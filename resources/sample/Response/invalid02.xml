@@ -1,0 +1,20 @@
+<samlp:Response
+        ID="_274be8a4-c2ba-43ca-a7c6-2f1613762576"
+        Version="2.0"
+        IssueInstant="2013-11-17T12:35:10.302Z"
+        InResponseTo="_b04e5e6166a0ba08f3ae9327a7145498e9f8a60e2f"
+        xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+>
+    <Issuer xmlns="urn:oasis:names:tc:SAML:2.0:assertion">https://sts.windows.net/554fadfe-f04f-4975-90cb-ddc8b147aaa2/</Issuer>
+    <samlp:Status>
+        <samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Requester">
+            <samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:UnsupportedBinding" />
+        </samlp:StatusCode>
+        <samlp:StatusMessage>
+            ACS75006: An error occurred while processing a SAML2 Authentication request. ACS75003: SAML protocol response cannot be sent via bindings other than HTTP POST. Requested binding: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+            Trace ID: d75d5305-d3fc-40b0-9087-d59032682dd9
+            Correlation ID: ca26b4bd-23d4-4233-9c28-96bc0a336c39
+            Timestamp: 2013-11-17 12:35:10Z
+        </samlp:StatusMessage>
+    </samlp:Status>
+</samlp:Response>

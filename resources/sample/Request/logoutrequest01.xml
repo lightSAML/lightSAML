@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<LogoutRequest
+        xmlns="urn:oasis:names:tc:SAML:2.0:protocol"
+        ID="_6210989d671b429f1c82467626ffd0be990ded60bd"
+        Version="2.0"
+        IssueInstant="2013-11-07T16:07:25Z"
+        Destination="https://b1.bead.loc/adfs/ls/"
+        NotOnOrAfter="2013-11-07T16:07:25Z"
+>
+    <saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">https://mt.evo.team/simplesaml/module.php/saml/sp/metadata.php/default-sp</saml:Issuer>
+    <saml:NameID xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Format="urn:oasis:names:tc:SAML:2.0:nameid-format:transient">user</saml:NameID>
+    <SessionIndex>_677952a2-7fb3-4e7a-b439-326366e677db</SessionIndex>
+</LogoutRequest>

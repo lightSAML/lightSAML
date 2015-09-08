@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<md:EntityDescriptor
+    xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+    entityID="https://saml.dev.bwc.loc/module.php/saml/sp/metadata.php/b1"
+>
+    <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+        <md:SingleLogoutService
+            Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+            Location="https://saml.dev.bwc.loc/module.php/saml/sp/saml2-logout.php/b1"
+        />
+        <md:AssertionConsumerService
+            Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+            Location="https://saml.dev.bwc.loc/module.php/saml/sp/saml2-acs.php/b1" index="0"
+        />
+        <md:AssertionConsumerService
+            Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post"
+            Location="https://saml.dev.bwc.loc/module.php/saml/sp/saml1-acs.php/b1" index="1"
+        />
+        <md:AssertionConsumerService
+            Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact"
+            Location="https://saml.dev.bwc.loc/module.php/saml/sp/saml2-acs.php/b1" index="2"
+        />
+        <md:AssertionConsumerService
+            Binding="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01"
+            Location="https://saml.dev.bwc.loc/module.php/saml/sp/saml1-acs.php/b1/artifact" index="3"
+        />
+    </md:SPSSODescriptor>
+</md:EntityDescriptor>

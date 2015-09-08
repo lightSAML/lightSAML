@@ -1,0 +1,11 @@
+# Symfony directories
+vendor/*
+/.idea
+/composer.lock
+/bin
+/php-cs-fixer.phar
+/web/sp/*.log
+/web/idp/*.log
+/build/logs
+/phpda.json
+/phpda.svg

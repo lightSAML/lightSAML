@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit
+        backupGlobals               = "false"
+        backupStaticAttributes      = "false"
+        colors                      = "false"
+        convertErrorsToExceptions   = "true"
+        convertNoticesToExceptions  = "true"
+        convertWarningsToExceptions = "true"
+        processIsolation            = "false"
+        stopOnFailure               = "false"
+        syntaxCheck                 = "false"
+        bootstrap                   = "autoload.php"
+        >
+
+    <logging>
+        <log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
+    </logging>
+
+    <testsuites>
+        <testsuite name="Project Test Suite">
+            <directory>src/LightSaml/Tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <!--
+    <php>
+        <server name="KERNEL_DIR" value="/path/to/your/app/" />
+    </php>
+    -->
+
+    <filter>
+        <whitelist>
+            <directory>src/LightSaml</directory>
+            <exclude>
+                <directory>src/LightSaml/Tests</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+
+
+</phpunit>

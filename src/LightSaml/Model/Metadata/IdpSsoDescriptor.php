@@ -1,0 +1,195 @@
+<?php
+
+namespace LightSaml\Model\Metadata;
+
+use LightSaml\Model\Context\DeserializationContext;
+use LightSaml\Model\Context\SerializationContext;
+use LightSaml\Model\Assertion\Attribute;
+use LightSaml\SamlConstants;
+
+class IdpSsoDescriptor extends SSODescriptor
+{
+    /** @var  bool|null */
+    protected $wantAuthnRequestsSigned;
+
+    /** @var  SingleSignOnService[]|null */
+    protected $singleSignOnServices;
+
+    /** @var  Attribute[]|null */
+    protected $attributes;
+
+    /**
+     * @param bool|null $wantAuthnRequestsSigned
+     *
+     * @return IdpSsoDescriptor
+     */
+    public function setWantAuthnRequestsSigned($wantAuthnRequestsSigned)
+    {
+        $this->wantAuthnRequestsSigned = $wantAuthnRequestsSigned !== null ? (bool) $wantAuthnRequestsSigned : null;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getWantAuthnRequestsSigned()
+    {
+        return $this->wantAuthnRequestsSigned;
+    }
+
+    /**
+     * @param SingleSignOnService $singleSignOnService
+     *
+     * @return IdpSsoDescriptor
+     */
+    public function addSingleSignOnService(SingleSignOnService $singleSignOnService)
+    {
+        if (false == is_array($this->singleSignOnServices)) {
+            $this->singleSignOnServices = array();
+        }
+        $this->singleSignOnServices[] = $singleSignOnService;
+
+        return $this;
+    }
+
+    /**
+     * @return SingleSignOnService[]|null
+     */
+    public function getAllSingleSignOnServices()
+    {
+        return $this->singleSignOnServices;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return SingleSignOnService[]
+     */
+    public function getAllSingleSignOnServicesByUrl($url)
+    {
+        $result = array();
+        foreach ($this->getAllSingleSignOnServices() as $svc) {
+            if ($svc->getLocation() == $url) {
+                $result[] = $svc;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param string $binding
+     *
+     * @return SingleSignOnService[]
+     */
+    public function getAllSingleSignOnServicesByBinding($binding)
+    {
+        $result = array();
+        foreach ($this->getAllSingleSignOnServices() as $svc) {
+            if ($svc->getBinding() == $binding) {
+                $result[] = $svc;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param string|null $binding
+     *
+     * @return SingleSignOnService|null
+     */
+    public function getFirstSingleSignOnService($binding = null)
+    {
+        foreach ($this->getAllSingleSignOnServices() as $svc) {
+            if (null == $binding || $svc->getBinding() == $binding) {
+                return $svc;
+            }
+        }
+
+        return;
+    }
+
+    /**
+     * @param \LightSaml\Model\Assertion\Attribute $attribute
+     *
+     * @return IdpSsoDescriptor
+     */
+    public function addAttribute(Attribute $attribute)
+    {
+        if (false == is_array($this->attributes)) {
+            $this->attributes = array();
+        }
+        $this->attributes[] = $attribute;
+
+        return $this;
+    }
+
+    /**
+     * @return \LightSaml\Model\Assertion\Attribute[]|null
+     */
+    public function getAllAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param \DOMNode             $parent
+     * @param SerializationContext $context
+     */
+    public function serialize(\DOMNode $parent, SerializationContext $context)
+    {
+        $result = $this->createElement('IDPSSODescriptor', SamlConstants::NS_METADATA, $parent, $context);
+
+        parent::serialize($result, $context);
+
+        $this->attributesToXml(array('WantAuthnRequestsSigned'), $result);
+
+        if ($this->getAllSingleSignOnServices()) {
+            foreach ($this->getAllSingleSignOnServices() as $object) {
+                $object->serialize($result, $context);
+            }
+        }
+        if ($this->getAllAttributes()) {
+            foreach ($this->getAllAttributes() as $object) {
+                $object->serialize($result, $context);
+            }
+        }
+    }
+
+    /**
+     * @param \DOMElement            $node
+     * @param DeserializationContext $context
+     *
+     * @return void
+     */
+    public function deserialize(\DOMElement $node, DeserializationContext $context)
+    {
+        $this->checkXmlNodeName($node, 'IDPSSODescriptor', SamlConstants::NS_METADATA);
+
+        parent::deserialize($node, $context);
+
+        $this->attributesFromXml($node, array('WantAuthnRequestsSigned'));
+
+        $this->singleSignOnServices = array();
+        $this->manyElementsFromXml(
+            $node,
+            $context,
+            'SingleSignOnService',
+            'md',
+            'LightSaml\Model\Metadata\SingleSignOnService',
+            'addSingleSignOnService'
+        );
+
+        $this->attributes = array();
+        $this->manyElementsFromXml(
+            $node,
+            $context,
+            'SingleSignOnService',
+            'saml',
+            'LightSaml\Model\Assertion\Attribute',
+            'addAttribute'
+        );
+    }
+}
