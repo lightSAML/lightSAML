@@ -4,7 +4,10 @@
     "type": "library",
     "description": "Light SAML2 php library",
     "autoload": {
-        "psr-0": { "LightSaml\\": "src/" }
+        "psr-0": {
+            "LightSaml\\Tests\\": "tests/",
+            "LightSaml\\": "src/"
+        }
     },
     "require": {
         "php": ">=5.5.1",

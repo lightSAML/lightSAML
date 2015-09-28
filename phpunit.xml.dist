@@ -20,7 +20,7 @@
 
     <testsuites>
         <testsuite name="Project Test Suite">
-            <directory>src/LightSaml/Tests</directory>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 
@@ -32,10 +32,7 @@
 
     <filter>
         <whitelist>
-            <directory>src/LightSaml</directory>
-            <exclude>
-                <directory>src/LightSaml/Tests</directory>
-            </exclude>
+            <directory>src</directory>
         </whitelist>
     </filter>
 

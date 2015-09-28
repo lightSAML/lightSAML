@@ -14,6 +14,6 @@ class BarAction implements ActionInterface
      */
     public function execute(ContextInterface $context)
     {
-        // TODO: Implement execute() method.
+        // bar
     }
 }

@@ -14,6 +14,6 @@ class FooAction implements ActionInterface
      */
     public function execute(ContextInterface $context)
     {
-        // TODO: Implement execute() method.
+        // foo
     }
 }

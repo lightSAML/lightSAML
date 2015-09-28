@@ -1,6 +1,6 @@
 <?php
 
-namespace LightSaml\Tests;
+namespace LightSaml\Tests\Tests;
 
 use LightSaml\Helper;
 use LightSaml\SamlConstants;
