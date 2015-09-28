@@ -14,5 +14,3 @@ script:
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
     - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
-    - CODECLIMATE_REPO_TOKEN=5933f2ef6a4d4129e3ae39e7c303e35e0941df2e92b7e935cb27ec1b920203d4 ./bin/test-reporter --stdout > codeclimate.json
-    - "curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v1.0.1-dev)' https://codeclimate.com/test_reports"
