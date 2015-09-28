@@ -1,6 +1,8 @@
 SAML 2.0 PHP Library
 ====================
 
+[![Build Status](https://travis-ci.org/lightSAML/lightSAML.svg?branch=master)](https://travis-ci.org/lightSAML/lightSAML)
+
 LightSaml Implements basic SAML 2.0 data model classes, serialization/deserialization to/from xml with XML security and
 certificates support, and message encapsulations to bindings. Covered with unit tests.
 
