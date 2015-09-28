@@ -2,16 +2,16 @@
 
 namespace LightSaml\Action;
 
-use LightSaml\Context\AbstractContext;
+use LightSaml\Context\ContextInterface;
 
 class NullAction implements ActionInterface
 {
     /**
-     * @param AbstractContext $context
+     * @param ContextInterface $context
      *
      * @return void
      */
-    public function execute(AbstractContext $context)
+    public function execute(ContextInterface $context)
     {
         // null
     }

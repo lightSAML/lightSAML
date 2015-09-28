@@ -2,7 +2,7 @@
 
 namespace LightSaml\Action;
 
-use LightSaml\Context\AbstractContext;
+use LightSaml\Context\ContextInterface;
 use Psr\Log\LoggerInterface;
 
 class LoggableAction extends WrappedAction
@@ -24,9 +24,9 @@ class LoggableAction extends WrappedAction
     }
 
     /**
-     * @param AbstractContext $context
+     * @param ContextInterface $context
      */
-    protected function beforeAction(AbstractContext $context)
+    protected function beforeAction(ContextInterface $context)
     {
         $this->logger->debug(sprintf('Executing action "%s"', get_class($this->action)), array(
             'context' => $context,
@@ -35,9 +35,9 @@ class LoggableAction extends WrappedAction
     }
 
     /**
-     * @param AbstractContext $context
+     * @param ContextInterface $context
      */
-    protected function afterAction(AbstractContext $context)
+    protected function afterAction(ContextInterface $context)
     {
 
     }

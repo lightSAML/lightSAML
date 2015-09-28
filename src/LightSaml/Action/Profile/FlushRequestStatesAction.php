@@ -2,7 +2,7 @@
 
 namespace LightSaml\Action\Profile;
 
-use LightSaml\Context\AbstractContext;
+use LightSaml\Context\ContextInterface;
 use LightSaml\Context\Profile\AssertionContext;
 use LightSaml\Context\Profile\Helper\LogHelper;
 use LightSaml\Context\Profile\ProfileContexts;
@@ -17,6 +17,7 @@ class FlushRequestStatesAction extends AbstractProfileAction
     protected $requestStore;
 
     /**
+     * @param LoggerInterface            $logger
      * @param RequestStateStoreInterface $requestStore
      */
     public function __construct(LoggerInterface $logger, RequestStateStoreInterface $requestStore)
@@ -42,7 +43,7 @@ class FlushRequestStatesAction extends AbstractProfileAction
     }
 
     /**
-     * @param AbstractContext|null $requestStateContext
+     * @param ContextInterface|null $requestStateContext
      */
     protected function flush($requestStateContext = null)
     {

@@ -2,16 +2,16 @@
 
 namespace LightSaml\Context;
 
-abstract class AbstractContext implements \IteratorAggregate
+abstract class AbstractContext implements ContextInterface
 {
-    /** @var  AbstractContext|null */
+    /** @var  ContextInterface|null */
     private $parent;
 
-    /** @var AbstractContext[] */
+    /** @var ContextInterface[] */
     private $subContexts = array();
 
     /**
-     * @return AbstractContext|null
+     * @return ContextInterface|null
      */
     public function getParent()
     {
@@ -19,7 +19,7 @@ abstract class AbstractContext implements \IteratorAggregate
     }
 
     /**
-     * @return AbstractContext
+     * @return ContextInterface
      */
     public function getTopParent()
     {
@@ -31,11 +31,11 @@ abstract class AbstractContext implements \IteratorAggregate
     }
 
     /**
-     * @param AbstractContext|null $parent
+     * @param ContextInterface|null $parent
      *
-     * @return AbstractContext
+     * @return ContextInterface
      */
-    public function setParent(AbstractContext $parent = null)
+    public function setParent(ContextInterface $parent = null)
     {
         $this->parent = $parent;
 
@@ -46,7 +46,7 @@ abstract class AbstractContext implements \IteratorAggregate
      * @param string      $name
      * @param null|string $class
      *
-     * @return AbstractContext|null
+     * @return ContextInterface|null
      */
     public function getSubContext($name, $class = null)
     {
@@ -69,7 +69,7 @@ abstract class AbstractContext implements \IteratorAggregate
      * @param string $class
      * @param bool   $autoCreate
      *
-     * @return AbstractContext|null
+     * @return ContextInterface|null
      */
     public function getSubContextByClass($class, $autoCreate)
     {
@@ -77,13 +77,13 @@ abstract class AbstractContext implements \IteratorAggregate
     }
 
     /**
-     * @param string                 $name
-     * @param object|AbstractContext $subContext
+     * @param string                  $name
+     * @param object|ContextInterface $subContext
      */
     public function addSubContext($name, $subContext)
     {
         if (false === is_object($subContext)) {
-            throw new \InvalidArgumentException('Expected object or AbstractContext');
+            throw new \InvalidArgumentException('Expected object or ContextInterface');
         }
 
         $existing = @$this->subContexts[$name];
@@ -92,11 +92,11 @@ abstract class AbstractContext implements \IteratorAggregate
         }
 
         $this->subContexts[$name] = $subContext;
-        if ($subContext instanceof AbstractContext) {
+        if ($subContext instanceof ContextInterface) {
             $subContext->setParent($this);
         }
 
-        if ($existing instanceof AbstractContext) {
+        if ($existing instanceof ContextInterface) {
             $existing->setParent(null);
         }
     }
@@ -104,7 +104,7 @@ abstract class AbstractContext implements \IteratorAggregate
     /**
      * @param string $name
      *
-     * @return AbstractContext
+     * @return ContextInterface
      */
     public function removeSubContext($name)
     {
@@ -129,7 +129,7 @@ abstract class AbstractContext implements \IteratorAggregate
     }
 
     /**
-     * @return AbstractContext
+     * @return ContextInterface
      */
     public function clearSubContexts()
     {
@@ -167,7 +167,7 @@ abstract class AbstractContext implements \IteratorAggregate
         if ($this->subContexts) {
             $arr = array();
             foreach ($this->subContexts as $name => $subContext) {
-                if ($subContext instanceof AbstractContext) {
+                if ($subContext instanceof ContextInterface) {
                     $arr = array_merge($arr, $subContext->debugPrintTree($name));
                 } else {
                     $arr = array_merge($arr, array($name => get_class($subContext)));
@@ -191,7 +191,7 @@ abstract class AbstractContext implements \IteratorAggregate
     /**
      * @param string $path
      *
-     * @return AbstractContext
+     * @return ContextInterface
      */
     public function getPath($path)
     {
@@ -217,7 +217,7 @@ abstract class AbstractContext implements \IteratorAggregate
     /**
      * @param string $class
      *
-     * @return AbstractContext
+     * @return ContextInterface
      */
     protected function createSubContext($class)
     {

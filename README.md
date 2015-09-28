@@ -23,8 +23,3 @@ CONTRIBUTING
 LightSaml is an open source project and is open for contributions.
 
 
-CREDIT
-======
-
-Thanks to all contributors and specially to SimpleSamlPHP open source which though hardly reusable helped us in
-start to understand better how SAML works and speed up the implementation.

@@ -2,9 +2,7 @@
 
 namespace LightSaml\Action;
 
-use LightSaml\Context\AbstractContext;
-use LightSaml\Context\Profile\Helper\LogHelper;
-use Psr\Log\LoggerInterface;
+use LightSaml\Context\ContextInterface;
 
 class CompositeAction implements ActionInterface, DebugPrintTreeActionInterface, CompositeActionInterface
 {
@@ -19,6 +17,14 @@ class CompositeAction implements ActionInterface, DebugPrintTreeActionInterface,
         foreach ($children as $action) {
             $this->add($action);
         }
+    }
+
+    /**
+     * @return ActionInterface[]
+     */
+    public function getChildren()
+    {
+        return $this->children;
     }
 
     /**
@@ -49,11 +55,11 @@ class CompositeAction implements ActionInterface, DebugPrintTreeActionInterface,
     }
 
     /**
-     * @param AbstractContext $context
+     * @param ContextInterface $context
      *
      * @return void
      */
-    public function execute(AbstractContext $context)
+    public function execute(ContextInterface $context)
     {
         foreach ($this->children as $action) {
             $action->execute($context);

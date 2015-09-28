@@ -2,7 +2,7 @@
 
 namespace LightSaml\Action;
 
-use LightSaml\Context\AbstractContext;
+use LightSaml\Context\ContextInterface;
 use LightSaml\Context\Profile\ExceptionContext;
 use LightSaml\Context\Profile\ProfileContexts;
 
@@ -25,11 +25,11 @@ class CatchableErrorAction implements ActionInterface
     }
 
     /**
-     * @param AbstractContext $context
+     * @param ContextInterface $context
      *
      * @return void
      */
-    public function execute(AbstractContext $context)
+    public function execute(ContextInterface $context)
     {
         try {
             $this->mainAction->execute($context);

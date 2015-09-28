@@ -2,7 +2,7 @@
 
 namespace LightSaml\Action;
 
-use LightSaml\Context\AbstractContext;
+use LightSaml\Context\ContextInterface;
 
 abstract class WrappedAction implements ActionInterface
 {
@@ -20,11 +20,11 @@ abstract class WrappedAction implements ActionInterface
     }
 
     /**
-     * @param AbstractContext $context
+     * @param ContextInterface $context
      *
      * @return void
      */
-    public function execute(AbstractContext $context)
+    public function execute(ContextInterface $context)
     {
         $this->beforeAction($context);
         $this->action->execute($context);
@@ -32,12 +32,12 @@ abstract class WrappedAction implements ActionInterface
     }
 
     /**
-     * @param AbstractContext $context
+     * @param ContextInterface $context
      */
-    abstract protected function beforeAction(AbstractContext $context);
+    abstract protected function beforeAction(ContextInterface $context);
 
     /**
-     * @param AbstractContext $context
+     * @param ContextInterface $context
      */
-    abstract protected function afterAction(AbstractContext $context);
+    abstract protected function afterAction(ContextInterface $context);
 }

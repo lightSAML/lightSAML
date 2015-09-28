@@ -3,44 +3,44 @@
 namespace LightSaml\Context\Profile\Helper;
 
 use LightSaml\Action\ActionInterface;
-use LightSaml\Context\AbstractContext;
+use LightSaml\Context\ContextInterface;
 use LightSaml\Context\Profile\ProfileContext;
 
 abstract class LogHelper
 {
     /**
-     * @param AbstractContext $context
-     * @param ActionInterface $action
-     * @param array           $extraData
+     * @param ContextInterface $context
+     * @param ActionInterface  $action
+     * @param array            $extraData
      *
      * @return array
      */
-    public static function getActionContext(AbstractContext $context, ActionInterface $action, array $extraData = null)
+    public static function getActionContext(ContextInterface $context, ActionInterface $action, array $extraData = null)
     {
         return self::getContext($context, $action, $extraData, false);
     }
 
     /**
-     * @param AbstractContext $context
-     * @param ActionInterface $action
-     * @param array           $extraData
+     * @param ContextInterface $context
+     * @param ActionInterface  $action
+     * @param array            $extraData
      *
      * @return array
      */
-    public static function getActionErrorContext(AbstractContext $context, ActionInterface $action, array $extraData = null)
+    public static function getActionErrorContext(ContextInterface $context, ActionInterface $action, array $extraData = null)
     {
         return self::getContext($context, $action, $extraData, true);
     }
 
     /**
-     * @param AbstractContext $context
-     * @param ActionInterface $action
-     * @param array           $extraData
-     * @param bool            $logWholeContext
+     * @param ContextInterface $context
+     * @param ActionInterface  $action
+     * @param array            $extraData
+     * @param bool             $logWholeContext
      *
      * @return array
      */
-    private static function getContext(AbstractContext $context, ActionInterface $action = null, array $extraData = null, $logWholeContext = false)
+    private static function getContext(ContextInterface $context, ActionInterface $action = null, array $extraData = null, $logWholeContext = false)
     {
         $topContext =  $context->getTopParent();
         $result = array();

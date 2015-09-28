@@ -3,7 +3,7 @@
 namespace LightSaml\Action\Profile;
 
 use LightSaml\Action\ActionInterface;
-use LightSaml\Context\AbstractContext;
+use LightSaml\Context\ContextInterface;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Error\LightSamlContextException;
 use Psr\Log\LoggerInterface;
@@ -22,11 +22,11 @@ abstract class AbstractProfileAction implements ActionInterface
     }
 
     /**
-     * @param AbstractContext $context
+     * @param ContextInterface $context
      *
      * @return void
      */
-    public function execute(AbstractContext $context)
+    public function execute(ContextInterface $context)
     {
         if ($context instanceof ProfileContext) {
             $this->doExecute($context);
