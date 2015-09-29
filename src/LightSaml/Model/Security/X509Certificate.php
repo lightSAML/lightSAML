@@ -15,6 +15,19 @@ class X509Certificate
     protected $info;
 
     /**
+     * @param string $filename
+     *
+     * @return X509Certificate
+     */
+    public static function fromFile($filename)
+    {
+        $result = new X509Certificate();
+        $result->loadFromFile($filename);
+
+        return $result;
+    }
+
+    /**
      * @param string $data
      *
      * @return X509Certificate
