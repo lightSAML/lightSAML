@@ -38,7 +38,7 @@ class X509CredentialFileProvider implements CredentialProviderInterface
     }
 
     /**
-     * @return CredentialProviderInterface
+     * @return X509Credential
      */
     public function get()
     {

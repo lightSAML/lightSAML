@@ -2,10 +2,12 @@
 
 namespace LightSaml\Provider\Credential;
 
+use LightSaml\Credential\CredentialInterface;
+
 interface CredentialProviderInterface
 {
     /**
-     * @return CredentialProviderInterface
+     * @return CredentialInterface
      */
     public function get();
 }
