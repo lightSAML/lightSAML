@@ -2,6 +2,7 @@
 
 namespace LightSaml\Store\Credential\Factory;
 
+use LightSaml\Credential\CredentialInterface;
 use LightSaml\Error\LightSamlBuildException;
 use LightSaml\Store\Credential\CompositeCredentialStore;
 use LightSaml\Store\Credential\MetadataCredentialStore;
@@ -10,6 +11,14 @@ use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
 
 class CredentialFactory
 {
+    /** @var CredentialInterface[] */
+    private $extraCredentials = [];
+
+    public function addExtraCredential(CredentialInterface $credential)
+    {
+        $this->extraCredentials[] = $credential;
+    }
+
     public function build(
         EntityDescriptorStoreInterface $idpEntityDescriptorStore,
         EntityDescriptorStoreInterface $spEntityDescriptorStore,
@@ -30,12 +39,15 @@ class CredentialFactory
         }
         $store->add($ownCredentialsStore);
 
+        $extraCredentialsStore = new StaticCredentialStore();
+        $store->add($extraCredentialsStore);
+        foreach ($this->extraCredentials as $credential) {
+            $extraCredentialsStore->add($credential);
+        }
         if ($extraCredentials) {
-            $extraCredentialsStore = new StaticCredentialStore();
             foreach ($extraCredentials as $credential) {
                 $extraCredentialsStore->add($credential);
             }
-            $store->add($extraCredentialsStore);
         }
 
         return $store;

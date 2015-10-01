@@ -2,8 +2,8 @@
 
 require_once __DIR__.'/_config.php';
 
-$buildContext = SpConfig::current()->getBuildContainer();
-$builder = new \LightSaml\Builder\Profile\WebBrowserSso\Sp\SsoSpReceiveResponseProfileBuilder($buildContext);
+$buildContainer = SpConfig::current()->getBuildContainer();
+$builder = new \LightSaml\Builder\Profile\WebBrowserSso\Sp\SsoSpReceiveResponseProfileBuilder($buildContainer);
 
 $context = $builder->buildContext();
 $action = $builder->buildAction();
