@@ -6,6 +6,7 @@ use LightSaml\Build\Container\BuildContainerInterface;
 use LightSaml\Builder\Action\Profile\SingleSignOn\Sp\SsoSpSendAuthnRequestActionBuilder;
 use LightSaml\Builder\Profile\AbstractProfileBuilder;
 use LightSaml\Context\Profile\ProfileContext;
+use LightSaml\Meta\TrustOptions\TrustOptions;
 use LightSaml\Profile\Profiles;
 
 class SsoSpSendAuthnRequestProfileBuilder extends AbstractProfileBuilder
@@ -34,7 +35,9 @@ class SsoSpSendAuthnRequestProfileBuilder extends AbstractProfileBuilder
 
         $result->getPartyEntityContext()
             ->setEntityDescriptor($idpEd)
-            ->setTrustOptions($this->container->getPartyContainer()->getTrustOptionsStore()->get($this->idpEntityId))
+            ->setTrustOptions(
+                $this->container->getPartyContainer()->getTrustOptionsStore()->get($this->idpEntityId) ?: new TrustOptions()
+            )
         ;
 
         return $result;
