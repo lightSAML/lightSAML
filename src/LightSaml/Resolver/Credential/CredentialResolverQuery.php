@@ -75,7 +75,7 @@ class CredentialResolverQuery extends CriteriaSet
         $result = array();
         foreach ($this->arrCredentials as $credential) {
             if ($credential instanceof CredentialInterface) {
-                $privateKey = $credential->getPublicKey();
+                $privateKey = $credential->getPrivateKey();
                 if ($privateKey) {
                     $result[] = $credential;
                 }
