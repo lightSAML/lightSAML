@@ -13,7 +13,7 @@ class CompositeActionBuilderTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testThrowsOnPriorityTrue()
+    public function test_throws_on_priority_true()
     {
         $compositeBuilder = new CompositeActionBuilder();
         $compositeBuilder->add(new FooAction(), true);
@@ -22,13 +22,13 @@ class CompositeActionBuilderTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testThrowsOnPriorityString()
+    public function test_throws_on_priority_string()
     {
         $compositeBuilder = new CompositeActionBuilder();
         $compositeBuilder->add(new FooAction(), "asc");
     }
 
-    public function testRankedAsAddedWithOutPriorityParameter()
+    public function test_ranked_as_added_with_out_priority_parameter()
     {
         $order = 1;
         $action1 = $this->getActionMock(1, $order);
@@ -47,7 +47,7 @@ class CompositeActionBuilderTest extends \PHPUnit_Framework_TestCase
         $compositeAction->execute($this->getMock(ContextInterface::class));
     }
 
-    public function testRankedAsGivenPriorityParameter()
+    public function test_ranked_as_given_priority_parameter()
     {
         $order = 1;
         $action1 = $this->getActionMock(3, $order);

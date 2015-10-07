@@ -24,7 +24,7 @@ use LightSaml\Model\Security\X509Certificate;
 
 class ResponseTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSerialization()
+    public function test_serialization()
     {
         $response = new Response();
         $response->setId('response-id')

@@ -6,7 +6,7 @@ use LightSaml\Context\AbstractContext;
 
 class AbstractContextTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSetValueSetsParent()
+    public function test_set_value_sets_parent()
     {
         $context = $this->getContextMock();
         $subContext = $this->getContextMock();
@@ -16,7 +16,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $context->getIterator()->count());
     }
 
-    public function testRemoveSetsParentToNull()
+    public function test_remove_sets_parent_to_null()
     {
         $context = $this->getContextMock();
         $subContext = $this->getContextMock();
@@ -30,7 +30,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $context->getIterator()->count());
     }
 
-    public function testClearSetsParentToNull()
+    public function test_clear_sets_parent_to_null()
     {
         $context = $this->getContextMock();
         $subContext1 = $this->getContextMock();
@@ -49,7 +49,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $context->getIterator()->count());
     }
 
-    public function testGetSubContextReturnsSetContext()
+    public function test_get_sub_context_returns_set_context()
     {
         $context = $this->getContextMock();
         $subContext = $this->getContextMock();
@@ -58,7 +58,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($subContext, $context->getSubContext($name));
     }
 
-    public function testGetSubContextReturnsNullForNotSetContext()
+    public function test_get_sub_context_returns_null_for_not_set_context()
     {
         $context = $this->getContextMock();
         $context->addSubContext('some', $this->getContextMock());
@@ -70,14 +70,14 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Expected object or ContextInterface
      */
-    public function testAddSubContextThrowsIfNotAContextValue()
+    public function test_add_sub_context_throws_if_not_a_context_value()
     {
         $context = $this->getContextMock();
         $context->addSubContext($name = 'some', '123');
         $context->getSubContext($name);
     }
 
-    public function testGetSubContextOrCreateNewDoesCreateNewInstance()
+    public function test_get_sub_context_or_create_new_does_create_new_instance()
     {
         $context = $this->getContextMock();
         $value = $context->getSubContext($name = 'name', '\stdClass');
@@ -85,7 +85,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\stdClass', $value);
     }
 
-    public function testCreatedSubContextHasSetParent()
+    public function test_created_sub_context_has_set_parent()
     {
         $context = $this->getContextMock();
         $subContext = $context->getSubContext($name = 'name', get_class($context));
@@ -93,7 +93,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($context, $subContext->getParent());
     }
 
-    public function testAddSubContextReturnsAlreadyAddedValue()
+    public function test_add_sub_context_returns_already_added_value()
     {
         $context = $this->getContextMock();
 
@@ -104,7 +104,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $context->getIterator()->count());
     }
 
-    public function testAddSubContextSetsParent()
+    public function test_add_sub_context_sets_parent()
     {
         $context = $this->getContextMock();
 
@@ -113,7 +113,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($context, $subContext->getParent());
     }
 
-    public function testAddSubContextReplacesPreviousValue()
+    public function test_add_sub_context_replaces_previous_value()
     {
         $context = $this->getContextMock();
 
@@ -126,7 +126,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($second, $context->getSubContext($name));
     }
 
-    public function testRemoveSubContextSetsParentToNull()
+    public function test_remove_sub_context_sets_parent_to_null()
     {
         $context = $this->getContextMock();
 
@@ -139,7 +139,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($context->getSubContext($name));
     }
 
-    public function testContainsSubContextReturnsTrueIfNameAlreadyAdded()
+    public function test_contains_sub_context_returns_true_if_name_already_added()
     {
         $context = $this->getContextMock();
 
@@ -148,13 +148,13 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($context->containsSubContext($name));
     }
 
-    public function testContainsSubContextReturnsFalseIfValueIsNotSet()
+    public function test_contains_sub_context_returns_false_if_value_is_not_set()
     {
         $context = $this->getContextMock();
         $this->assertFalse($context->containsSubContext('name'));
     }
 
-    public function testGetPathStringReturnsValue()
+    public function test_get_path_string_returns_value()
     {
         $context = $this->getContextMock();
         $fooContext = $context->getSubContext('foo', get_class($context));
@@ -164,7 +164,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expectedValue, $context->getPath('foo/bar/value'));
     }
 
-    public function testGetPathReturnsNullForNonExistingPath()
+    public function test_get_path_returns_null_for_non_existing_path()
     {
         $context = $this->getContextMock();
         $fooContext = $context->getSubContext('foo', get_class($context));
@@ -174,7 +174,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($context->getPath('foo/non-existing/value'));
     }
 
-    public function testGetPathStringReturnsNullForTooDeepPath()
+    public function test_get_path_string_returns_null_for_too_deep_path()
     {
         $context = $this->getContextMock();
         $fooContext = $context->getSubContext('foo', get_class($context));

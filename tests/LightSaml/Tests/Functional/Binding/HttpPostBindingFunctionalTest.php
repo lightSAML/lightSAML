@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class HttpPostBindingFunctionalTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSendAuthnRequest()
+    public function test_send_authn_request()
     {
         $expectedRelayState = 'relayState';
         $expectedDestination = 'https://destination.com/auth';
@@ -63,7 +63,7 @@ class HttpPostBindingFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedDestination, $response->getDestination());
     }
 
-    public function testSendDestination()
+    public function test_send_destination()
     {
         $expectedDestination = 'https://destination.com/auth';
 
@@ -82,7 +82,7 @@ class HttpPostBindingFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedDestination, $response->getDestination());
     }
 
-    public function testReceiveAuthnRequest()
+    public function test_receive_authn_request()
     {
         $expectedRelayState = 'relayState';
 

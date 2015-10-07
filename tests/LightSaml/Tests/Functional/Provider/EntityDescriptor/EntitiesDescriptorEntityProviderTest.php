@@ -8,7 +8,7 @@ use LightSaml\Provider\EntityDescriptor\EntitiesDescriptorEntityProvider;
 
 class EntitiesDescriptorEntityProviderTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_provides_by_specified_entity_id()
+    public function test__provides_by_specified_entity_id()
     {
         $entitiesProvider = new FileEntitiesDescriptorProvider(
             __DIR__.'/../../../../../../resources/sample/EntitiesDescriptor/testshib-providers.xml'

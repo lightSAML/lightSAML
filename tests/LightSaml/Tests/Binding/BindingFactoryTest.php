@@ -8,14 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BindingFactoryTest extends \PHPUnit_Framework_TestCase
 {
-    public function testCreateHttpRedirect()
+    public function test_create_http_redirect()
     {
         $factory = new BindingFactory();
         $binding = $factory->create(SamlConstants::BINDING_SAML2_HTTP_REDIRECT);
         $this->assertInstanceOf('LightSaml\Binding\HttpRedirectBinding', $binding);
     }
 
-    public function testCreateHttpPost()
+    public function test_create_http_post()
     {
         $factory = new BindingFactory();
         $binding = $factory->create(SamlConstants::BINDING_SAML2_HTTP_POST);
@@ -26,7 +26,7 @@ class BindingFactoryTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LogicException
      * @expectedExceptionMessage SOAP binding not implemented
      */
-    public function testCreateThrowsNotImplementedErrorForSoap()
+    public function test_create_throws_not_implemented_error_for_soap()
     {
         $factory = new BindingFactory();
         $factory->create(SamlConstants::BINDING_SAML2_SOAP);
@@ -36,7 +36,7 @@ class BindingFactoryTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LogicException
      * @expectedExceptionMessage Artifact binding not implemented
      */
-    public function testCreateThrowsNotImplementedErrorForArtifact()
+    public function test_create_throws_not_implemented_error_for_artifact()
     {
         $factory = new BindingFactory();
         $factory->create(SamlConstants::BINDING_SAML2_HTTP_ARTIFACT);
@@ -46,13 +46,13 @@ class BindingFactoryTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlBindingException
      * @expectedExceptionMessage Unknown binding type 'foo'
      */
-    public function testCreateThrowsForUnknownBinding()
+    public function test_create_throws_for_unknown_binding()
     {
         $factory = new BindingFactory();
         $factory->create('foo');
     }
 
-    public function testDetectHttpRedirect()
+    public function test_detect_http_redirect()
     {
         $request = $this->createHttpRedirectRequest();
 
@@ -61,7 +61,7 @@ class BindingFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(SamlConstants::BINDING_SAML2_HTTP_REDIRECT, $factory->detectBindingType($request));
     }
 
-    public function testDetectHttpPost()
+    public function test_detect_http_post()
     {
         $request = $this->createHttpPostRequest();
 
@@ -70,7 +70,7 @@ class BindingFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(SamlConstants::BINDING_SAML2_HTTP_POST, $factory->detectBindingType($request));
     }
 
-    public function testDetectArtifactPost()
+    public function test_detect_artifact_post()
     {
         $request = $this->createArtifactPostRequest();
 
@@ -79,7 +79,7 @@ class BindingFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(SamlConstants::BINDING_SAML2_HTTP_ARTIFACT, $factory->detectBindingType($request));
     }
 
-    public function testDetectArtifactGet()
+    public function test_detect_artifact_get()
     {
         $request = $this->createArtifactGetRequest();
 
@@ -88,7 +88,7 @@ class BindingFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(SamlConstants::BINDING_SAML2_HTTP_ARTIFACT, $factory->detectBindingType($request));
     }
 
-    public function testDetectSoap()
+    public function test_detect_soap()
     {
         $request = $this->createSoapRequest();
 
@@ -97,7 +97,7 @@ class BindingFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(SamlConstants::BINDING_SAML2_SOAP, $factory->detectBindingType($request));
     }
 
-    public function testDetectNoneGet()
+    public function test_detect_none_get()
     {
         $request = new Request();
         $request->setMethod('GET');
@@ -107,7 +107,7 @@ class BindingFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($factory->detectBindingType($request));
     }
 
-    public function testDetectNonePost()
+    public function test_detect_none_post()
     {
         $request = new Request();
         $request->setMethod('POST');
@@ -117,14 +117,14 @@ class BindingFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($factory->detectBindingType($request));
     }
 
-    public function testGetBindingByRequestHttpRedirect()
+    public function test_get_binding_by_request_http_redirect()
     {
         $request = $this->createHttpRedirectRequest();
         $factory = new BindingFactory();
         $this->assertInstanceOf('LightSaml\Binding\HttpRedirectBinding', $factory->getBindingByRequest($request));
     }
 
-    public function testGetBindingByRequestHttpPost()
+    public function test_get_binding_by_request_http_post()
     {
         $request = $this->createHttpPostRequest();
         $factory = new BindingFactory();

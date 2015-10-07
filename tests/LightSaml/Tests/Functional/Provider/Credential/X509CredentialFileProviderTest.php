@@ -8,13 +8,13 @@ use LightSaml\Provider\Credential\X509CredentialFileProvider;
 
 class X509CredentialFileProviderTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_implements_credential_provider_interface()
+    public function test__implements_credential_provider_interface()
     {
         $reflection = new \ReflectionClass(X509CredentialFileProvider::class);
         $this->assertTrue($reflection->implementsInterface(CredentialProviderInterface::class));
     }
 
-    public function test_loads_specified_files()
+    public function test__loads_specified_files()
     {
         $provider = new X509CredentialFileProvider(
             $expectedEntityId = 'http://localhost',

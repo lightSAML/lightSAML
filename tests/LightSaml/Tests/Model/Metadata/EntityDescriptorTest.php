@@ -19,7 +19,7 @@ use LightSaml\Model\Security\X509Certificate;
 
 class EntityDescriptorTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSerialization()
+    public function test_serialization()
     {
         $ed = new EntityDescriptor();
         $ed

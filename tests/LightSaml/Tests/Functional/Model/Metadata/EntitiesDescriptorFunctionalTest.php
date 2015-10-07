@@ -15,7 +15,7 @@ use LightSaml\Tests\Helper\OrganizationChecker;
 
 class EntitiesDescriptorFunctionalTest extends \PHPUnit_Framework_TestCase
 {
-    public function testDeserializeTestShib()
+    public function test_deserialize_test_shib()
     {
         $context = new DeserializationContext();
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/EntitiesDescriptor/testshib-providers.xml');

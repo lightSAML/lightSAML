@@ -9,26 +9,26 @@ use LightSaml\Tests\Mock\Action\FooAction;
 
 class CompositeActionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testCanBeConstructedWithoutArguments()
+    public function test_can_be_constructed_without_arguments()
     {
         $composite = new CompositeAction();
         $this->assertCount(0, $composite->getChildren());
     }
 
-    public function testCanBeConstructedWithArrayOfActions()
+    public function test_can_be_constructed_with_array_of_actions()
     {
         $composite = new CompositeAction([$this->getActionMock(), $this->getActionMock()]);
         $this->assertCount(2, $composite->getChildren());
     }
 
-    public function testCanAddChildAction()
+    public function test_can_add_child_action()
     {
         $composite = new CompositeAction();
         $composite->add($this->getActionMock());
         $this->assertCount(1, $composite->getChildren());
     }
 
-    public function testExecuteCalledOnEachChild()
+    public function test_execute_called_on_each_child()
     {
         $context = $this->getContextMock();
 
@@ -48,7 +48,7 @@ class CompositeActionTest extends \PHPUnit_Framework_TestCase
         $composite->execute($context);
     }
 
-    public function testMap()
+    public function test_map()
     {
         $action1 = $this->getActionMock();
         $action2 = $this->getActionMock();
@@ -81,7 +81,7 @@ class CompositeActionTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($action2replacement, $children[1]);
     }
 
-    public function testDebugTree()
+    public function test_debug_tree()
     {
         $innerComposite = new CompositeAction([new FooAction(), new BarAction()]);
         $this->assertCount(2, $innerComposite->getChildren());

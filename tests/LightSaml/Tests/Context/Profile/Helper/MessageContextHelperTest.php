@@ -57,7 +57,7 @@ class MessageContextHelperTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider helperProvider
      */
-    public function testHelper($method, SamlMessage $message = null, $expectedException = null, $expectedMessage = null)
+    public function test_helper($method, SamlMessage $message = null, $expectedException = null, $expectedMessage = null)
     {
         $context = new MessageContext();
         if ($message) {
@@ -79,7 +79,7 @@ class MessageContextHelperTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testAsSamlMessageReturnsMessage()
+    public function test_as_saml_message_returns_message()
     {
         $context = new MessageContext();
         $context->setMessage($expectedMessage = $this->getMessageMock());

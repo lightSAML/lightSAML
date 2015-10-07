@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 
 class ActionLogWrapperTest extends \PHPUnit_Framework_TestCase
 {
-    public function testBuildsLoggableActionWithGivenLogger()
+    public function test_builds_loggable_action_with_given_logger()
     {
         $context = $this->getContextMock();
 
