@@ -10,6 +10,7 @@ class FileEntityDescriptorProvider implements EntityDescriptorProviderInterface
     /** @var string */
     private $filename;
 
+    /** @var EntityDescriptor|null */
     private $entityDescriptor;
 
     /**
@@ -28,6 +29,7 @@ class FileEntityDescriptorProvider implements EntityDescriptorProviderInterface
         if (null == $this->entityDescriptor) {
             $this->entityDescriptor = new EntityDescriptor();
             $deserializationContext = new DeserializationContext();
+            $deserializationContext->getDocument()->load($this->filename);
             $this->entityDescriptor->deserialize($deserializationContext->getDocument()->firstChild, $deserializationContext);
         }
 

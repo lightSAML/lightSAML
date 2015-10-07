@@ -29,6 +29,7 @@ class FileEntitiesDescriptorProvider implements EntitiesDescriptorProviderInterf
         if (null == $this->entitiesDescriptor) {
             $this->entitiesDescriptor = new EntitiesDescriptor();
             $deserializationContext = new DeserializationContext();
+            $deserializationContext->getDocument()->load($this->filename);
             $this->entitiesDescriptor->deserialize($deserializationContext->getDocument()->firstChild, $deserializationContext);
         }
 

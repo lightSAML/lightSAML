@@ -47,6 +47,7 @@ class X509CredentialFileProvider implements CredentialProviderInterface
                 X509Certificate::fromFile($this->certificatePath),
                 KeyHelper::createPrivateKey($this->privateKeyPath, $this->privateKeyPassword, true)
             );
+            $this->credential->setEntityId($this->entityId);
         }
 
         return $this->credential;
