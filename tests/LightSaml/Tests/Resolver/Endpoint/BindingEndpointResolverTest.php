@@ -13,7 +13,7 @@ use LightSaml\SamlConstants;
 
 class BindingEndpointResolverTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_does_not_modify_when_criteria_not_present()
+    public function test__does_not_modify_when_criteria_not_present()
     {
         $candidates = [
             $firstEndpoint = $this->getMock(EndpointReference::class, [], [], '', false),
@@ -29,7 +29,7 @@ class BindingEndpointResolverTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($secondEndpoint, $result[1]);
     }
 
-    public function test_filters_by_given_bindings()
+    public function test__filters_by_given_bindings()
     {
         $criteriaSet = new CriteriaSet([new BindingCriteria([
             SamlConstants::BINDING_SAML2_HTTP_POST,

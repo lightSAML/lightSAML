@@ -10,7 +10,7 @@ class X509CertificateTest extends \PHPUnit_Framework_TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Invalid PEM encoded certificate
      */
-    public function testErrorOnInvalidLoadPemContext()
+    public function test__error_on_invalid_load_pem_context()
     {
         $certificate = new X509Certificate();
         $certificate->loadPem('not a pem format');
@@ -20,7 +20,7 @@ class X509CertificateTest extends \PHPUnit_Framework_TestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage File not found '/non/existing/file/123'
      */
-    public function testErrorOnInvalidLoadFromFile()
+    public function test_error_on_invalid_load_from_file()
     {
         $certificate = new X509Certificate();
         $certificate->loadFromFile('/non/existing/file/123');
@@ -30,7 +30,7 @@ class X509CertificateTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlException
      * @expectedExceptionMessage Certificate data not set
      */
-    public function testErrorWhenParseCalledWithOutDataSet()
+    public function test_error_when_parse_called_with_out_data_set()
     {
         $certificate = new X509Certificate();
         $certificate->parse();

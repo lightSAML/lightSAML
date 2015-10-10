@@ -14,7 +14,7 @@ use LightSaml\SamlConstants;
 
 class AuthnRequestFunctionalTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_deserialize_request01()
+    public function test__deserialize_request01()
     {
         $context = new DeserializationContext();
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/Request/request01.xml');
@@ -37,7 +37,7 @@ class AuthnRequestFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($request->getNameIDPolicy()->getAllowCreate());
     }
 
-    public function test_signed_serialize_deserialize()
+    public function test__signed_serialize_deserialize()
     {
         $certificate = new X509Certificate();
         $certificate->loadFromFile(__DIR__.'/../../../../../../web/sp/saml.crt');

@@ -7,14 +7,14 @@ use LightSaml\Credential\Context\MetadataCredentialContext;
 
 class CredentialContextSetTest extends \PHPUnit_Framework_TestCase
 {
-    public function testMetadataContextIsNullUponCreation()
+    public function test_metadata_context_is_null_upon_creation()
     {
         $context = new CredentialContextSet();
 
         $this->assertNull($context->get(MetadataCredentialContext::class));
     }
 
-    public function testReturnsSetMetadataContext()
+    public function test_returns_set_metadata_context()
     {
         $context = new CredentialContextSet([$metadataContextMock = $this->getMetadataContextMock()]);
 

@@ -8,7 +8,7 @@ use LightSaml\Validator\Model\NameId\NameIdValidator;
 
 class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    public function testOkIfNoFormat()
+    public function test_ok_if_no_format()
     {
         $nameId = new NameID();
 
@@ -21,7 +21,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID element has Format attribute 'invalid format' which is not a wellformed absolute uri
      */
-    public function testInvalidFormat()
+    public function test_invalid_format()
     {
         $nameId = new NameID();
         $nameId->setFormat('invalid format');
@@ -31,7 +31,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateNameId($nameId);
     }
 
-    public function testValidEmailFormat()
+    public function test_valid_email_format()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_EMAIL)
@@ -46,7 +46,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage Value of NameID is not a valid email address according to the IETF RFC 2822 specification
      */
-    public function testInvalidEmailFormat()
+    public function test_invalid_email_format()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_EMAIL)
@@ -61,7 +61,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Email Format attribute MUST contain a Value that contains more than whitespace characters
      */
-    public function testEmptyEmailFormat()
+    public function test_empty_email_format()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_EMAIL);
@@ -71,7 +71,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateNameId($nameId);
     }
 
-    public function testValidX509SubjectFormat()
+    public function test_valid_x509_subject_format()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_X509_SUBJECT_NAME)
@@ -86,7 +86,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with X509SubjectName Format attribute MUST contain a Value that contains more than whitespace characters
      */
-    public function testEmptyX509SubjectFormat()
+    public function test_empty_x509_subject_format()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_X509_SUBJECT_NAME);
@@ -96,7 +96,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateNameId($nameId);
     }
 
-    public function testValidWindowsFormatWithDomain()
+    public function test_valid_windows_format_with_domain()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_WINDOWS)
@@ -107,7 +107,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateNameId($nameId);
     }
 
-    public function testValidWindowsFormatWithOutDomain()
+    public function test_valid_windows_format_with_out_domain()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_WINDOWS)
@@ -122,7 +122,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Windows Format attribute MUST contain a Value that contains more than whitespace characters
      */
-    public function testEmptyWindowsFormat()
+    public function test_empty_windows_format()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_WINDOWS);
@@ -132,7 +132,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateNameId($nameId);
     }
 
-    public function testValidKerberosFormatFull()
+    public function test_valid_kerberos_format_full()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_KERBEROS)
@@ -143,7 +143,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateNameId($nameId);
     }
 
-    public function testValidKerberosFormatShort()
+    public function test_valid_kerberos_format_short()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_KERBEROS)
@@ -158,7 +158,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Kerberos Format attribute MUST contain a Value that contains a '@'
      */
-    public function testInvalidKerberosFormat()
+    public function test_invalid_kerberos_format()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_KERBEROS)
@@ -173,7 +173,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Kerberos Format attribute MUST contain a Value with at least 3 characters
      */
-    public function testInvalidKerberosFormatShort()
+    public function test_invalid_kerberos_format_short()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_KERBEROS)
@@ -188,7 +188,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Kerberos Format attribute MUST contain a Value that contains more than whitespace characters
      */
-    public function testInvalidKerberosFormatEmpty()
+    public function test_invalid_kerberos_format_empty()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_KERBEROS);
@@ -198,7 +198,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateNameId($nameId);
     }
 
-    public function testValidEntityFormat()
+    public function test_valid_entity_format()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_ENTITY)
@@ -213,7 +213,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Entity Format attribute MUST contain a Value that contains more than whitespace characters
      */
-    public function testInvalidEntityFormatEmpty()
+    public function test_invalid_entity_format_empty()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_ENTITY);
@@ -227,7 +227,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Entity Format attribute MUST have a Value that contains no more than 1024 characters
      */
-    public function testInvalidEntityFormatLong()
+    public function test_invalid_entity_format_long()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_ENTITY)
@@ -242,7 +242,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Entity Format attribute MUST NOT set the NameQualifier attribute
      */
-    public function testInvalidEntityFormatWithNameQualifier()
+    public function test_invalid_entity_format_with_name_qualifier()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_ENTITY)
@@ -258,7 +258,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Entity Format attribute MUST NOT set the SPNameQualifier attribute
      */
-    public function testInvalidEntityFormatWithSpNameQualifier()
+    public function test_invalid_entity_format_with_sp_name_qualifier()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_ENTITY)
@@ -274,7 +274,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Entity Format attribute MUST NOT set the SPProvidedID attribute
      */
-    public function testInvalidEntityFormatWithSpProvidedId()
+    public function test_invalid_entity_format_with_sp_provided_id()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_ENTITY)
@@ -286,7 +286,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateNameId($nameId);
     }
 
-    public function testValidPersistentFormat()
+    public function test_valid_persistent_format()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_PERSISTENT)
@@ -297,7 +297,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateNameId($nameId);
     }
 
-    public function testValidPersistentFormatWithOtherAttributes()
+    public function test_valid_persistent_format_with_other_attributes()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_PERSISTENT)
@@ -316,7 +316,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Persistent Format attribute MUST contain a Value that contains more than whitespace characters
      */
-    public function testInvalidPersistentFormatEmpty()
+    public function test_invalid_persistent_format_empty()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_PERSISTENT);
@@ -330,7 +330,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Persistent Format attribute MUST have a Value that contains no more than 256 characters
      */
-    public function testInvalidPersistentFormatLong()
+    public function test_invalid_persistent_format_long()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_PERSISTENT)
@@ -341,7 +341,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateNameId($nameId);
     }
 
-    public function testValidTransientFormat()
+    public function test_valid_transient_format()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_TRANSIENT)
@@ -352,7 +352,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateNameId($nameId);
     }
 
-    public function testValidTransientFormatWithOtherAttributes()
+    public function test_valid_transient_format_with_other_attributes()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_TRANSIENT)
@@ -371,7 +371,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Transient Format attribute MUST contain a Value that contains more than whitespace characters
      */
-    public function testInvalidTransientFormatEmpty()
+    public function test_invalid_transient_format_empty()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_TRANSIENT);
@@ -385,7 +385,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID with Transient Format attribute MUST have a Value that contains no more than 256 characters
      */
-    public function testInvalidTransientFormatLong()
+    public function test_invalid_transient_format_long()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_TRANSIENT)
@@ -400,7 +400,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage NameID '123456789012345' with Transient Format attribute MUST have a Value with at least 16 characters (the equivalent of 128 bits)
      */
-    public function testInvalidTransientFormatShort()
+    public function test_invalid_transient_format_short()
     {
         $nameId = new NameID();
         $nameId->setFormat(SamlConstants::NAME_ID_FORMAT_TRANSIENT)

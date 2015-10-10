@@ -12,7 +12,7 @@ class HttpPostBindingTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlBindingException
      * @expectedExceptionMessage Missing SAMLRequest or SAMLResponse parameter
      */
-    public function test_receive_throws_when_no_message()
+    public function test__receive_throws_when_no_message()
     {
         $request = new Request();
 

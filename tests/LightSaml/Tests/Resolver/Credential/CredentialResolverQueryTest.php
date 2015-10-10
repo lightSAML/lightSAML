@@ -9,18 +9,18 @@ use LightSaml\Resolver\Credential\CredentialResolverQuery;
 
 class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_extends_criteria_set()
+    public function test__extends_criteria_set()
     {
         $reflectionClass = new \ReflectionClass(CredentialResolverQuery::class);
         $this->assertEquals(CriteriaSet::class, $reflectionClass->getParentClass()->name);
     }
 
-    public function test_instantiates_with_credential_resolver()
+    public function test__instantiates_with_credential_resolver()
     {
         new CredentialResolverQuery($this->getMock(CredentialResolverInterface::class));
     }
 
-    public function test_resolve_calls_credential_resolver_and_stores_returned_credentials()
+    public function test__resolve_calls_credential_resolver_and_stores_returned_credentials()
     {
         $credentialResolverMock = $this->getMock(CredentialResolverInterface::class);
         $query = new CredentialResolverQuery($credentialResolverMock);
@@ -35,7 +35,7 @@ class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedCredentials, $query->allCredentials());
     }
 
-    public function test_first_credential()
+    public function test__first_credential()
     {
         $credentialResolverMock = $this->getMock(CredentialResolverInterface::class);
         $query = new CredentialResolverQuery($credentialResolverMock);
@@ -54,7 +54,7 @@ class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($firstCredential, $query->firstCredential());
     }
 
-    public function test_public_keys()
+    public function test__public_keys()
     {
         $credentialResolverMock = $this->getMock(CredentialResolverInterface::class);
         $query = new CredentialResolverQuery($credentialResolverMock);
@@ -86,7 +86,7 @@ class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(0, $query->getPrivateKeys());
     }
 
-    public function test_private_keys()
+    public function test__private_keys()
     {
         $credentialResolverMock = $this->getMock(CredentialResolverInterface::class);
         $query = new CredentialResolverQuery($credentialResolverMock);

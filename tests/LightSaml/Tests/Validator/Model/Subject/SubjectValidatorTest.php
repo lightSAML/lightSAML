@@ -15,7 +15,7 @@ class SubjectValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage Subject MUST contain either an identifier or a subject confirmation
      */
-    public function testFailsWhenNoSubjectAndNoSubjectConfirmation()
+    public function test_fails_when_no_subject_and_no_subject_confirmation()
     {
         $subject = new Subject();
 
@@ -26,7 +26,7 @@ class SubjectValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateSubject($subject);
     }
 
-    public function testNameIdValidatorIsCalledWhenNameIdPresent()
+    public function test_name_id_validator_is_called_when_name_id_present()
     {
         $subject = new Subject();
 
@@ -43,7 +43,7 @@ class SubjectValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateSubject($subject);
     }
 
-    public function testNameIdValidatorIsNotCalledWhenNoNameId()
+    public function test_name_id_validator_is_not_called_when_no_name_id()
     {
         $subject = new Subject();
 
@@ -61,7 +61,7 @@ class SubjectValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateSubject($subject);
     }
 
-    public function testNameIdValidatorIsCalledForSubjectConfirmationNameId()
+    public function test_name_id_validator_is_called_for_subject_confirmation_name_id()
     {
         $subject = new Subject();
 
@@ -87,7 +87,7 @@ class SubjectValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage Method attribute of SubjectConfirmation MUST contain at least one non-whitespace character
      */
-    public function testFailsOnEmptyMethod()
+    public function test_fails_on_empty_method()
     {
         $subject = new Subject();
 
@@ -104,7 +104,7 @@ class SubjectValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage SubjectConfirmation element has Method attribute which is not a wellformed absolute uri
      */
-    public function testFailsOnInvalidMethod()
+    public function test_fails_on_invalid_method()
     {
         $subject = new Subject();
 
@@ -122,7 +122,7 @@ class SubjectValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage Recipient of SubjectConfirmationData must be a wellformed absolute URI
      */
-    public function testFailsOnInvalidRecipient()
+    public function test_fails_on_invalid_recipient()
     {
         $subject = new Subject();
 
@@ -144,7 +144,7 @@ class SubjectValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage SubjectConfirmationData NotBefore MUST be less than NotOnOrAfter
      */
-    public function testFailsOnNotOnOrAfterLessThenNotBefore()
+    public function test_fails_on_not_on_or_after_less_then_not_before()
     {
         $subject = new Subject();
 

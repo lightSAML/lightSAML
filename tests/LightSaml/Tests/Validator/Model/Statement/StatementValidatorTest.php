@@ -16,7 +16,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessageRegExp /Unsupported Statement type '\w+'/
      */
-    public function testUnsupportedStatementFails()
+    public function test_unsupported_statement_fails()
     {
         $statementMock = $this->getMockForAbstractClass('LightSaml\Model\Assertion\AbstractStatement');
 
@@ -29,7 +29,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage AuthnStatement MUST have an AuthnInstant attribute
      */
-    public function testAuthnStatementFailsWithOutAuthnInstant()
+    public function test_authn_statement_fails_with_out_authn_instant()
     {
         $authnStatement = new AuthnStatement();
 
@@ -42,7 +42,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage SessionIndex attribute of AuthnStatement must contain at least one non-whitespace character
      */
-    public function testAuthnStatementFailsWithSessionIndexEmptyString()
+    public function test_authn_statement_fails_with_session_index_empty_string()
     {
         $authnStatement = new AuthnStatement();
         $authnStatement->setAuthnInstant(123456789)
@@ -57,7 +57,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage Address attribute of SubjectLocality must contain at least one non-whitespace character
      */
-    public function testAuthnStatementFailsWithSubjectLocalityAddressEmptyString()
+    public function test_authn_statement_fails_with_subject_locality_address_empty_string()
     {
         $subjectLocality = new SubjectLocality();
         $subjectLocality->setAddress('');
@@ -75,7 +75,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage DNSName attribute of SubjectLocality must contain at least one non-whitespace character
      */
-    public function testAuthnStatementFailsWithSubjectLocalityDnsNameEmptyString()
+    public function test_authn_statement_fails_with_subject_locality_dns_name_empty_string()
     {
         $subjectLocality = new SubjectLocality();
         $subjectLocality->setDNSName('');
@@ -93,7 +93,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage AuthnStatement MUST have an AuthnContext element
      */
-    public function testAuthnStatementFailsWithOutAuthnContext()
+    public function test_authn_statement_fails_with_out_authn_context()
     {
         $authnStatement = new AuthnStatement();
         $authnStatement->setAuthnInstant(123456789);
@@ -107,7 +107,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage AuthnContext element MUST contain at least one AuthnContextClassRef, AuthnContextDecl or AuthnContextDeclRef element
      */
-    public function testAuthnStatementFailsWithEmptyAuthnContext()
+    public function test_authn_statement_fails_with_empty_authn_context()
     {
         $authnContext = new AuthnContext();
 
@@ -124,7 +124,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage AuthnContext MUST NOT contain more than two elements
      */
-    public function testAuthnStatementFailsWithAuthnContextWithMoreThenTwoElements()
+    public function test_authn_statement_fails_with_authn_context_with_more_then_two_elements()
     {
         $authnContext = new AuthnContext();
         $authnContext->setAuthnContextClassRef('AuthnContextClassRef')
@@ -144,7 +144,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage AuthnContextClassRef has a value which is not a wellformed absolute uri
      */
-    public function testAuthnContextClassRefMustBeWellFormedUriString()
+    public function test_authn_context_class_ref_must_be_well_formed_uri_string()
     {
         $authnContext = new AuthnContext();
         $authnContext->setAuthnContextClassRef('in valid');
@@ -162,7 +162,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage AuthnContextDeclRef has a value which is not a wellformed absolute uri
      */
-    public function testAuthnContextDeclRefMustBeWellFormedUriString()
+    public function test_authn_context_decl_ref_must_be_well_formed_uri_string()
     {
         $authnContext = new AuthnContext();
         $authnContext->setAuthnContextDeclRef('in valid');
@@ -176,7 +176,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateStatement($authnStatement);
     }
 
-    public function testAuthnStatementOk()
+    public function test_authn_statement_ok()
     {
         $authnContext = new AuthnContext();
         $authnContext->setAuthnContextClassRef(SamlConstants::AUTHN_CONTEXT_PASSWORD_PROTECTED_TRANSPORT);
@@ -194,7 +194,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage AttributeStatement MUST contain at least one Attribute or EncryptedAttribute
      */
-    public function testEmptyAttributeStatementFails()
+    public function test_empty_attribute_statement_fails()
     {
         $attributeStatement = new AttributeStatement();
 
@@ -207,7 +207,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage Name attribute of Attribute element MUST contain at least one non-whitespace character
      */
-    public function testAttributeWithBlankNameFails()
+    public function test_attribute_with_blank_name_fails()
     {
         $attributeStatement = new AttributeStatement();
         $attributeStatement->addAttribute(new Attribute(' '));
@@ -217,7 +217,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateStatement($attributeStatement);
     }
 
-    public function testAttributeStatementOk()
+    public function test_attribute_statement_ok()
     {
         $attributeStatement = new AttributeStatement();
         $attributeStatement->addAttribute(new Attribute('name', 'value'));

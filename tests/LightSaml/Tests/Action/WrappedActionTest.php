@@ -7,7 +7,7 @@ use LightSaml\Action\WrappedAction;
 
 class WrappedActionTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_before_and_after_called()
+    public function test__before_and_after_called()
     {
         $context = $this->getContextMock();
 

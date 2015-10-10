@@ -20,7 +20,7 @@ use LightSaml\Credential\Criteria\UsageCriteria;
 
 class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_idp2()
+    public function test__idp2()
     {
         $resolver = $this->getResolver();
 
@@ -52,7 +52,7 @@ class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(UsageType::SIGNING, $credential->getUsageType());
     }
 
-    public function test_idp()
+    public function test__idp()
     {
         $resolver = $this->getResolver();
 
@@ -84,7 +84,7 @@ class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(UsageType::SIGNING, $credential->getUsageType());
     }
 
-    public function test_sp2()
+    public function test__sp2()
     {
         $resolver = $this->getResolver();
 
@@ -116,7 +116,7 @@ class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(UsageType::SIGNING, $credential->getUsageType());
     }
 
-    public function test_get_private_key()
+    public function test__get_private_key()
     {
         $resolver = $this->getResolver();
 

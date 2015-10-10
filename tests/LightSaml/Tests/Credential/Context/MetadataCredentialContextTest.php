@@ -6,7 +6,7 @@ use LightSaml\Credential\Context\MetadataCredentialContext;
 
 class MetadataCredentialContextTest extends \PHPUnit_Framework_TestCase
 {
-    public function testReturnsObjectsSetOnConstruct()
+    public function test_returns_objects_set_on_construct()
     {
         $context = new MetadataCredentialContext(
             $keyDescriptor = $this->getKeyDescriptorMock(),

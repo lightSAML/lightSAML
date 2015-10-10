@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class HttpRedirectBindingFunctionalTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_send_authn_request()
+    public function test__send_authn_request()
     {
         $expectedRelayState = 'relayState';
         $expectedDestination = 'https://destination.com/auth';
@@ -88,7 +88,7 @@ class HttpRedirectBindingFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($request->getIssueInstantTimestamp(), $receivedAuthnRequest->getIssueInstantTimestamp());
     }
 
-    public function test_send_destination()
+    public function test__send_destination()
     {
         $expectedDestination = 'https://destination.com/auth';
 
@@ -112,7 +112,7 @@ class HttpRedirectBindingFunctionalTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedDestination, $urlInfo['scheme'].'://'.$urlInfo['host'].$urlInfo['path']);
     }
 
-    public function test_receive_authn_request()
+    public function test__receive_authn_request()
     {
         $expectedRelayState = 'relayState';
 

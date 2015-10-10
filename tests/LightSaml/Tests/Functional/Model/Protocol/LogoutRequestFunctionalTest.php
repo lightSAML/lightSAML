@@ -8,7 +8,7 @@ use LightSaml\SamlConstants;
 
 class LogoutRequestFunctionalTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_deserialize_logout_request01()
+    public function test__deserialize_logout_request01()
     {
         $context = new DeserializationContext();
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/Request/logoutrequest01.xml');

@@ -9,7 +9,7 @@ use LightSaml\Resolver\Credential\PrivateKeyResolver;
 
 class PrivateKeyResolverTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_returns_only_credentials_with_private_keys_when_criteria_given()
+    public function test__returns_only_credentials_with_private_keys_when_criteria_given()
     {
         $criteriaSet = new CriteriaSet([new PrivateKeyCriteria()]);
 

@@ -16,7 +16,7 @@ class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage Conditions.NotBefore must not be in the future
      */
-    public function testConditionsNotBeforeFails()
+    public function test_conditions_not_before_fails()
     {
         $now = 1000;
 
@@ -33,7 +33,7 @@ class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage Conditions.NotOnOrAfter must not be in the past
      */
-    public function testConditionsNotOnOrAfterFails()
+    public function test_conditions_not_on_or_after_fails()
     {
         $now = 1000;
 
@@ -50,7 +50,7 @@ class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage AuthnStatement attribute SessionNotOnOrAfter MUST be in the future
      */
-    public function testAuthnStatementSessionNotOnOrAfterFails()
+    public function test_authn_statement_session_not_on_or_after_fails()
     {
         $now = 1000;
 
@@ -67,7 +67,7 @@ class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage SubjectConfirmationData.NotBefore must not be in the future
      */
-    public function testSubjectNotBeforeFails()
+    public function test_subject_not_before_fails()
     {
         $now = 1000;
 
@@ -90,7 +90,7 @@ class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
      * @expectedException \LightSaml\Error\LightSamlValidationException
      * @expectedExceptionMessage SubjectConfirmationData.NotOnOrAfter must not be in the past
      */
-    public function testSubjectNotOnOrAfterFails()
+    public function test_subject_not_on_or_after_fails()
     {
         $now = 1000;
 
@@ -109,7 +109,7 @@ class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
         $validator->validateTimeRestrictions($assertion, $now, 10);
     }
 
-    public function testPass()
+    public function test_pass()
     {
         $now = 1000;
 

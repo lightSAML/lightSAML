@@ -8,7 +8,7 @@ use LightSaml\Credential\X509Credential;
 
 class X509CredentialTest extends \PHPUnit_Framework_TestCase
 {
-    public function testPublicKey()
+    public function test_public_key()
     {
         $certificate = new X509Certificate();
         $certificate->loadFromFile(__DIR__.'/../../../../../resources/sample/Certificate/saml.crt');
@@ -24,7 +24,7 @@ class X509CredentialTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('/C=RS/ST=Serbia/O=BOS/CN=mt.evo.team'), $credential->getKeyNames());
     }
 
-    public function testPrivateKey()
+    public function test_private_key()
     {
         $certificate = new X509Certificate();
         $certificate->loadFromFile(__DIR__.'/../../../../../resources/sample/Certificate/saml.crt');

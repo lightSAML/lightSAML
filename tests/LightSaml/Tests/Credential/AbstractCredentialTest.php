@@ -6,7 +6,7 @@ use LightSaml\Credential\UsageType;
 
 class AbstractCredentialTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSetGetEntityId()
+    public function test__set_get_entity_id()
     {
         $credential = $this->getAbstractCredentialMock();
         $credential->setEntityId($expectedValue = 'entity-foo');
@@ -14,7 +14,7 @@ class AbstractCredentialTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedValue, $credential->getEntityId());
     }
 
-    public function testSetGetUsageType()
+    public function test__set_get_usage_type()
     {
         $credential = $this->getAbstractCredentialMock();
         $credential->setUsageType($expectedValue = UsageType::ENCRYPTION);
@@ -22,7 +22,7 @@ class AbstractCredentialTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedValue, $credential->getUsageType());
     }
 
-    public function testSetGetSecretKey()
+    public function test__set_get_secret_key()
     {
         $credential = $this->getAbstractCredentialMock();
         $credential->setSecretKey($expectedValue = '123123123');
@@ -30,14 +30,14 @@ class AbstractCredentialTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedValue, $credential->getSecretKey());
     }
 
-    public function testCreatesCredentialContextOnConstruct()
+    public function test__creates_credential_context_on_construct()
     {
         $credential = $this->getAbstractCredentialMock();
 
         $this->assertNotNull($credential->getCredentialContext());
     }
 
-    public function testAddKeyName()
+    public function test__add_key_name()
     {
         $credential = $this->getAbstractCredentialMock();
 

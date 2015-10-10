@@ -7,7 +7,7 @@ use LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProvider;
 
 class FileEntityDescriptorProviderTest extends \PHPUnit_Framework_TestCase
 {
-    public function test__loads_from_file()
+    public function test___loads_from_file()
     {
         $provider = new FileEntityDescriptorProvider(
             __DIR__.'/../../../../../../resources/sample/EntityDescriptor/idp-ed.xml'

@@ -10,7 +10,7 @@ use LightSaml\SamlConstants;
 
 class LogoutRequestTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_serialize()
+    public function test__serialize()
     {
         $context = new SerializationContext();
         $request = new LogoutRequest();

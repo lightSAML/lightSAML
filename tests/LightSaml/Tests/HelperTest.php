@@ -39,7 +39,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase
      * @param string $string
      * @dataProvider timestamp2StringProvider
      */
-    public function test_time_to_string($timestamp, $string)
+    public function test__time_to_string($timestamp, $string)
     {
         $this->assertEquals($string, Helper::time2string($timestamp));
     }
@@ -50,7 +50,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider string2TimestampProvider
      */
-    public function test_get_timestamp_from_value_with_string($value, $timestamp)
+    public function test__get_timestamp_from_value_with_string($value, $timestamp)
     {
         $this->assertEquals($timestamp, Helper::getTimestampFromValue($value));
     }
@@ -61,7 +61,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider string2TimestampProvider
      */
-    public function test_get_timestamp_from_value_with_date_time($value, $timestamp)
+    public function test__get_timestamp_from_value_with_date_time($value, $timestamp)
     {
         $dt = new \DateTime('@'.$timestamp);
         $this->assertEquals($timestamp, Helper::getTimestampFromValue($dt));
@@ -73,7 +73,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase
      *
      * @dataProvider string2TimestampProvider
      */
-    public function test_get_timestamp_from_value_with_int($value, $timestamp)
+    public function test__get_timestamp_from_value_with_int($value, $timestamp)
     {
         $this->assertEquals($timestamp, Helper::getTimestampFromValue($timestamp));
     }
@@ -81,12 +81,12 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function test_get_timestamp_from_value_with_invalid_value()
+    public function test__get_timestamp_from_value_with_invalid_value()
     {
         Helper::getTimestampFromValue(array());
     }
 
-    public function test_generate_random_bytes_length()
+    public function test__generate_random_bytes_length()
     {
         $random = Helper::generateRandomBytes(10);
         $this->assertEquals(10, strlen($random));
@@ -101,12 +101,12 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function test_generate_random_bytes_error_on_invalid_length()
+    public function test__generate_random_bytes_error_on_invalid_length()
     {
         Helper::generateRandomBytes('');
     }
 
-    public function test_generate_id()
+    public function test__generate_id()
     {
         $id = Helper::generateID();
         $this->assertStringStartsWith('_', $id);
@@ -120,106 +120,106 @@ class HelperTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThan(8, count($arr));
     }
 
-    public function test_validate_id_string_returns_true_for_valid_string()
+    public function test__validate_id_string_returns_true_for_valid_string()
     {
         $this->assertTrue(Helper::validateIdString('1234567890123456'));
         $this->assertTrue(Helper::validateIdString('12345678901234567890'));
     }
 
-    public function test_validate_id_string_returns_false_for_non_string()
+    public function test__validate_id_string_returns_false_for_non_string()
     {
         $this->assertFalse(Helper::validateIdString(1234567890123456));
         $this->assertFalse(Helper::validateIdString(array()));
     }
 
-    public function test_validate_id_string_returns_false_for_short_string()
+    public function test__validate_id_string_returns_false_for_short_string()
     {
         $this->assertFalse(Helper::validateIdString(''));
         $this->assertFalse(Helper::validateIdString('abc'));
         $this->assertFalse(Helper::validateIdString('123456789012345'));
     }
 
-    public function test_validate_required_string_returns_true_for_non_empty_string()
+    public function test__validate_required_string_returns_true_for_non_empty_string()
     {
         $this->assertTrue(Helper::validateRequiredString('1'));
         $this->assertTrue(Helper::validateRequiredString('123'));
         $this->assertTrue(Helper::validateRequiredString('123456789'));
     }
 
-    public function test_validate_required_string_returns_false_for_empty_string()
+    public function test__validate_required_string_returns_false_for_empty_string()
     {
         $this->assertFalse(Helper::validateRequiredString(''));
     }
 
-    public function test_validate_required_string_returns_false_for_null()
+    public function test__validate_required_string_returns_false_for_null()
     {
         $this->assertFalse(Helper::validateRequiredString(null));
     }
 
-    public function test_validate_required_string_returns_false_for_non_string()
+    public function test__validate_required_string_returns_false_for_non_string()
     {
         $this->assertFalse(Helper::validateRequiredString(123));
         $this->assertFalse(Helper::validateRequiredString(array()));
     }
 
-    public function test_validate_optional_string_returns_true_for_null()
+    public function test__validate_optional_string_returns_true_for_null()
     {
         $this->assertTrue(Helper::validateOptionalString(null));
     }
 
-    public function test_validate_optional_string_returns_true_for_non_empty_string()
+    public function test__validate_optional_string_returns_true_for_non_empty_string()
     {
         $this->assertTrue(Helper::validateOptionalString('1'));
         $this->assertTrue(Helper::validateOptionalString('1234'));
     }
 
-    public function test_validate_optional_string_returns_false_for_empty_string()
+    public function test__validate_optional_string_returns_false_for_empty_string()
     {
         $this->assertFalse(Helper::validateOptionalString(''));
     }
 
-    public function test_validate_optional_string_returns_false_for_non_string()
+    public function test__validate_optional_string_returns_false_for_non_string()
     {
         $this->assertFalse(Helper::validateOptionalString(123));
         $this->assertFalse(Helper::validateOptionalString(array()));
     }
 
-    public function test_validate_well_formed_uri_string_returns_false_for_empty_string()
+    public function test__validate_well_formed_uri_string_returns_false_for_empty_string()
     {
         $this->assertFalse(Helper::validateWellFormedUriString(''));
     }
 
-    public function test_validate_well_formed_uri_string_returns_false_for_null()
+    public function test__validate_well_formed_uri_string_returns_false_for_null()
     {
         $this->assertFalse(Helper::validateWellFormedUriString(null));
     }
 
-    public function test_validate_well_formed_uri_string_returns_false_for_too_big_string()
+    public function test__validate_well_formed_uri_string_returns_false_for_too_big_string()
     {
         $str = str_pad('', 67000, 'x');
         $this->assertFalse(Helper::validateWellFormedUriString($str));
     }
 
-    public function test_validate_well_formed_uri_string_returns_false_for_string_with_spaces()
+    public function test__validate_well_formed_uri_string_returns_false_for_string_with_spaces()
     {
         $this->assertFalse(Helper::validateWellFormedUriString('123 456 789'));
     }
 
-    public function test_validate_well_formed_uri_string_returns_false_for_string_without_scheme()
+    public function test__validate_well_formed_uri_string_returns_false_for_string_without_scheme()
     {
         $this->assertFalse(Helper::validateWellFormedUriString('example.com'));
         $this->assertFalse(Helper::validateWellFormedUriString(':example.com'));
         $this->assertFalse(Helper::validateWellFormedUriString('//:example.com'));
     }
 
-    public function test_validate_well_formed_uri_string_returns_false_for_string_with_invalid_scheme()
+    public function test__validate_well_formed_uri_string_returns_false_for_string_with_invalid_scheme()
     {
         $this->assertFalse(Helper::validateWellFormedUriString('a=b:example.com'));
         $this->assertFalse(Helper::validateWellFormedUriString('a b:example.com'));
         $this->assertFalse(Helper::validateWellFormedUriString('a&b:example.com'));
     }
 
-    public function test_validate_well_formed_uri_string_returns_false_for_valid_string()
+    public function test__validate_well_formed_uri_string_returns_false_for_valid_string()
     {
         $this->assertTrue(Helper::validateWellFormedUriString('http://example.com'));
         $this->assertTrue(Helper::validateWellFormedUriString(SamlConstants::NS_ASSERTION));
@@ -241,7 +241,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notBeforeProvider
      */
-    public function test_validate_not_before($notBefore, $now, $allowedSecondsSkew, $expected)
+    public function test__validate_not_before($notBefore, $now, $allowedSecondsSkew, $expected)
     {
         $this->assertEquals($expected, Helper::validateNotBefore($notBefore, $now, $allowedSecondsSkew));
     }
@@ -257,7 +257,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider notOnOrAfterProvider
      */
-    public function test_validate_not_on_or_after($notOnOrAfter, $now, $allowedSecondsSkew, $expected)
+    public function test__validate_not_on_or_after($notOnOrAfter, $now, $allowedSecondsSkew, $expected)
     {
         $this->assertEquals($expected, Helper::validateNotOnOrAfter($notOnOrAfter, $now, $allowedSecondsSkew));
     }

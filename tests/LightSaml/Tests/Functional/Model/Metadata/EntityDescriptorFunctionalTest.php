@@ -15,7 +15,7 @@ use LightSaml\SamlConstants;
 
 class EntityDescriptorFunctionalTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_deserialization_idp2_ed()
+    public function test__deserialization_idp2_ed()
     {
         $context = new DeserializationContext();
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/EntityDescriptor/idp2-ed.xml');
@@ -95,7 +95,7 @@ class EntityDescriptorFunctionalTest extends \PHPUnit_Framework_TestCase
         //endregion
     }
 
-    public function test_deserialize_formatted_certificate()
+    public function test__deserialize_formatted_certificate()
     {
         $context = new DeserializationContext();
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/EntityDescriptor/ed01-formatted-certificate.xml');
