@@ -79,6 +79,8 @@ abstract class AbstractContext implements ContextInterface
     /**
      * @param string                  $name
      * @param object|ContextInterface $subContext
+     *
+     * @return AbstractContext
      */
     public function addSubContext($name, $subContext)
     {
@@ -88,7 +90,7 @@ abstract class AbstractContext implements ContextInterface
 
         $existing = @$this->subContexts[$name];
         if ($existing === $subContext) {
-            return;
+            return $this;
         }
 
         $this->subContexts[$name] = $subContext;
@@ -99,6 +101,8 @@ abstract class AbstractContext implements ContextInterface
         if ($existing instanceof ContextInterface) {
             $existing->setParent(null);
         }
+
+        return $this;
     }
 
     /**

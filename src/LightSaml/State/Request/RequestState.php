@@ -12,6 +12,16 @@ class RequestState implements \Serializable
 
     /**
      * @param string $id
+     * @param mixed  $nonce
+     */
+    public function __construct($id = null, $nonce = null)
+    {
+        $this->id = $id;
+        $this->nonce = $nonce;
+    }
+
+    /**
+     * @param string $id
      *
      * @return RequestState
      */
