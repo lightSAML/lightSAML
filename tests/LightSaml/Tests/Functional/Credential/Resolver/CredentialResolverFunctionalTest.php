@@ -1,36 +1,37 @@
 <?php
 
-namespace LightSaml\Tests\Functional\Trust\Resolver;
+namespace LightSaml\Tests\Functional\Credential\Resolver;
 
-use LightSaml\Resolver\Credential\Factory\CredentialResolverFactory;
-use LightSaml\Store\EntityDescriptor\FixedEntityDescriptorStore;
+use LightSaml\Credential\Context\MetadataCredentialContext;
+use LightSaml\Credential\Criteria\EntityIdCriteria;
+use LightSaml\Credential\Criteria\MetadataCriteria;
+use LightSaml\Credential\Criteria\UsageCriteria;
 use LightSaml\Model\Metadata\EntityDescriptor;
+use LightSaml\Resolver\Credential\Factory\CredentialResolverFactory;
 use LightSaml\SamlConstants;
-use LightSaml\Store\Credential\CompositeCredentialStore;
-use LightSaml\Store\Credential\MetadataCredentialStore;
-use LightSaml\Store\Credential\StaticCredentialStore;
 use LightSaml\Credential\UsageType;
 use LightSaml\Credential\X509Credential;
 use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
-use LightSaml\Criteria\CriteriaSet;
-use LightSaml\Credential\Criteria\EntityIdCriteria;
-use LightSaml\Credential\Criteria\MetadataCriteria;
-use LightSaml\Credential\Criteria\UsageCriteria;
+use LightSaml\Store\Credential\CompositeCredentialStore;
+use LightSaml\Store\Credential\MetadataCredentialStore;
+use LightSaml\Store\Credential\StaticCredentialStore;
+use LightSaml\Store\EntityDescriptor\FixedEntityDescriptorStore;
 
 class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_idp2()
+    public function testIdp2()
     {
         $resolver = $this->getResolver();
 
-        $set = (new CriteriaSet())
+        $query = $resolver->query();
+        $query
             ->add(new EntityIdCriteria($entityId = 'https://B1.bead.loc/adfs/services/trust'))
             ->add(new MetadataCriteria(MetadataCriteria::TYPE_IDP, SamlConstants::PROTOCOL_SAML2))
             ->add(new UsageCriteria(UsageType::SIGNING))
         ;
 
-        $arrCredentials = $resolver->resolve($set);
+        $arrCredentials = $query->resolve()->allCredentials();
 
         $this->assertCount(1, $arrCredentials);
 
@@ -44,25 +45,26 @@ class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
             $crt->getData()
         );
 
-        /** @var \LightSaml\Credential\Context\MetadataCredentialContext $metadataContext */
-        $metadataContext = $credential->getCredentialContext()->get('LightSaml\Credential\Context\MetadataCredentialContext');
+        /** @var MetadataCredentialContext $metadataContext */
+        $metadataContext = $credential->getCredentialContext()->get(MetadataCredentialContext::class);
         $this->assertNotNull($metadataContext);
         $this->assertInstanceOf('LightSaml\Model\Metadata\IdpSsoDescriptor', $metadataContext->getRoleDescriptor());
 
         $this->assertEquals(UsageType::SIGNING, $credential->getUsageType());
     }
 
-    public function test_idp()
+    public function testIdp()
     {
         $resolver = $this->getResolver();
 
-        $set = (new CriteriaSet())
+        $query = $resolver->query();
+        $query
             ->add(new EntityIdCriteria($entityId = 'https://sts.windows.net/554fadfe-f04f-4975-90cb-ddc8b147aaa2/'))
             ->add(new MetadataCriteria(MetadataCriteria::TYPE_IDP, SamlConstants::PROTOCOL_SAML2))
             ->add(new UsageCriteria(UsageType::SIGNING))
         ;
 
-        $arrCredentials = $resolver->resolve($set);
+        $arrCredentials = $query->resolve()->allCredentials();
 
         $this->assertCount(1, $arrCredentials);
 
@@ -76,25 +78,26 @@ class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
             $crt->getData()
         );
 
-        /** @var \LightSaml\Credential\Context\MetadataCredentialContext $metadataContext */
-        $metadataContext = $credential->getCredentialContext()->get('LightSaml\Credential\Context\MetadataCredentialContext');
+        /** @var MetadataCredentialContext $metadataContext */
+        $metadataContext = $credential->getCredentialContext()->get(MetadataCredentialContext::class);
         $this->assertNotNull($metadataContext);
         $this->assertInstanceOf('LightSaml\Model\Metadata\IdpSsoDescriptor', $metadataContext->getRoleDescriptor());
 
         $this->assertEquals(UsageType::SIGNING, $credential->getUsageType());
     }
 
-    public function test_sp2()
+    public function testSp2()
     {
         $resolver = $this->getResolver();
 
-        $set = (new CriteriaSet())
+        $query = $resolver->query();
+        $query
             ->add(new EntityIdCriteria($entityId = 'https://mt.evo.team/simplesaml/module.php/saml/sp/metadata.php/default-sp'))
             ->add(new MetadataCriteria(MetadataCriteria::TYPE_SP, SamlConstants::PROTOCOL_SAML2))
             ->add(new UsageCriteria(UsageType::SIGNING))
         ;
 
-        $arrCredentials = $resolver->resolve($set);
+        $arrCredentials = $query->resolve()->allCredentials();
 
         $this->assertCount(1, $arrCredentials);
 
@@ -108,25 +111,26 @@ class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
             $crt->getData()
         );
 
-        /** @var \LightSaml\Credential\Context\MetadataCredentialContext $metadataContext */
-        $metadataContext = $credential->getCredentialContext()->get('LightSaml\Credential\Context\MetadataCredentialContext');
+        /** @var MetadataCredentialContext $metadataContext */
+        $metadataContext = $credential->getCredentialContext()->get(MetadataCredentialContext::class);
         $this->assertNotNull($metadataContext);
         $this->assertInstanceOf('LightSaml\Model\Metadata\SpSsoDescriptor', $metadataContext->getRoleDescriptor());
 
         $this->assertEquals(UsageType::SIGNING, $credential->getUsageType());
     }
 
-    public function test_get_private_key()
+    public function testGetPrivateKey()
     {
         $resolver = $this->getResolver();
 
-        $set = (new CriteriaSet())
+        $query = $resolver->query();
+        $query
             ->add(new EntityIdCriteria($entityId = 'https://mt.evo.loc/sp'))
             ->add(new MetadataCriteria(MetadataCriteria::TYPE_SP, SamlConstants::PROTOCOL_SAML2))
             ->add(new UsageCriteria(UsageType::ENCRYPTION))
         ;
 
-        $arrCredentials = $resolver->resolve($set);
+        $arrCredentials = $query->resolve()->allCredentials();
 
         $this->assertCount(1, $arrCredentials);
 

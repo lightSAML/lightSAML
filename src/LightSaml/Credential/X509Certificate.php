@@ -1,6 +1,6 @@
 <?php
 
-namespace LightSaml\Model\Security;
+namespace LightSaml\Credential;
 
 use LightSaml\Error\LightSamlException;
 

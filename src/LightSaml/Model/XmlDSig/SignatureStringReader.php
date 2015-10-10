@@ -5,7 +5,7 @@ namespace LightSaml\Model\XmlDSig;
 use LightSaml\Error\LightSamlSecurityException;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\Security\KeyHelper;
+use LightSaml\Credential\KeyHelper;
 
 class SignatureStringReader extends AbstractSignatureReader
 {

@@ -7,7 +7,7 @@ use LightSaml\Error\LightSamlXmlException;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
 use LightSaml\SamlConstants;
-use LightSaml\Model\Security\KeyHelper;
+use LightSaml\Credential\KeyHelper;
 
 class SignatureXmlReader extends AbstractSignatureReader
 {

@@ -7,7 +7,7 @@ use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
 use LightSaml\Model\AbstractSamlModel;
 use LightSaml\SamlConstants;
-use LightSaml\Model\Security\X509Certificate;
+use LightSaml\Credential\X509Certificate;
 
 class KeyDescriptor extends AbstractSamlModel
 {

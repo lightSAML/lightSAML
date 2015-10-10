@@ -11,7 +11,7 @@ use LightSaml\Model\Metadata\SingleSignOnService;
 use LightSaml\Model\Metadata\SpSsoDescriptor;
 use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
 use LightSaml\SamlConstants;
-use LightSaml\Model\Security\X509Certificate;
+use LightSaml\Credential\X509Certificate;
 
 class SimpleEntityDescriptorBuilder implements EntityDescriptorProviderInterface
 {

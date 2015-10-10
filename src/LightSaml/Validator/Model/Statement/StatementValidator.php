@@ -30,7 +30,7 @@ class StatementValidator implements StatementValidatorInterface
         }
     }
 
-    protected function validateAuthnStatement(AuthnStatement $statement)
+    private function validateAuthnStatement(AuthnStatement $statement)
     {
         if (false == $statement->getAuthnInstantTimestamp()) {
             throw new LightSamlValidationException('AuthnStatement MUST have an AuthnInstant attribute');
@@ -52,7 +52,7 @@ class StatementValidator implements StatementValidatorInterface
         $this->validateAuthnContext($statement->getAuthnContext());
     }
 
-    protected function validateAuthnContext(AuthnContext $authnContext)
+    private function validateAuthnContext(AuthnContext $authnContext)
     {
         if (false == $authnContext->getAuthnContextClassRef() &&
             false == $authnContext->getAuthnContextDecl() &&
@@ -74,13 +74,13 @@ class StatementValidator implements StatementValidatorInterface
             }
         }
         if ($authnContext->getAuthnContextDeclRef()) {
-            if (false == $authnContext->getAuthnContextDeclRef()) {
+            if (false === Helper::validateWellFormedUriString($authnContext->getAuthnContextDeclRef())) {
                 throw new LightSamlValidationException('AuthnContextDeclRef has a value which is not a wellformed absolute uri');
             }
         }
     }
 
-    protected function validateAttributeStatement(AttributeStatement $statement)
+    private function validateAttributeStatement(AttributeStatement $statement)
     {
         if (false == $statement->getAllAttributes()) {
             throw new LightSamlValidationException('AttributeStatement MUST contain at least one Attribute or EncryptedAttribute');
@@ -98,7 +98,7 @@ class StatementValidator implements StatementValidatorInterface
      *
      * @return void
      */
-    public function validateAttribute(Attribute $attribute)
+    private function validateAttribute(Attribute $attribute)
     {
         if (false == Helper::validateRequiredString($attribute->getName())) {
             throw new LightSamlValidationException('Name attribute of Attribute element MUST contain at least one non-whitespace character');

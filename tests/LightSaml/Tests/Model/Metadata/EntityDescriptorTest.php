@@ -15,7 +15,7 @@ use LightSaml\Model\Metadata\SingleLogoutService;
 use LightSaml\Model\Metadata\SingleSignOnService;
 use LightSaml\Model\Metadata\SpSsoDescriptor;
 use LightSaml\SamlConstants;
-use LightSaml\Model\Security\X509Certificate;
+use LightSaml\Credential\X509Certificate;
 
 class EntityDescriptorTest extends \PHPUnit_Framework_TestCase
 {

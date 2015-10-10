@@ -2,7 +2,7 @@
 
 namespace LightSaml\Credential;
 
-use LightSaml\Model\Security\X509Certificate;
+use LightSaml\Credential\X509Certificate;
 
 interface X509CredentialInterface extends CredentialInterface
 {

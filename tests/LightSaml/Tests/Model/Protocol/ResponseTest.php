@@ -19,8 +19,8 @@ use LightSaml\Model\Assertion\SubjectConfirmationData;
 use LightSaml\Model\Protocol\Response;
 use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\SamlConstants;
-use LightSaml\Model\Security\KeyHelper;
-use LightSaml\Model\Security\X509Certificate;
+use LightSaml\Credential\KeyHelper;
+use LightSaml\Credential\X509Certificate;
 
 class ResponseTest extends \PHPUnit_Framework_TestCase
 {

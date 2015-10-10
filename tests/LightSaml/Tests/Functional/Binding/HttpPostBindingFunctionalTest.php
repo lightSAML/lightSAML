@@ -7,8 +7,8 @@ use LightSaml\Context\Profile\MessageContext;
 use LightSaml\Event\Events;
 use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Model\XmlDSig\SignatureWriter;
-use LightSaml\Model\Security\KeyHelper;
-use LightSaml\Model\Security\X509Certificate;
+use LightSaml\Credential\KeyHelper;
+use LightSaml\Credential\X509Certificate;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 

@@ -5,7 +5,7 @@ namespace LightSaml\Model\XmlDSig;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
 use LightSaml\SamlConstants;
-use LightSaml\Model\Security\X509Certificate;
+use LightSaml\Credential\X509Certificate;
 
 class SignatureWriter extends Signature
 {

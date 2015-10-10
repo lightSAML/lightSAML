@@ -3,8 +3,8 @@
 namespace LightSaml\Provider\Credential;
 
 use LightSaml\Credential\X509Credential;
-use LightSaml\Model\Security\KeyHelper;
-use LightSaml\Model\Security\X509Certificate;
+use LightSaml\Credential\KeyHelper;
+use LightSaml\Credential\X509Certificate;
 
 class X509CredentialFileProvider implements CredentialProviderInterface
 {

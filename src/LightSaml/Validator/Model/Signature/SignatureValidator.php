@@ -8,7 +8,7 @@ use LightSaml\Resolver\Credential\CredentialResolverInterface;
 use LightSaml\SamlConstants;
 use LightSaml\Credential\UsageType;
 use LightSaml\Credential\X509Credential;
-use LightSaml\Model\Security\X509Certificate;
+use LightSaml\Credential\X509Certificate;
 use LightSaml\Credential\Criteria\EntityIdCriteria;
 use LightSaml\Credential\Criteria\MetadataCriteria;
 use LightSaml\Credential\Criteria\UsageCriteria;
