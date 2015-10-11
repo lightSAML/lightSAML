@@ -4,7 +4,7 @@ namespace LightSaml\Builder\Action\Profile\SingleSignOn\Sp;
 
 use LightSaml\Action\Profile\FlushRequestStatesAction;
 use LightSaml\Action\Profile\Inbound\Message\AssertBindingTypeAction;
-use LightSaml\Action\Profile\Inbound\Message\DestinationValidatorResponseAction;
+use LightSaml\Action\Profile\Inbound\Message\AbstractDestinationValidatorResponseAction;
 use LightSaml\Action\Profile\Inbound\Message\EntityIdFromMessageIssuerAction;
 use LightSaml\Action\Profile\Inbound\Message\ResolvePartyEntityIdAction;
 use LightSaml\Action\Profile\Inbound\Message\ReceiveMessageAction;
@@ -76,7 +76,7 @@ class SsoSpReceiveResponseActionBuilder extends AbstractProfileActionBuilder
         $this->add(new StatusAction(
             $this->buildContainer->getSystemContainer()->getLogger()
         ));
-        $this->add(new DestinationValidatorResponseAction(
+        $this->add(new AbstractDestinationValidatorResponseAction(
             $this->buildContainer->getSystemContainer()->getLogger(),
             $this->buildContainer->getServiceContainer()->getEndpointResolver()
         ));

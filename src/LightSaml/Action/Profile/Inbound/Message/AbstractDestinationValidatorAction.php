@@ -7,14 +7,15 @@ use LightSaml\Context\Profile\Helper\LogHelper;
 use LightSaml\Context\Profile\Helper\MessageContextHelper;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Criteria\CriteriaSet;
-use LightSaml\Error\LightSamlValidationException;
+use LightSaml\Error\LightSamlContextException;
 use LightSaml\Model\Metadata\IdpSsoDescriptor;
 use LightSaml\Model\Metadata\SpSsoDescriptor;
 use LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria;
+use LightSaml\Resolver\Endpoint\Criteria\LocationCriteria;
 use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
 use Psr\Log\LoggerInterface;
 
-abstract class DestinationValidatorBaseAction extends AbstractProfileAction
+abstract class AbstractDestinationValidatorAction extends AbstractProfileAction
 {
     /** @var  EndpointResolverInterface */
     protected $endpointResolver;
@@ -44,7 +45,7 @@ abstract class DestinationValidatorBaseAction extends AbstractProfileAction
             return;
         }
 
-        $criteriaSet = $this->getCriteriaSet($context);
+        $criteriaSet = $this->getCriteriaSet($context, $destination);
         $endpoints = $this->endpointResolver->resolve($criteriaSet, $context->getOwnEntityDescriptor()->getAllEndpoints());
 
         if ($endpoints) {
@@ -53,18 +54,25 @@ abstract class DestinationValidatorBaseAction extends AbstractProfileAction
 
         $message = sprintf('Invalid inbound message destination "%s"', $destination);
         $this->logger->emergency($message, LogHelper::getActionErrorContext($context, $this));
-        throw new LightSamlValidationException($message);
+        throw new LightSamlContextException($context, $message);
     }
 
-    protected function getCriteriaSet(ProfileContext $context)
+    /**
+     * @param ProfileContext $context
+     * @param string         $location
+     *
+     * @return CriteriaSet
+     */
+    protected function getCriteriaSet(ProfileContext $context, $location)
     {
-        $criteriaSet = new CriteriaSet(array(
+        $criteriaSet = new CriteriaSet([
             new DescriptorTypeCriteria(
                 $context->getOwnRole() === ProfileContext::ROLE_IDP
                 ? IdpSsoDescriptor::class
                 : SpSsoDescriptor::class
             ),
-        ));
+            new LocationCriteria($location),
+        ]);
 
         return $criteriaSet;
     }
