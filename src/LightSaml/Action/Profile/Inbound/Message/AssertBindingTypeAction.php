@@ -31,7 +31,7 @@ class AssertBindingTypeAction extends AbstractProfileAction
     {
         if (false === in_array($context->getInboundContext()->getBindingType(), $this->expectedBindingTypes)) {
             $message = sprintf(
-                'Unexpected binding type "%s" - expected binding types are: ',
+                'Unexpected binding type "%s" - expected binding types are: %s',
                 $context->getInboundContext()->getBindingType(),
                 implode(' ', $this->expectedBindingTypes)
             );
@@ -40,7 +40,7 @@ class AssertBindingTypeAction extends AbstractProfileAction
                 'expectedBindingTypes' => $this->expectedBindingTypes,
             )));
 
-            throw new LightSamlContextException($this, $message);
+            throw new LightSamlContextException($context, $message);
         }
     }
 }
