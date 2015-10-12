@@ -37,10 +37,12 @@ abstract class AbstractNameID extends AbstractSamlModel
 
     /**
      * @param string $value
+     * @param string $format
      */
-    public function __construct($value = null)
+    public function __construct($value = null, $format = null)
     {
         $this->value = $value;
+        $this->format = $format;
     }
 
     /**

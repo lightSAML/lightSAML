@@ -6,6 +6,7 @@ use LightSaml\Action\Profile\AbstractProfileAction;
 use LightSaml\Context\Profile\Helper\LogHelper;
 use LightSaml\Context\Profile\Helper\MessageContextHelper;
 use LightSaml\Context\Profile\ProfileContext;
+use LightSaml\Error\LightSamlContextException;
 use LightSaml\Error\LightSamlValidationException;
 use LightSaml\Validator\Model\NameId\NameIdValidatorInterface;
 use Psr\Log\LoggerInterface;
@@ -41,9 +42,9 @@ class IssuerValidatorAction extends AbstractProfileAction
         $message = MessageContextHelper::asSamlMessage($context->getInboundContext());
 
         if (false == $message->getIssuer()) {
-            $message = sprintf('Inbound message "%s" must have Issuer element', get_class($message));
+            $message = 'Inbound message must have Issuer element';
             $this->logger->emergency($message, LogHelper::getActionErrorContext($context, $this));
-            throw new LightSamlValidationException($message);
+            throw new LightSamlContextException($context, $message);
         }
 
         if ($this->allowedFormat &&
@@ -57,9 +58,13 @@ class IssuerValidatorAction extends AbstractProfileAction
                 $message->getIssuer()->getFormat()
             );
             $this->logger->emergency($message, LogHelper::getActionErrorContext($context, $this));
-            throw new LightSamlValidationException($message);
+            throw new LightSamlContextException($context, $message);
         }
 
-        $this->nameIdValidator->validateNameId($message->getIssuer());
+        try {
+            $this->nameIdValidator->validateNameId($message->getIssuer());
+        } catch (LightSamlValidationException $ex) {
+            throw new LightSamlContextException($context, $ex->getMessage(), 0, $ex);
+        }
     }
 }
