@@ -49,14 +49,13 @@ class MessageSignatureValidatorAction extends AbstractProfileAction
 
         if ($signature instanceof AbstractSignatureReader) {
             $metadataType = ProfileContext::ROLE_IDP === $context->getOwnRole() ? MetadataCriteria::TYPE_SP : MetadataCriteria::TYPE_IDP;
-            $key = $this->signatureValidator->validate($signature, $message->getIssuer()->getValue(), $metadataType);
-            if ($key) {
-                $certificateInfo = openssl_x509_parse($key->getX509Certificate());
+            $credential = $this->signatureValidator->validate($signature, $message->getIssuer()->getValue(), $metadataType);
+            if ($credential) {
+                $keyNames = $credential->getKeyNames();
                 $this->logger->debug(
-                    sprintf('Message signature validated with key name "%s", fingerprint "%s"', $certificateInfo['name'], $key->getX509Thumbprint()),
+                    sprintf('Message signature validated with key "%s"', implode(', ', $keyNames)),
                     LogHelper::getActionContext($context, $this, array(
-                      'key' => $key->key,
-                      'certificate' => $certificateInfo,
+                        'credential' => $credential,
                     ))
                 );
             } else {
@@ -66,7 +65,9 @@ class MessageSignatureValidatorAction extends AbstractProfileAction
                 );
             }
         } else {
-            throw new LightSamlModelException('Expected AbstractSignatureReader');
+            $message = 'Expected AbstractSignatureReader';
+            $this->logger->critical($message, LogHelper::getActionErrorContext($context, $this));
+            throw new LightSamlModelException($message);
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace LightSaml\Validator\Model\Signature;
 
+use LightSaml\Credential\CredentialInterface;
 use LightSaml\Error\LightSamlSecurityException;
 use LightSaml\Model\XmlDSig\AbstractSignatureReader;
 use LightSaml\Resolver\Credential\CredentialResolverInterface;
@@ -31,7 +32,7 @@ class SignatureValidator implements SignatureValidatorInterface
      * @param string                  $issuer
      * @param string                  $metadataType
      *
-     * @return \XMLSecurityKey|null
+     * @return CredentialInterface|null
      */
     public function validate(AbstractSignatureReader $signature, $issuer, $metadataType)
     {
@@ -43,12 +44,12 @@ class SignatureValidator implements SignatureValidatorInterface
         ;
         $query->resolve();
 
-        $publicKeys = $query->getPublicKeys();
-        if (empty($publicKeys)) {
+        $credentialCandidates = $query->allCredentials();
+        if (empty($credentialCandidates)) {
             throw new LightSamlSecurityException('No credentials resolved for signature verification');
         }
-        $key = $signature->validateMulti($publicKeys);
+        $credential = $signature->validateMulti($credentialCandidates);
 
-        return $key;
+        return $credential;
     }
 }

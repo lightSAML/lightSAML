@@ -6,7 +6,6 @@ use LightSaml\Action\Profile\AbstractProfileAction;
 use LightSaml\Context\Profile\Helper\LogHelper;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Error\LightSamlContextException;
-use LightSaml\Error\LightSamlProfileException;
 use LightSaml\Meta\TrustOptions\TrustOptions;
 use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
 use LightSaml\Store\TrustOptions\TrustOptionsStoreInterface;
@@ -54,7 +53,7 @@ class ResolvePartyEntityIdAction extends AbstractProfileAction
 
         if ($partyContext->getEntityDescriptor() && $partyContext->getTrustOptions()) {
             $this->logger->debug(
-                sprintf('Party EntityDescriptor and TrustOptions already set'),
+                sprintf('Party EntityDescriptor and TrustOptions already set for "%s"', $partyContext->getEntityDescriptor()->getEntityID()),
                 LogHelper::getActionContext($context, $this, array(
                     'partyEntityId' => $partyContext->getEntityDescriptor()->getEntityID(),
                 ))
@@ -64,9 +63,11 @@ class ResolvePartyEntityIdAction extends AbstractProfileAction
         }
 
         $entityId = $partyContext->getEntityDescriptor() ? $partyContext->getEntityDescriptor()->getEntityID() : null;
-        $entityId = $entityId ? $entityId : $context->getPartyEntityContext()->getEntityId();
+        $entityId = $entityId ? $entityId : $partyContext->getEntityId();
         if (null == $entityId) {
-            throw new LightSamlContextException($context, 'EntityID is not set in the party context');
+            $message = 'EntityID is not set in the party context';
+            $this->logger->critical($message, LogHelper::getActionErrorContext($context, $this));
+            throw new LightSamlContextException($context, $message);
         }
 
         if (null == $partyContext->getEntityDescriptor()) {

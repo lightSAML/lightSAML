@@ -2,9 +2,6 @@
 
 namespace LightSaml\Credential;
 
-use LightSaml\Credential\KeyHelper;
-use LightSaml\Credential\X509Certificate;
-
 class X509Credential extends AbstractCredential implements X509CredentialInterface
 {
     /** @var  X509Certificate */

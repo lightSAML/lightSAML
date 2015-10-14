@@ -7,7 +7,6 @@ use LightSaml\Binding\BindingFactoryInterface;
 use LightSaml\Context\Profile\Helper\LogHelper;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Error\LightSamlBindingException;
-use LightSaml\Error\LightSamlProfileException;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -39,7 +38,9 @@ class ReceiveMessageAction extends AbstractProfileAction
     {
         $bindingType = $this->bindingFactory->detectBindingType($context->getHttpRequest());
         if (null == $bindingType) {
-            throw new LightSamlBindingException('Unable to resolve binding type, invalid or unsupported http request');
+            $message = 'Unable to resolve binding type, invalid or unsupported http request';
+            $this->logger->critical($message, LogHelper::getActionErrorContext($context, $this));
+            throw new LightSamlBindingException($message);
         }
 
         $this->logger->debug(sprintf('Detected binding type: %s', $bindingType), LogHelper::getActionContext($context, $this));

@@ -28,34 +28,33 @@ abstract class AbstractSignatureReader extends Signature
     }
 
     /**
-     * @param \XMLSecurityKey[] $keyCandidates
+     * @param CredentialInterface[] $credentialCandidates
      *
-     * @throws \LogicException
-     * @throws \InvalidArgumentException                              If some element of $keys array is not \XMLSecurityKey
+     * @throws \InvalidArgumentException                   If element of $credentialCandidates array is not CredentialInterface
      * @throws \LightSaml\Error\LightSamlSecurityException If validation fails
      *
-     * @return \XMLSecurityKey|null Returns key that validated the signature or null if validation was not performed
+     * @return CredentialInterface|null Returns credential that validated the signature or null if validation was not performed
      */
-    public function validateMulti(array $keyCandidates)
+    public function validateMulti(array $credentialCandidates)
     {
         $lastException = null;
 
-        foreach ($keyCandidates as $key) {
-            if ($key instanceof CredentialInterface) {
-                $key = $key->getPublicKey();
+        foreach ($credentialCandidates as $credential) {
+            if (false == $credential instanceof CredentialInterface) {
+                throw new \InvalidArgumentException('Expected CredentialInterface');
             }
-            if (false == $key instanceof \XMLSecurityKey) {
-                throw new \InvalidArgumentException('Expected XMLSecurityKey');
+            if (null == $credential->getPublicKey()) {
+                continue;
             }
 
             try {
-                $result = $this->validate($key);
+                $result = $this->validate($credential->getPublicKey());
 
                 if ($result === false) {
                     return null;
                 }
 
-                return $key;
+                return $credential;
             } catch (LightSamlSecurityException $ex) {
                 $lastException = $ex;
             }
@@ -64,7 +63,7 @@ abstract class AbstractSignatureReader extends Signature
         if ($lastException) {
             throw $lastException;
         } else {
-            throw new LightSamlSecurityException('No key provided for signature verification');
+            throw new LightSamlSecurityException('No public key available for signature verification');
         }
     }
 }
