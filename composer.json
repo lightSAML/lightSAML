@@ -2,7 +2,22 @@
     "name": "lightsaml/lightsaml",
     "license": "MIT",
     "type": "library",
-    "description": "Light SAML2 php library",
+    "description": "Light SAML 2.0 PHP library",
+    "keywords": "SAML 2.0, PHP, library, lightSAML, Single SignOn, Single Logout",
+    "homepage": "http://www.lightsaml.com/",
+    "authors": [
+        {
+            "name": "Milos Tomic",
+            "email": "tmilos@gmail.com",
+            "homepage": "https://github.com/tmilos/",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/lightsaml/lightsaml/issues",
+        "source": "https://github.com/lightSAML/lightSAML",
+        "docs": "http://www.lightsaml.com/LightSAML-Core/"
+    },
     "autoload": {
         "psr-0": {
             "LightSaml\\Tests\\": "tests/",
@@ -14,14 +29,18 @@
         "robrichards/xmlseclibs": "1.3.2",
         "symfony/console": "~2.3",
         "symfony/http-foundation": "~2.3",
-        "symfony/event-dispatcher": "~2.3",
-        "pimple/pimple": "~3.0"
+        "symfony/event-dispatcher": "~2.3"
     },
     "require-dev": {
+        "pimple/pimple": "~3.0",
         "phpunit/phpunit": "~4.5",
         "codeclimate/php-test-reporter": "v0.1.2",
         "monolog/monolog": "~1.3",
         "squizlabs/php_codesniffer": "~2.0"
+    },
+    "suggest": {
+        "lightsaml/symfony-bridge": "Symfony 2 build container bridge",
+        "lightsaml/sp-bundle": "Symfony 2 SP security bundle"
     },
     "scripts": {
         "post-install-cmd": [
