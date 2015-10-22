@@ -12,9 +12,9 @@ certificates support, and message encapsulations to bindings. Covered with unit 
 DOCUMENTATION
 =============
 
-* [Usage](doc/index.md)
-* [Console](doc/console.md)
-* [Signing and Certificates](doc/signing_and_certificates.md)
+* [Homepage](http://www.lightsaml.com/LightSAML-Core/)
+* [Installation](http://www.lightsaml.com/LightSAML-Core/Installation/)
+* [Cookbook](http://www.lightsaml.com/LightSAML-Core/Cookbook/)
 
 
 CONTRIBUTING
