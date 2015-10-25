@@ -9,7 +9,7 @@ class ForwardRelayStateAction extends AbstractProfileAction
 {
     protected function doExecute(ProfileContext $context)
     {
-        if (null == $context->getInboundMessage()) {
+        if (null == $context->getInboundContext()->getMessage()) {
             return;
         }
 
