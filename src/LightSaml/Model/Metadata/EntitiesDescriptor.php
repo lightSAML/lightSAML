@@ -165,7 +165,7 @@ class EntitiesDescriptor extends AbstractSamlModel
             return Helper::time2string($this->validUntil);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -185,7 +185,7 @@ class EntitiesDescriptor extends AbstractSamlModel
             return new \DateTime('@'.$this->validUntil);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -277,7 +277,7 @@ class EntitiesDescriptor extends AbstractSamlModel
             }
         }
 
-        return;
+        return null;
     }
 
     /**
