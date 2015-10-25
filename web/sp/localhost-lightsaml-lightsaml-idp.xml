@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" entityID="https://lightsaml.local/idp">
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" entityID="http://localhost/lightSAML/lightSAML-IDP/web/idp">
   <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
     <KeyDescriptor use="encryption">
       <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
