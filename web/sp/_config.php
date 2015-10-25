@@ -159,7 +159,7 @@ class SpConfig
     {
         return new \LightSaml\Builder\EntityDescriptor\SimpleEntityDescriptorBuilder(
             self::OWN_ENTITY_ID,
-            'https://localhost/lightsaml/lightSAML/web/sp/acs.php',
+            'http://localhost/lightsaml/lightSAML/web/sp/acs.php',
             null,
             $certificate
         );
