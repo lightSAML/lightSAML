@@ -8,7 +8,7 @@ class SsoState implements \Serializable
     protected $localSessionId;
 
     /** @var  array */
-    protected $options;
+    protected $options = [];
 
     /** @var SsoSessionState[] */
     protected $ssoSessions = array();
@@ -56,11 +56,10 @@ class SsoState implements \Serializable
 
     /**
      * @param string $name
-     * @param mixed  $value
      *
      * @return SsoState
      */
-    public function removeOption($name, $value)
+    public function removeOption($name)
     {
         unset($this->options[$name]);
 

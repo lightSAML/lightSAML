@@ -29,7 +29,7 @@ class SsoSessionState implements \Serializable
     protected $lastAuthOn;
 
     /** @var  array */
-    protected $options;
+    protected $options = [];
 
     /**
      * @return string
@@ -185,6 +185,7 @@ class SsoSessionState implements \Serializable
     public function setSessionInstant($sessionInstant)
     {
         $this->sessionInstant = $sessionInstant;
+
         return $this;
     }
 
