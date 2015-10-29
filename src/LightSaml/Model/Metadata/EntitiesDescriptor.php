@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Model\Metadata;
 
 use LightSaml\Helper;
@@ -48,7 +57,7 @@ class EntitiesDescriptor extends AbstractSamlModel
     {
         $context = new DeserializationContext();
         $context->getDocument()->loadXML($xml);
-        $ed = new EntitiesDescriptor();
+        $ed = new self();
         $ed->deserialize($context->getDocument()->firstChild, $context);
 
         return $ed;
@@ -197,13 +206,13 @@ class EntitiesDescriptor extends AbstractSamlModel
      */
     public function addItem($item)
     {
-        if (false == $item instanceof EntitiesDescriptor && false == $item instanceof EntityDescriptor) {
+        if (false == $item instanceof self && false == $item instanceof EntityDescriptor) {
             throw new \InvalidArgumentException('Expected EntitiesDescriptor or EntityDescriptor');
         }
         if ($item === $this) {
             throw new \InvalidArgumentException('Circular reference detected');
         }
-        if ($item instanceof EntitiesDescriptor) {
+        if ($item instanceof self) {
             if ($item->containsItem($this)) {
                 throw new \InvalidArgumentException('Circular reference detected');
             }
@@ -222,14 +231,14 @@ class EntitiesDescriptor extends AbstractSamlModel
      */
     public function containsItem($item)
     {
-        if (false == $item instanceof EntitiesDescriptor && false == $item instanceof EntityDescriptor) {
+        if (false == $item instanceof self && false == $item instanceof EntityDescriptor) {
             throw new \InvalidArgumentException('Expected EntitiesDescriptor or EntityDescriptor');
         }
         foreach ($this->items as $i) {
             if ($i === $item) {
                 return true;
             }
-            if ($i instanceof EntitiesDescriptor) {
+            if ($i instanceof self) {
                 if ($i->containsItem($item)) {
                     return true;
                 }
@@ -254,7 +263,7 @@ class EntitiesDescriptor extends AbstractSamlModel
     {
         $result = array();
         foreach ($this->items as $item) {
-            if ($item instanceof EntitiesDescriptor) {
+            if ($item instanceof self) {
                 $result = array_merge($result, $item->getAllEntityDescriptors());
             } else {
                 $result[] = $item;

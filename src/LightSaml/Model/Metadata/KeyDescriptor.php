@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Model\Metadata;
 
 use LightSaml\Error\LightSamlXmlException;
@@ -111,14 +120,14 @@ class KeyDescriptor extends AbstractSamlModel
 
         $list = $context->getXpath()->query('./ds:KeyInfo/ds:X509Data/ds:X509Certificate', $node);
         if (1 != $list->length) {
-            throw new LightSamlXmlException("Missing X509Certificate node");
+            throw new LightSamlXmlException('Missing X509Certificate node');
         }
 
         /** @var $x509CertificateNode \DOMElement */
         $x509CertificateNode = $list->item(0);
         $certificateData = trim($x509CertificateNode->textContent);
         if (false == $certificateData) {
-            throw new LightSamlXmlException("Missing certificate data");
+            throw new LightSamlXmlException('Missing certificate data');
         }
 
         $this->certificate = new X509Certificate();

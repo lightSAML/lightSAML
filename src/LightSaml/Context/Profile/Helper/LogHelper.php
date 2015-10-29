@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Context\Profile\Helper;
 
 use LightSaml\Action\ActionInterface;
@@ -42,7 +51,7 @@ abstract class LogHelper
      */
     private static function getContext(ContextInterface $context, ActionInterface $action = null, array $extraData = null, $logWholeContext = false)
     {
-        $topContext =  $context->getTopParent();
+        $topContext = $context->getTopParent();
         $result = array();
         if ($topContext instanceof ProfileContext) {
             $result['profile_id'] = $topContext->getProfileId();

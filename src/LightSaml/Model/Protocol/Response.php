@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Model\Protocol;
 
 use LightSaml\Model\Context\DeserializationContext;
@@ -58,7 +67,7 @@ class Response extends StatusResponse
 
     /**
      * Returns assertions with <AuthnStatement> and <Subject> with at least one <SubjectConfirmation>
-     * element containing a Method of urn:oasis:names:tc:SAML:2.0:cm:bearer
+     * element containing a Method of urn:oasis:names:tc:SAML:2.0:cm:bearer.
      *
      * @return \LightSaml\Model\Assertion\Assertion[]
      */

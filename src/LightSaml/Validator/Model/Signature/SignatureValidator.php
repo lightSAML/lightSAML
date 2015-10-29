@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Validator\Model\Signature;
 
 use LightSaml\Credential\CredentialInterface;
@@ -8,8 +17,6 @@ use LightSaml\Model\XmlDSig\AbstractSignatureReader;
 use LightSaml\Resolver\Credential\CredentialResolverInterface;
 use LightSaml\SamlConstants;
 use LightSaml\Credential\UsageType;
-use LightSaml\Credential\X509Credential;
-use LightSaml\Credential\X509Certificate;
 use LightSaml\Credential\Criteria\EntityIdCriteria;
 use LightSaml\Credential\Criteria\MetadataCriteria;
 use LightSaml\Credential\Criteria\UsageCriteria;

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Model\Assertion;
 
 use LightSaml\Error\LightSamlModelException;
@@ -167,7 +176,7 @@ abstract class AbstractNameID extends AbstractSamlModel
             $result = $this->createElement('saml:'.$this->getElementName(), SamlConstants::NS_ASSERTION, $parent, $context);
         }
 
-        /** @var \DOMElement $parent */
+        /* @var \DOMElement $parent */
         $this->attributesToXml(array('Format', 'NameQualifier', 'SPNameQualifier', 'SPProvidedID'), $result);
         $result->nodeValue = $this->getValue();
     }

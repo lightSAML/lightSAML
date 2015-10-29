@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Action\Profile\Outbound\Message;
 
 use LightSaml\Action\Profile\AbstractProfileAction;
@@ -42,7 +51,7 @@ class SendMessageAction extends AbstractProfileAction
         $this->logger->info(
             'Sending message',
             LogHelper::getActionContext($context, $this, array(
-                'message' => $outboundContext->getSerializationContext()->getDocument()->saveXML()
+                'message' => $outboundContext->getSerializationContext()->getDocument()->saveXML(),
             ))
         );
     }

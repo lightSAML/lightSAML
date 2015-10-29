@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Action\Profile\Inbound\Message;
 
 use LightSaml\Action\Profile\AbstractProfileAction;
@@ -12,7 +21,7 @@ use LightSaml\Store\TrustOptions\TrustOptionsStoreInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Looks up inbound message Issuer in entity descriptor providers and sets it to the party context
+ * Looks up inbound message Issuer in entity descriptor providers and sets it to the party context.
  */
 class ResolvePartyEntityIdAction extends AbstractProfileAction
 {
@@ -26,7 +35,7 @@ class ResolvePartyEntityIdAction extends AbstractProfileAction
     protected $trustOptionsProvider;
 
     /**
-     * @param LoggerInterface                   $logger
+     * @param LoggerInterface                $logger
      * @param EntityDescriptorStoreInterface $spEntityDescriptorProvider
      * @param EntityDescriptorStoreInterface $idpEntityDescriptorProvider
      * @param TrustOptionsStoreInterface     $trustOptionsProvider
@@ -97,9 +106,9 @@ class ResolvePartyEntityIdAction extends AbstractProfileAction
     }
 
     /**
-     * @param ProfileContext                    $context
+     * @param ProfileContext                 $context
      * @param EntityDescriptorStoreInterface $entityDescriptorProvider
-     * @param string                            $entityId
+     * @param string                         $entityId
      *
      * @return \LightSaml\Model\Metadata\EntityDescriptor
      */

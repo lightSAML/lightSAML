@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Validator\Model\NameId;
 
 use LightSaml\Error\LightSamlValidationException;
@@ -90,7 +99,7 @@ class NameIdValidator implements NameIdValidatorInterface
     {
         // Required format is 'DomainName\UserName' but the domain name and the '\' are optional
         if (false == Helper::validateRequiredString($nameId->getValue())) {
-            throw new LightSamlValidationException("NameID with Windows Format attribute MUST contain a Value that contains more than whitespace characters");
+            throw new LightSamlValidationException('NameID with Windows Format attribute MUST contain a Value that contains more than whitespace characters');
         }
     }
 

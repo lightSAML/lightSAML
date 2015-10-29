@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Context\Profile;
 
 use LightSaml\State\Sso\SsoSessionState;
@@ -34,7 +43,7 @@ class LogoutContext extends AbstractProfileContext
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function areAllSsoSessionsTerminated()
     {
@@ -42,13 +51,13 @@ class LogoutContext extends AbstractProfileContext
     }
 
     /**
-     * @param boolean $allSsoSessionsTerminated
+     * @param bool $allSsoSessionsTerminated
      *
      * @return LogoutContext
      */
     public function setAllSsoSessionsTerminated($allSsoSessionsTerminated)
     {
-        $this->allSsoSessionsTerminated = (bool)$allSsoSessionsTerminated;
+        $this->allSsoSessionsTerminated = (bool) $allSsoSessionsTerminated;
 
         return $this;
     }

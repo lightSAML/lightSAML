@@ -9,3 +9,4 @@ vendor/*
 /build/logs
 /phpda.json
 /phpda.svg
+/*.cache

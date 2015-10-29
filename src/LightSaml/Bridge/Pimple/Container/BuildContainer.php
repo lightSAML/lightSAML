@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Bridge\Pimple\Container;
 
 use LightSaml\Build\Container\BuildContainerInterface;
@@ -10,7 +19,6 @@ use LightSaml\Build\Container\ProviderContainerInterface;
 use LightSaml\Build\Container\ServiceContainerInterface;
 use LightSaml\Build\Container\StoreContainerInterface;
 use LightSaml\Build\Container\SystemContainerInterface;
-use Pimple\Container;
 
 class BuildContainer extends AbstractPimpleContainer implements BuildContainerInterface
 {

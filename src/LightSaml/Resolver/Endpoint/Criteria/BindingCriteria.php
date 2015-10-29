@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Resolver\Endpoint\Criteria;
 
 use LightSaml\Criteria\CriteriaInterface;
@@ -7,9 +16,9 @@ use LightSaml\Criteria\CriteriaInterface;
 class BindingCriteria implements CriteriaInterface
 {
     /**
-     * Binding => Preference
+     * Binding => Preference.
      *
-     * @var  int[]
+     * @var int[]
      */
     protected $bindings;
 
@@ -36,7 +45,7 @@ class BindingCriteria implements CriteriaInterface
     }
 
     /**
-     * Returns array of bindings ordered by preference, first being most preferable, last least preferable
+     * Returns array of bindings ordered by preference, first being most preferable, last least preferable.
      *
      * @return string[]
      */

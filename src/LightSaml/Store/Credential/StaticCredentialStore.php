@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Store\Credential;
 
 use LightSaml\Credential\CredentialInterface;
@@ -7,7 +16,8 @@ use LightSaml\Credential\CredentialInterface;
 class StaticCredentialStore implements CredentialStoreInterface
 {
     /**
-     * entityID => CredentialInterface[]
+     * entityID => CredentialInterface[].
+     *
      * @var array
      */
     protected $credentials = array();

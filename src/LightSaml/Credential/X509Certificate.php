@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Credential;
 
 use LightSaml\Error\LightSamlException;
@@ -21,7 +30,7 @@ class X509Certificate
      */
     public static function fromFile($filename)
     {
-        $result = new X509Certificate();
+        $result = new self();
         $result->loadFromFile($filename);
 
         return $result;
@@ -134,6 +143,7 @@ class X509Certificate
 
     /**
      * @return array
+     *
      * @throws \LightSaml\Error\LightSamlException
      */
     public function getIssuer()
@@ -147,6 +157,7 @@ class X509Certificate
 
     /**
      * @return int
+     *
      * @throws \LightSaml\Error\LightSamlException
      */
     public function getValidFromTimestamp()
@@ -188,6 +199,7 @@ class X509Certificate
 
     /**
      * @throws \LightSaml\Error\LightSamlException
+     *
      * @return string
      */
     public function getFingerprint()

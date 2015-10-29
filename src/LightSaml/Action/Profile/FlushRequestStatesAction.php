@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Action\Profile;
 
 use LightSaml\Context\ContextInterface;
@@ -23,7 +32,7 @@ class FlushRequestStatesAction extends AbstractProfileAction
     public function __construct(LoggerInterface $logger, RequestStateStoreInterface $requestStore)
     {
         parent::__construct($logger);
-        
+
         $this->requestStore = $requestStore;
     }
 

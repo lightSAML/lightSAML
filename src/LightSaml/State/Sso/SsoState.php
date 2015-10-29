@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\State\Sso;
 
 class SsoState implements \Serializable
@@ -127,7 +136,7 @@ class SsoState implements \Serializable
         foreach ($this->ssoSessions as $ssoSession) {
             if ((!$idpEntityId || $ssoSession->getIdpEntityId() === $idpEntityId) &&
                 (!$spEntityId || $ssoSession->getSpEntityId() === $spEntityId) &&
-                (!$nameId|| $ssoSession->getNameId() === $nameId) &&
+                (!$nameId || $ssoSession->getNameId() === $nameId) &&
                 (!$nameIdFormat || $ssoSession->getNameIdFormat() === $nameIdFormat) &&
                 (!$sessionIndex || $ssoSession->getSessionIndex() === $sessionIndex)
             ) {
@@ -166,7 +175,6 @@ class SsoState implements \Serializable
         list(
             $this->localSessionId,
             $this->ssoSessions,
-            $this->options,
-        ) = $data;
+            $this->options) = $data;
     }
 }

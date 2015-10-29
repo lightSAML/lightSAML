@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Meta\TrustOptions;
 
 class TrustOptions
@@ -20,7 +29,7 @@ class TrustOptions
     protected $signResponse = true;
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getEncryptAssertions()
     {
@@ -28,7 +37,7 @@ class TrustOptions
     }
 
     /**
-     * @param boolean $encryptAssertions
+     * @param bool $encryptAssertions
      *
      * @return TrustOptions
      */
@@ -40,7 +49,7 @@ class TrustOptions
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getEncryptAuthnRequest()
     {
@@ -48,7 +57,7 @@ class TrustOptions
     }
 
     /**
-     * @param boolean $encryptAuthnRequest
+     * @param bool $encryptAuthnRequest
      *
      * @return TrustOptions
      */
@@ -60,7 +69,7 @@ class TrustOptions
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getSignAssertions()
     {
@@ -68,7 +77,7 @@ class TrustOptions
     }
 
     /**
-     * @param boolean $signAssertions
+     * @param bool $signAssertions
      *
      * @return TrustOptions
      */
@@ -80,7 +89,7 @@ class TrustOptions
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getSignAuthnRequest()
     {
@@ -88,7 +97,7 @@ class TrustOptions
     }
 
     /**
-     * @param boolean $signAuthnRequest
+     * @param bool $signAuthnRequest
      *
      * @return TrustOptions
      */
@@ -100,7 +109,7 @@ class TrustOptions
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getSignResponse()
     {
@@ -108,7 +117,7 @@ class TrustOptions
     }
 
     /**
-     * @param boolean $signResponse
+     * @param bool $signResponse
      *
      * @return TrustOptions
      */

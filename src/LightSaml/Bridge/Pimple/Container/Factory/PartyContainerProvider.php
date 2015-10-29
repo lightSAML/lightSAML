@@ -1,9 +1,17 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Bridge\Pimple\Container\Factory;
 
 use LightSaml\Bridge\Pimple\Container\PartyContainer;
-use LightSaml\Error\LightSamlBuildException;
 use LightSaml\Meta\TrustOptions\TrustOptions;
 use LightSaml\Store\EntityDescriptor\FixedEntityDescriptorStore;
 use LightSaml\Store\TrustOptions\FixedTrustOptionsStore;
@@ -27,7 +35,6 @@ class PartyContainerProvider implements ServiceProviderInterface
 
         $pimple[PartyContainer::TRUST_OPTIONS_STORE] = function () {
             return new FixedTrustOptionsStore(new TrustOptions());
-            ;
         };
     }
 }

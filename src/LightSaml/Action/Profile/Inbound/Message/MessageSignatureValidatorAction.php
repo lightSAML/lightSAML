@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Action\Profile\Inbound\Message;
 
 use LightSaml\Action\Profile\AbstractProfileAction;
@@ -13,7 +22,7 @@ use LightSaml\Validator\Model\Signature\SignatureValidatorInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Validates the signature, if any, of the inbound message
+ * Validates the signature, if any, of the inbound message.
  */
 class MessageSignatureValidatorAction extends AbstractProfileAction
 {

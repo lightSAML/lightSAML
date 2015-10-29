@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Model\Assertion;
 
 use LightSaml\Helper;
@@ -60,7 +69,7 @@ class Assertion extends AbstractSamlModel
 
 
     /**
-     * Core 3.3.4 Processing rules
+     * Core 3.3.4 Processing rules.
      *
      * @param string      $nameId
      * @param string|null $format

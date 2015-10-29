@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Model;
 
 use LightSaml\Error\LightSamlXmlException;
@@ -120,13 +129,13 @@ abstract class AbstractSamlModel implements SamlElementInterface
     protected function manyElementsFromXml(\DOMElement $node, DeserializationContext $context, $nodeName, $namespacePrefix, $class, $methodName)
     {
         if ($namespacePrefix) {
-            $query = sprintf("%s:%s", $namespacePrefix, $nodeName);
+            $query = sprintf('%s:%s', $namespacePrefix, $nodeName);
         } else {
-            $query = sprintf("%s", $nodeName);
+            $query = sprintf('%s', $nodeName);
         }
 
         foreach ($context->getXpath()->query($query, $node) as $xml) {
-            /** @var \DOMElement $xml */
+            /* @var \DOMElement $xml */
             if ($class) {
                 /** @var SamlElementInterface $object */
                 $object = new $class();
@@ -290,7 +299,7 @@ abstract class AbstractSamlModel implements SamlElementInterface
     private function getPropertyValue($name)
     {
         if (($pos = strpos($name, ':')) !== false) {
-            $name = substr($name, $pos+1);
+            $name = substr($name, $pos + 1);
         }
         $getter = 'get'.$name.'String';
         if (false == method_exists($this, $getter)) {

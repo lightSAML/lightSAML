@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Action\Profile\Inbound\Message;
 
 use LightSaml\Action\Profile\AbstractProfileAction;
@@ -11,7 +20,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Receives message from HTTP Request into inbound context,
- * optionally enforces biding type to the one specified in the inbound context
+ * optionally enforces biding type to the one specified in the inbound context.
  */
 class ReceiveMessageAction extends AbstractProfileAction
 {
@@ -19,7 +28,7 @@ class ReceiveMessageAction extends AbstractProfileAction
     protected $bindingFactory;
 
     /**
-     * @param LoggerInterface $logger
+     * @param LoggerInterface         $logger
      * @param BindingFactoryInterface $bindingFactory
      */
     public function __construct(LoggerInterface $logger, BindingFactoryInterface $bindingFactory)
@@ -52,7 +61,7 @@ class ReceiveMessageAction extends AbstractProfileAction
         $this->logger->info(
             'Received message',
             LogHelper::getActionContext($context, $this, array(
-                'message' => $context->getInboundContext()->getDeserializationContext()->getDocument()->saveXML()
+                'message' => $context->getInboundContext()->getDeserializationContext()->getDocument()->saveXML(),
             ))
         );
     }

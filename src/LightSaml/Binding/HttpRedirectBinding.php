@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Binding;
 
 use LightSaml\Context\Profile\Helper\MessageContextHelper;
@@ -138,7 +147,6 @@ class HttpRedirectBinding extends AbstractBinding
      * @param string|null    $destination
      *
      * @return string
-     *
      */
     protected function getRedirectURL(MessageContext $context, $destination)
     {

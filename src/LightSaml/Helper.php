@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml;
 
 final class Helper
@@ -40,7 +49,7 @@ final class Helper
     public static function getTimestampFromValue($value)
     {
         if (is_string($value)) {
-            return Helper::parseSAMLTime($value);
+            return self::parseSAMLTime($value);
         } elseif ($value instanceof \DateTime) {
             return $value->getTimestamp();
         } elseif (is_int($value)) {
@@ -100,7 +109,7 @@ final class Helper
         }
 
         $data = '';
-        for ($i = 0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; ++$i) {
             $data .= chr(mt_rand(0, 255));
         }
 
@@ -116,7 +125,7 @@ final class Helper
     {
         $result = '';
         $len = strlen($bytes);
-        for ($i = 0; $i < $len; $i++) {
+        for ($i = 0; $i < $len; ++$i) {
             $result .= sprintf('%02x', ord($bytes[$i]));
         }
 
@@ -132,7 +141,7 @@ final class Helper
     }
 
     /**
-     * Is ID element at least 128 bits in length (SAML2.0 standard section 1.3.4)
+     * Is ID element at least 128 bits in length (SAML2.0 standard section 1.3.4).
      *
      * @param string $id
      *

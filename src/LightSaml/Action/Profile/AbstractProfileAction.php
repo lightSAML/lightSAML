@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Action\Profile;
 
 use LightSaml\Action\ActionInterface;
@@ -32,7 +41,7 @@ abstract class AbstractProfileAction implements ActionInterface
             $this->doExecute($context);
         } else {
             $message = sprintf('Expected ProfileContext but got %s', get_class($context));
-            $this->logger->emergency($message, array('context'=>$context));
+            $this->logger->emergency($message, array('context' => $context));
             throw new LightSamlContextException($context, $message);
         }
     }

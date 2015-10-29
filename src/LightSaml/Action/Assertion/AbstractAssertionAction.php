@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Action\Assertion;
 
 use LightSaml\Action\ActionInterface;
@@ -23,8 +32,6 @@ abstract class AbstractAssertionAction implements ActionInterface
 
     /**
      * @param ContextInterface $context
-     *
-     * @return void
      */
     public function execute(ContextInterface $context)
     {
@@ -37,8 +44,6 @@ abstract class AbstractAssertionAction implements ActionInterface
 
     /**
      * @param AssertionContext $context
-     *
-     * @return void
      */
     abstract protected function doExecute(AssertionContext $context);
 }

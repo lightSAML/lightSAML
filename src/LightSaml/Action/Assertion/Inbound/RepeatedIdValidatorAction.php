@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Action\Assertion\Inbound;
 
 use LightSaml\Action\Assertion\AbstractAssertionAction;
@@ -21,7 +30,7 @@ class RepeatedIdValidatorAction extends AbstractAssertionAction
     protected $idStore;
 
     /**
-     * @param LoggerInterface       $logger
+     * @param LoggerInterface  $logger
      * @param IdStoreInterface $idStore
      */
     public function __construct(LoggerInterface $logger, IdStoreInterface $idStore)

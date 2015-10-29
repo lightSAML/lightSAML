@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Action\Profile\Inbound\Response;
 
 use LightSaml\Action\Profile\AbstractProfileAction;
@@ -7,7 +16,6 @@ use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Context\Profile\Helper\LogHelper;
 use LightSaml\Context\Profile\Helper\MessageContextHelper;
 use LightSaml\Context\Profile\ProfileContext;
-use LightSaml\Criteria\CriteriaSet;
 use LightSaml\Error\LightSamlSecurityException;
 use LightSaml\Model\Assertion\EncryptedAssertionReader;
 use LightSaml\Resolver\Credential\CredentialResolverInterface;
@@ -75,7 +83,7 @@ class DecryptAssertionsAction extends AbstractProfileAction
                     $credential->getEntityId(),
                     $credential->getPublicKey() ? $credential->getPublicKey()->getX509Thumbprint() : ''
                 );
-            }, $privateKeys)
+            }, $privateKeys),
         )));
 
         foreach ($response->getAllEncryptedAssertions() as $index => $encryptedAssertion) {

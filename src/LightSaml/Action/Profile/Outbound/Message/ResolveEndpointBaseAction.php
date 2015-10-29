@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Action\Profile\Outbound\Message;
 
 use LightSaml\Action\Profile\AbstractProfileAction;
@@ -21,7 +30,7 @@ use LightSaml\SamlConstants;
 use Psr\Log\LoggerInterface;
 
 /**
- * Determines to which endpoint outbound message will be sent
+ * Determines to which endpoint outbound message will be sent.
  */
 abstract class ResolveEndpointBaseAction extends AbstractProfileAction
 {
