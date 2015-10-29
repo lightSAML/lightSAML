@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Context\Profile;
 
 class ExceptionContext extends AbstractProfileContext
@@ -55,7 +64,7 @@ class ExceptionContext extends AbstractProfileContext
     {
         if ($this->exception) {
             if (null == $this->nextExceptionContext) {
-                $this->nextExceptionContext = new ExceptionContext($exception);
+                $this->nextExceptionContext = new self($exception);
 
                 return $this->nextExceptionContext;
             } else {

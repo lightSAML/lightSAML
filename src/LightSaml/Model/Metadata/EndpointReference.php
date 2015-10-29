@@ -1,10 +1,15 @@
 <?php
 
-namespace LightSaml\Model\Metadata;
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
-use LightSaml\Model\Metadata\Endpoint;
-use LightSaml\Model\Metadata\EntityDescriptor;
-use LightSaml\Model\Metadata\RoleDescriptor;
+namespace LightSaml\Model\Metadata;
 
 class EndpointReference
 {

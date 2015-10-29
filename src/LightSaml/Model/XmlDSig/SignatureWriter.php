@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Model\XmlDSig;
 
 use LightSaml\Model\Context\DeserializationContext;
@@ -121,7 +130,7 @@ class SignatureWriter extends Signature
         );
 
         $objXMLSecDSig->sign($key);
-        $objXMLSecDSig->add509Cert($this->getCertificate()->getData(), false, false, array('subjectName'=>false));
+        $objXMLSecDSig->add509Cert($this->getCertificate()->getData(), false, false, array('subjectName' => false));
         $firstChild = $parent->hasChildNodes() ? $parent->firstChild : null;
         if ($firstChild && $firstChild->localName == 'Issuer') {
             // The signature node should come after the issuer node

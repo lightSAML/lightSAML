@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Model\Metadata;
 
 use LightSaml\Helper;
@@ -54,7 +63,7 @@ class EntityDescriptor extends AbstractSamlModel
     {
         $context = new DeserializationContext();
         $context->getDocument()->loadXML($xml);
-        $ed = new EntityDescriptor();
+        $ed = new self();
         $ed->deserialize($context->getDocument()->firstChild, $context);
 
         return $ed;
@@ -216,7 +225,7 @@ class EntityDescriptor extends AbstractSamlModel
         if (false == $item instanceof IdpSsoDescriptor &&
             false == $item instanceof SpSsoDescriptor
         ) {
-            throw new \InvalidArgumentException("EntityDescriptor item must be IdpSsoDescriptor or SpSsoDescriptor");
+            throw new \InvalidArgumentException('EntityDescriptor item must be IdpSsoDescriptor or SpSsoDescriptor');
         }
 
         if (false == is_array($this->items)) {

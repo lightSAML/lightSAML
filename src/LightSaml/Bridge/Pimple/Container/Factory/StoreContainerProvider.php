@@ -1,10 +1,18 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Bridge\Pimple\Container\Factory;
 
 use LightSaml\Bridge\Pimple\Container\StoreContainer;
 use LightSaml\Build\Container\SystemContainerInterface;
-use LightSaml\Error\LightSamlBuildException;
 use LightSaml\Store\Id\NullIdStore;
 use LightSaml\Store\Request\RequestStateSessionStore;
 use LightSaml\Store\Sso\SsoStateSessionStore;

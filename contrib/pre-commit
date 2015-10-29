@@ -25,7 +25,7 @@ then
     do
         if [[ $i == *.php ]];
         then
-            ./bin/phpcbf --standard=PSR2 -p -n $i --diff
+            php php-cs-fixer.phar fix $i
 
       	    if [ $? -ne 0 ];
             then

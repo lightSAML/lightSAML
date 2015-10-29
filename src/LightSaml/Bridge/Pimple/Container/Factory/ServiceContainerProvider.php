@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Bridge\Pimple\Container\Factory;
 
 use LightSaml\Binding\BindingFactory;
@@ -52,7 +61,6 @@ class ServiceContainerProvider implements ServiceProviderInterface
         $this->systemContainer = $systemContainer;
     }
 
-
     /**
      * @param Container $pimple A container instance
      */
@@ -68,6 +76,7 @@ class ServiceContainerProvider implements ServiceProviderInterface
 
         $pimple[ServiceContainer::ASSERTION_VALIDATOR] = function (Container $c) {
             $nameIdValidator = $c[ServiceContainer::NAME_ID_VALIDATOR];
+
             return new AssertionValidator(
                 $nameIdValidator,
                 new SubjectValidator($nameIdValidator),

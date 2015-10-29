@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\State\Request;
 
 class RequestState implements \Serializable
@@ -62,8 +71,10 @@ class RequestState implements \Serializable
 
     /**
      * (PHP 5 &gt;= 5.1.0)<br/>
-     * String representation of object
+     * String representation of object.
+     *
      * @link http://php.net/manual/en/serializable.serialize.php
+     *
      * @return string the string representation of the object or null
      */
     public function serialize()

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Command;
 
 use LightSaml\Model\Context\SerializationContext;
@@ -225,7 +234,7 @@ class BuildSPMetadataCommand extends Command
      */
     protected function askUrlBinding(DialogHelper $dialog, OutputInterface $output, $title)
     {
-        $url = $dialog->ask($output, sprintf("%s URL [empty for none]: ", $title));
+        $url = $dialog->ask($output, sprintf('%s URL [empty for none]: ', $title));
         $url = trim($url);
         if (!$url) {
             return array(null, null);

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Action\Profile\Outbound\Message;
 
 use LightSaml\Action\Profile\AbstractProfileAction;
@@ -8,12 +17,11 @@ use LightSaml\Context\Profile\Helper\MessageContextHelper;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Model\Protocol\Response;
-use LightSaml\Model\Protocol\SamlMessage;
 use LightSaml\Resolver\Signature\SignatureResolverInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Signs the outbound message, according to TrustOptions settings
+ * Signs the outbound message, according to TrustOptions settings.
  */
 class SignMessageAction extends AbstractProfileAction
 {
@@ -44,7 +52,7 @@ class SignMessageAction extends AbstractProfileAction
                 $this->logger->debug(
                     sprintf('Message signed with fingerprint "%s"', $signature->getCertificate()->getFingerprint()),
                     LogHelper::getActionContext($context, $this, array(
-                        'certificate' => $signature->getCertificate()->getInfo()
+                        'certificate' => $signature->getCertificate()->getInfo(),
                     ))
                 );
             } else {

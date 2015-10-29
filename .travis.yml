@@ -5,10 +5,11 @@ php:
     - 5.6
 
 before_script:
+    - wget http://get.sensiolabs.org/php-cs-fixer.phar -O php-cs-fixer.phar
     - COMPOSER_ROOT_VERSION=dev-master composer install
 
 script:
-    - bin/phpcs --standard=PSR2 -n src
+    - php php-cs-fixer.phar fix --dry-run -v
     - bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:

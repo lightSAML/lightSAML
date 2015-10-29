@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Action\Profile\Entity;
 
 use LightSaml\Action\Profile\AbstractProfileAction;
@@ -11,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 class SerializeOwnEntityAction extends AbstractProfileAction
 {
     /** @var string[] */
-    protected $supportedContextTypes = array("application/samlmetadata+xml", "application/xml", "text/xml");
+    protected $supportedContextTypes = array('application/samlmetadata+xml', 'application/xml', 'text/xml');
 
     /**
      * @param ProfileContext $context

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Action\Profile\Outbound\Message;
 
 use LightSaml\Action\Profile\AbstractProfileAction;
@@ -10,7 +19,7 @@ use LightSaml\Model\Assertion\Issuer;
 use LightSaml\SamlConstants;
 
 /**
- * Sets the Issuer of the outbound message to the value of own entityID
+ * Sets the Issuer of the outbound message to the value of own entityID.
  */
 class CreateMessageIssuerAction extends AbstractProfileAction
 {
