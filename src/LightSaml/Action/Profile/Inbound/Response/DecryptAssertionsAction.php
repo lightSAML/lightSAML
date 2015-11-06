@@ -12,11 +12,11 @@
 namespace LightSaml\Action\Profile\Inbound\Response;
 
 use LightSaml\Action\Profile\AbstractProfileAction;
+use LightSaml\Error\LightSamlContextException;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Context\Profile\Helper\LogHelper;
 use LightSaml\Context\Profile\Helper\MessageContextHelper;
 use LightSaml\Context\Profile\ProfileContext;
-use LightSaml\Error\LightSamlSecurityException;
 use LightSaml\Model\Assertion\EncryptedAssertionReader;
 use LightSaml\Resolver\Credential\CredentialResolverInterface;
 use LightSaml\SamlConstants;
@@ -74,7 +74,7 @@ class DecryptAssertionsAction extends AbstractProfileAction
         if (empty($privateKeys)) {
             $message = 'No credentials resolved for assertion decryption';
             $this->logger->emergency($message, LogHelper::getActionErrorContext($context, $this));
-            throw new LightSamlSecurityException($message);
+            throw new LightSamlContextException($context, $message);
         }
         $this->logger->info('Trusted decryption candidates', LogHelper::getActionContext($context, $this, array(
             'credentials' => array_map(function (CredentialInterface $credential) {

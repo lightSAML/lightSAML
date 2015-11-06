@@ -8,6 +8,7 @@ use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Model\Assertion\Assertion;
 use LightSaml\Model\Protocol\Response;
 use LightSaml\Profile\Profiles;
+use LightSaml\Tests\Mock\Action\FooAction;
 
 class AssertionActionTest extends \PHPUnit_Framework_TestCase
 {
@@ -69,6 +70,24 @@ class AssertionActionTest extends \PHPUnit_Framework_TestCase
         $assertionContext = $context->getSubContext('assertion_1');
         $this->assertInstanceOf(AssertionContext::class, $assertionContext);
         $this->assertSame($assertion2, $assertionContext->getAssertion());
+    }
+
+    public function test_debug_tree()
+    {
+        $innerAction = new AssertionAction($this->getLoggerMock(), new FooAction());
+        $outerAction = new AssertionAction($this->getLoggerMock(), $innerAction);
+
+        $actualTree = $outerAction->debugPrintTree();
+
+        $expectedTree = [
+            AssertionAction::class => [
+                AssertionAction::class => [
+                    FooAction::class => [],
+                ],
+            ],
+        ];
+
+        $this->assertEquals($expectedTree, $actualTree);
     }
 
     /**

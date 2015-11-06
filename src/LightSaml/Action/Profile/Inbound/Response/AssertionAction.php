@@ -37,8 +37,6 @@ class AssertionAction extends AbstractProfileAction implements DebugPrintTreeAct
 
     /**
      * @param ProfileContext $context
-     *
-     * @return void
      */
     protected function doExecute(ProfileContext $context)
     {
@@ -68,7 +66,7 @@ class AssertionAction extends AbstractProfileAction implements DebugPrintTreeAct
         if ($this->assertionAction instanceof DebugPrintTreeActionInterface) {
             $arr = array_merge($arr, $this->assertionAction->debugPrintTree());
         } else {
-            $arr = array_merge($arr, array(get_class($this->assertionAction), array()));
+            $arr[get_class($this->assertionAction)] = array();
         }
 
         $result = array(

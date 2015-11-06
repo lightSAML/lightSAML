@@ -112,6 +112,23 @@ class CriteriaSet
     /**
      * @param string $class
      *
+     * @return CriteriaInterface|null
+     */
+    public function getSingle($class)
+    {
+        $result = array();
+        foreach ($this->criterions as $criteria) {
+            if ($criteria instanceof $class) {
+                return $criteria;
+            }
+        }
+
+        return;
+    }
+
+    /**
+     * @param string $class
+     *
      * @return bool
      */
     public function has($class)

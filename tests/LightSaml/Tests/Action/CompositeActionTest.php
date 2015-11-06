@@ -61,7 +61,7 @@ class CompositeActionTest extends \PHPUnit_Framework_TestCase
             if ($action === $action1) {
                 $action1mapped = true;
 
-                return null;
+                return;
             } elseif ($action === $action2) {
                 $action2mapped = true;
                 $action2replacement = $this->getActionMock();
@@ -81,7 +81,7 @@ class CompositeActionTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($action2replacement, $children[1]);
     }
 
-    public function test__debug_tree()
+    public function test_debug_tree()
     {
         $innerComposite = new CompositeAction([new FooAction(), new BarAction()]);
         $this->assertCount(2, $innerComposite->getChildren());
@@ -91,13 +91,13 @@ class CompositeActionTest extends \PHPUnit_Framework_TestCase
         $actualTree = $outerComposite->debugPrintTree();
 
         $expectedTree = [
-            'LightSaml\Action\CompositeAction' => [
-                'LightSaml\Tests\Mock\Action\FooAction' => [],
-                'LightSaml\Action\CompositeAction' => [
-                    'LightSaml\Tests\Mock\Action\FooAction' => [],
-                    'LightSaml\Tests\Mock\Action\BarAction' => [],
+            CompositeAction::class => [
+                FooAction::class => [],
+                CompositeAction::class => [
+                    FooAction::class => [],
+                    BarAction::class => [],
                 ],
-                'LightSaml\Tests\Mock\Action\BarAction' => [],
+                BarAction::class => [],
             ],
         ];
 
