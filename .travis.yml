@@ -5,6 +5,8 @@ php:
     - 5.6
 
 before_script:
+    - composer self-update
+    - composer --version
     - wget http://get.sensiolabs.org/php-cs-fixer.phar -O php-cs-fixer.phar
     - COMPOSER_ROOT_VERSION=dev-master composer install
 
@@ -13,5 +15,4 @@ script:
     - bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
-    - wget https://scrutinizer-ci.com/ocular.phar
-    - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
+    - php bin/coveralls -v

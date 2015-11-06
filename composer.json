@@ -34,7 +34,8 @@
     "require-dev": {
         "pimple/pimple": "~3.0",
         "phpunit/phpunit": "~4.5",
-        "monolog/monolog": "~1.3"
+        "monolog/monolog": "~1.3",
+        "satooshi/php-coveralls": "~0.6"
     },
     "suggest": {
         "lightsaml/symfony-bridge": "Symfony 2 build container bridge",
