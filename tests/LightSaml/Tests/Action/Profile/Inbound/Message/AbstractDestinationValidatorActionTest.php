@@ -150,6 +150,7 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
     {
         return $this->getMock(EndpointResolverInterface::class);
     }
+
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\Log\LoggerInterface
      */
