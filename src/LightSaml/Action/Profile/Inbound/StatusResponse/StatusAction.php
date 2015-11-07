@@ -33,7 +33,7 @@ class StatusAction extends AbstractProfileAction
 
         if (null == $statusResponse->getStatus()) {
             $message = 'Status response does not have Status set';
-            $this->logger->emergency($message, LogHelper::getActionErrorContext($context, $this));
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this));
             throw new LightSamlContextException($context, $message);
         }
 
@@ -43,6 +43,8 @@ class StatusAction extends AbstractProfileAction
             $status .= "\n".$statusResponse->getStatus()->getStatusCode()->getStatusCode()->getValue();
         }
 
-        throw new LightSamlAuthenticationException($statusResponse, 'Unsuccessful SAML response: '.$status);
+        $message = 'Unsuccessful SAML response: '.$status;
+        $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, ['status' => $status]));
+        throw new LightSamlAuthenticationException($statusResponse, $message);
     }
 }
