@@ -12,9 +12,10 @@
 namespace LightSaml\Action\Profile\Inbound\Response;
 
 use LightSaml\Action\Profile\AbstractProfileAction;
+use LightSaml\Context\Profile\Helper\LogHelper;
 use LightSaml\Context\Profile\Helper\MessageContextHelper;
 use LightSaml\Context\Profile\ProfileContext;
-use LightSaml\Error\LightSamlValidationException;
+use LightSaml\Error\LightSamlContextException;
 
 class HasAssertionsValidatorAction extends AbstractProfileAction
 {
@@ -26,6 +27,8 @@ class HasAssertionsValidatorAction extends AbstractProfileAction
             return;
         }
 
-        throw new LightSamlValidationException('Response must contain at least one assertion');
+        $message = 'Response must contain at least one assertion';
+        $this->logger->error($message, LogHelper::getActionErrorContext($context, $this));
+        throw new LightSamlContextException($context, $message);
     }
 }
