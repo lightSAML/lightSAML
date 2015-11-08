@@ -6,14 +6,14 @@ use LightSaml\Action\Profile\Inbound\Message\AssertBindingTypeAction;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Profile\Profiles;
 use LightSaml\SamlConstants;
-use Psr\Log\LoggerInterface;
+use LightSaml\Tests\TestHelper;
 
 class AssertBindingTypeActionTest extends \PHPUnit_Framework_TestCase
 {
     public function test_construct_with_logger_and_expected_binding_types()
     {
         new AssertBindingTypeAction(
-            $this->getLoggerMock(),
+            TestHelper::getLoggerMock($this),
             [SamlConstants::BINDING_SAML2_HTTP_POST]
         );
     }
@@ -21,7 +21,7 @@ class AssertBindingTypeActionTest extends \PHPUnit_Framework_TestCase
     public function test_passes_with_inbound_binding_type_being_one_of_expected()
     {
         $action = new AssertBindingTypeAction(
-            $this->getLoggerMock(),
+            TestHelper::getLoggerMock($this),
             [SamlConstants::BINDING_SAML2_HTTP_POST]
         );
 
@@ -37,9 +37,8 @@ class AssertBindingTypeActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_when_inbound_binding_type_not_one_of_expected()
     {
-        $logger = $this->getLoggerMock();
         $action = new AssertBindingTypeAction(
-            $logger,
+            $logger = TestHelper::getLoggerMock($this),
             [SamlConstants::BINDING_SAML2_HTTP_POST]
         );
 
@@ -54,13 +53,5 @@ class AssertBindingTypeActionTest extends \PHPUnit_Framework_TestCase
             });
 
         $action->execute($context);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\Log\LoggerInterface
-     */
-    private function getLoggerMock()
-    {
-        return $this->getMock(LoggerInterface::class);
     }
 }

@@ -8,14 +8,14 @@ use LightSaml\Binding\BindingFactoryInterface;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Profile\Profiles;
 use LightSaml\SamlConstants;
-use Psr\Log\LoggerInterface;
+use LightSaml\Tests\TestHelper;
 use Symfony\Component\HttpFoundation\Request;
 
 class ReceiveMessageActionTest extends \PHPUnit_Framework_TestCase
 {
     public function test_constructs_with_logger_and_binding_factory()
     {
-        new ReceiveMessageAction($this->getLoggerMock(), $this->getBindingFactoryMock());
+        new ReceiveMessageAction(TestHelper::getLoggerMock($this), $this->getBindingFactoryMock());
     }
 
     /**
@@ -24,10 +24,7 @@ class ReceiveMessageActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_on_invalid_binding()
     {
-        $logger = $this->getLoggerMock();
-        $bindingFactory = $this->getBindingFactoryMock();
-
-        $action = new ReceiveMessageAction($logger, $bindingFactory);
+        $action = new ReceiveMessageAction($logger = TestHelper::getLoggerMock($this), $bindingFactory = $this->getBindingFactoryMock());
 
         $context = new ProfileContext(Profiles::SSO_SP_SEND_AUTHN_REQUEST, ProfileContext::ROLE_SP);
 
@@ -47,10 +44,7 @@ class ReceiveMessageActionTest extends \PHPUnit_Framework_TestCase
 
     public function test_receives_message()
     {
-        $logger = $this->getLoggerMock();
-        $bindingFactory = $this->getBindingFactoryMock();
-
-        $action = new ReceiveMessageAction($logger, $bindingFactory);
+        $action = new ReceiveMessageAction($logger = TestHelper::getLoggerMock($this), $bindingFactory = $this->getBindingFactoryMock());
 
         $context = new ProfileContext(Profiles::SSO_SP_SEND_AUTHN_REQUEST, ProfileContext::ROLE_SP);
         $context->getHttpRequestContext()->setRequest($request = new Request());
@@ -95,13 +89,5 @@ class ReceiveMessageActionTest extends \PHPUnit_Framework_TestCase
     private function getBindingFactoryMock()
     {
         return $this->getMock(BindingFactoryInterface::class);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\Log\LoggerInterface
-     */
-    private function getLoggerMock()
-    {
-        return $this->getMock(LoggerInterface::class);
     }
 }

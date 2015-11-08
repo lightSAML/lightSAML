@@ -11,7 +11,7 @@ use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Profile\Profiles;
 use LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria;
 use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
-use Psr\Log\LoggerInterface;
+use LightSaml\Tests\TestHelper;
 
 class DestinationValidatorAuthnRequestActionTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,7 +19,7 @@ class DestinationValidatorAuthnRequestActionTest extends \PHPUnit_Framework_Test
     {
         $endpointResolverMock = $this->getEndpointResolverMock();
 
-        $action = new DestinationValidatorAuthnRequestAction($this->getLoggerMock(), $endpointResolverMock);
+        $action = new DestinationValidatorAuthnRequestAction(TestHelper::getLoggerMock($this), $endpointResolverMock);
 
         $context = $this->buildContext(ProfileContext::ROLE_IDP, 'http://localhost');
 
@@ -64,12 +64,5 @@ class DestinationValidatorAuthnRequestActionTest extends \PHPUnit_Framework_Test
     private function getEndpointResolverMock()
     {
         return $this->getMock(EndpointResolverInterface::class);
-    }
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\Log\LoggerInterface
-     */
-    private function getLoggerMock()
-    {
-        return $this->getMock(LoggerInterface::class);
     }
 }

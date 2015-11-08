@@ -9,14 +9,14 @@ use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Profile\Profiles;
 use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
 use LightSaml\Store\TrustOptions\TrustOptionsStoreInterface;
-use Psr\Log\LoggerInterface;
+use LightSaml\Tests\TestHelper;
 
 class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
 {
     public function test_constructs_with_logger_entity_descriptor_stores_and_trust_options_provider()
     {
         new ResolvePartyEntityIdAction(
-            $this->getLoggerMock(),
+            TestHelper::getLoggerMock($this),
             $this->getEntityDescriptorStoreMock(),
             $this->getEntityDescriptorStoreMock(),
             $this->getTrustOptionsStore()
@@ -26,7 +26,7 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
     public function test_does_nothing_if_party_entity_descriptor_and_trust_options_already_set_in_context()
     {
         $action = new ResolvePartyEntityIdAction(
-            $logger = $this->getLoggerMock(),
+            $logger = TestHelper::getLoggerMock($this),
             $spEntityStore = $this->getEntityDescriptorStoreMock(),
             $idpEntityStore = $this->getEntityDescriptorStoreMock(),
             $trustOptionsStore = $this->getTrustOptionsStore()
@@ -53,7 +53,7 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
     public function test_throws_if_entity_id_is_not_set_in_context()
     {
         $action = new ResolvePartyEntityIdAction(
-            $logger = $this->getLoggerMock(),
+            $logger = TestHelper::getLoggerMock($this),
             $spEntityStore = $this->getEntityDescriptorStoreMock(),
             $idpEntityStore = $this->getEntityDescriptorStoreMock(),
             $trustOptionsStore = $this->getTrustOptionsStore()
@@ -72,7 +72,7 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
     public function test_looks_for_idp_entity_descriptor_when_own_role_sp()
     {
         $action = new ResolvePartyEntityIdAction(
-            $logger = $this->getLoggerMock(),
+            $logger = TestHelper::getLoggerMock($this),
             $spEntityStore = $this->getEntityDescriptorStoreMock(),
             $idpEntityStore = $this->getEntityDescriptorStoreMock(),
             $trustOptionsStore = $this->getTrustOptionsStore()
@@ -104,7 +104,7 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
     public function test_looks_for_sp_entity_descriptor_when_own_role_idp()
     {
         $action = new ResolvePartyEntityIdAction(
-            $logger = $this->getLoggerMock(),
+            $logger = TestHelper::getLoggerMock($this),
             $spEntityStore = $this->getEntityDescriptorStoreMock(),
             $idpEntityStore = $this->getEntityDescriptorStoreMock(),
             $trustOptionsStore = $this->getTrustOptionsStore()
@@ -137,12 +137,11 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
     public function test_looks_for_trust_options()
     {
         $action = new ResolvePartyEntityIdAction(
-            $logger = $this->getLoggerMock(),
+            $logger = TestHelper::getLoggerMock($this),
             $spEntityStore = $this->getEntityDescriptorStoreMock(),
             $idpEntityStore = $this->getEntityDescriptorStoreMock(),
             $trustOptionsStore = $this->getTrustOptionsStore()
         );
-
 
         $context = new ProfileContext(Profiles::SSO_SP_SEND_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getPartyEntityContext()
@@ -167,12 +166,11 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
     public function test_creates_default_trust_options_if_none_resolved()
     {
         $action = new ResolvePartyEntityIdAction(
-            $logger = $this->getLoggerMock(),
+            $logger = TestHelper::getLoggerMock($this),
             $spEntityStore = $this->getEntityDescriptorStoreMock(),
             $idpEntityStore = $this->getEntityDescriptorStoreMock(),
             $trustOptionsStore = $this->getTrustOptionsStore()
         );
-
 
         $context = new ProfileContext(Profiles::SSO_SP_SEND_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getPartyEntityContext()
@@ -208,13 +206,5 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
     private function getTrustOptionsStore()
     {
         return $this->getMock(TrustOptionsStoreInterface::class);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\Log\LoggerInterface
-     */
-    private function getLoggerMock()
-    {
-        return $this->getMock(LoggerInterface::class);
     }
 }

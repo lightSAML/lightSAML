@@ -9,17 +9,18 @@ use LightSaml\Model\Protocol\Status;
 use LightSaml\Model\Protocol\StatusCode;
 use LightSaml\Profile\Profiles;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\TestHelper;
 
 class StatusActionTest extends \PHPUnit_Framework_TestCase
 {
     public function test_constructs_with_logger()
     {
-        new StatusAction($this->getLoggerMock());
+        new StatusAction(TestHelper::getLoggerMock($this));
     }
 
     public function test_does_nothing_if_status_success()
     {
-        $action = new StatusAction($this->getLoggerMock());
+        $action = new StatusAction(TestHelper::getLoggerMock($this));
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage($response = new Response());
@@ -34,7 +35,7 @@ class StatusActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_context_exception_if_no_status()
     {
-        $action = new StatusAction($loggerMock = $this->getLoggerMock());
+        $action = new StatusAction($loggerMock = TestHelper::getLoggerMock($this));
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage($response = new Response());
@@ -52,7 +53,7 @@ class StatusActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_authentication_exception_if_status_not_success()
     {
-        $action = new StatusAction($loggerMock = $this->getLoggerMock());
+        $action = new StatusAction($loggerMock = TestHelper::getLoggerMock($this));
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage($response = new Response());
@@ -63,13 +64,5 @@ class StatusActionTest extends \PHPUnit_Framework_TestCase
             ->method('error');
 
         $action->execute($context);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\Log\LoggerInterface
-     */
-    private function getLoggerMock()
-    {
-        return $this->getMock(\Psr\Log\LoggerInterface::class);
     }
 }

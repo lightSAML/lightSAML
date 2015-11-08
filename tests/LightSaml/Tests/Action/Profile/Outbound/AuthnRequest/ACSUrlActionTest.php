@@ -15,18 +15,19 @@ use LightSaml\Resolver\Endpoint\Criteria\BindingCriteria;
 use LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria;
 use LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\TestHelper;
 
 class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
 {
     public function test_constructs_with_logger_and_endpoint_resolver()
     {
-        new ACSUrlAction($this->getLoggerMock(), $this->getEndpointResolverMock());
+        new ACSUrlAction(TestHelper::getLoggerMock($this), $this->getEndpointResolverMock());
     }
 
     public function test_finds_acs_endpoint_and_sets_outbounding_authn_request_acs_url()
     {
         $action = new ACSUrlAction(
-            $loggerMock = $this->getLoggerMock(),
+            $loggerMock = TestHelper::getLoggerMock($this),
             $endpointResolverMock = $this->getEndpointResolverMock()
         );
 
@@ -73,7 +74,7 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
     public function test_throws_context_exception_if_no_own_acs_service()
     {
         $action = new ACSUrlAction(
-            $loggerMock = $this->getLoggerMock(),
+            $loggerMock = TestHelper::getLoggerMock($this),
             $endpointResolverMock = $this->getEndpointResolverMock()
         );
 
@@ -115,13 +116,5 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
     private function getEndpointResolverMock()
     {
         return $this->getMock(\LightSaml\Resolver\Endpoint\EndpointResolverInterface::class);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\Log\LoggerInterface
-     */
-    private function getLoggerMock()
-    {
-        return $this->getMock(\Psr\Log\LoggerInterface::class);
     }
 }

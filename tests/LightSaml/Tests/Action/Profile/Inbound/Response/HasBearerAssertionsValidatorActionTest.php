@@ -11,17 +11,18 @@ use LightSaml\Model\Assertion\SubjectConfirmation;
 use LightSaml\Model\Protocol\Response;
 use LightSaml\Profile\Profiles;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\TestHelper;
 
 class HasBearerAssertionsValidatorActionTest extends \PHPUnit_Framework_TestCase
 {
     public function test_constructs_with_logger()
     {
-        new HasBearerAssertionsValidatorAction($this->getLoggerMock());
+        new HasBearerAssertionsValidatorAction(TestHelper::getLoggerMock($this));
     }
 
     public function test_does_nothing_if_there_is_bearer_assertion()
     {
-        $action = new HasBearerAssertionsValidatorAction($this->getLoggerMock());
+        $action = new HasBearerAssertionsValidatorAction(TestHelper::getLoggerMock($this));
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage($response = new Response());
@@ -40,19 +41,11 @@ class HasBearerAssertionsValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_context_exception_if_no_bearer_assertion()
     {
-        $action = new HasBearerAssertionsValidatorAction($this->getLoggerMock());
+        $action = new HasBearerAssertionsValidatorAction(TestHelper::getLoggerMock($this));
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage($response = new Response());
 
         $action->execute($context);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\Log\LoggerInterface
-     */
-    private function getLoggerMock()
-    {
-        return $this->getMock(\Psr\Log\LoggerInterface::class);
     }
 }

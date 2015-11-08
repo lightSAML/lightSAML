@@ -6,7 +6,7 @@ use LightSaml\Action\Profile\Entity\SerializeOwnEntityAction;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Profile\Profiles;
-use Psr\Log\LoggerInterface;
+use LightSaml\Tests\TestHelper;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -14,14 +14,14 @@ class SerializeOwnEntityActionTest extends \PHPUnit_Framework_TestCase
 {
     public function test_constructs_with_logger()
     {
-        $loggerMock = $this->getLoggerMock();
+        $loggerMock = TestHelper::getLoggerMock($this);
 
         new SerializeOwnEntityAction($loggerMock);
     }
 
     public function test_creates_http_response_with_serialized_own_entity()
     {
-        $loggerMock = $this->getLoggerMock();
+        $loggerMock = TestHelper::getLoggerMock($this);
 
         $action = new SerializeOwnEntityAction($loggerMock);
 
@@ -29,7 +29,7 @@ class SerializeOwnEntityActionTest extends \PHPUnit_Framework_TestCase
         $context->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor($myEntityId = 'http://localhost/myself'));
         $context->getHttpRequestContext()->setRequest($httpRequest = new Request());
 
-        $httpRequest->headers->add(['Accept'=>$contextType = 'application/samlmetadata+xml']);
+        $httpRequest->headers->add(['Accept' => $contextType = 'application/samlmetadata+xml']);
 
         $action->execute($context);
 
@@ -45,13 +45,5 @@ EOT;
         $expectedContent = trim(str_replace("\r", '', $expectedContent));
 
         $this->assertEquals($expectedContent, trim(str_replace("\r", '', $response->getContent())));
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\Log\LoggerInterface
-     */
-    private function getLoggerMock()
-    {
-        return $this->getMock(LoggerInterface::class);
     }
 }

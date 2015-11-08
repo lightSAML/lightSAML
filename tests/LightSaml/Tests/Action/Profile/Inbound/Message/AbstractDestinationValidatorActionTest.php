@@ -13,7 +13,7 @@ use LightSaml\Profile\Profiles;
 use LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria;
 use LightSaml\Resolver\Endpoint\Criteria\LocationCriteria;
 use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
-use Psr\Log\LoggerInterface;
+use LightSaml\Tests\TestHelper;
 
 class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +22,7 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
         $this->getMockForAbstractClass(
             AbstractDestinationValidatorAction::class,
             [
-                $this->getLoggerMock(),
+                TestHelper::getLoggerMock($this),
                 $this->getEndpointResolverMock(),
             ]
         );
@@ -30,7 +30,7 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
 
     public function test_passes_if_inbound_message_destination_is_empty()
     {
-        $loggerMock = $this->getLoggerMock();
+        $loggerMock = TestHelper::getLoggerMock($this);
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */
         $action = $this->getMockForAbstractClass(AbstractDestinationValidatorAction::class, [$loggerMock, $endpointResolverMock]);
@@ -42,7 +42,7 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
 
     public function test_passes_if_message_destination_matches_to_one_of_own_locations()
     {
-        $loggerMock = $this->getLoggerMock();
+        $loggerMock = TestHelper::getLoggerMock($this);
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */
         $action = $this->getMockForAbstractClass(AbstractDestinationValidatorAction::class, [$loggerMock, $endpointResolverMock]);
@@ -73,7 +73,7 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_makes_descriptor_type_criteria_for_own_role($ownRole, $descriptorType)
     {
-        $loggerMock = $this->getLoggerMock();
+        $loggerMock = TestHelper::getLoggerMock($this);
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */
         $action = $this->getMockForAbstractClass(AbstractDestinationValidatorAction::class, [$loggerMock, $endpointResolverMock]);
@@ -110,7 +110,7 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_exception_when_destination_does_not_match()
     {
-        $loggerMock = $this->getLoggerMock();
+        $loggerMock = TestHelper::getLoggerMock($this);
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */
         $action = $this->getMockForAbstractClass(AbstractDestinationValidatorAction::class, [$loggerMock, $endpointResolverMock]);
@@ -149,13 +149,5 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
     private function getEndpointResolverMock()
     {
         return $this->getMock(EndpointResolverInterface::class);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\Log\LoggerInterface
-     */
-    private function getLoggerMock()
-    {
-        return $this->getMock(LoggerInterface::class);
     }
 }
