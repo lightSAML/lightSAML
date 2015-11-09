@@ -27,6 +27,16 @@ abstract class Endpoint extends AbstractSamlModel
     protected $responseLocation;
 
     /**
+     * @param string $location
+     * @param string $binding
+     */
+    public function __construct($location = null, $binding = null)
+    {
+        $this->location = $location;
+        $this->binding = $binding;
+    }
+
+    /**
      * @param string $binding
      *
      * @return Endpoint
@@ -89,8 +99,6 @@ abstract class Endpoint extends AbstractSamlModel
     /**
      * @param \DOMNode             $parent
      * @param SerializationContext $context
-     *
-     * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
@@ -100,8 +108,6 @@ abstract class Endpoint extends AbstractSamlModel
     /**
      * @param \DOMElement            $node
      * @param DeserializationContext $context
-     *
-     * @return void
      */
     public function deserialize(\DOMElement $node, DeserializationContext $context)
     {

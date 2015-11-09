@@ -14,6 +14,7 @@ namespace LightSaml\Action\Profile\Outbound\Message;
 use LightSaml\Action\Profile\AbstractProfileAction;
 use LightSaml\Context\Profile\Helper\LogHelper;
 use LightSaml\Context\Profile\ProfileContext;
+use LightSaml\Error\LightSamlContextException;
 use LightSaml\Model\Metadata\EndpointReference;
 use LightSaml\Model\Metadata\IdpSsoDescriptor;
 use LightSaml\Model\Metadata\SpSsoDescriptor;
@@ -25,7 +26,6 @@ use LightSaml\Resolver\Endpoint\Criteria\LocationCriteria;
 use LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria;
 use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
 use LightSaml\Criteria\CriteriaSet;
-use LightSaml\Error\LightSamlException;
 use LightSaml\SamlConstants;
 use Psr\Log\LoggerInterface;
 
@@ -50,15 +50,13 @@ abstract class ResolveEndpointBaseAction extends AbstractProfileAction
 
     /**
      * @param ProfileContext $context
-     *
-     * @return void
      */
     protected function doExecute(ProfileContext $context)
     {
         if ($context->getEndpointContext()->getEndpoint()) {
             $this->logger->debug(
                 sprintf(
-                    'Endpoint already set with location "%" and binding "%"',
+                    'Endpoint already set with location "%s" and binding "%s"',
                     $context->getEndpoint()->getLocation(),
                     $context->getEndpoint()->getBinding()
                 ),
@@ -89,12 +87,11 @@ abstract class ResolveEndpointBaseAction extends AbstractProfileAction
 
         if (null == $endpointReference) {
             $message = sprintf(
-                "Unable to determine endpoint for entity '%s' on profile '%s'",
-                $context->getPartyEntityDescriptor()->getEntityID(),
-                $context->getProfileId()
+                "Unable to determine endpoint for entity '%s'",
+                $context->getPartyEntityDescriptor()->getEntityID()
             );
             $this->logger->emergency($message, LogHelper::getActionErrorContext($context, $this));
-            throw new LightSamlException($message);
+            throw new LightSamlContextException($context, $message);
         }
 
         $this->logger->debug(
@@ -170,6 +167,6 @@ abstract class ResolveEndpointBaseAction extends AbstractProfileAction
      */
     protected function getServiceType(ProfileContext $context)
     {
-        return null;
+        return;
     }
 }

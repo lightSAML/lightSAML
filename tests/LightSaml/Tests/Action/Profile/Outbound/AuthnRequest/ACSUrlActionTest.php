@@ -6,7 +6,6 @@ use LightSaml\Action\Profile\Outbound\AuthnRequest\ACSUrlAction;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Criteria\CriteriaSet;
 use LightSaml\Model\Metadata\AssertionConsumerService;
-use LightSaml\Model\Metadata\EndpointReference;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Model\Metadata\SpSsoDescriptor;
 use LightSaml\Model\Protocol\AuthnRequest;
@@ -36,13 +35,7 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
 
         $entityDescriptorMock->expects($this->once())
             ->method('getAllEndpoints')
-            ->willReturn([$endpointReferenceMock = $this->getEndpointReferenceMock()]);
-
-        $endpointReferenceMock->expects($this->once())
-            ->method('getEndpoint')
-            ->willReturn($endpoint = new AssertionConsumerService());
-
-        $endpoint->setLocation('http://localhost/acs');
+            ->willReturn([TestHelper::getEndpointReferenceMock($this, $endpoint = new AssertionConsumerService('http://localhost/acs'))]);
 
         $endpointResolverMock->expects($this->once())
             ->method('resolve')
@@ -95,13 +88,6 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
         $action->execute($context);
     }
 
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|EndpointReference
-     */
-    private function getEndpointReferenceMock()
-    {
-        return $this->getMockBuilder(EndpointReference::class)->disableOriginalConstructor()->getMock();
-    }
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|EntityDescriptor
      */
