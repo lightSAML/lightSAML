@@ -122,4 +122,14 @@ abstract class TestHelper
     {
         return $test->getMock(\LightSaml\Credential\X509Certificate::class);
     }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Validator\Model\Assertion\AssertionValidatorInterface
+     */
+    public static function getAssertionValidatorMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMock(\LightSaml\Validator\Model\Assertion\AssertionValidatorInterface::class);
+    }
 }

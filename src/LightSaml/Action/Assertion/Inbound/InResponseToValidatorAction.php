@@ -16,7 +16,7 @@ use LightSaml\Context\Profile\AssertionContext;
 use LightSaml\Context\Profile\Helper\LogHelper;
 use LightSaml\Context\Profile\ProfileContexts;
 use LightSaml\Context\Profile\RequestStateContext;
-use LightSaml\Error\LightSamlValidationException;
+use LightSaml\Error\LightSamlContextException;
 use LightSaml\Store\Request\RequestStateStoreInterface;
 use Psr\Log\LoggerInterface;
 
@@ -73,7 +73,7 @@ class InResponseToValidatorAction extends AbstractAssertionAction
         if (null == $requestState) {
             $message = sprintf("Unknown InResponseTo '%s'", $inResponseTo);
             $this->logger->emergency($message, LogHelper::getActionErrorContext($context, $this));
-            throw new LightSamlValidationException();
+            throw new LightSamlContextException($context, $message);
         }
 
         return $requestState;
