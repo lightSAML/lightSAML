@@ -13,7 +13,8 @@ namespace LightSaml\Action\Assertion\Inbound;
 
 use LightSaml\Action\Assertion\AbstractAssertionAction;
 use LightSaml\Context\Profile\AssertionContext;
-use LightSaml\Error\LightSamlValidationException;
+use LightSaml\Context\Profile\Helper\LogHelper;
+use LightSaml\Error\LightSamlContextException;
 use LightSaml\SamlConstants;
 use Psr\Log\LoggerInterface;
 
@@ -39,17 +40,24 @@ class AssertionIssuerFormatValidatorAction extends AbstractAssertionAction
     protected function doExecute(AssertionContext $context)
     {
         if (null == $context->getAssertion()->getIssuer()) {
-            throw new LightSamlValidationException('Assertion element must have an issuer element');
+            $message = 'Assertion element must have an issuer element';
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this));
+            throw new LightSamlContextException($context, $message);
         }
 
         if ($context->getAssertion()->getIssuer()->getFormat() &&
             $context->getAssertion()->getIssuer()->getFormat() != $this->expectedIssuerFormat
         ) {
-            throw new LightSamlValidationException(sprintf(
+            $message = sprintf(
                 "Response Issuer Format if set must have value '%s' but it was '%s'",
                 $this->expectedIssuerFormat,
                 $context->getAssertion()->getIssuer()->getFormat()
-            ));
+            );
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, [
+                'actualFormat' => $context->getAssertion()->getIssuer()->getFormat(),
+                'expectedFormat' => $this->expectedIssuerFormat,
+            ]));
+            throw new LightSamlContextException($context, $message);
         }
     }
 }

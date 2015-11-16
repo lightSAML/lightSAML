@@ -2,7 +2,9 @@
 
 namespace LightSaml\Tests;
 
+use LightSaml\Context\Profile\AssertionContext;
 use LightSaml\Context\Profile\ProfileContext;
+use LightSaml\Model\Assertion\Assertion;
 use LightSaml\Model\Metadata\Endpoint;
 use LightSaml\Profile\Profiles;
 
@@ -53,5 +55,71 @@ abstract class TestHelper
         $context = new ProfileContext($profileId, $ownRole);
 
         return $context;
+    }
+
+    /**
+     * @param Assertion $assertion
+     *
+     * @return AssertionContext
+     */
+    public static function getAssertionContext(Assertion $assertion)
+    {
+        $context = new AssertionContext();
+
+        if ($assertion) {
+            $context->setAssertion($assertion);
+        }
+
+        return $context;
+    }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Store\Request\RequestStateStoreInterface
+     */
+    public static function getRequestStateStoreMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMock(\LightSaml\Store\Request\RequestStateStoreInterface::class);
+    }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Binding\BindingFactoryInterface
+     */
+    public static function getBindingFactoryMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMock(\LightSaml\Binding\BindingFactoryInterface::class);
+    }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Binding\AbstractBinding
+     */
+    public static function getBindingMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMockForAbstractClass(\LightSaml\Binding\AbstractBinding::class);
+    }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Resolver\Signature\SignatureResolverInterface
+     */
+    public static function getSignatureResolverMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMock(\LightSaml\Resolver\Signature\SignatureResolverInterface::class);
+    }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Credential\X509Certificate
+     */
+    public static function getX509CertificateMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMock(\LightSaml\Credential\X509Certificate::class);
     }
 }
