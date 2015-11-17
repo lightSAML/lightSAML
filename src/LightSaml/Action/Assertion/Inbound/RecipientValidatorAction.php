@@ -13,13 +13,34 @@ namespace LightSaml\Action\Assertion\Inbound;
 
 use LightSaml\Action\Assertion\AbstractAssertionAction;
 use LightSaml\Context\Profile\AssertionContext;
-use LightSaml\Error\LightSamlValidationException;
-use LightSaml\Model\Assertion\Assertion;
+use LightSaml\Context\Profile\Helper\LogHelper;
+use LightSaml\Criteria\CriteriaSet;
+use LightSaml\Error\LightSamlContextException;
 use LightSaml\Model\Assertion\SubjectConfirmation;
-use LightSaml\Model\Metadata\EntityDescriptor;
+use LightSaml\Model\Metadata\AssertionConsumerService;
+use LightSaml\Model\Metadata\SpSsoDescriptor;
+use LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria;
+use LightSaml\Resolver\Endpoint\Criteria\LocationCriteria;
+use LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria;
+use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
+use Psr\Log\LoggerInterface;
 
 class RecipientValidatorAction extends AbstractAssertionAction
 {
+    /** @var EndpointResolverInterface */
+    private $endpointResolver;
+
+    /**
+     * @param LoggerInterface           $logger
+     * @param EndpointResolverInterface $endpointResolver
+     */
+    public function __construct(LoggerInterface $logger, EndpointResolverInterface $endpointResolver)
+    {
+        parent::__construct($logger);
+
+        $this->endpointResolver = $endpointResolver;
+    }
+
     /**
      * @param AssertionContext $context
      *
@@ -27,45 +48,48 @@ class RecipientValidatorAction extends AbstractAssertionAction
      */
     protected function doExecute(AssertionContext $context)
     {
-        $ownEntityDescriptor = $context->getProfileContext()->getOwnEntityDescriptor();
-
         if ($context->getAssertion()->getAllAuthnStatements() && $context->getAssertion()->hasBearerSubject()) {
-            $this->validateBearerAssertion($context->getAssertion(), $ownEntityDescriptor);
+            $this->validateBearerAssertion($context);
         }
     }
 
     /**
-     * @param Assertion        $assertion
-     * @param EntityDescriptor $ownEntityDescriptor
+     * @param AssertionContext $context
      */
-    protected function validateBearerAssertion(Assertion $assertion, EntityDescriptor $ownEntityDescriptor)
+    protected function validateBearerAssertion(AssertionContext $context)
     {
-        foreach ($assertion->getSubject()->getBearerConfirmations() as $subjectConfirmation) {
-            $this->validateSubjectConfirmation($subjectConfirmation, $ownEntityDescriptor);
+        foreach ($context->getAssertion()->getSubject()->getBearerConfirmations() as $subjectConfirmation) {
+            $this->validateSubjectConfirmation($context, $subjectConfirmation);
         }
     }
 
     /**
+     * @param AssertionContext    $context
      * @param SubjectConfirmation $subjectConfirmation
-     * @param EntityDescriptor    $ownEntityDescriptor
      */
-    protected function validateSubjectConfirmation(SubjectConfirmation $subjectConfirmation, EntityDescriptor $ownEntityDescriptor)
+    protected function validateSubjectConfirmation(AssertionContext $context, SubjectConfirmation $subjectConfirmation)
     {
         $recipient = $subjectConfirmation->getSubjectConfirmationData()->getRecipient();
         if (null == $recipient) {
-            throw new LightSamlValidationException('Bearer SubjectConfirmation must contain Recipient attribute');
+            $message = 'Bearer SubjectConfirmation must contain Recipient attribute';
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this));
+            throw new LightSamlContextException($context, $message);
         }
 
-        $ok = false;
-        foreach ($ownEntityDescriptor->getAllSpSsoDescriptors() as $spSsoDescriptor) {
-            if ($spSsoDescriptor->getAllAssertionConsumerServicesByUrl($recipient)) {
-                $ok = true;
-                break;
-            }
-        }
+        $criteriaSet = new CriteriaSet([
+            new DescriptorTypeCriteria(SpSsoDescriptor::class),
+            new ServiceTypeCriteria(AssertionConsumerService::class),
+            new LocationCriteria($recipient),
+        ]);
+        $ownEntityDescriptor = $context->getProfileContext()->getOwnEntityDescriptor();
+        $arrEndpoints = $this->endpointResolver->resolve($criteriaSet, $ownEntityDescriptor->getAllEndpoints());
 
-        if (false === $ok) {
-            throw new LightSamlValidationException(sprintf("Recipient '%s' does not match SP descriptor", $recipient));
+        if (empty($arrEndpoints)) {
+            $message = sprintf("Recipient '%s' does not match SP descriptor", $recipient);
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, [
+                'recipient' => $recipient,
+            ]));
+            throw new LightSamlContextException($context, $message);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace LightSaml\Action\Assertion\Inbound;
 use LightSaml\Action\Assertion\AbstractAssertionAction;
 use LightSaml\Context\Profile\AssertionContext;
 use LightSaml\Context\Profile\Helper\LogHelper;
-use LightSaml\Error\LightSamlValidationException;
+use LightSaml\Error\LightSamlContextException;
 use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
 use Psr\Log\LoggerInterface;
 
@@ -42,11 +42,17 @@ class KnownAssertionIssuerAction extends AbstractAssertionAction
     protected function doExecute(AssertionContext $context)
     {
         if (null === $context->getAssertion()->getIssuer()) {
-            throw new LightSamlValidationException('Assertion element must have an issuer element.');
+            $message = 'Assertion element must have an issuer element';
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this));
+            throw new LightSamlContextException($context, $message);
         }
 
-        if (false === $this->idpEntityDescriptorProvider->has($context->getAssertion()->getIssuer()->getValue())) {
-            throw new LightSamlValidationException(sprintf("Unknown issuer '%s'", $context->getAssertion()->getIssuer()->getValue()));
+        if (false == $this->idpEntityDescriptorProvider->has($context->getAssertion()->getIssuer()->getValue())) {
+            $message = sprintf("Unknown issuer '%s'", $context->getAssertion()->getIssuer()->getValue());
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, [
+                'messageIssuer' => $context->getAssertion()->getIssuer()->getValue(),
+            ]));
+            throw new LightSamlContextException($context, $message);
         }
 
         $this->logger->debug(

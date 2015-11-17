@@ -4,6 +4,7 @@ namespace LightSaml\Tests;
 
 use LightSaml\Context\Profile\AssertionContext;
 use LightSaml\Context\Profile\ProfileContext;
+use LightSaml\Criteria\CriteriaSet;
 use LightSaml\Model\Assertion\Assertion;
 use LightSaml\Model\Metadata\Endpoint;
 use LightSaml\Profile\Profiles;
@@ -42,6 +43,16 @@ abstract class TestHelper
             ->willReturn($endpoint);
 
         return $endpointReferenceMock;
+    }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Resolver\Endpoint\EndpointResolverInterface
+     */
+    public static function getEndpointResolverMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMock(\LightSaml\Resolver\Endpoint\EndpointResolverInterface::class);
     }
 
     /**
@@ -131,5 +142,49 @@ abstract class TestHelper
     public static function getAssertionValidatorMock(\PHPUnit_Framework_TestCase $test)
     {
         return $test->getMock(\LightSaml\Validator\Model\Assertion\AssertionValidatorInterface::class);
+    }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface
+     */
+    public static function getEntityDescriptorStoreMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMock(\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface::class);
+    }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     * @param CriteriaSet                 $criteriaSet
+     * @param string                      $class
+     * @param string                      $getter
+     * @param string                      $value
+     */
+    public static function assertCriteria(\PHPUnit_Framework_TestCase $test, CriteriaSet $criteriaSet, $class, $getter, $value)
+    {
+        $test->assertTrue($criteriaSet->has($class));
+        $criteria = $criteriaSet->getSingle($class);
+        $test->assertEquals($value, $criteria->{$getter}());
+    }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Store\Id\IdStoreInterface
+     */
+    public static function getIdStoreMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMock(\LightSaml\Store\Id\IdStoreInterface::class);
+    }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Validator\Model\Assertion\AssertionTimeValidatorInterface
+     */
+    public static function getAssertionTimeValidatorMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMock(\LightSaml\Validator\Model\Assertion\AssertionTimeValidatorInterface::class);
     }
 }

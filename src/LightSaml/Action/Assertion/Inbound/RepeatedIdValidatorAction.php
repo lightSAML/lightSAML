@@ -13,8 +13,8 @@ namespace LightSaml\Action\Assertion\Inbound;
 
 use LightSaml\Action\Assertion\AbstractAssertionAction;
 use LightSaml\Context\Profile\AssertionContext;
-use LightSaml\Error\LightSamlValidationException;
-use LightSaml\Model\Assertion\Assertion;
+use LightSaml\Context\Profile\Helper\LogHelper;
+use LightSaml\Error\LightSamlContextException;
 use LightSaml\Store\Id\IdStoreInterface;
 use Psr\Log\LoggerInterface;
 
@@ -48,61 +48,78 @@ class RepeatedIdValidatorAction extends AbstractAssertionAction
     protected function doExecute(AssertionContext $context)
     {
         if ($context->getAssertion()->hasBearerSubject()) {
-            $this->validateBearerAssertion($context->getAssertion());
+            $this->validateBearerAssertion($context);
         }
     }
 
     /**
-     * @param Assertion $assertion
+     * @param AssertionContext $context
      *
-     * @throws \LightSaml\Error\LightSamlValidationException
+     * @throws \LightSaml\Error\LightSamlContextException
      */
-    protected function validateBearerAssertion(Assertion $assertion)
+    protected function validateBearerAssertion(AssertionContext $context)
     {
-        if (null == $assertion->getId()) {
-            throw new LightSamlValidationException('Bearer Assertion must have ID attribute');
+        if (null == $context->getAssertion()->getId()) {
+            $message = 'Bearer Assertion must have ID attribute';
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this));
+            throw new LightSamlContextException($context, $message);
         }
 
-        if (null == $assertion->getIssuer()) {
-            throw new LightSamlValidationException('Bearer Assertion must have Issuer element');
+        if (null == $context->getAssertion()->getIssuer()) {
+            $message = 'Bearer Assertion must have Issuer element';
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this));
+            throw new LightSamlContextException($context, $message);
         }
 
-        if ($this->idStore->has($assertion->getIssuer()->getValue(), $assertion->getId())) {
-            throw new LightSamlValidationException(sprintf(
+        if ($this->idStore->has($context->getAssertion()->getIssuer()->getValue(), $context->getAssertion()->getId())) {
+            $message = sprintf(
                 "Repeated assertion id '%s' of issuer '%s'",
-                $assertion->getId(),
-                $assertion->getIssuer()->getValue()
-            ));
+                $context->getAssertion()->getId(),
+                $context->getAssertion()->getIssuer()->getValue()
+            );
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, [
+                'id' => $context->getAssertion()->getId(),
+                'issuer' => $context->getAssertion()->getIssuer()->getValue(),
+            ]));
+            throw new LightSamlContextException($context, $message);
         }
 
-        $this->idStore->set($assertion->getIssuer()->getValue(), $assertion->getId(), $this->getIdExpiryTime($assertion));
+        $this->idStore->set(
+            $context->getAssertion()->getIssuer()->getValue(),
+            $context->getAssertion()->getId(),
+            $this->getIdExpiryTime($context)
+        );
     }
 
     /**
-     * @param Assertion $assertion
+     * @param AssertionContext $context
      *
      * @throws \LogicException
      * @throws \LightSaml\Error\LightSamlValidationException
      *
      * @return \DateTime
      */
-    protected function getIdExpiryTime(Assertion $assertion)
+    protected function getIdExpiryTime(AssertionContext $context)
     {
         /** @var \DateTime $result */
         $result = null;
-        $bearerConfirmations = $assertion->getSubject()->getBearerConfirmations();
+        $bearerConfirmations = $context->getAssertion()->getSubject()->getBearerConfirmations();
         if (null == $bearerConfirmations) {
             throw new \LogicException('Bearer assertion must have bearer subject confirmations');
         }
 
         foreach ($bearerConfirmations as $subjectConfirmation) {
             if (null == $subjectConfirmation->getSubjectConfirmationData()) {
-                throw new LightSamlValidationException('Bearer SubjectConfirmation must have SubjectConfirmationData element');
+                $message = 'Bearer SubjectConfirmation must have SubjectConfirmationData element';
+                $this->logger->error($message, LogHelper::getActionErrorContext($context, $this));
+                throw new LightSamlContextException($context, $message);
             }
 
             $dt = $subjectConfirmation->getSubjectConfirmationData()->getNotOnOrAfterDateTime();
             if (null == $dt) {
-                throw new LightSamlValidationException('Bearer SubjectConfirmation must have NotOnOrAfter attribute');
+                $message = 'Bearer SubjectConfirmation must have NotOnOrAfter attribute';
+                $this->logger->error($message, LogHelper::getActionErrorContext($context, $this));
+                throw new LightSamlContextException($context, $message);
             }
 
             if (null == $result || $result->getTimestamp() < $dt->getTimestamp()) {
@@ -111,7 +128,9 @@ class RepeatedIdValidatorAction extends AbstractAssertionAction
         }
 
         if (null == $result) {
-            throw new LightSamlValidationException('Unable to find NotOnOrAfter attribute in bearer assertion');
+            $message = 'Unable to find NotOnOrAfter attribute in bearer assertion';
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this));
+            throw new LightSamlContextException($context, $message);
         }
 
         return $result;

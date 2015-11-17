@@ -45,7 +45,8 @@ class SsoSpValidateAssertionActionBuilder extends AbstractProfileActionBuilder
             $this->buildContainer->getPartyContainer()->getIdpEntityDescriptorStore()
         ));
         $this->add(new RecipientValidatorAction(
-            $this->buildContainer->getSystemContainer()->getLogger()
+            $this->buildContainer->getSystemContainer()->getLogger(),
+            $this->buildContainer->getServiceContainer()->getEndpointResolver()
         ));
         $this->add(new RepeatedIdValidatorAction(
             $this->buildContainer->getSystemContainer()->getLogger(),
