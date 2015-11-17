@@ -35,4 +35,28 @@ class X509CertificateTest extends \PHPUnit_Framework_TestCase
         $certificate = new X509Certificate();
         $certificate->parse();
     }
+
+    public function throws_exception_when_data_not_set_provider()
+    {
+        return [
+            ['getFingerprint'],
+            ['getInfo'],
+            ['getValidToTimestamp'],
+            ['getValidFromTimestamp'],
+            ['getIssuer'],
+            ['getSubject'],
+            ['getName'],
+        ];
+    }
+
+    /**
+     * @dataProvider throws_exception_when_data_not_set_provider
+     * @expectedException \LightSaml\Error\LightSamlException
+     * @expectedExceptionMessage Certificate data not set
+     */
+    public function test_throws_exception_when_data_not_set($method)
+    {
+        $certificate = new X509Certificate();
+        $certificate->{$method}();
+    }
 }

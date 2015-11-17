@@ -116,14 +116,13 @@ class CriteriaSet
      */
     public function getSingle($class)
     {
-        $result = array();
         foreach ($this->criterions as $criteria) {
             if ($criteria instanceof $class) {
                 return $criteria;
             }
         }
 
-        return;
+        return null;
     }
 
     /**

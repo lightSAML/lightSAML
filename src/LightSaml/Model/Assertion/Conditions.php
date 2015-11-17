@@ -80,7 +80,7 @@ class Conditions extends AbstractSamlModel
             }
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -109,7 +109,7 @@ class Conditions extends AbstractSamlModel
             }
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -138,7 +138,7 @@ class Conditions extends AbstractSamlModel
             }
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -170,7 +170,7 @@ class Conditions extends AbstractSamlModel
             return Helper::time2string($this->notBefore);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -182,7 +182,7 @@ class Conditions extends AbstractSamlModel
             return new \DateTime('@'.$this->notBefore);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -214,7 +214,7 @@ class Conditions extends AbstractSamlModel
             return Helper::time2string($this->notOnOrAfter);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -226,7 +226,7 @@ class Conditions extends AbstractSamlModel
             return new \DateTime('@'.$this->notOnOrAfter);
         }
 
-        return;
+        return null;
     }
 
     /**

@@ -104,6 +104,31 @@ class CompositeActionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedTree, $actualTree);
     }
 
+    public function test_to_string_returns_json_debug_tree_string()
+    {
+        $innerComposite = new CompositeAction([new FooAction(), new BarAction()]);
+        $this->assertCount(2, $innerComposite->getChildren());
+        $outerComposite = new CompositeAction([new FooAction(), $innerComposite, new BarAction()]);
+        $this->assertCount(3, $outerComposite->getChildren());
+
+        $actualValue = (string)$outerComposite;
+
+        $expectedValue = <<<EOT
+{
+    "LightSaml\\\\Action\\\\CompositeAction": {
+        "LightSaml\\\\Tests\\\\Mock\\\\Action\\\\FooAction": [],
+        "LightSaml\\\\Action\\\\CompositeAction": {
+            "LightSaml\\\\Tests\\\\Mock\\\\Action\\\\FooAction": [],
+            "LightSaml\\\\Tests\\\\Mock\\\\Action\\\\BarAction": []
+        },
+        "LightSaml\\\\Tests\\\\Mock\\\\Action\\\\BarAction": []
+    }
+}
+EOT;
+
+        $this->assertEquals($expectedValue, $actualValue);
+    }
+
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Action\ActionInterface
      */

@@ -187,4 +187,14 @@ abstract class TestHelper
     {
         return $test->getMock(\LightSaml\Validator\Model\Assertion\AssertionTimeValidatorInterface::class);
     }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Criteria\CriteriaInterface
+     */
+    public static function getCriteriaMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMock(\LightSaml\Criteria\CriteriaInterface::class);
+    }
 }

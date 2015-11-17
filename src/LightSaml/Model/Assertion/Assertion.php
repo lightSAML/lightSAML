@@ -104,7 +104,7 @@ class Assertion extends AbstractSamlModel
      */
     public function hasSessionIndex($sessionIndex)
     {
-        if (false == $this->getAllAuthnStatements()) {
+        if (null == $this->getAllAuthnStatements()) {
             return false;
         }
 
@@ -205,7 +205,7 @@ class Assertion extends AbstractSamlModel
             return Helper::time2string($this->issueInstant);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -217,7 +217,7 @@ class Assertion extends AbstractSamlModel
             return new \DateTime('@'.$this->issueInstant);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -361,7 +361,7 @@ class Assertion extends AbstractSamlModel
             }
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -375,7 +375,7 @@ class Assertion extends AbstractSamlModel
             }
         }
 
-        return;
+        return null;
     }
 
     //endregion
