@@ -92,7 +92,7 @@ class AuthnStatement extends AbstractStatement
             return Helper::time2string($this->authnInstant);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -104,7 +104,7 @@ class AuthnStatement extends AbstractStatement
             return new \DateTime('@'.$this->authnInstant);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -156,7 +156,7 @@ class AuthnStatement extends AbstractStatement
             return Helper::time2string($this->sessionNotOnOrAfter);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -168,7 +168,7 @@ class AuthnStatement extends AbstractStatement
             return new \DateTime('@'.$this->sessionNotOnOrAfter);
         }
 
-        return;
+        return null;
     }
 
     /**

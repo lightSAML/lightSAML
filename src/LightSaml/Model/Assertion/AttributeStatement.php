@@ -57,7 +57,7 @@ class AttributeStatement extends AbstractStatement
             }
         }
 
-        return;
+        return null;
     }
 
     /**
