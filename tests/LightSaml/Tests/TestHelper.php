@@ -197,4 +197,14 @@ abstract class TestHelper
     {
         return $test->getMock(\LightSaml\Criteria\CriteriaInterface::class);
     }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\HttpFoundation\Session\SessionInterface
+     */
+    public static function getSessionMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMock(\Symfony\Component\HttpFoundation\Session\SessionInterface::class);
+    }
 }

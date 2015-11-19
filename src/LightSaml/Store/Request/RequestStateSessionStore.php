@@ -41,7 +41,7 @@ class RequestStateSessionStore extends AbstractRequestStateArrayStore
      */
     protected function getKey()
     {
-        return sprintf('%s%s', $this->providerId, $this->prefix);
+        return sprintf('%s_%s', $this->providerId, $this->prefix);
     }
 
     /**
