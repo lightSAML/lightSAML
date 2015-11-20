@@ -3,6 +3,7 @@
 namespace LightSaml\Tests\Functional\Bridge\Pimple;
 
 use LightSaml\Bridge\Pimple\Container\BuildContainer;
+use LightSaml\Bridge\Pimple\Container\Factory\PartyContainerProvider;
 use LightSaml\Bridge\Pimple\Container\PartyContainer;
 use LightSaml\Bridge\Pimple\Container\StoreContainer;
 use LightSaml\Bridge\Pimple\Container\SystemContainer;
@@ -13,11 +14,9 @@ use LightSaml\SamlConstants;
 use LightSaml\State\Request\RequestState;
 use LightSaml\Store\Request\RequestStateArrayStore;
 use LightSaml\Tests\Fixtures\Meta\TimeProviderMock;
-use LightSaml\Tests\TestHelper;
 use Pimple\Container;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ProfileTest extends \PHPUnit_Framework_TestCase
 {
@@ -108,12 +107,72 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('tmilos', $response->getFirstAssertion()->getFirstAttributeStatement()->getFirstAttributeByName('uid')->getFirstAttributeValue());
     }
 
-    private function getBuildContainer($inResponseTo = null, TimeProviderInterface $timeProvider = null, SessionInterface $session = null)
+    /**
+     * @expectedException \LightSaml\Error\LightSamlBuildException
+     * @expectedExceptionMessage Attribute value provider not set
+     */
+    public function test_attribute_value_provider_throws_exception()
     {
-        if (null == $session) {
-            $session = TestHelper::getSessionMock($this);
-        }
+        $buildContainer = $this->getBuildContainer();
+        $buildContainer->getProviderContainer()->getAttributeValueProvider();
+    }
 
+    /**
+     * @expectedException \LightSaml\Error\LightSamlBuildException
+     * @expectedExceptionMessage Attribute name provider not set
+     */
+    public function test_attribute_name_provider_throws_exception()
+    {
+        $buildContainer = $this->getBuildContainer();
+        $buildContainer->getProviderContainer()->getAttributeNameProvider();
+    }
+
+    /**
+     * @expectedException \LightSaml\Error\LightSamlBuildException
+     * @expectedExceptionMessage Session info provider not set
+     */
+    public function test_session_info_provider_throws_exception()
+    {
+        $buildContainer = $this->getBuildContainer();
+        $buildContainer->getProviderContainer()->getSessionInfoProvider();
+    }
+
+    /**
+     * @expectedException \LightSaml\Error\LightSamlBuildException
+     * @expectedExceptionMessage Name ID provider not set
+     */
+    public function test_name_id_provider_throws_exception()
+    {
+        $buildContainer = $this->getBuildContainer();
+        $buildContainer->getProviderContainer()->getNameIdProvider();
+    }
+
+    public function test_session()
+    {
+        $buildContainer = $this->getBuildContainer();
+        $this->assertInstanceOf(\Symfony\Component\HttpFoundation\Session\Session::class, $buildContainer->getSystemContainer()->getSession());
+    }
+
+    public function test_idp_entity_descriptor()
+    {
+        $pimple = new Container();
+        $pimple->register(new \LightSaml\Bridge\Pimple\Container\Factory\PartyContainerProvider());
+        $buildContainer = new BuildContainer($pimple);
+
+        $this->assertInstanceOf(\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface::class, $buildContainer->getPartyContainer()->getIdpEntityDescriptorStore());
+    }
+
+    public function test_sp_entity_descriptor()
+    {
+        $pimple = new Container();
+        $pimple->register(new \LightSaml\Bridge\Pimple\Container\Factory\PartyContainerProvider());
+        $buildContainer = new BuildContainer($pimple);
+
+        $this->assertInstanceOf(\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface::class, $buildContainer->getPartyContainer()->getSpEntityDescriptorStore());
+    }
+
+    private function getBuildContainer($inResponseTo = null, TimeProviderInterface $timeProvider = null)
+    {
         $buildContainer = new BuildContainer($pimple = new Container());
 
         // OWN
@@ -136,12 +195,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         ));
 
         // SYSTEM
-        $buildContainer->getPimple()->register(new \LightSaml\Bridge\Pimple\Container\Factory\SystemContainerProvider());
-        if ($session) {
-            $pimple[SystemContainer::SESSION] = function () use ($session) {
-                return $session;
-            };
-        }
+        $buildContainer->getPimple()->register(new \LightSaml\Bridge\Pimple\Container\Factory\SystemContainerProvider(true));
         if ($timeProvider) {
             $pimple[SystemContainer::TIME_PROVIDER] = function () use ($timeProvider) {
                 return $timeProvider;

@@ -143,10 +143,10 @@ class BuildSPMetadataCommand extends Command
                 break;
             }
             $s = (new AssertionConsumerService())
-                ->setBinding($this->resolveBinding($binding))
-                ->setLocation($url)
                 ->setIsDefault($index == 0)
                 ->setIndex($index++)
+                ->setBinding($this->resolveBinding($binding))
+                ->setLocation($url)
             ;
             $sp->addAssertionConsumerService($s);
         }
@@ -212,7 +212,7 @@ class BuildSPMetadataCommand extends Command
             "$title [empty for none]: ",
             function ($answer) use ($required) {
                 if (false == $required && false == $answer) {
-                    return;
+                    return null;
                 }
                 if (false == is_file($answer)) {
                     throw new \RuntimeException('Specified file not found');

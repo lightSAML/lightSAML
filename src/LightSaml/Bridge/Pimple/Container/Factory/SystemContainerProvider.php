@@ -19,9 +19,18 @@ use Psr\Log\NullLogger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class SystemContainerProvider implements ServiceProviderInterface
 {
+    /** @var bool */
+    private $mockSession;
+
+    public function __construct($mockSession = false)
+    {
+        $this->mockSession = true;
+    }
+
     /**
      * @param Container $pimple A container instance
      */
@@ -32,7 +41,11 @@ class SystemContainerProvider implements ServiceProviderInterface
         };
 
         $pimple[SystemContainer::SESSION] = function () {
-            $session = new Session();
+            if ($this->mockSession) {
+                $session = new Session(new MockArraySessionStorage());
+            } else {
+                $session = new Session();
+            }
             $session->setName(sprintf('SID%s', mt_rand(1000, 9999)));
             $session->start();
 

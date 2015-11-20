@@ -13,6 +13,7 @@ namespace LightSaml\Resolver\Signature;
 
 use LightSaml\Context\Profile\AbstractProfileContext;
 use LightSaml\Context\Profile\ProfileContext;
+use LightSaml\Error\LightSamlContextException;
 use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\Resolver\Credential\CredentialResolverInterface;
 use LightSaml\SamlConstants;
@@ -45,7 +46,7 @@ class OwnSignatureResolver implements SignatureResolverInterface
     {
         $credential = $this->getSigningCredential($context);
         if (null == $credential) {
-            throw new \LogicException('Unable to find signing credential');
+            throw new LightSamlContextException($context, 'Unable to find signing credential');
         }
 
         $signature = new SignatureWriter($credential->getCertificate(), $credential->getPrivateKey());
@@ -73,7 +74,7 @@ class OwnSignatureResolver implements SignatureResolverInterface
                 return new MetadataCriteria(MetadataCriteria::TYPE_IDP, SamlConstants::VERSION_20);
             })
             ->addIf(ProfileContext::ROLE_SP === $profileContext->getOwnRole(), function () {
-                new MetadataCriteria(MetadataCriteria::TYPE_SP, SamlConstants::VERSION_20);
+                return new MetadataCriteria(MetadataCriteria::TYPE_SP, SamlConstants::VERSION_20);
             })
         ;
         $query->resolve();

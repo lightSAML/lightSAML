@@ -12,7 +12,7 @@
 namespace LightSaml\Builder\Context;
 
 use LightSaml\Context\Profile\ProfileContext;
-use LightSaml\Error\LightSamlException;
+use LightSaml\Error\LightSamlBuildException;
 use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -116,16 +116,16 @@ class ProfileContextBuilder
     public function build()
     {
         if (null === $this->request) {
-            throw new LightSamlException('HTTP Request not set');
+            throw new LightSamlBuildException('HTTP Request not set');
         }
         if (null === $this->ownEntityDescriptorProvider) {
-            throw new LightSamlException('Own EntityDescriptor not set');
+            throw new LightSamlBuildException('Own EntityDescriptor not set');
         }
         if (null === $this->profileId) {
-            throw new LightSamlException('ProfileID not set');
+            throw new LightSamlBuildException('ProfileID not set');
         }
         if (null === $this->profileRole) {
-            throw new LightSamlException('Profile role not set');
+            throw new LightSamlBuildException('Profile role not set');
         }
 
         $result = new ProfileContext($this->profileId, $this->profileRole);

@@ -165,7 +165,9 @@ abstract class TestHelper
     {
         $test->assertTrue($criteriaSet->has($class));
         $criteria = $criteriaSet->getSingle($class);
-        $test->assertEquals($value, $criteria->{$getter}());
+        if ($getter) {
+            $test->assertEquals($value, $criteria->{$getter}());
+        }
     }
 
     /**
@@ -196,6 +198,26 @@ abstract class TestHelper
     public static function getCriteriaMock(\PHPUnit_Framework_TestCase $test)
     {
         return $test->getMock(\LightSaml\Criteria\CriteriaInterface::class);
+    }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Resolver\Credential\CredentialResolverInterface
+     */
+    public static function getCredentialResolverMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMock(\LightSaml\Resolver\Credential\CredentialResolverInterface::class);
+    }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Credential\X509CredentialInterface
+     */
+    public static function getX509CredentialMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMock(\LightSaml\Credential\X509CredentialInterface::class);
     }
 
     /**
