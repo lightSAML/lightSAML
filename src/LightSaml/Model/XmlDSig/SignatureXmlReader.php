@@ -16,7 +16,6 @@ use LightSaml\Error\LightSamlXmlException;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
 use LightSaml\SamlConstants;
-use LightSaml\Credential\KeyHelper;
 
 class SignatureXmlReader extends AbstractSignatureReader
 {
@@ -79,28 +78,11 @@ class SignatureXmlReader extends AbstractSignatureReader
             throw new LightSamlSecurityException('Key type must be RSA_SHA1 but got '.$key->type);
         }
 
-        $key = $this->castKeyIfNecessary($key);
-
         if (false == $this->signature->verify($key)) {
             throw new LightSamlSecurityException('Unable to verify Signature');
         }
 
         return true;
-    }
-
-    /**
-     * @param \XMLSecurityKey $key
-     *
-     * @return \XMLSecurityKey
-     */
-    private function castKeyIfNecessary(\XMLSecurityKey $key)
-    {
-        $algorithm = $this->getAlgorithm();
-        if ($key->type === \XMLSecurityKey::RSA_SHA1 && $algorithm !== $key->type) {
-            $key = KeyHelper::castKey($key, $algorithm);
-        }
-
-        return $key;
     }
 
     /**

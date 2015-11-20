@@ -73,8 +73,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
                     ->setXmlSecurityKey(KeyHelper::createPrivateKey(
                         __DIR__.'/../../../../../resources/sample/Certificate/saml.pem',
                         '',
-                        true,
-                        false
+                        true
                     ))))
             ->setIssuer((new Issuer())
                 ->setValue('the-issuer'))

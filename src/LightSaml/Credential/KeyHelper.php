@@ -11,8 +11,6 @@
 
 namespace LightSaml\Credential;
 
-use LightSaml\Error\LightSamlSecurityException;
-
 class KeyHelper
 {
     /**
@@ -22,9 +20,9 @@ class KeyHelper
      *
      * @return \XMLSecurityKey
      */
-    public static function createPrivateKey($key, $passphrase, $isFile = false)
+    public static function createPrivateKey($key, $passphrase, $isFile = false, $type = \XMLSecurityKey::RSA_SHA1)
     {
-        $result = new \XMLSecurityKey(\XMLSecurityKey::RSA_SHA1, array('type' => 'private'));
+        $result = new \XMLSecurityKey($type, array('type' => 'private'));
         $result->passphrase = $passphrase;
         $result->loadKey($key, $isFile, false);
 
@@ -36,45 +34,11 @@ class KeyHelper
      *
      * @return \XMLSecurityKey
      */
-    public static function createPublicKey(X509Certificate $certificate)
+    public static function createPublicKey(X509Certificate $certificate, $type = \XMLSecurityKey::RSA_SHA1)
     {
-        $key = new \XMLSecurityKey(\XMLSecurityKey::RSA_SHA1, array('type' => 'public'));
+        $key = new \XMLSecurityKey($type, array('type' => 'public'));
         $key->loadKey($certificate->toPem(), false, true);
 
         return $key;
-    }
-
-    /**
-     * @param \XMLSecurityKey $key
-     * @param string          $algorithm
-     *
-     * @throws \LightSaml\Error\LightSamlSecurityException
-     * @throws \InvalidArgumentException
-     *
-     * @return \XMLSecurityKey
-     */
-    public static function castKey(\XMLSecurityKey $key, $algorithm)
-    {
-        if (false == is_string($algorithm)) {
-            throw new \InvalidArgumentException('Algorithm must be string');
-        }
-
-        // do nothing if algorithm is already the type of the key
-        if ($key->type === $algorithm) {
-            return $key;
-        }
-
-        $keyInfo = openssl_pkey_get_details($key->key);
-        if ($keyInfo === false) {
-            throw new LightSamlSecurityException('Unable to get key details from XMLSecurityKey.');
-        }
-        if (false == isset($keyInfo['key'])) {
-            throw new LightSamlSecurityException('Missing key in public key details.');
-        }
-
-        $newKey = new \XMLSecurityKey($algorithm, array('type' => 'public'));
-        $newKey->loadKey($keyInfo['key']);
-
-        return $newKey;
     }
 }

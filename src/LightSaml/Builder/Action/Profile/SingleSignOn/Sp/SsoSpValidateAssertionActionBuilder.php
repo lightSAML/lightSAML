@@ -11,6 +11,7 @@
 
 namespace LightSaml\Builder\Action\Profile\SingleSignOn\Sp;
 
+use LightSaml\Action\Assertion\Inbound\AssertionSignatureValidatorAction;
 use LightSaml\Action\Assertion\Inbound\AssertionValidatorAction;
 use LightSaml\Action\Assertion\Inbound\AssertionIssuerFormatValidatorAction;
 use LightSaml\Action\Assertion\Inbound\InResponseToValidatorAction;
@@ -57,6 +58,10 @@ class SsoSpValidateAssertionActionBuilder extends AbstractProfileActionBuilder
             $this->buildContainer->getServiceContainer()->getAssertionTimeValidator(),
             $this->buildContainer->getSystemContainer()->getTimeProvider(),
             120
+        ));
+        $this->add(new AssertionSignatureValidatorAction(
+            $this->buildContainer->getSystemContainer()->getLogger(),
+            $this->buildContainer->getServiceContainer()->getSignatureValidator()
         ));
     }
 }

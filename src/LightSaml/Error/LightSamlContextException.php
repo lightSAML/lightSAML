@@ -27,6 +27,8 @@ class LightSamlContextException extends LightSamlException
     public function __construct(ContextInterface $context, $message = '', $code = 0, \Exception $previous = null)
     {
         parent::__construct($message, $code, $previous);
+
+        $this->context = $context;
     }
 
     /**
