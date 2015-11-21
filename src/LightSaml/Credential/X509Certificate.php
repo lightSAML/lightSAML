@@ -18,10 +18,11 @@ class X509Certificate
     /** @var string */
     protected $data;
 
-    /**
-     * @var null|array
-     */
+    /** @var null|array */
     protected $info;
+
+    /** @var string */
+    private $signatureAlgorithm;
 
     /**
      * @param string $filename
@@ -110,7 +111,28 @@ class X509Certificate
             throw new LightSamlException('Certificate data not set');
         }
 
-        $this->info = openssl_x509_parse($this->toPem());
+        $res = openssl_x509_read($this->toPem());
+        $this->info = openssl_x509_parse($res);
+        openssl_x509_export($res, $out, false);
+        $this->signatureAlgorithm = null;
+        if (preg_match('/^\s+Signature Algorithm:\s*(.*)\s*$/m', $out, $match)) {
+            switch ($match[1]) {
+                case 'sha1WithRSAEncryption':
+                    $this->signatureAlgorithm = \XMLSecurityKey::RSA_SHA1;
+                    break;
+                case 'sha256WithRSAEncryption':
+                    $this->signatureAlgorithm = \XMLSecurityKey::RSA_SHA256;
+                    break;
+                case 'sha384WithRSAEncryption':
+                    $this->signatureAlgorithm = \XMLSecurityKey::RSA_SHA384;
+                    break;
+                case 'sha512WithRSAEncryption':
+                    $this->signatureAlgorithm = \XMLSecurityKey::RSA_SHA512;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     /**
@@ -209,5 +231,14 @@ class X509Certificate
         }
 
         return \XMLSecurityKey::getRawThumbprint($this->toPem());
+    }
+
+    public function getSignatureAlgorithm()
+    {
+        if (false == $this->data) {
+            throw new LightSamlException('Certificate data not set');
+        }
+
+        return $this->signatureAlgorithm;
     }
 }
