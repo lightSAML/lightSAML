@@ -1,10 +1,10 @@
 <?php
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__.'/../../vendor/autoload.php';
 
 class SpConfig
 {
-    const OWN_ENTITY_ID = 'http://localhost/lightSAML/lightSAML';
+    const OWN_ENTITY_ID = 'https://localhost/lightSAML/lightSAML';
 
     /** @var  \SpConfig */
     private static $instance;
@@ -17,7 +17,7 @@ class SpConfig
     public static function current()
     {
         if (null == self::$instance) {
-            self::$instance = new static;
+            self::$instance = new static();
         }
 
         return self::$instance;
@@ -159,7 +159,7 @@ class SpConfig
     {
         return new \LightSaml\Builder\EntityDescriptor\SimpleEntityDescriptorBuilder(
             self::OWN_ENTITY_ID,
-            'http://localhost/lightsaml/lightSAML/web/sp/acs.php',
+            'https://localhost/lightsaml/lightSAML/web/sp/acs.php',
             null,
             $certificate
         );
@@ -189,7 +189,7 @@ class SpConfig
      */
     private function buildLogger()
     {
-        $logger = new \Monolog\Logger('lightsaml', array(new \Monolog\Handler\StreamHandler(__DIR__ . '/sp.log')));
+        $logger = new \Monolog\Logger('lightsaml', array(new \Monolog\Handler\StreamHandler(__DIR__.'/sp.log')));
 
         return $logger;
     }
