@@ -12,6 +12,8 @@
 namespace LightSaml\Credential;
 
 use LightSaml\Error\LightSamlException;
+use LightSaml\Error\LightSamlSecurityException;
+use LightSaml\SamlConstants;
 
 class X509Certificate
 {
@@ -118,19 +120,27 @@ class X509Certificate
         if (preg_match('/^\s+Signature Algorithm:\s*(.*)\s*$/m', $out, $match)) {
             switch ($match[1]) {
                 case 'sha1WithRSAEncryption':
+                case 'sha1WithRSA':
                     $this->signatureAlgorithm = \XMLSecurityKey::RSA_SHA1;
                     break;
                 case 'sha256WithRSAEncryption':
+                case 'sha256WithRSA':
                     $this->signatureAlgorithm = \XMLSecurityKey::RSA_SHA256;
                     break;
                 case 'sha384WithRSAEncryption':
+                case 'sha384WithRSA':
                     $this->signatureAlgorithm = \XMLSecurityKey::RSA_SHA384;
                     break;
                 case 'sha512WithRSAEncryption':
+                case 'sha512WithRSA':
                     $this->signatureAlgorithm = \XMLSecurityKey::RSA_SHA512;
                     break;
-                default:
+                case 'md5WithRSAEncryption':
+                case 'md5WithRSA':
+                    $this->signatureAlgorithm = SamlConstants::XMLDSIG_DIGEST_MD5;
                     break;
+                default:
+                    throw new LightSamlSecurityException(sprintf('Unrecognized signature algorithm "%s"', $match[1]));
             }
         }
     }

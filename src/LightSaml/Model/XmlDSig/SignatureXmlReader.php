@@ -74,9 +74,7 @@ class SignatureXmlReader extends AbstractSignatureReader
             throw new LightSamlSecurityException('Digest validation failed');
         }
 
-        if (\XMLSecurityKey::RSA_SHA1 != $key->type) {
-            throw new LightSamlSecurityException('Key type must be RSA_SHA1 but got '.$key->type);
-        }
+        $key = $this->castKeyIfNecessary($key);
 
         if (false == $this->signature->verify($key)) {
             throw new LightSamlSecurityException('Unable to verify Signature');
@@ -90,7 +88,7 @@ class SignatureXmlReader extends AbstractSignatureReader
      *
      * @throws \LightSaml\Error\LightSamlXmlException
      */
-    private function getAlgorithm()
+    public function getAlgorithm()
     {
         $xpath = new \DOMXPath(
             $this->signature->sigNode instanceof \DOMDocument
@@ -118,8 +116,6 @@ class SignatureXmlReader extends AbstractSignatureReader
      * @param SerializationContext $context
      *
      * @throws \LogicException
-     *
-     * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
@@ -131,8 +127,6 @@ class SignatureXmlReader extends AbstractSignatureReader
      * @param DeserializationContext $context
      *
      * @throws \LightSaml\Error\LightSamlSecurityException
-     *
-     * @return void
      */
     public function deserialize(\DOMElement $node, DeserializationContext $context)
     {

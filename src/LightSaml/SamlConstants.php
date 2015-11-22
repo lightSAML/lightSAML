@@ -75,6 +75,8 @@ abstract class SamlConstants
     const LOGOUT_REASON_GLOBAL_TIMEOUT = 'urn:oasis:names:tc:SAML:2.0:logout:global-timeout';
     const LOGOUT_REASON_SP_TIMEOUT = 'urn:oasis:names:tc:SAML:2.0:logout:sp-timeout';
 
+    const XMLDSIG_DIGEST_MD5 = 'http://www.w3.org/2001/04/xmldsig-more#md5';
+
     /**
      * @param string $value
      *

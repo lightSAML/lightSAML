@@ -12,7 +12,7 @@ use LightSaml\Credential\X509Certificate;
 
 class ResponseFunctionalTest extends \PHPUnit_Framework_TestCase
 {
-    public function test__deserialize_response01()
+    public function test_deserialize_response01()
     {
         $context = new DeserializationContext();
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/Response/response01.xml');
@@ -81,13 +81,14 @@ class ResponseFunctionalTest extends \PHPUnit_Framework_TestCase
         $arrCertificates = $sig->getAllCertificates();
         $this->assertCount(1, $arrCertificates);
 
+        $certificate = (new X509Certificate())->setData($arrCertificates[0]);
+
         $sig->validate(
-            KeyHelper::createPublicKey((new X509Certificate())
-                ->setData($arrCertificates[0]))
+            KeyHelper::createPublicKey($certificate)
         );
     }
 
-    public function test__deserialize_invalid02()
+    public function test_deserialize_invalid02()
     {
         $context = new DeserializationContext();
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/Response/invalid02.xml');

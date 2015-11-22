@@ -99,9 +99,7 @@ class SignatureStringReader extends AbstractSignatureReader
             return false;
         }
 
-        if (\XMLSecurityKey::RSA_SHA1 != $key->type) {
-            throw new LightSamlSecurityException('Key type must be RSA_SHA1 but got '.$key->type);
-        }
+        $key = $this->castKeyIfNecessary($key);
 
         $signature = base64_decode($this->getSignature());
 
@@ -117,8 +115,6 @@ class SignatureStringReader extends AbstractSignatureReader
      * @param SerializationContext $context
      *
      * @throws \LogicException
-     *
-     * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
@@ -130,8 +126,6 @@ class SignatureStringReader extends AbstractSignatureReader
      * @param DeserializationContext $context
      *
      * @throws \LogicException
-     *
-     * @return void
      */
     public function deserialize(\DOMElement $node, DeserializationContext $context)
     {

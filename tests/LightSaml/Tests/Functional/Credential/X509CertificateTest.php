@@ -3,6 +3,7 @@
 namespace LightSaml\Tests\Functional\Credential;
 
 use LightSaml\Credential\X509Certificate;
+use LightSaml\SamlConstants;
 
 class X509CertificateTest extends \PHPUnit_Framework_TestCase
 {
@@ -40,7 +41,7 @@ class X509CertificateTest extends \PHPUnit_Framework_TestCase
     public function test_algorithm_md5()
     {
         $certificate = X509Certificate::fromFile(__DIR__.'/../../../../../resources/sample/Certificate/saml-md5.crt');
-        $this->assertNull($certificate->getSignatureAlgorithm());
+        $this->assertEquals(SamlConstants::XMLDSIG_DIGEST_MD5, $certificate->getSignatureAlgorithm());
     }
 
     public function test_get_subject()

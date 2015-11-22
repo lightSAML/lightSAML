@@ -12,6 +12,7 @@
 namespace LightSaml\Model\XmlDSig;
 
 use LightSaml\Credential\CredentialInterface;
+use LightSaml\Credential\KeyHelper;
 use LightSaml\Error\LightSamlSecurityException;
 
 abstract class AbstractSignatureReader extends Signature
@@ -60,7 +61,7 @@ abstract class AbstractSignatureReader extends Signature
                 $result = $this->validate($credential->getPublicKey());
 
                 if ($result === false) {
-                    return null;
+                    return;
                 }
 
                 return $credential;
@@ -74,5 +75,25 @@ abstract class AbstractSignatureReader extends Signature
         } else {
             throw new LightSamlSecurityException('No public key available for signature verification');
         }
+    }
+
+    /**
+     * @return string
+     */
+    abstract public function getAlgorithm();
+
+    /**
+     * @param \XMLSecurityKey $key
+     *
+     * @return \XMLSecurityKey
+     */
+    protected function castKeyIfNecessary(\XMLSecurityKey $key)
+    {
+        $algorithm = $this->getAlgorithm();
+        if ($algorithm != $key->type) {
+            $key = KeyHelper::castKey($key, $algorithm);
+        }
+
+        return $key;
     }
 }
