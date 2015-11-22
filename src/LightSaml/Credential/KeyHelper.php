@@ -11,12 +11,15 @@
 
 namespace LightSaml\Credential;
 
+use LightSaml\Error\LightSamlSecurityException;
+
 class KeyHelper
 {
     /**
      * @param string $key        Key content or key filename
      * @param string $passphrase Passphrase for the private key
      * @param bool   $isFile     true if $key is a filename of the key
+     * @param string $type
      *
      * @return \XMLSecurityKey
      */
@@ -34,9 +37,12 @@ class KeyHelper
      *
      * @return \XMLSecurityKey
      */
-    public static function createPublicKey(X509Certificate $certificate, $type = \XMLSecurityKey::RSA_SHA1)
+    public static function createPublicKey(X509Certificate $certificate)
     {
-        $key = new \XMLSecurityKey($type, array('type' => 'public'));
+        if (null == $certificate->getSignatureAlgorithm()) {
+            throw new LightSamlSecurityException('Unrecognized certificate signature algorithm');
+        }
+        $key = new \XMLSecurityKey($certificate->getSignatureAlgorithm(), array('type' => 'public'));
         $key->loadKey($certificate->toPem(), false, true);
 
         return $key;
