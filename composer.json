@@ -43,13 +43,6 @@
         "lightsaml/symfony-bridge": "Symfony 2 build container bridge",
         "lightsaml/sp-bundle": "Symfony 2 SP security bundle"
     },
-    "scripts": {
-        "post-install-cmd": [
-            "bash contrib/setup.sh"
-        ],
-        "post-update-cmd": [
-        ]
-    },
     "config": {
         "bin-dir": "bin"
     },
