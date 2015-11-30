@@ -15,13 +15,15 @@ use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
 use LightSaml\SamlConstants;
 use LightSaml\Credential\X509Certificate;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
+use RobRichards\XMLSecLibs\XMLSecurityDSig;
 
 class SignatureWriter extends Signature
 {
     /** @var string */
-    protected $canonicalMethod = \XMLSecurityDSig::EXC_C14N;
+    protected $canonicalMethod = XMLSecurityDSig::EXC_C14N;
 
-    /** @var \XMLSecurityKey */
+    /** @var XMLSecurityKey */
     protected $xmlSecurityKey;
 
     /** @var X509Certificate */
@@ -29,9 +31,9 @@ class SignatureWriter extends Signature
 
     /**
      * @param X509Certificate|null $certificate
-     * @param \XMLSecurityKey|null $xmlSecurityKey
+     * @param XMLSecurityKey|null  $xmlSecurityKey
      */
-    public function __construct(X509Certificate $certificate = null, \XMLSecurityKey $xmlSecurityKey = null)
+    public function __construct(X509Certificate $certificate = null, XMLSecurityKey $xmlSecurityKey = null)
     {
         $this->certificate = $certificate;
         $this->xmlSecurityKey = $xmlSecurityKey;
@@ -58,11 +60,11 @@ class SignatureWriter extends Signature
     }
 
     /**
-     * @param \XMLSecurityKey $key
+     * @param XMLSecurityKey $key
      *
      * @return SignatureWriter
      */
-    public function setXmlSecurityKey(\XMLSecurityKey $key)
+    public function setXmlSecurityKey(XMLSecurityKey $key)
     {
         $this->xmlSecurityKey = $key;
 
@@ -70,7 +72,7 @@ class SignatureWriter extends Signature
     }
 
     /**
-     * @return \XMLSecurityKey
+     * @return XMLSecurityKey
      */
     public function getXmlSecurityKey()
     {
@@ -105,27 +107,27 @@ class SignatureWriter extends Signature
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
-        $objXMLSecDSig = new \XMLSecurityDSig();
+        $objXMLSecDSig = new XMLSecurityDSig();
         $objXMLSecDSig->setCanonicalMethod($this->getCanonicalMethod());
         $key = $this->getXmlSecurityKey();
         switch ($key->type) {
-            case \XMLSecurityKey::RSA_SHA256:
-                $type = \XMLSecurityDSig::SHA256;
+            case XMLSecurityKey::RSA_SHA256:
+                $type = XMLSecurityDSig::SHA256;
                 break;
-            case \XMLSecurityKey::RSA_SHA384:
-                $type = \XMLSecurityDSig::SHA384;
+            case XMLSecurityKey::RSA_SHA384:
+                $type = XMLSecurityDSig::SHA384;
                 break;
-            case \XMLSecurityKey::RSA_SHA512:
-                $type = \XMLSecurityDSig::SHA512;
+            case XMLSecurityKey::RSA_SHA512:
+                $type = XMLSecurityDSig::SHA512;
                 break;
             default:
-                $type = \XMLSecurityDSig::SHA1;
+                $type = XMLSecurityDSig::SHA1;
         }
 
         $objXMLSecDSig->addReferenceList(
             array($parent),
             $type,
-            array(SamlConstants::XMLSEC_TRANSFORM_ALGORITHM_ENVELOPED_SIGNATURE, \XMLSecurityDSig::EXC_C14N),
+            array(SamlConstants::XMLSEC_TRANSFORM_ALGORITHM_ENVELOPED_SIGNATURE, XMLSecurityDSig::EXC_C14N),
             array('id_name' => $this->getIDName(), 'overwrite' => false)
         );
 

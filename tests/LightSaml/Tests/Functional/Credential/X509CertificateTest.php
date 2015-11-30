@@ -4,6 +4,7 @@ namespace LightSaml\Tests\Functional\Credential;
 
 use LightSaml\Credential\X509Certificate;
 use LightSaml\SamlConstants;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class X509CertificateTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,25 +18,25 @@ class X509CertificateTest extends \PHPUnit_Framework_TestCase
     public function test_algorithm_sha1()
     {
         $certificate = X509Certificate::fromFile(__DIR__.'/../../../../../resources/sample/Certificate/saml-sha1.crt');
-        $this->assertEquals(\XMLSecurityKey::RSA_SHA1, $certificate->getSignatureAlgorithm());
+        $this->assertEquals(XMLSecurityKey::RSA_SHA1, $certificate->getSignatureAlgorithm());
     }
 
     public function test_algorithm_sha256()
     {
         $certificate = X509Certificate::fromFile(__DIR__.'/../../../../../resources/sample/Certificate/saml-sha256.crt');
-        $this->assertEquals(\XMLSecurityKey::RSA_SHA256, $certificate->getSignatureAlgorithm());
+        $this->assertEquals(XMLSecurityKey::RSA_SHA256, $certificate->getSignatureAlgorithm());
     }
 
     public function test_algorithm_sha384()
     {
         $certificate = X509Certificate::fromFile(__DIR__.'/../../../../../resources/sample/Certificate/saml-sha384.crt');
-        $this->assertEquals(\XMLSecurityKey::RSA_SHA384, $certificate->getSignatureAlgorithm());
+        $this->assertEquals(XMLSecurityKey::RSA_SHA384, $certificate->getSignatureAlgorithm());
     }
 
     public function test_algorithm_sha512()
     {
         $certificate = X509Certificate::fromFile(__DIR__.'/../../../../../resources/sample/Certificate/saml-sha512.crt');
-        $this->assertEquals(\XMLSecurityKey::RSA_SHA512, $certificate->getSignatureAlgorithm());
+        $this->assertEquals(XMLSecurityKey::RSA_SHA512, $certificate->getSignatureAlgorithm());
     }
 
     public function test_algorithm_md5()

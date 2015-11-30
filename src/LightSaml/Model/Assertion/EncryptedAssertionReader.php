@@ -12,11 +12,12 @@
 namespace LightSaml\Model\Assertion;
 
 use LightSaml\Model\Context\DeserializationContext;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class EncryptedAssertionReader extends EncryptedElementReader
 {
     /**
-     * @param \XMLSecurityKey[]      $inputKeys
+     * @param XMLSecurityKey[]       $inputKeys
      * @param DeserializationContext $deserializationContext
      *
      * @return Assertion
@@ -29,7 +30,7 @@ class EncryptedAssertionReader extends EncryptedElementReader
     }
 
     /**
-     * @param \XMLSecurityKey        $credential
+     * @param XMLSecurityKey         $credential
      * @param DeserializationContext $deserializationContext
      *
      * @return Assertion

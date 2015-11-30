@@ -14,6 +14,7 @@ use LightSaml\Model\Protocol\Response;
 use LightSaml\Profile\Profiles;
 use LightSaml\Resolver\Credential\CredentialResolverQuery;
 use LightSaml\Tests\TestHelper;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class DecryptAssertionsActionTest extends \PHPUnit_Framework_TestCase
 {
@@ -62,7 +63,7 @@ class DecryptAssertionsActionTest extends \PHPUnit_Framework_TestCase
 
         $credentialMock1->expects($this->any())
             ->method('getPrivateKey')
-            ->willReturn($privateKey = new \XMLSecurityKey(\XMLSecurityKey::TRIPLEDES_CBC));
+            ->willReturn($privateKey = new XMLSecurityKey(XMLSecurityKey::TRIPLEDES_CBC));
 
         $action->execute($context);
 
