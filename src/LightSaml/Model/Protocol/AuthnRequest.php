@@ -44,7 +44,6 @@ class AuthnRequest extends AbstractRequest
 
     //endregion
 
-
     //region Elements
 
     /** @var Conditions|null */

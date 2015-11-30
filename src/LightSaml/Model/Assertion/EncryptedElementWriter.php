@@ -18,7 +18,7 @@ use LightSaml\Model\AbstractSamlModel;
 
 abstract class EncryptedElementWriter extends EncryptedElement
 {
-    /** @var  \DOMElement*/
+    /** @var \DOMElement */
     protected $encryptedElement;
 
     /**

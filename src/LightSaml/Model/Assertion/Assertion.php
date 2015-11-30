@@ -39,7 +39,6 @@ class Assertion extends AbstractSamlModel
 
     //endregion
 
-
     //region Elements
 
     /**
@@ -62,11 +61,12 @@ class Assertion extends AbstractSamlModel
      */
     protected $conditions;
 
-    /** @var array|AbstractStatement[]|AuthnStatement[]|AttributeStatement[]  */
+    /**
+     * @var array|AbstractStatement[]|AuthnStatement[]|AttributeStatement[]
+     */
     protected $items = array();
 
     //endregion
-
 
     /**
      * Core 3.3.4 Processing rules.
