@@ -20,7 +20,7 @@ use RobRichards\XMLSecLibs\XMLSecEnc;
 
 abstract class EncryptedElementWriter extends EncryptedElement
 {
-    /** @var  \DOMElement*/
+    /** @var \DOMElement */
     protected $encryptedElement;
 
     /**
