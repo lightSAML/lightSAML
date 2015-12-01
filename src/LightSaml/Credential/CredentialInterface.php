@@ -12,6 +12,7 @@
 namespace LightSaml\Credential;
 
 use LightSaml\Credential\Context\CredentialContextSet;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 interface CredentialInterface
 {
@@ -33,12 +34,12 @@ interface CredentialInterface
     public function getKeyNames();
 
     /**
-     * @return \XMLSecurityKey|null
+     * @return XMLSecurityKey|null
      */
     public function getPublicKey();
 
     /**
-     * @return \XMLSecurityKey|null
+     * @return XMLSecurityKey|null
      */
     public function getPrivateKey();
 

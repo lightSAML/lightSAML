@@ -11,6 +11,8 @@
 
 namespace LightSaml\Credential;
 
+use RobRichards\XMLSecLibs\XMLSecurityKey;
+
 class X509Credential extends AbstractCredential implements X509CredentialInterface
 {
     /** @var  X509Certificate */
@@ -18,9 +20,9 @@ class X509Credential extends AbstractCredential implements X509CredentialInterfa
 
     /**
      * @param X509Certificate $certificate
-     * @param \XMLSecurityKey $privateKey
+     * @param XMLSecurityKey  $privateKey
      */
-    public function __construct(X509Certificate $certificate, \XMLSecurityKey $privateKey = null)
+    public function __construct(X509Certificate $certificate, XMLSecurityKey $privateKey = null)
     {
         parent::__construct();
         $this->certificate = $certificate;

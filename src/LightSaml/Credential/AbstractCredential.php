@@ -12,6 +12,7 @@
 namespace LightSaml\Credential;
 
 use LightSaml\Credential\Context\CredentialContextSet;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 abstract class AbstractCredential implements CredentialInterface
 {
@@ -24,10 +25,10 @@ abstract class AbstractCredential implements CredentialInterface
     /** @var  string[] */
     private $keyNames = array();
 
-    /** @var  \XMLSecurityKey|null */
+    /** @var  XMLSecurityKey|null */
     private $publicKey;
 
-    /** @var  \XMLSecurityKey|null */
+    /** @var  XMLSecurityKey|null */
     private $privateKey;
 
     /** @var  string|null */
@@ -68,7 +69,7 @@ abstract class AbstractCredential implements CredentialInterface
     }
 
     /**
-     * @return \XMLSecurityKey|null
+     * @return XMLSecurityKey|null
      */
     public function getPublicKey()
     {
@@ -76,7 +77,7 @@ abstract class AbstractCredential implements CredentialInterface
     }
 
     /**
-     * @return \XMLSecurityKey|null
+     * @return XMLSecurityKey|null
      */
     public function getPrivateKey()
     {
@@ -151,11 +152,11 @@ abstract class AbstractCredential implements CredentialInterface
     }
 
     /**
-     * @param null|\XMLSecurityKey $privateKey
+     * @param null|XMLSecurityKey $privateKey
      *
      * @return AbstractCredential
      */
-    public function setPrivateKey(\XMLSecurityKey $privateKey)
+    public function setPrivateKey(XMLSecurityKey $privateKey)
     {
         $this->privateKey = $privateKey;
 
@@ -163,11 +164,11 @@ abstract class AbstractCredential implements CredentialInterface
     }
 
     /**
-     * @param null|\XMLSecurityKey $publicKey
+     * @param null|XMLSecurityKey $publicKey
      *
      * @return AbstractCredential
      */
-    public function setPublicKey(\XMLSecurityKey $publicKey)
+    public function setPublicKey(XMLSecurityKey $publicKey)
     {
         $this->publicKey = $publicKey;
 

@@ -15,6 +15,8 @@ use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
 use LightSaml\Error\LightSamlException;
 use LightSaml\Model\AbstractSamlModel;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
+use RobRichards\XMLSecLibs\XMLSecEnc;
 
 abstract class EncryptedElementWriter extends EncryptedElement
 {
@@ -23,34 +25,34 @@ abstract class EncryptedElementWriter extends EncryptedElement
 
     /**
      * @param AbstractSamlModel $object
-     * @param \XMLSecurityKey   $key
+     * @param XMLSecurityKey    $key
      *
      * @return SerializationContext
      */
-    public function encrypt(AbstractSamlModel $object, \XMLSecurityKey $key)
+    public function encrypt(AbstractSamlModel $object, XMLSecurityKey $key)
     {
         $serializationContext = new SerializationContext();
         $object->serialize($serializationContext->getDocument(), $serializationContext);
 
-        $enc = new \XMLSecEnc();
+        $enc = new XMLSecEnc();
         $enc->setNode($serializationContext->getDocument()->firstChild);
-        $enc->type = \XMLSecEnc::Element;
+        $enc->type = XMLSecEnc::Element;
 
         switch ($key->type) {
-            case \XMLSecurityKey::TRIPLEDES_CBC:
-            case \XMLSecurityKey::AES128_CBC:
-            case \XMLSecurityKey::AES192_CBC:
-            case \XMLSecurityKey::AES256_CBC:
+            case XMLSecurityKey::TRIPLEDES_CBC:
+            case XMLSecurityKey::AES128_CBC:
+            case XMLSecurityKey::AES192_CBC:
+            case XMLSecurityKey::AES256_CBC:
                 $symmetricKey = $key;
                 break;
 
-            case \XMLSecurityKey::RSA_1_5:
-            case \XMLSecurityKey::RSA_SHA1:
-            case \XMLSecurityKey::RSA_SHA256:
-            case \XMLSecurityKey::RSA_SHA384:
-            case \XMLSecurityKey::RSA_SHA512:
-            case \XMLSecurityKey::RSA_OAEP_MGF1P:
-                $symmetricKey = new \XMLSecurityKey(\XMLSecurityKey::AES128_CBC);
+            case XMLSecurityKey::RSA_1_5:
+            case XMLSecurityKey::RSA_SHA1:
+            case XMLSecurityKey::RSA_SHA256:
+            case XMLSecurityKey::RSA_SHA384:
+            case XMLSecurityKey::RSA_SHA512:
+            case XMLSecurityKey::RSA_OAEP_MGF1P:
+                $symmetricKey = new XMLSecurityKey(XMLSecurityKey::AES128_CBC);
                 $symmetricKey->generateSessionKey();
 
                 $enc->encryptKey($key, $symmetricKey);

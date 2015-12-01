@@ -12,6 +12,7 @@
 namespace LightSaml\Model\Context;
 
 use LightSaml\SamlConstants;
+use RobRichards\XMLSecLibs\XMLSecEnc;
 
 class DeserializationContext
 {
@@ -60,7 +61,7 @@ class DeserializationContext
             $this->xpath->registerNamespace('samlp', SamlConstants::NS_PROTOCOL);
             $this->xpath->registerNamespace('md', SamlConstants::NS_METADATA);
             $this->xpath->registerNamespace('ds', SamlConstants::NS_XMLDSIG);
-            $this->xpath->registerNamespace('xenc', \XMLSecEnc::XMLENCNS);
+            $this->xpath->registerNamespace('xenc', XMLSecEnc::XMLENCNS);
         }
 
         return $this->xpath;

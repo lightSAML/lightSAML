@@ -1,7 +1,7 @@
 SIGNING AND CERTIFICATES
 ========================
 
-The LightSaml relies on the [xmlseclibs](https://code.google.com/p/xmlseclibs/) regarding signing and certificates
+The LightSaml relies on the [xmlseclibs](https://github.com/robrichards/xmlseclibs) regarding signing and certificates
 functionality. LightSaml has helper methods and was tested using xmlseclibs with PEM format only.
 
 

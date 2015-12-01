@@ -16,20 +16,22 @@ use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
 use LightSaml\Error\LightSamlSecurityException;
 use LightSaml\Error\LightSamlXmlException;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
+use RobRichards\XMLSecLibs\XMLSecEnc;
 
 class EncryptedElementReader extends EncryptedElement
 {
-    /** @var \XMLSecEnc */
+    /** @var XMLSecEnc */
     protected $xmlEnc;
 
-    /** @var  \XMLSecurityKey */
+    /** @var  XMLSecurityKey */
     protected $symmetricKey;
 
-    /** @var  \XMLSecurityKey */
+    /** @var  XMLSecurityKey */
     protected $symmetricKeyInfo;
 
     /**
-     * @return \XMLSecurityKey
+     * @return XMLSecurityKey
      */
     public function getSymmetricKey()
     {
@@ -37,7 +39,7 @@ class EncryptedElementReader extends EncryptedElement
     }
 
     /**
-     * @return \XMLSecurityKey
+     * @return XMLSecurityKey
      */
     public function getSymmetricKeyInfo()
     {
@@ -77,7 +79,7 @@ class EncryptedElementReader extends EncryptedElement
 
         /** @var \DOMElement $encryptedData */
         $encryptedData = $list->item(0);
-        $this->xmlEnc = new \XMLSecEnc();
+        $this->xmlEnc = new XMLSecEnc();
         $this->xmlEnc->setNode($encryptedData);
         $this->xmlEnc->type = $encryptedData->getAttribute('Type');
 
@@ -87,7 +89,7 @@ class EncryptedElementReader extends EncryptedElement
     }
 
     /**
-     * @param \XMLSecurityKey[] $inputKeys
+     * @param XMLSecurityKey[] $inputKeys
      *
      * @throws \LogicException
      * @throws \LightSaml\Error\LightSamlXmlException
@@ -104,7 +106,7 @@ class EncryptedElementReader extends EncryptedElement
             if ($key instanceof CredentialInterface) {
                 $key = $key->getPrivateKey();
             }
-            if (false == $key instanceof \XMLSecurityKey) {
+            if (false == $key instanceof XMLSecurityKey) {
                 throw new \InvalidArgumentException('Expected XMLSecurityKey');
             }
 
@@ -123,7 +125,7 @@ class EncryptedElementReader extends EncryptedElement
     }
 
     /**
-     * @param \XMLSecurityKey $inputKey
+     * @param XMLSecurityKey $inputKey
      *
      * @throws \LogicException
      * @throws \LightSaml\Error\LightSamlXmlException
@@ -131,7 +133,7 @@ class EncryptedElementReader extends EncryptedElement
      *
      * @return \DOMElement
      */
-    public function decrypt(\XMLSecurityKey $inputKey)
+    public function decrypt(XMLSecurityKey $inputKey)
     {
         $this->symmetricKey = $this->loadSymmetricKey();
         $this->symmetricKeyInfo = $this->loadSymmetricKeyInfo($this->symmetricKey);
@@ -199,23 +201,23 @@ class EncryptedElementReader extends EncryptedElement
     }
 
     /**
-     * @param \XMLSecurityKey $inputKey
+     * @param XMLSecurityKey $inputKey
      *
      * @throws \Exception
      */
-    protected function decryptSymmetricKey(\XMLSecurityKey $inputKey)
+    protected function decryptSymmetricKey(XMLSecurityKey $inputKey)
     {
         $inputKeyAlgo = $inputKey->getAlgorith();
-        if ($this->symmetricKeyInfo->getAlgorith() === \XMLSecurityKey::RSA_OAEP_MGF1P &&
-            ($inputKeyAlgo === \XMLSecurityKey::RSA_1_5 || $inputKeyAlgo === \XMLSecurityKey::RSA_SHA1)) {
+        if ($this->symmetricKeyInfo->getAlgorith() === XMLSecurityKey::RSA_OAEP_MGF1P &&
+            ($inputKeyAlgo === XMLSecurityKey::RSA_1_5 || $inputKeyAlgo === XMLSecurityKey::RSA_SHA1)) {
             // The RSA key formats are equal, so loading an RSA_1_5 key into an RSA_OAEP_MGF1P key can be done without problems.
             // We therefore pretend that the input key is an RSA_OAEP_MGF1P key.
-            $inputKeyAlgo = \XMLSecurityKey::RSA_OAEP_MGF1P;
+            $inputKeyAlgo = XMLSecurityKey::RSA_OAEP_MGF1P;
         }
 
         $this->checkInputAndMessageKeyAlgoSame($inputKeyAlgo, $this->symmetricKeyInfo->getAlgorith());
 
-        /** @var \XMLSecEnc $encKey */
+        /** @var XMLSecEnc $encKey */
         $encKey = $this->symmetricKeyInfo->encryptedCtx;
         $this->symmetricKeyInfo->key = $inputKey->key;
 
@@ -265,7 +267,7 @@ class EncryptedElementReader extends EncryptedElement
     }
 
     /**
-     * @return \XMLSecurityKey
+     * @return XMLSecurityKey
      *
      * @throws \LightSaml\Error\LightSamlXmlException
      */
@@ -280,13 +282,13 @@ class EncryptedElementReader extends EncryptedElement
     }
 
     /**
-     * @param \XMLSecurityKey $symmetricKey
+     * @param XMLSecurityKey $symmetricKey
      *
      * @throws \LightSaml\Error\LightSamlXmlException
      *
-     * @return \XMLSecurityKey
+     * @return XMLSecurityKey
      */
-    protected function loadSymmetricKeyInfo(\XMLSecurityKey $symmetricKey)
+    protected function loadSymmetricKeyInfo(XMLSecurityKey $symmetricKey)
     {
         $symmetricKeyInfo = $this->xmlEnc->locateKeyInfo($symmetricKey);
         if (false == $symmetricKeyInfo) {

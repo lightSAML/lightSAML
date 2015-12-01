@@ -14,6 +14,7 @@ namespace LightSaml\Credential;
 use LightSaml\Error\LightSamlException;
 use LightSaml\Error\LightSamlSecurityException;
 use LightSaml\SamlConstants;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class X509Certificate
 {
@@ -121,19 +122,19 @@ class X509Certificate
             switch ($match[1]) {
                 case 'sha1WithRSAEncryption':
                 case 'sha1WithRSA':
-                    $this->signatureAlgorithm = \XMLSecurityKey::RSA_SHA1;
+                    $this->signatureAlgorithm = XMLSecurityKey::RSA_SHA1;
                     break;
                 case 'sha256WithRSAEncryption':
                 case 'sha256WithRSA':
-                    $this->signatureAlgorithm = \XMLSecurityKey::RSA_SHA256;
+                    $this->signatureAlgorithm = XMLSecurityKey::RSA_SHA256;
                     break;
                 case 'sha384WithRSAEncryption':
                 case 'sha384WithRSA':
-                    $this->signatureAlgorithm = \XMLSecurityKey::RSA_SHA384;
+                    $this->signatureAlgorithm = XMLSecurityKey::RSA_SHA384;
                     break;
                 case 'sha512WithRSAEncryption':
                 case 'sha512WithRSA':
-                    $this->signatureAlgorithm = \XMLSecurityKey::RSA_SHA512;
+                    $this->signatureAlgorithm = XMLSecurityKey::RSA_SHA512;
                     break;
                 case 'md5WithRSAEncryption':
                 case 'md5WithRSA':
@@ -240,7 +241,7 @@ class X509Certificate
             throw new LightSamlException('Certificate data not set');
         }
 
-        return \XMLSecurityKey::getRawThumbprint($this->toPem());
+        return XMLSecurityKey::getRawThumbprint($this->toPem());
     }
 
     public function getSignatureAlgorithm()

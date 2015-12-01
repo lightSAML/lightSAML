@@ -14,23 +14,24 @@ namespace LightSaml\Model\XmlDSig;
 use LightSaml\Credential\CredentialInterface;
 use LightSaml\Credential\KeyHelper;
 use LightSaml\Error\LightSamlSecurityException;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 abstract class AbstractSignatureReader extends Signature
 {
-    /** @var  \XMLSecurityKey|null */
+    /** @var  XMLSecurityKey|null */
     protected $key;
 
     /**
-     * @param \XMLSecurityKey $key
+     * @param XMLSecurityKey $key
      *
      * @return bool True if validated, False if validation was not performed
      *
      * @throws \LightSaml\Error\LightSamlSecurityException If validation fails
      */
-    abstract public function validate(\XMLSecurityKey $key);
+    abstract public function validate(XMLSecurityKey $key);
 
     /**
-     * @return \XMLSecurityKey|null
+     * @return XMLSecurityKey|null
      */
     public function getKey()
     {
@@ -83,11 +84,11 @@ abstract class AbstractSignatureReader extends Signature
     abstract public function getAlgorithm();
 
     /**
-     * @param \XMLSecurityKey $key
+     * @param XMLSecurityKey $key
      *
-     * @return \XMLSecurityKey
+     * @return XMLSecurityKey
      */
-    protected function castKeyIfNecessary(\XMLSecurityKey $key)
+    protected function castKeyIfNecessary(XMLSecurityKey $key)
     {
         $algorithm = $this->getAlgorithm();
         if ($algorithm != $key->type) {

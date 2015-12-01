@@ -16,6 +16,7 @@ use LightSaml\Profile\Profiles;
 use LightSaml\Resolver\Credential\CredentialResolverQuery;
 use LightSaml\Resolver\Signature\OwnSignatureResolver;
 use LightSaml\Tests\TestHelper;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
 {
@@ -59,7 +60,7 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
             ->willReturn($certificate = new X509Certificate());
         $credential1->expects($this->once())
             ->method('getPrivateKey')
-            ->willReturn($privateKey = new \XMLSecurityKey(\XMLSecurityKey::AES128_CBC));
+            ->willReturn($privateKey = new XMLSecurityKey(XMLSecurityKey::AES128_CBC));
 
         $signatureWriter = $signatureResolver->getSignature($context);
 

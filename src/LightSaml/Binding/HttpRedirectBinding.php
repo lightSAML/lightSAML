@@ -19,6 +19,7 @@ use LightSaml\Model\Protocol\SamlMessage;
 use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\Model\XmlDSig\SignatureStringReader;
 use LightSaml\SamlConstants;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -221,7 +222,7 @@ class HttpRedirectBinding extends AbstractBinding
      */
     protected function addSignatureToUrl(&$msg, SignatureWriter $signature = null)
     {
-        /** @var $key \XMLSecurityKey */
+        /** @var $key XMLSecurityKey */
         $key = $signature ? $signature->getXmlSecurityKey() : null;
 
         if (null != $key) {

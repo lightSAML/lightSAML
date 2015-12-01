@@ -6,6 +6,7 @@ use LightSaml\Credential\CredentialInterface;
 use LightSaml\Criteria\CriteriaSet;
 use LightSaml\Resolver\Credential\CredentialResolverInterface;
 use LightSaml\Resolver\Credential\CredentialResolverQuery;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
 {
@@ -119,10 +120,10 @@ class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\XMLSecurityKey
+     * @return \PHPUnit_Framework_MockObject_MockObject|XMLSecurityKey
      */
     private function getXmlSecurityKeyMock()
     {
-        return $this->getMock(\XMLSecurityKey::class, [], [], '', false);
+        return $this->getMock(XMLSecurityKey::class, [], [], '', false);
     }
 }

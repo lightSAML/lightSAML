@@ -14,6 +14,7 @@ namespace LightSaml\Model\XmlDSig;
 use LightSaml\Error\LightSamlSecurityException;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class SignatureStringReader extends AbstractSignatureReader
 {
@@ -87,13 +88,13 @@ class SignatureStringReader extends AbstractSignatureReader
     }
 
     /**
-     * @param \XMLSecurityKey $key
+     * @param XMLSecurityKey $key
      *
      * @return bool True if validated, False if validation was not performed
      *
      * @throws LightSamlSecurityException If validation fails
      */
-    public function validate(\XMLSecurityKey $key)
+    public function validate(XMLSecurityKey $key)
     {
         if (null == $this->getSignature()) {
             return false;

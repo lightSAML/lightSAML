@@ -16,10 +16,13 @@ use LightSaml\Error\LightSamlXmlException;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
 use LightSaml\SamlConstants;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
+use RobRichards\XMLSecLibs\XMLSecurityDSig;
+use RobRichards\XMLSecLibs\XMLSecEnc;
 
 class SignatureXmlReader extends AbstractSignatureReader
 {
-    /** @var \XMLSecurityDSig */
+    /** @var XMLSecurityDSig */
     protected $signature;
 
     /** @var string[] */
@@ -42,15 +45,15 @@ class SignatureXmlReader extends AbstractSignatureReader
     }
 
     /**
-     * @param \XMLSecurityDSig $signature
+     * @param XMLSecurityDSig $signature
      */
-    public function setSignature(\XMLSecurityDSig $signature)
+    public function setSignature(XMLSecurityDSig $signature)
     {
         $this->signature = $signature;
     }
 
     /**
-     * @return \XMLSecurityDSig
+     * @return XMLSecurityDSig
      */
     public function getSignature()
     {
@@ -58,13 +61,13 @@ class SignatureXmlReader extends AbstractSignatureReader
     }
 
     /**
-     * @param \XMLSecurityKey $key
+     * @param XMLSecurityKey $key
      *
      * @return bool
      *
      * @throws LightSamlSecurityException
      */
-    public function validate(\XMLSecurityKey $key)
+    public function validate(XMLSecurityKey $key)
     {
         if (null == $this->signature) {
             return false;
@@ -95,7 +98,7 @@ class SignatureXmlReader extends AbstractSignatureReader
             ? $this->signature->sigNode
             : $this->signature->sigNode->ownerDocument
         );
-        $xpath->registerNamespace('ds', \XMLSecurityDSig::XMLDSIGNS);
+        $xpath->registerNamespace('ds', XMLSecurityDSig::XMLDSIGNS);
 
         $list = $xpath->query('./ds:SignedInfo/ds:SignatureMethod', $this->signature->sigNode);
         if (!$list || $list->length == 0) {
@@ -132,14 +135,14 @@ class SignatureXmlReader extends AbstractSignatureReader
     {
         $this->checkXmlNodeName($node, 'Signature', SamlConstants::NS_XMLDSIG);
 
-        $this->signature = new \XMLSecurityDSig();
+        $this->signature = new XMLSecurityDSig();
         $this->signature->idKeys[] = $this->getIDName();
         $this->signature->sigNode = $node;
         $this->signature->canonicalizeSignedInfo();
 
         $this->key = null;
-        $key = new \XMLSecurityKey(\XMLSecurityKey::RSA_SHA1, array('type' => 'public'));
-        \XMLSecEnc::staticLocateKeyInfo($key, $node);
+        $key = new XMLSecurityKey(XMLSecurityKey::RSA_SHA1, array('type' => 'public'));
+        XMLSecEnc::staticLocateKeyInfo($key, $node);
         if ($key->name || $key->key) {
             $this->key = $key;
         }
