@@ -37,9 +37,9 @@ class BuildSPMetadataCommandTest extends \PHPUnit_Framework_TestCase
         // Equals to a user inputting "Test" and hitting ENTER
         // If you need to enter a confirmation, "yes\n" will work
 
-        $commandTester->execute(array('command' => $command->getName()));
+        $statusCode = $commandTester->execute(array('command' => $command->getName()));
 
-        $this->assertEquals(0, $commandTester->getStatusCode());
+        $this->assertEquals(0, $statusCode);
 
         fseek($file, 0);
         $xml = fread($file, 16000);
