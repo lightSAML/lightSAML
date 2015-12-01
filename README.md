@@ -21,5 +21,4 @@ CONTRIBUTING
 ============
 
 LightSaml is an open source project and is open for contributions.
-
-
+Run `contrib/setup.sh` to setup a Git commit hook to ensure a consistent code style.
