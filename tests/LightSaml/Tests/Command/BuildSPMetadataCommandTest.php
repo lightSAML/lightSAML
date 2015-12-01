@@ -19,13 +19,14 @@ class BuildSPMetadataCommandTest extends \PHPUnit_Framework_TestCase
         $command = $application->find('lightsaml:sp:meta:build');
         $commandTester = new CommandTester($command);
 
-        $dialog = $command->getHelper('dialog');
-        $dialog->setInputStream($this->getInputStream([
+        $helper = $command->getHelper('question');
+        $helper->setInputStream($this->getInputStream([
             $ownEntityId = 'http://own.id',
             __DIR__.'/../../../../resources/sample/Certificate/saml.crt',
             '',
             $sloUrl = 'http://localhost/slo',
             '1',
+            '',
             $acsUrl = 'http://localhost/acs',
             '0',
             '',

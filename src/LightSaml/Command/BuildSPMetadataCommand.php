@@ -20,9 +20,12 @@ use LightSaml\Model\Metadata\SpSsoDescriptor;
 use LightSaml\SamlConstants;
 use LightSaml\Credential\X509Certificate;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\DialogHelper;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Question\Question;
 
 class BuildSPMetadataCommand extends Command
 {
@@ -36,71 +39,53 @@ class BuildSPMetadataCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var  $dialog DialogHelper */
-        $dialog = $this->getHelperSet()->get('dialog');
+        /** @var $questionHelper QuestionHelper */
+        $questionHelper = $this->getHelperSet()->get('question');
 
-        $entityID = $this->askForEntityID($dialog, $output);
+        $entityID = $questionHelper->ask($input, $output, $this->buildEntityIDQuestion());
 
         $ed = new EntityDescriptor($entityID);
         $sp = new SpSsoDescriptor();
         $ed->addItem($sp);
 
-        $this->askForCertificate($dialog, $output, $sp);
+        $this->askForCertificate($questionHelper, $input, $output, $sp);
 
         $output->writeln('');
 
-        $wantAssertionsSigned = (bool) $dialog->select($output, 'Want assertions signed [yes]: ', array('no', 'yes'), 1);
-        $sp->setWantAssertionsSigned($wantAssertionsSigned);
+        $assertionsSignedQuestion = new ConfirmationQuestion('Want assertions signed [yes]: ', true);
+        $sp->setWantAssertionsSigned($questionHelper->ask($input, $output, $assertionsSignedQuestion));
 
         $output->writeln('');
 
-        $this->askForSLO($dialog, $output, $sp);
+        $this->askForSLO($questionHelper, $input, $output, $sp);
 
         $output->writeln('');
 
-        $this->askForACS($dialog, $output, $sp);
+        $this->askForACS($questionHelper, $input, $output, $sp);
 
         $output->writeln('');
 
-        $filename = $this->askForFilename($dialog, $output);
+        $outputFile = $questionHelper->ask($input, $output, $this->buildOutputFileQuestion());
 
-        $formatOutput = $dialog->select($output, 'Format output xml [no]: ', array('no', 'yes'), 0);
+        $formatOutputQuestion = new ConfirmationQuestion('Format output xml [no]: ', false);
+        $formatOutput = $questionHelper->ask($input, $output, $formatOutputQuestion);
 
         $context = new SerializationContext();
-        $context->getDocument()->formatOutput = (bool) $formatOutput;
+        $context->getDocument()->formatOutput = $formatOutput;
         $ed->serialize($context->getDocument(), $context);
         $xml = $context->getDocument()->saveXML();
-        file_put_contents($filename, $xml);
+        file_put_contents($outputFile, $xml);
     }
 
     /**
-     * @param DialogHelper    $dialog
-     * @param OutputInterface $output
-     *
-     * @return string
-     */
-    protected function askForEntityID(DialogHelper $dialog, OutputInterface $output)
-    {
-        $entityID = $dialog->askAndValidate($output, 'EntityID [https://example.com/saml]: ', function ($answer) {
-            $answer = trim($answer);
-            if (false == $answer) {
-                throw new \RuntimeException('EntityID can not be empty');
-            }
-
-            return $answer;
-        }, false, 'https://example.com/saml');
-
-        return $entityID;
-    }
-
-    /**
-     * @param DialogHelper    $dialog
+     * @param QuestionHelper  $questionHelper
+     * @param InputInterface  $input
      * @param OutputInterface $output
      * @param SpSsoDescriptor $sp
      */
-    protected function askForCertificate(DialogHelper $dialog, OutputInterface $output, SpSsoDescriptor $sp)
+    protected function askForCertificate(QuestionHelper $questionHelper, InputInterface $input, OutputInterface $output, SpSsoDescriptor $sp)
     {
-        $certificatePath = $this->askFile($dialog, $output, 'Signing Certificate path', false);
+        $certificatePath = $questionHelper->ask($input, $output, $this->buildInputFileQuestion('Signing Certificate path', false));
         if ($certificatePath) {
             $certificate = new X509Certificate();
             $certificate->loadFromFile($certificatePath);
@@ -110,140 +95,135 @@ class BuildSPMetadataCommand extends Command
     }
 
     /**
-     * @param DialogHelper    $dialog
+     * @param QuestionHelper  $questionHelper
+     * @param InputInterface  $input
      * @param OutputInterface $output
      * @param SpSsoDescriptor $sp
      */
-    protected function askForSLO(DialogHelper $dialog, OutputInterface $output, SpSsoDescriptor $sp)
+    protected function askForSLO(QuestionHelper $questionHelper, InputInterface $input, OutputInterface $output, SpSsoDescriptor $sp)
     {
         while (true) {
-            list($url, $binding) = $this->askUrlBinding($dialog, $output, 'Single Logout');
+            list($url, $binding) = $this->askUrlBinding($questionHelper, $input, $output, 'Single Logout');
             if (!$url) {
                 break;
             }
-            $s = new SingleLogoutService();
-            $s->setLocation($url);
-            $s->setBinding($this->resolveBinding($binding));
-            $sp->addSingleLogoutService($s);
-            break;
+            $service = new SingleLogoutService();
+            $service->setLocation($url);
+            $service->setBinding($binding);
+            $sp->addSingleLogoutService($service);
         }
     }
 
     /**
-     * @param DialogHelper    $dialog
+     * @param QuestionHelper  $questionHelper
+     * @param InputInterface  $input
      * @param OutputInterface $output
      * @param SpSsoDescriptor $sp
      */
-    protected function askForACS(DialogHelper $dialog, OutputInterface $output, SpSsoDescriptor $sp)
+    protected function askForACS(QuestionHelper $questionHelper, InputInterface $input, OutputInterface $output, SpSsoDescriptor $sp)
     {
         $index = 0;
         while (true) {
-            list($url, $binding) = $this->askUrlBinding($dialog, $output, 'Assertion Consumer Service');
-            if (false == $url) {
+            list($url, $binding) = $this->askUrlBinding($questionHelper, $input, $output, 'Assertion Consumer Service');
+            if (!$url) {
                 break;
             }
-            $s = (new AssertionConsumerService())
-                ->setIsDefault($index == 0)
-                ->setIndex($index++)
-                ->setBinding($this->resolveBinding($binding))
-                ->setLocation($url)
-            ;
-            $sp->addAssertionConsumerService($s);
+            $service = new AssertionConsumerService();
+            $service->setIsDefault($index == 0);
+            $service->setIndex($index);
+            $service->setBinding($binding);
+            $service->setLocation($url);
+            $sp->addAssertionConsumerService($service);
+            ++$index;
         }
     }
 
     /**
-     * @param DialogHelper    $dialog
-     * @param OutputInterface $output
-     *
-     * @return string
-     */
-    protected function askForFilename(DialogHelper $dialog, OutputInterface $output)
-    {
-        $filename = $dialog->askAndValidate(
-            $output,
-            'Save to filename [FederationMetadata.xml]: ',
-            function ($answer) {
-                $answer = trim($answer);
-                if (false == $answer) {
-                    throw new \RuntimeException('Filename can not be empty');
-                }
-
-                return $answer;
-            },
-            false,
-            'FederationMetadata.xml'
-        );
-
-        return $filename;
-    }
-
-    /**
-     * @param string $binding
-     *
-     * @return string
-     *
-     * @throws \RuntimeException
-     */
-    protected function resolveBinding($binding)
-    {
-        switch ($binding) {
-            case 'post':
-                return SamlConstants::BINDING_SAML2_HTTP_POST;
-            case 'redirect':
-                return SamlConstants::BINDING_SAML2_HTTP_REDIRECT;
-            default:
-                throw new \RuntimeException(sprintf("Unknown binding '%s'", $binding));
-        }
-    }
-
-    /**
-     * @param DialogHelper    $dialog
-     * @param OutputInterface $output
-     * @param string          $title
-     * @param bool            $required
-     *
-     * @return string
-     */
-    protected function askFile(DialogHelper $dialog, OutputInterface $output, $title, $required)
-    {
-        $result = $dialog->askAndValidate(
-            $output,
-            "$title [empty for none]: ",
-            function ($answer) use ($required) {
-                if (false == $required && false == $answer) {
-                    return null;
-                }
-                if (false == is_file($answer)) {
-                    throw new \RuntimeException('Specified file not found');
-                }
-
-                return $answer;
-            }
-        );
-
-        return $result;
-    }
-
-    /**
-     * @param DialogHelper    $dialog
+     * @param QuestionHelper  $questionHelper
+     * @param InputInterface  $input
      * @param OutputInterface $output
      * @param string          $title
      *
      * @return array
      */
-    protected function askUrlBinding(DialogHelper $dialog, OutputInterface $output, $title)
+    protected function askUrlBinding(QuestionHelper $questionHelper, InputInterface $input, OutputInterface $output, $title)
     {
-        $url = $dialog->ask($output, sprintf('%s URL [empty for none]: ', $title));
-        $url = trim($url);
+        $urlQuestion = new Question(sprintf('%s URL [empty for none]: ', $title));
+        $url = trim($questionHelper->ask($input, $output, $urlQuestion));
         if (!$url) {
             return array(null, null);
         }
 
-        $arrBindings = array('post', 'redirect');
-        $binding = $dialog->select($output, 'Binding: ', $arrBindings, 'post');
-        $binding = $arrBindings[$binding];
+        $bindings = array(
+            'post' => SamlConstants::BINDING_SAML2_HTTP_POST,
+            'redirect' => SamlConstants::BINDING_SAML2_HTTP_REDIRECT,
+        );
+        $bindingQuestion = new ChoiceQuestion('Binding [post]: ', array_keys($bindings));
+        $bindingChoice = $questionHelper->ask($input, $output, $bindingQuestion);
 
-        return array($url, $binding);
+        return array($url, $bindings[$bindingChoice]);
+    }
+
+    /**
+     * @return Question
+     */
+    protected function buildEntityIDQuestion()
+    {
+        $question = new Question('EntityID [https://example.com/saml]: ', 'https://example.com/saml');
+        $question->setValidator(function ($answer) {
+            $answer = trim($answer);
+            if (false == $answer) {
+                throw new \RuntimeException('EntityID can not be empty');
+            }
+
+            return $answer;
+        });
+
+        return $question;
+    }
+
+    /**
+     * @param string $title
+     * @param bool   $required
+     *
+     * @return Question
+     */
+    protected function buildInputFileQuestion($title, $required)
+    {
+        $question = new Question(sprintf('%s%s: ', $title, (!$required ? ' [empty for none]' : '')));
+        $question->setValidator(function ($answer) use ($required) {
+            if (false == $required && false == $answer) {
+                return null;
+            }
+            if (false == is_file($answer)) {
+                throw new \RuntimeException('Specified file not found');
+            }
+
+            return $answer;
+        });
+
+        return $question;
+    }
+
+    /**
+     * @param QuestionHelper  $questionHelper
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
+     * @return string
+     */
+    protected function buildOutputFileQuestion()
+    {
+        $question = new Question('Save to filename [FederationMetadata.xml]: ', 'FederationMetadata.xml');
+        $question->setValidator(function ($answer) {
+            $answer = trim($answer);
+            if (false == $answer) {
+                throw new \RuntimeException('Filename can not be empty');
+            }
+
+            return $answer;
+        });
+
+        return $question;
     }
 }
