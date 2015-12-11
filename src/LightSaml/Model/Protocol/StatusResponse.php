@@ -19,9 +19,6 @@ abstract class StatusResponse extends SamlMessage
     /** @var string */
     protected $inResponseTo;
 
-    /** @var  string|null */
-    protected $consent;
-
     /** @var Status */
     protected $status;
 
@@ -66,26 +63,6 @@ abstract class StatusResponse extends SamlMessage
     }
 
     /**
-     * @param null|string $consent
-     *
-     * @return StatusResponse
-     */
-    public function setConsent($consent)
-    {
-        $this->consent = $consent;
-
-        return $this;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getConsent()
-    {
-        return $this->consent;
-    }
-
-    /**
      * @param \DOMNode             $parent
      * @param SerializationContext $context
      *
@@ -93,9 +70,9 @@ abstract class StatusResponse extends SamlMessage
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
-        $this->attributesToXml(array('ID', 'InResponseTo', 'Version', 'IssueInstant', 'Consent'), $parent);
+        $this->attributesToXml(array('InResponseTo'), $parent);
 
-        $this->singleElementsToXml(array('Issuer', 'Status'), $parent, $context);
+        $this->singleElementsToXml(array('Status'), $parent, $context);
 
         parent::serialize($parent, $context);
     }
@@ -108,7 +85,7 @@ abstract class StatusResponse extends SamlMessage
      */
     public function deserialize(\DOMElement $node, DeserializationContext $context)
     {
-        $this->attributesFromXml($node, array('InResponseTo', 'Consent'));
+        $this->attributesFromXml($node, array('InResponseTo'));
 
         $this->singleElementsFromXml($node, $context, array(
             'Status' => array('samlp', 'LightSaml\Model\Protocol\Status'),

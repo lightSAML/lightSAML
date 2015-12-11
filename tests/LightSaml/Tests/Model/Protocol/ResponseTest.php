@@ -24,7 +24,7 @@ use LightSaml\Credential\X509Certificate;
 
 class ResponseTest extends \PHPUnit_Framework_TestCase
 {
-    public function test__serialization()
+    public function test_serialization()
     {
         $response = new Response();
         $response->setId('response-id')
@@ -86,7 +86,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
             $expectedXml = <<<EOT
 <?xml version="1.0"?>
-<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ID="response-id" InResponseTo="in-reponse-to" Version="2.0" IssueInstant="2013-10-27T11:55:37Z" Consent="urn:oasis:names:tc:SAML:2.0:consent:unspecified" Destination="http://destination.com">
+<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" InResponseTo="in-reponse-to" ID="response-id" Version="2.0" IssueInstant="2013-10-27T11:55:37Z" Destination="http://destination.com" Consent="urn:oasis:names:tc:SAML:2.0:consent:unspecified">
   <saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">the-issuer</saml:Issuer>
   <Assertion xmlns="urn:oasis:names:tc:SAML:2.0:assertion" ID="assertion-id" Version="2.0" IssueInstant="2013-10-27T11:55:37Z">
     <Issuer>assertion-issuer</Issuer>
