@@ -38,6 +38,9 @@ abstract class SamlMessage extends AbstractSamlModel
     /** @var Issuer|null */
     protected $issuer;
 
+    /** @var  string|null */
+    protected $consent;
+
     /** @var  Signature|null */
     protected $signature;
 
@@ -223,6 +226,26 @@ abstract class SamlMessage extends AbstractSamlModel
     }
 
     /**
+     * @param null|string $consent
+     *
+     * @return StatusResponse
+     */
+    public function setConsent($consent)
+    {
+        $this->consent = $consent;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getConsent()
+    {
+        return $this->consent;
+    }
+
+    /**
      * @param Signature|null $signature
      *
      * @return SamlMessage
@@ -270,9 +293,9 @@ abstract class SamlMessage extends AbstractSamlModel
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
-        $this->attributesToXml(array('Destination'), $parent);
+        $this->attributesToXml(array('ID', 'Version', 'IssueInstant', 'Destination', 'Consent'), $parent);
 
-        $this->singleElementsToXml(array('Signature'), $parent, $context);
+        $this->singleElementsToXml(array('Issuer'), $parent, $context);
     }
 
     /**
@@ -283,7 +306,7 @@ abstract class SamlMessage extends AbstractSamlModel
      */
     public function deserialize(\DOMElement $node, DeserializationContext $context)
     {
-        $this->attributesFromXml($node, array('ID', 'Version', 'IssueInstant', 'Destination'));
+        $this->attributesFromXml($node, array('ID', 'Version', 'IssueInstant', 'Destination', 'Consent'));
 
         $this->singleElementsFromXml($node, $context, array(
             'Issuer' => array('saml', 'LightSaml\Model\Assertion\Issuer'),

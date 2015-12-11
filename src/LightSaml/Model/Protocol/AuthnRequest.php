@@ -161,7 +161,7 @@ class AuthnRequest extends AbstractRequest
     public function getIsPassiveString()
     {
         if ($this->isPassive === null) {
-            return;
+            return null;
         }
 
         return $this->isPassive ? 'true' : 'false';
@@ -193,7 +193,7 @@ class AuthnRequest extends AbstractRequest
     public function getForceAuthnString()
     {
         if ($this->forceAuthn === null) {
-            return;
+            return null;
         }
 
         return $this->forceAuthn ? 'true' : 'false';
@@ -303,6 +303,9 @@ class AuthnRequest extends AbstractRequest
             ), $result);
 
         $this->singleElementsToXml(array('Subject', 'NameIDPolicy', 'Conditions'), $result, $context);
+
+        // must be last in order signature to include them all
+        $this->singleElementsToXml(array('Signature'), $result, $context);
     }
 
     /**

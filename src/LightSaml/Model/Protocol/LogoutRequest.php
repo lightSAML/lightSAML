@@ -148,6 +148,9 @@ class LogoutRequest extends AbstractRequest
         $this->attributesToXml(array('Reason', 'NotOnOrAfter'), $result);
 
         $this->singleElementsToXml(array('NameID', 'SessionIndex'), $result, $context, SamlConstants::NS_PROTOCOL);
+
+        // must be last in order signature to include them all
+        $this->singleElementsToXml(array('Signature'), $result, $context);
     }
 
     /**
