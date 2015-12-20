@@ -11,6 +11,7 @@
 
 namespace LightSaml\Model\XmlDSig;
 
+use LightSaml\Meta\SigningOptions;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
 use LightSaml\SamlConstants;
@@ -29,6 +30,35 @@ class SignatureWriter extends Signature
     /** @var X509Certificate */
     protected $certificate;
 
+    /** @var SigningOptions */
+    protected $signingOptions;
+
+    /**
+     * @param SigningOptions $options
+     *
+     * @return SignatureWriter
+     */
+    public static function create(SigningOptions $options)
+    {
+        $writer = new self($options->getCertificate(), $options->getPrivateKey());
+        $writer->signingOptions = $options;
+
+        return $writer;
+    }
+
+    /**
+     * @param X509Certificate $certificate
+     * @param XMLSecurityKey  $xmlSecurityKey
+     *
+     * @return SignatureWriter
+     */
+    public static function createByKeyAndCertificate(X509Certificate $certificate, XMLSecurityKey $xmlSecurityKey)
+    {
+        $signingOptions = new SigningOptions($xmlSecurityKey, $certificate);
+
+        return self::create($signingOptions);
+    }
+
     /**
      * @param X509Certificate|null $certificate
      * @param XMLSecurityKey|null  $xmlSecurityKey
@@ -37,6 +67,26 @@ class SignatureWriter extends Signature
     {
         $this->certificate = $certificate;
         $this->xmlSecurityKey = $xmlSecurityKey;
+    }
+
+    /**
+     * @return SigningOptions
+     */
+    public function getSigningOptions()
+    {
+        return $this->signingOptions;
+    }
+
+    /**
+     * @param SigningOptions $signingOptions
+     *
+     * @return SignatureWriter
+     */
+    public function setSigningOptions(SigningOptions $signingOptions)
+    {
+        $this->signingOptions = $signingOptions;
+
+        return $this;
     }
 
     /**
@@ -102,11 +152,13 @@ class SignatureWriter extends Signature
     /**
      * @param \DOMNode             $parent
      * @param SerializationContext $context
-     *
-     * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
+        if ($this->signingOptions && false === $this->signingOptions->isEnabled()) {
+            return;
+        }
+
         $objXMLSecDSig = new XMLSecurityDSig();
         $objXMLSecDSig->setCanonicalMethod($this->getCanonicalMethod());
         $key = $this->getXmlSecurityKey();
@@ -132,7 +184,14 @@ class SignatureWriter extends Signature
         );
 
         $objXMLSecDSig->sign($key);
-        $objXMLSecDSig->add509Cert($this->getCertificate()->getData(), false, false, array('subjectName' => false));
+
+        $objXMLSecDSig->add509Cert(
+            $this->getCertificate()->getData(),
+            false,
+            false,
+            $this->signingOptions ? $this->signingOptions->getCertificateOptions()->all() : null
+        );
+
         $firstChild = $parent->hasChildNodes() ? $parent->firstChild : null;
         if ($firstChild && $firstChild->localName == 'Issuer') {
             // The signature node should come after the issuer node
@@ -146,11 +205,9 @@ class SignatureWriter extends Signature
      * @param DeserializationContext $context
      *
      * @throws \LogicException
-     *
-     * @return void
      */
     public function deserialize(\DOMElement $node, DeserializationContext $context)
     {
-        throw new \LogicException('SignatureWriter can not be deserialize');
+        throw new \LogicException('SignatureWriter can not be deserialized');
     }
 }
