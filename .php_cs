@@ -16,7 +16,7 @@ EOT;
 Symfony\CS\Fixer\Contrib\HeaderCommentFixer::setHeader($header);
 
 return Symfony\CS\Config\Config::create()
-    ->setUsingCache(true)
+    ->setUsingCache(false)
     ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
     ->fixers(array('-empty_return', '-phpdoc_no_empty_return', 'header_comment'))
     ->finder($finder)

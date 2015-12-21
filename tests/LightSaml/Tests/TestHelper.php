@@ -229,4 +229,17 @@ abstract class TestHelper
     {
         return $test->getMock(\Symfony\Component\HttpFoundation\Session\SessionInterface::class);
     }
+
+    /**
+     * @param \PHPUnit_Framework_TestCase $test
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\RobRichards\XMLSecLibs\XMLSecurityKey
+     */
+    public static function getXmlSecurityKeyMock(\PHPUnit_Framework_TestCase $test)
+    {
+        return $test->getMockBuilder(\RobRichards\XMLSecLibs\XMLSecurityKey::class)
+            ->disableOriginalConstructor()
+            ->getMock()
+        ;
+    }
 }
