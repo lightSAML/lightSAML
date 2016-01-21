@@ -74,21 +74,17 @@ class AudienceRestriction extends AbstractCondition
     /**
      * @param \DOMNode             $parent
      * @param SerializationContext $context
-     *
-     * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
         $result = $this->createElement('AudienceRestriction', SamlConstants::NS_ASSERTION, $parent, $context);
 
-        $this->manyElementsToXml($this->getAllAudience(), $result, $context, 'Audience');
+        $this->manyElementsToXml($this->getAllAudience(), $result, $context, 'Audience', SamlConstants::NS_ASSERTION);
     }
 
     /**
      * @param \DOMElement            $node
      * @param DeserializationContext $context
-     *
-     * @return void
      */
     public function deserialize(\DOMElement $node, DeserializationContext $context)
     {

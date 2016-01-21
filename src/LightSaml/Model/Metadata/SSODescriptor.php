@@ -122,9 +122,8 @@ abstract class SSODescriptor extends RoleDescriptor
     {
         parent::serialize($parent, $context);
 
-        $this->manyElementsToXml($this->getAllNameIDFormats(), $parent, $context, 'NameIDFormat', SamlConstants::NS_METADATA);
-
         $this->manyElementsToXml($this->getAllSingleLogoutServices(), $parent, $context, null);
+        $this->manyElementsToXml($this->getAllNameIDFormats(), $parent, $context, 'NameIDFormat', SamlConstants::NS_METADATA);
     }
 
     /**

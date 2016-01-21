@@ -18,6 +18,8 @@ use LightSaml\Model\Assertion\Subject;
 use LightSaml\Model\Assertion\SubjectConfirmation;
 use LightSaml\Model\Assertion\SubjectConfirmationData;
 use LightSaml\Model\Protocol\Response;
+use LightSaml\Model\Protocol\Status;
+use LightSaml\Model\Protocol\StatusCode;
 use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\SamlConstants;
 use LightSaml\Credential\KeyHelper;
@@ -36,7 +38,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
         $expectedXml = <<<EOT
 <?xml version="1.0"?>
-<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" InResponseTo="in-reponse-to" ID="response-id" Version="2.0" IssueInstant="2013-10-27T11:55:37Z" Destination="http://destination.com" Consent="urn:oasis:names:tc:SAML:2.0:consent:unspecified">
+<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ID="response-id" Version="2.0" IssueInstant="2013-10-27T11:55:37Z" Destination="http://destination.com" Consent="urn:oasis:names:tc:SAML:2.0:consent:unspecified" InResponseTo="in-reponse-to">
   <saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">the-issuer</saml:Issuer>
   <Assertion xmlns="urn:oasis:names:tc:SAML:2.0:assertion" ID="assertion-id" Version="2.0" IssueInstant="2013-10-27T11:55:37Z">
     <Issuer>assertion-issuer</Issuer>
@@ -96,7 +98,7 @@ EOT;
 
         $expectedXml = <<<EOT
 <?xml version="1.0"?>
-<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" InResponseTo="in-reponse-to" ID="response-id" Version="2.0" IssueInstant="2013-10-27T11:55:37Z" Destination="http://destination.com" Consent="urn:oasis:names:tc:SAML:2.0:consent:unspecified">
+<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ID="response-id" Version="2.0" IssueInstant="2013-10-27T11:55:37Z" Destination="http://destination.com" Consent="urn:oasis:names:tc:SAML:2.0:consent:unspecified" InResponseTo="in-reponse-to">
   <saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">the-issuer</saml:Issuer>
   <Assertion xmlns="urn:oasis:names:tc:SAML:2.0:assertion" ID="assertion-id" Version="2.0" IssueInstant="2013-10-27T11:55:37Z">
     <Issuer>assertion-issuer</Issuer>
@@ -156,7 +158,7 @@ EOT;
 
         $expectedXml = <<<EOT
 <?xml version="1.0"?>
-<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" InResponseTo="in-reponse-to" ID="response-id" Version="2.0" IssueInstant="2013-10-27T11:55:37Z" Destination="http://destination.com" Consent="urn:oasis:names:tc:SAML:2.0:consent:unspecified">
+<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" ID="response-id" Version="2.0" IssueInstant="2013-10-27T11:55:37Z" Destination="http://destination.com" Consent="urn:oasis:names:tc:SAML:2.0:consent:unspecified" InResponseTo="in-reponse-to">
   <saml:Issuer xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">the-issuer</saml:Issuer>
   <Assertion xmlns="urn:oasis:names:tc:SAML:2.0:assertion" ID="assertion-id" Version="2.0" IssueInstant="2013-10-27T11:55:37Z">
     <Issuer>assertion-issuer</Issuer>

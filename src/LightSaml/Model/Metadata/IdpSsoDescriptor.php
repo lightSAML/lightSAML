@@ -117,7 +117,7 @@ class IdpSsoDescriptor extends SSODescriptor
             }
         }
 
-        return;
+        return null;
     }
 
     /**

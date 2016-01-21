@@ -52,7 +52,7 @@ class LogoutRequest extends AbstractRequest
     }
 
     /**
-     * @param int|null $notOnOrAfter
+     * @param int|\DateTime|string $notOnOrAfter
      *
      * @return LogoutRequest
      */
