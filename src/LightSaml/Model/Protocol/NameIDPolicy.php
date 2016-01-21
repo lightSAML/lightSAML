@@ -34,6 +34,16 @@ class NameIDPolicy extends AbstractSamlModel
     protected $spNameQualifier;
 
     /**
+     * @param string $format
+     * @param bool   $allowCreate
+     */
+    public function __construct($format = null, $allowCreate = null)
+    {
+        $this->allowCreate = $allowCreate;
+        $this->format = $format;
+    }
+
+    /**
      * @param string|bool|null $allowCreate
      *
      * @return NameIDPolicy
@@ -65,7 +75,7 @@ class NameIDPolicy extends AbstractSamlModel
     public function getAllowCreateString()
     {
         if ($this->allowCreate === null) {
-            return;
+            return null;
         }
 
         return $this->allowCreate ? 'true' : 'false';

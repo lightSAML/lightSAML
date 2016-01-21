@@ -19,7 +19,7 @@ use LightSaml\Credential\X509Certificate;
 
 class EntityDescriptorTest extends \PHPUnit_Framework_TestCase
 {
-    public function test__serialization()
+    public function test_serialization()
     {
         $ed = new EntityDescriptor();
         $ed
@@ -98,9 +98,9 @@ class EntityDescriptorTest extends \PHPUnit_Framework_TestCase
       <SurName>Smith</SurName>
       <EmailAddress>support@idp.com</EmailAddress>
     </ContactPerson>
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="http://idp.example.com/slo/redirect"/>
     <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</NameIDFormat>
     <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
-    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="http://idp.example.com/slo/redirect"/>
     <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://idp.example.com/sso/post"/>
     <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="http://idp.example.com/slo/get"/>
     <Attribute xmlns="urn:oasis:names:tc:SAML:2.0:assertion" Name="http://schemas.xmlsoap.org/claims/CommonName" FriendlyName="Common Name">
@@ -108,9 +108,9 @@ class EntityDescriptorTest extends \PHPUnit_Framework_TestCase
     </Attribute>
   </IDPSSODescriptor>
   <SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://sp.example.com/slo/post"/>
     <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
     <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
-    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://sp.example.com/slo/post"/>
     <AssertionConsumerService index="0" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://sp.example.com/acs/post"/>
     <AssertionConsumerService index="1" isDefault="false" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="http://sp.example.com/acs/redirect"/>
   </SPSSODescriptor>

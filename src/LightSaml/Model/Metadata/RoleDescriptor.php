@@ -299,7 +299,7 @@ abstract class RoleDescriptor extends AbstractSamlModel
             return new \DateTime('@'.$this->validUntil);
         }
 
-        return;
+        return null;
     }
 
     /**

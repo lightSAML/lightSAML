@@ -36,6 +36,9 @@ class SpSsoDescriptor extends SSODescriptor
         if (false == is_array($this->assertionConsumerServices)) {
             $this->assertionConsumerServices = array();
         }
+        if (null === $assertionConsumerService->getIndex()) {
+            $assertionConsumerService->setIndex(count($this->assertionConsumerServices));
+        }
         $this->assertionConsumerServices[] = $assertionConsumerService;
 
         return $this;
@@ -112,7 +115,7 @@ class SpSsoDescriptor extends SSODescriptor
             }
         }
 
-        return;
+        return null;
     }
 
     /**

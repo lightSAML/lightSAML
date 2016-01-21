@@ -70,11 +70,11 @@ abstract class StatusResponse extends SamlMessage
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
+        parent::serialize($parent, $context);
+
         $this->attributesToXml(array('InResponseTo'), $parent);
 
         $this->singleElementsToXml(array('Status'), $parent, $context);
-
-        parent::serialize($parent, $context);
     }
 
     /**
