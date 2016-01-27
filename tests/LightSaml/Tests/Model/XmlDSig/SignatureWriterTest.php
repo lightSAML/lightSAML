@@ -49,7 +49,7 @@ class SignatureWriterTest extends \PHPUnit_Framework_TestCase
         $deserializationContext = new DeserializationContext();
         $deserializationContext->getDocument()->loadXML('<a></a>');
         $writer = new SignatureWriter();
-        $writer->deserialize($deserializationContext->getDocument()->firstChild, $deserializationContext);
+        $writer->deserialize($deserializationContext->getDocument(), $deserializationContext);
     }
 
     public function test_returns_set_certificate()

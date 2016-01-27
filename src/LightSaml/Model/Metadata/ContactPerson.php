@@ -183,12 +183,10 @@ class ContactPerson extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMElement            $node
+     * @param \DOMNode               $node
      * @param DeserializationContext $context
-     *
-     * @return void
      */
-    public function deserialize(\DOMElement $node, DeserializationContext $context)
+    public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'ContactPerson', SamlConstants::NS_METADATA);
 

@@ -180,6 +180,9 @@ class SpConfig
         $idpProvider->add(
             \LightSaml\Model\Metadata\EntityDescriptor::load(__DIR__.'/openidp.feide.no.xml')
         );
+        $idpProvider->add(
+            \LightSaml\Model\Metadata\EntityDescriptor::load(__DIR__.'/FederationMetadata.xml')
+        );
 
         return $idpProvider;
     }

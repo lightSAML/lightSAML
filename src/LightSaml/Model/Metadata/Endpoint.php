@@ -106,10 +106,10 @@ abstract class Endpoint extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMElement            $node
+     * @param \DOMNode               $node
      * @param DeserializationContext $context
      */
-    public function deserialize(\DOMElement $node, DeserializationContext $context)
+    public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->attributesFromXml($node, array('Binding', 'Location', 'ResponseLocation'));
     }

@@ -24,7 +24,7 @@ class SingleSignOnService extends Endpoint
         parent::serialize($result, $context);
     }
 
-    public function deserialize(\DOMElement $node, DeserializationContext $context)
+    public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'SingleSignOnService', SamlConstants::NS_METADATA);
 

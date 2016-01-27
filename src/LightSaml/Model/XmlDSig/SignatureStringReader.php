@@ -123,12 +123,10 @@ class SignatureStringReader extends AbstractSignatureReader
     }
 
     /**
-     * @param \DOMElement            $node
+     * @param \DOMNode               $node
      * @param DeserializationContext $context
-     *
-     * @throws \LogicException
      */
-    public function deserialize(\DOMElement $node, DeserializationContext $context)
+    public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         throw new \LogicException('AbstractSignatureReader can not be serialized');
     }

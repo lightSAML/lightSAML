@@ -114,7 +114,7 @@ class SamlMessageSignAndVerifyTest extends \PHPUnit_Framework_TestCase
 
         /** @var SamlMessage $samlMessage */
         $samlMessage = new $class();
-        $samlMessage->deserialize($deserializationContext->getDocument()->firstChild, $deserializationContext);
+        $samlMessage->deserialize($deserializationContext->getDocument(), $deserializationContext);
 
         /** @var AbstractSignatureReader $signatureReader */
         $signatureReader = $samlMessage->getSignature();

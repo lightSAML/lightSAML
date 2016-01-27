@@ -60,14 +60,10 @@ class EncryptedElementReader extends EncryptedElement
     }
 
     /**
-     * @param \DOMElement            $node
+     * @param \DOMNode               $node
      * @param DeserializationContext $context
-     *
-     * @throws LightSamlXmlException
-     *
-     * @return void
      */
-    public function deserialize(\DOMElement $node, DeserializationContext $context)
+    public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $list = $context->getXpath()->query('xenc:EncryptedData', $node);
         if (0 == $list->length) {

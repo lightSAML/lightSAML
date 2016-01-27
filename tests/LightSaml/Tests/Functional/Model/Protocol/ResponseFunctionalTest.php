@@ -18,7 +18,7 @@ class ResponseFunctionalTest extends \PHPUnit_Framework_TestCase
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/Response/response01.xml');
 
         $response = new Response();
-        $response->deserialize($context->getDocument()->firstChild, $context);
+        $response->deserialize($context->getDocument(), $context);
 
         $this->assertEquals('_c34b38b9-5da6-4ee8-af49-2af20423d8f5', $response->getID());
         $this->assertEquals('2.0', $response->getVersion());
@@ -94,7 +94,7 @@ class ResponseFunctionalTest extends \PHPUnit_Framework_TestCase
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/Response/invalid02.xml');
 
         $response = new Response();
-        $response->deserialize($context->getDocument()->firstChild, $context);
+        $response->deserialize($context->getDocument(), $context);
 
         $this->assertEquals('_274be8a4-c2ba-43ca-a7c6-2f1613762576', $response->getID());
         $this->assertEquals('2.0', $response->getVersion());

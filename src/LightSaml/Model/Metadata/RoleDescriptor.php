@@ -322,12 +322,10 @@ abstract class RoleDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMElement            $node
+     * @param \DOMNode               $node
      * @param DeserializationContext $context
-     *
-     * @return void
      */
-    public function deserialize(\DOMElement $node, DeserializationContext $context)
+    public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->attributesFromXml(
             $node,
