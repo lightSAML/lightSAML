@@ -71,9 +71,7 @@ abstract class SamlMessage extends AbstractSamlModel
             throw new LightSamlXmlException('Empty XML');
         }
 
-        if (SamlConstants::NS_PROTOCOL !== $context->getDocument()->namespaceURI &&
-            SamlConstants::NS_PROTOCOL !== $node->namespaceURI
-        ) {
+        if (SamlConstants::NS_PROTOCOL !== $node->namespaceURI) {
             throw new LightSamlXmlException(sprintf(
                 "Invalid namespace '%s' of the root XML element, expected '%s'",
                 $context->getDocument()->namespaceURI,
@@ -98,7 +96,7 @@ abstract class SamlMessage extends AbstractSamlModel
                 /** @var SamlElementInterface $result */
                 $result = new $class();
             } else {
-                throw new \Exception('Deserialization of %s root element is not implemented');
+                throw new \LogicException('Deserialization of %s root element is not implemented');
             }
         } else {
             throw new LightSamlXmlException(sprintf("Unknown SAML message '%s'", $rootElementName));

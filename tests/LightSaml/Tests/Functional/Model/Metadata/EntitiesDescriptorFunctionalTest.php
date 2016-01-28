@@ -216,5 +216,15 @@ class EntitiesDescriptorFunctionalTest extends \PHPUnit_Framework_TestCase
 
         $entitiesDescriptor = new EntitiesDescriptor();
         $entitiesDescriptor->deserialize($context->getDocument(), $context);
+        $this->assertCount(2935, $entitiesDescriptor->getAllEntityDescriptors());
+    }
+
+    /**
+     * @expectedException \LightSaml\Error\LightSamlXmlException
+     * @expectedExceptionMessage Expected 'EntitiesDescriptor' xml node and 'urn:oasis:names:tc:SAML:2.0:metadata' namespace but got node 'EntityDescriptor' and namespace 'urn:oasis:names:tc:SAML:2.0:metadata'
+     */
+    public function test_throws_on_entity_descriptor()
+    {
+        EntitiesDescriptor::load(__DIR__.'/../../../../../../resources/sample/EntityDescriptor/idp-ed.xml');
     }
 }
