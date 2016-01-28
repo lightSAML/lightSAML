@@ -63,8 +63,16 @@ abstract class SamlMessage extends AbstractSamlModel
 
         $context->getDocument()->loadXML($xml);
 
+        $node = $context->getDocument()->firstChild;
+        while ($node && $node instanceof \DOMComment) {
+            $node = $node->nextSibling;
+        }
+        if (null === $node) {
+            throw new LightSamlXmlException('Empty XML');
+        }
+
         if (SamlConstants::NS_PROTOCOL !== $context->getDocument()->namespaceURI &&
-            SamlConstants::NS_PROTOCOL !== $context->getDocument()->firstChild->namespaceURI
+            SamlConstants::NS_PROTOCOL !== $node->namespaceURI
         ) {
             throw new LightSamlXmlException(sprintf(
                 "Invalid namespace '%s' of the root XML element, expected '%s'",
@@ -83,7 +91,7 @@ abstract class SamlMessage extends AbstractSamlModel
             'ArtifactResolve' => null,
         );
 
-        $rootElementName = $context->getDocument()->firstChild->localName;
+        $rootElementName = $node->localName;
 
         if (array_key_exists($rootElementName, $map)) {
             if ($class = $map[$rootElementName]) {
@@ -96,7 +104,7 @@ abstract class SamlMessage extends AbstractSamlModel
             throw new LightSamlXmlException(sprintf("Unknown SAML message '%s'", $rootElementName));
         }
 
-        $result->deserialize($context->getDocument()->firstChild, $context);
+        $result->deserialize($node, $context);
 
         return $result;
     }
@@ -299,12 +307,10 @@ abstract class SamlMessage extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMElement            $node
+     * @param \DOMNode               $node
      * @param DeserializationContext $context
-     *
-     * @return void
      */
-    public function deserialize(\DOMElement $node, DeserializationContext $context)
+    public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->attributesFromXml($node, array('ID', 'Version', 'IssueInstant', 'Destination', 'Consent'));
 

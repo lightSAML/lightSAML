@@ -20,7 +20,7 @@ class AuthnRequestFunctionalTest extends \PHPUnit_Framework_TestCase
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/Request/request01.xml');
 
         $request = new AuthnRequest();
-        $request->deserialize($context->getDocument()->firstChild, $context);
+        $request->deserialize($context->getDocument(), $context);
 
         $this->assertEquals('_8dcc6985f6d9f385f0bbd4562ef848ef3ae78d87d7', $request->getID());
         $this->assertEquals('2.0', $request->getVersion());
@@ -59,17 +59,14 @@ class AuthnRequestFunctionalTest extends \PHPUnit_Framework_TestCase
         $serializationContext = new SerializationContext();
         $authnRequest->serialize($serializationContext->getDocument(), $serializationContext);
 
-        $temporaryFilename = tempnam(sys_get_temp_dir(), 'lightsaml-');
+        $xml = $serializationContext->getDocument()->saveXML();
 
-        $serializationContext->getDocument()->save($temporaryFilename);
-
-
-        $xml = file_get_contents($temporaryFilename);
+        // deserialization
         $deserializationContext = new DeserializationContext();
         $deserializationContext->getDocument()->loadXML($xml);
 
         $authnRequest = new AuthnRequest();
-        $authnRequest->deserialize($deserializationContext->getDocument()->firstChild, $deserializationContext);
+        $authnRequest->deserialize($deserializationContext->getDocument(), $deserializationContext);
 
         $signatureReader = $authnRequest->getSignature();
         if ($signatureReader instanceof SignatureXmlReader) {

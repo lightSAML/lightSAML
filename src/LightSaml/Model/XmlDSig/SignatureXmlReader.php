@@ -126,12 +126,12 @@ class SignatureXmlReader extends AbstractSignatureReader
     }
 
     /**
-     * @param \DOMElement            $node
+     * @param \DOMNode               $node
      * @param DeserializationContext $context
      *
-     * @throws \LightSaml\Error\LightSamlSecurityException
+     * @throws \Exception
      */
-    public function deserialize(\DOMElement $node, DeserializationContext $context)
+    public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'Signature', SamlConstants::NS_XMLDSIG);
 

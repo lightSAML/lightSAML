@@ -64,7 +64,7 @@ class EntityDescriptor extends AbstractSamlModel
         $context = new DeserializationContext();
         $context->getDocument()->loadXML($xml);
         $ed = new self();
-        $ed->deserialize($context->getDocument()->firstChild, $context);
+        $ed->deserialize($context->getDocument(), $context);
 
         return $ed;
     }
@@ -441,12 +441,10 @@ class EntityDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMElement            $node
+     * @param \DOMNode               $node
      * @param DeserializationContext $context
-     *
-     * @return void
      */
-    public function deserialize(\DOMElement $node, DeserializationContext $context)
+    public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'EntityDescriptor', SamlConstants::NS_METADATA);
 

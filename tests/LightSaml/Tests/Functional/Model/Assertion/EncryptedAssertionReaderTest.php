@@ -36,7 +36,7 @@ EOT;
         $deserializationContext->getDocument()->loadXML($xml);
 
         $response = new Response();
-        $response->deserialize($deserializationContext->getDocument()->firstChild, $deserializationContext);
+        $response->deserialize($deserializationContext->getDocument(), $deserializationContext);
 
         $credential = new X509Credential(
             X509Certificate::fromFile(__DIR__.'/../../../../../../resources/sample/Certificate/lightsaml-idp.crt'),

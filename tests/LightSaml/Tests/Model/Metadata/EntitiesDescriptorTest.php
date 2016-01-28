@@ -230,7 +230,7 @@ EOT;
         $context->getDocument()->loadXML($xml);
 
         $esd = new EntitiesDescriptor();
-        $esd->deserialize($context->getDocument()->firstChild, $context);
+        $esd->deserialize($context->getDocument(), $context);
 
         $this->assertEquals('esd1', $esd->getId());
         $this->assertEquals('first', $esd->getName());

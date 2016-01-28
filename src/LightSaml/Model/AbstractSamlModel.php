@@ -183,15 +183,25 @@ abstract class AbstractSamlModel implements SamlElementInterface
     }
 
     /**
-     * @param \DOMElement $node
-     * @param string      $expectedName
-     * @param string      $expectedNamespaceUri
-     *
-     * @throws \LightSaml\Error\LightSamlXmlException
+     * @param \DOMNode $node
+     * @param string   $expectedName
+     * @param string   $expectedNamespaceUri
      */
-    protected function checkXmlNodeName(\DOMElement $node, $expectedName, $expectedNamespaceUri)
+    protected function checkXmlNodeName(\DOMNode &$node, $expectedName, $expectedNamespaceUri)
     {
-        if ($node->localName != $expectedName || $node->namespaceURI != $expectedNamespaceUri) {
+        if ($node instanceof \DOMDocument) {
+            $node = $node->firstChild;
+        }
+        while ($node && $node instanceof \DOMComment) {
+            $node = $node->nextSibling;
+        }
+        if (null === $node) {
+            throw new LightSamlXmlException(sprintf(
+                "Unable to find expected '%s' xml node and '%s' namespace",
+                $expectedName,
+                $expectedNamespaceUri
+            ));
+        } elseif ($node->localName != $expectedName || $node->namespaceURI != $expectedNamespaceUri) {
             throw new LightSamlXmlException(sprintf(
                 "Expected '%s' xml node and '%s' namespace but got node '%s' and namespace '%s'",
                 $expectedName,

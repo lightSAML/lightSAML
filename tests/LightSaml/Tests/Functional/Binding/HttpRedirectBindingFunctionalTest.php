@@ -82,7 +82,7 @@ class HttpRedirectBindingFunctionalTest extends \PHPUnit_Framework_TestCase
         $context->getDocument()->loadXML($xml);
 
         $receivedAuthnRequest = new AuthnRequest();
-        $receivedAuthnRequest->deserialize($context->getDocument()->firstChild, $context);
+        $receivedAuthnRequest->deserialize($context->getDocument(), $context);
 
         $this->assertEquals($request->getID(), $receivedAuthnRequest->getID());
         $this->assertEquals($request->getIssueInstantTimestamp(), $receivedAuthnRequest->getIssueInstantTimestamp());

@@ -14,7 +14,7 @@ class LogoutRequestFunctionalTest extends \PHPUnit_Framework_TestCase
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/Request/logoutrequest01.xml');
 
         $request = new LogoutRequest();
-        $request->deserialize($context->getDocument()->firstChild, $context);
+        $request->deserialize($context->getDocument(), $context);
 
         $this->assertEquals('_6210989d671b429f1c82467626ffd0be990ded60bd', $request->getID());
         $this->assertEquals('2.0', $request->getVersion());

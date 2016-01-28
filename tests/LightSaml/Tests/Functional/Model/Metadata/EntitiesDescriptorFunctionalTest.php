@@ -21,7 +21,7 @@ class EntitiesDescriptorFunctionalTest extends \PHPUnit_Framework_TestCase
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/EntitiesDescriptor/testshib-providers.xml');
 
         $entitiesDescriptor = new EntitiesDescriptor();
-        $entitiesDescriptor->deserialize($context->getDocument()->firstChild, $context);
+        $entitiesDescriptor->deserialize($context->getDocument(), $context);
 
         $this->assertEquals('urn:mace:shibboleth:testshib:two', $entitiesDescriptor->getName());
         $this->assertCount(2, $entitiesDescriptor->getAllEntityDescriptors());
@@ -207,5 +207,14 @@ class EntitiesDescriptorFunctionalTest extends \PHPUnit_Framework_TestCase
 
         unset($sp);
         //endregion
+    }
+
+    public function test_deserialize_ukfederation_metadata()
+    {
+        $context = new DeserializationContext();
+        $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/EntitiesDescriptor/ukfederation-metadata.xml');
+
+        $entitiesDescriptor = new EntitiesDescriptor();
+        $entitiesDescriptor->deserialize($context->getDocument(), $context);
     }
 }

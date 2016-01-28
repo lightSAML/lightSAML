@@ -58,7 +58,7 @@ class EntitiesDescriptor extends AbstractSamlModel
         $context = new DeserializationContext();
         $context->getDocument()->loadXML($xml);
         $ed = new self();
-        $ed->deserialize($context->getDocument()->firstChild, $context);
+        $ed->deserialize($context->getDocument(), $context);
 
         return $ed;
     }
@@ -307,19 +307,17 @@ class EntitiesDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMElement            $node
+     * @param \DOMNode               $node
      * @param DeserializationContext $context
-     *
-     * @return void
      */
-    public function deserialize(\DOMElement $node, DeserializationContext $context)
+    public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'EntitiesDescriptor', SamlConstants::NS_METADATA);
 
         $this->attributesFromXml($node, array('validUntil', 'cacheDuration', 'ID', 'Name'));
 
         $this->singleElementsFromXml($node, $context, array(
-            'Signature' => array('ds', 'LightSaml\Model\XmlDSig\Signature'),
+            'Signature' => array('ds', 'LightSaml\Model\XmlDSig\SignatureXmlReader'),
         ));
 
         $this->manyElementsFromXml(

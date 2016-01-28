@@ -21,7 +21,7 @@ class EntityDescriptorFunctionalTest extends \PHPUnit_Framework_TestCase
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/EntityDescriptor/idp2-ed.xml');
 
         $ed = new EntityDescriptor();
-        $ed->deserialize($context->getDocument()->firstChild, $context);
+        $ed->deserialize($context->getDocument(), $context);
 
         $this->assertEquals('_2240bd9c-30c4-4d2a-ab3e-87a94ea334fd', $ed->getID());
         $this->assertEquals('https://B1.bead.loc/adfs/services/trust', $ed->getEntityID());
@@ -101,7 +101,7 @@ class EntityDescriptorFunctionalTest extends \PHPUnit_Framework_TestCase
         $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/EntityDescriptor/ed01-formatted-certificate.xml');
 
         $ed = new EntityDescriptor();
-        $ed->deserialize($context->getDocument()->firstChild, $context);
+        $ed->deserialize($context->getDocument(), $context);
 
         $this->assertNotNull($ed->getFirstIdpSsoDescriptor());
 
@@ -111,6 +111,15 @@ class EntityDescriptorFunctionalTest extends \PHPUnit_Framework_TestCase
         $kd = array_shift($arr);
         $crt = openssl_x509_parse($kd->getCertificate()->toPem());
         $this->assertEquals('idp.testshib.org', $crt['subject']['CN']);
+    }
+
+    public function test_deserialize_engine_surfconext_nl_authentication_idp_metadata()
+    {
+        $context = new DeserializationContext();
+        $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/EntityDescriptor/engine.surfconext.nl_authentication_idp_metadata.xml');
+
+        $ed = new EntityDescriptor();
+        $ed->deserialize($context->getDocument(), $context);
     }
 
     private function checkKD(SSODescriptor $descriptor, $use, $certificate)
