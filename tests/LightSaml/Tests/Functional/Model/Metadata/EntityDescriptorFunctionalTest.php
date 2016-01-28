@@ -115,11 +115,17 @@ class EntityDescriptorFunctionalTest extends \PHPUnit_Framework_TestCase
 
     public function test_deserialize_engine_surfconext_nl_authentication_idp_metadata()
     {
-        $context = new DeserializationContext();
-        $context->getDocument()->load(__DIR__.'/../../../../../../resources/sample/EntityDescriptor/engine.surfconext.nl_authentication_idp_metadata.xml');
+        $ed = EntityDescriptor::load(__DIR__.'/../../../../../../resources/sample/EntityDescriptor/engine.surfconext.nl_authentication_idp_metadata.xml');
+        $this->assertEquals('https://engine.surfconext.nl/authentication/idp/metadata', $ed->getEntityID());
+    }
 
-        $ed = new EntityDescriptor();
-        $ed->deserialize($context->getDocument(), $context);
+    /**
+     * @expectedException \LightSaml\Error\LightSamlXmlException
+     * @expectedExceptionMessage Expected 'EntityDescriptor' xml node and 'urn:oasis:names:tc:SAML:2.0:metadata' namespace but got node 'EntitiesDescriptor' and namespace 'urn:oasis:names:tc:SAML:2.0:metadata'
+     */
+    public function test_throws_on_entities_descriptor_document()
+    {
+        EntityDescriptor::load(__DIR__.'/../../../../../../resources/sample/EntitiesDescriptor/testshib-providers.xml');
     }
 
     private function checkKD(SSODescriptor $descriptor, $use, $certificate)

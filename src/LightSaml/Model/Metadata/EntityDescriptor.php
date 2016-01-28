@@ -14,11 +14,10 @@ namespace LightSaml\Model\Metadata;
 use LightSaml\Helper;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\XmlDSig\Signature;
 use LightSaml\SamlConstants;
 
-class EntityDescriptor extends AbstractSamlModel
+class EntityDescriptor extends Metadata
 {
     /** @var string */
     protected $entityID;
