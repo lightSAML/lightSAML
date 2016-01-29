@@ -61,6 +61,6 @@ class BindingCriteria implements CriteriaInterface
      */
     public function getPreference($binding)
     {
-        return @$this->bindings[$binding];
+        return isset($this->bindings[$binding]) ? $this->bindings[$binding] : null;
     }
 }

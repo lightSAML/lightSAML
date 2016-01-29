@@ -38,7 +38,7 @@ class StaticTrustOptionsStore implements TrustOptionsStoreInterface
      */
     public function get($entityId)
     {
-        return @$this->options[$entityId];
+        return isset($this->options[$entityId]) ? $this->options[$entityId] : null;
     }
 
     /**

@@ -59,9 +59,8 @@ abstract class AbstractContext implements ContextInterface
      */
     public function getSubContext($name, $class = null)
     {
-        $result = @$this->subContexts[$name];
-        if ($result) {
-            return $result;
+        if (isset($this->subContexts[$name])) {
+            return $this->subContexts[$name];
         }
 
         if ($class) {
@@ -97,7 +96,7 @@ abstract class AbstractContext implements ContextInterface
             throw new \InvalidArgumentException('Expected object or ContextInterface');
         }
 
-        $existing = @$this->subContexts[$name];
+        $existing = isset($this->subContexts[$name]) ? $this->subContexts[$name] : null;
         if ($existing === $subContext) {
             return $this;
         }

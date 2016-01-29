@@ -43,7 +43,7 @@ class NameIdValidator implements NameIdValidatorInterface
 
         $this->validateFormat($nameId);
 
-        $validatorMethod = @self::$formatValidators[$nameId->getFormat()];
+        $validatorMethod = isset(self::$formatValidators[$nameId->getFormat()]) ? self::$formatValidators[$nameId->getFormat()] : null;
 
         if ($validatorMethod) {
             $this->{$validatorMethod}($nameId);
