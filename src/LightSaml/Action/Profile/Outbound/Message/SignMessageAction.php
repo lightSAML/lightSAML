@@ -16,6 +16,7 @@ use LightSaml\Context\Profile\Helper\LogHelper;
 use LightSaml\Context\Profile\Helper\MessageContextHelper;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Model\Protocol\AuthnRequest;
+use LightSaml\Model\Protocol\LogoutRequest;
 use LightSaml\Model\Protocol\Response;
 use LightSaml\Resolver\Signature\SignatureResolverInterface;
 use Psr\Log\LoggerInterface;
@@ -74,6 +75,11 @@ class SignMessageAction extends AbstractProfileAction
     private function shouldSignMessage(ProfileContext $context)
     {
         $message = $context->getOutboundMessage();
+
+        if ($message instanceof LogoutRequest) {
+            return true;
+        }
+
         $trustOptions = $context->getTrustOptions();
 
         if ($message instanceof AuthnRequest) {

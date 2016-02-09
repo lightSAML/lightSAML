@@ -11,6 +11,8 @@
 
 namespace LightSaml\State\Sso;
 
+use LightSaml\Error\LightSamlException;
+
 class SsoSessionState implements \Serializable
 {
     /** @var  string */
@@ -243,6 +245,28 @@ class SsoSessionState implements \Serializable
         return isset($this->options[$name]);
     }
 
+    /**
+     * @param string $partyId
+     *
+     * @return string Other party id
+     *
+     * @throws \LightSaml\Error\LightSamlException If $partyId does not match sp or idp entity id
+     */
+    public function getOtherPartyId($partyId)
+    {
+        if ($partyId == $this->idpEntityId) {
+            return $this->spEntityId;
+        } elseif ($partyId == $this->spEntityId) {
+            return $this->idpEntityId;
+        }
+
+        throw new LightSamlException(sprintf(
+            'Party "%s" is not included in sso session between "%s" and "%s"',
+            $partyId,
+            $this->idpEntityId,
+            $this->spEntityId
+        ));
+    }
     /**
      * @return string the string representation of the object or null
      */
