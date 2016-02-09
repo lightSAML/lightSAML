@@ -33,6 +33,8 @@ class HttpRedirectBinding extends AbstractBinding
      */
     public function send(MessageContext $context, $destination = null)
     {
+        $destination = $context->getMessage()->getDestination() ? $context->getMessage()->getDestination() : $destination;
+
         $url = $this->getRedirectURL($context, $destination);
 
         return new RedirectResponse($url);
