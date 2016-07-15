@@ -1,5 +1,5 @@
 {
-    "name": "lightsaml/lightsaml",
+    "name": "illuminateeducation/lightsaml",
     "license": "MIT",
     "type": "library",
     "description": "Light SAML 2.0 PHP library",
