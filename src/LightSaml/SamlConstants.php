@@ -35,6 +35,7 @@ abstract class SamlConstants
     const NAME_ID_FORMAT_X509_SUBJECT_NAME = 'urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName';
     const NAME_ID_FORMAT_WINDOWS = 'urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName';
     const NAME_ID_FORMAT_KERBEROS = 'urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos';
+    const NAME_ID_FORMAT_UNSPECIFIED = 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified';
 
     const BINDING_SAML2_HTTP_REDIRECT = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect';
     const BINDING_SAML2_HTTP_POST = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST';
