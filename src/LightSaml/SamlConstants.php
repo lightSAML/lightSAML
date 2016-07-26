@@ -63,6 +63,7 @@ abstract class SamlConstants
 
     const CONFIRMATION_METHOD_BEARER = 'urn:oasis:names:tc:SAML:2.0:cm:bearer';
     const CONFIRMATION_METHOD_HOK = 'urn:oasis:names:tc:SAML:2.0:cm:holder-of-key';
+    const CONFIRMATION_METHOD_SENDER_VOUCHES = 'urn:oasis:names:tc:SAML:2.0:cm:sender-vouches';
 
     const AUTHN_CONTEXT_PASSWORD = 'urn:oasis:names:tc:SAML:2.0:ac:classes:Password';
     const AUTHN_CONTEXT_UNSPECIFIED = 'urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified';
