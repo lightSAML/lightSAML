@@ -35,6 +35,7 @@ abstract class SamlConstants
     const NAME_ID_FORMAT_X509_SUBJECT_NAME = 'urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName';
     const NAME_ID_FORMAT_WINDOWS = 'urn:oasis:names:tc:SAML:1.1:nameid-format:WindowsDomainQualifiedName';
     const NAME_ID_FORMAT_KERBEROS = 'urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos';
+    const NAME_ID_FORMAT_UNSPECIFIED = 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified';
 
     const BINDING_SAML2_HTTP_REDIRECT = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect';
     const BINDING_SAML2_HTTP_POST = 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST';
@@ -62,6 +63,7 @@ abstract class SamlConstants
 
     const CONFIRMATION_METHOD_BEARER = 'urn:oasis:names:tc:SAML:2.0:cm:bearer';
     const CONFIRMATION_METHOD_HOK = 'urn:oasis:names:tc:SAML:2.0:cm:holder-of-key';
+    const CONFIRMATION_METHOD_SENDER_VOUCHES = 'urn:oasis:names:tc:SAML:2.0:cm:sender-vouches';
 
     const AUTHN_CONTEXT_PASSWORD = 'urn:oasis:names:tc:SAML:2.0:ac:classes:Password';
     const AUTHN_CONTEXT_UNSPECIFIED = 'urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified';
@@ -76,6 +78,8 @@ abstract class SamlConstants
     const LOGOUT_REASON_SP_TIMEOUT = 'urn:oasis:names:tc:SAML:2.0:logout:sp-timeout';
 
     const XMLDSIG_DIGEST_MD5 = 'http://www.w3.org/2001/04/xmldsig-more#md5';
+
+    const ATTRIBUTE_NAME_FORMAT_UNSPECIFIED = 'urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified';
 
     /**
      * @param string $value
