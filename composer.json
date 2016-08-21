@@ -4,7 +4,7 @@
     "type": "library",
     "description": "Light SAML 2.0 PHP library",
     "keywords": ["SAML 2.0", "PHP", "library", "lightSAML", "Single SignOn", "Single Logout"],
-    "homepage": "http://www.lightsaml.com/",
+    "homepage": "https://www.lightsaml.com/",
     "authors": [
         {
             "name": "Milos Tomic",
