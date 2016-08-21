@@ -25,7 +25,7 @@ class FileEntityDescriptorStore implements EntityDescriptorStoreInterface
     /**
      * @param string $filename
      */
-    public function __construct($filename)
+    public function __construct($filename, $content = null)
     {
         $this->filename = $filename;
     }
@@ -80,10 +80,19 @@ class FileEntityDescriptorStore implements EntityDescriptorStoreInterface
 
     private function load()
     {
-        try {
-            $this->object = EntityDescriptor::load($this->filename);
-        } catch (LightSamlXmlException $ex) {
-            $this->object = EntitiesDescriptor::load($this->filename);
+        if (is_null($this->filecontent)) {
+            try {
+                $this->object = EntityDescriptor::load($this->filename);
+            } catch (LightSamlXmlException $ex) {
+                $this->object = EntitiesDescriptor::load($this->filename);
+            }
+        }
+        else {
+            try {
+                $this->object = EntitiesDescriptor::loadXml($this->filecontent);
+            } catch (LightSamlXmlException $ex) {
+                $this->object = EntityDescriptor::loadXml($this->filecontent);
+            }
         }
     }
 }
