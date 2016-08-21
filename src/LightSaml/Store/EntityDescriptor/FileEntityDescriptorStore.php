@@ -54,7 +54,7 @@ class FileEntityDescriptorStore implements EntityDescriptorStoreInterface
             if ($this->object->getEntityID() == $entityId) {
                 return $this->object;
             } else {
-                return null;
+                return;
             }
         } else {
             return $this->object->getByEntityId($entityId);
@@ -95,8 +95,7 @@ class FileEntityDescriptorStore implements EntityDescriptorStoreInterface
             } catch (LightSamlXmlException $ex) {
                 $this->object = EntitiesDescriptor::load($this->filename);
             }
-        }
-        else {
+        } else {
             try {
                 $this->object = EntitiesDescriptor::loadXml($this->filecontent);
             } catch (LightSamlXmlException $ex) {
