@@ -17,7 +17,15 @@ use LightSaml\Model\Metadata\EntityDescriptor;
 
 class FileEntityDescriptorStore implements EntityDescriptorStoreInterface
 {
+    /**
+     * @var string
+     */
     private $filename;
+
+    /**
+     * @var string
+     */
+    private $filecontent;
 
     /** @var EntityDescriptor|EntitiesDescriptor */
     private $object;
@@ -28,6 +36,7 @@ class FileEntityDescriptorStore implements EntityDescriptorStoreInterface
     public function __construct($filename, $content = null)
     {
         $this->filename = $filename;
+        $this->filecontent = $content;
     }
 
     /**
