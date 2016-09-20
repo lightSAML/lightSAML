@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 
 class AssertionValidatorAction extends AbstractAssertionAction
 {
-    /** @var  AssertionValidatorInterface */
+    /** @var AssertionValidatorInterface */
     protected $assertionValidator;
 
     /**

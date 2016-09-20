@@ -15,7 +15,7 @@ use LightSaml\Criteria\CriteriaInterface;
 
 class ServiceTypeCriteria implements CriteriaInterface
 {
-    /** @var  string */
+    /** @var string */
     protected $serviceType;
 
     /**

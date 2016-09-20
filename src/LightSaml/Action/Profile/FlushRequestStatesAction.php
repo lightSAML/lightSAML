@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 
 class FlushRequestStatesAction extends AbstractProfileAction
 {
-    /** @var  RequestStateStoreInterface */
+    /** @var RequestStateStoreInterface */
     protected $requestStore;
 
     /**

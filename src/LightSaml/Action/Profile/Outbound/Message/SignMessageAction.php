@@ -26,7 +26,7 @@ use Psr\Log\LoggerInterface;
  */
 class SignMessageAction extends AbstractProfileAction
 {
-    /** @var  SignatureResolverInterface */
+    /** @var SignatureResolverInterface */
     protected $signatureResolver;
 
     /**

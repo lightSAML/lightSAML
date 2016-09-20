@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 
 class AssertBindingTypeAction extends AbstractProfileAction
 {
-    /** @var  string[] */
+    /** @var string[] */
     protected $expectedBindingTypes;
 
     /**

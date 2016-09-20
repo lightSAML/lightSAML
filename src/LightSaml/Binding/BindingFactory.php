@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BindingFactory implements BindingFactoryInterface
 {
-    /** @var  EventDispatcherInterface|null */
+    /** @var EventDispatcherInterface|null */
     protected $eventDispatcher;
 
     /**

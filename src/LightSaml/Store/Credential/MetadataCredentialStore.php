@@ -21,7 +21,7 @@ use LightSaml\Credential\X509Credential;
 
 class MetadataCredentialStore implements CredentialStoreInterface
 {
-    /** @var  EntityDescriptorStoreInterface */
+    /** @var EntityDescriptorStoreInterface */
     protected $entityDescriptorProvider;
 
     /**

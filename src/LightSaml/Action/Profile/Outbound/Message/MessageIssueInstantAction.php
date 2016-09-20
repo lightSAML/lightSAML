@@ -23,7 +23,7 @@ use Psr\Log\LoggerInterface;
  */
 class MessageIssueInstantAction extends AbstractProfileAction
 {
-    /** @var  TimeProviderInterface */
+    /** @var TimeProviderInterface */
     protected $timeProvider;
 
     /**

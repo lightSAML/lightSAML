@@ -15,7 +15,7 @@ use LightSaml\Criteria\CriteriaInterface;
 
 class LocationCriteria implements CriteriaInterface
 {
-    /** @var  string */
+    /** @var string */
     protected $location;
 
     /**

@@ -18,10 +18,10 @@ class MetadataCriteria implements TrustCriteriaInterface
     const TYPE_IDP = 'idp';
     const TYPE_SP = 'sp';
 
-    /** @var  string */
+    /** @var string */
     protected $metadataType;
 
-    /** @var  string */
+    /** @var string */
     protected $protocol;
 
     /**

@@ -15,7 +15,7 @@ use LightSaml\State\Sso\SsoState;
 
 class SsoStateFixedStore implements SsoStateStoreInterface
 {
-    /** @var  SsoState */
+    /** @var SsoState */
     protected $ssoState;
 
     /**

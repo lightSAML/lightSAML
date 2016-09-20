@@ -26,7 +26,7 @@ use Psr\Log\LoggerInterface;
 
 abstract class AbstractDestinationValidatorAction extends AbstractProfileAction
 {
-    /** @var  EndpointResolverInterface */
+    /** @var EndpointResolverInterface */
     protected $endpointResolver;
 
     /**

@@ -18,10 +18,10 @@ use LightSaml\SamlConstants;
 
 class StatusCode extends AbstractSamlModel
 {
-    /** @var  string */
+    /** @var string */
     protected $value;
 
-    /** @var  StatusCode|null */
+    /** @var StatusCode|null */
     protected $statusCode;
 
     /**

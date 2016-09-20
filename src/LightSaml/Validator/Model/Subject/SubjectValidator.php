@@ -20,7 +20,7 @@ use LightSaml\Validator\Model\NameId\NameIdValidatorInterface;
 
 class SubjectValidator implements SubjectValidatorInterface
 {
-    /** @var  NameIdValidatorInterface */
+    /** @var NameIdValidatorInterface */
     protected $nameIdValidator;
 
     /**

@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 
 class AssertionIssuerFormatValidatorAction extends AbstractAssertionAction
 {
-    /** @var  string */
+    /** @var string */
     private $expectedIssuerFormat = SamlConstants::NAME_ID_FORMAT_ENTITY;
 
     /**

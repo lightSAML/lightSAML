@@ -16,10 +16,10 @@ use LightSaml\Model\Context\SerializationContext;
 
 class IndexedEndpoint extends Endpoint
 {
-    /** @var  int */
+    /** @var int */
     protected $index;
 
-    /** @var  bool|null */
+    /** @var bool|null */
     protected $isDefault;
 
     /**

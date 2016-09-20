@@ -13,7 +13,7 @@ namespace LightSaml\Store\Id;
 
 class IdArrayStore implements IdStoreInterface
 {
-    /** @var array  */
+    /** @var array */
     protected $store = array();
 
     /**

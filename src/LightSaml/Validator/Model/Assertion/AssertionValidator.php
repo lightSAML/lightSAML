@@ -27,13 +27,13 @@ use LightSaml\Validator\Model\Subject\SubjectValidatorInterface;
 
 class AssertionValidator implements AssertionValidatorInterface
 {
-    /** @var  NameIdValidatorInterface */
+    /** @var NameIdValidatorInterface */
     protected $nameIdValidator;
 
-    /** @var  SubjectValidatorInterface */
+    /** @var SubjectValidatorInterface */
     protected $subjectValidator;
 
-    /** @var  StatementValidatorInterface */
+    /** @var StatementValidatorInterface */
     protected $statementValidator;
 
     /**

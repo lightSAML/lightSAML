@@ -19,13 +19,13 @@ use Psr\Log\LoggerInterface;
 
 class TimeValidatorAction extends AbstractAssertionAction
 {
-    /** @var  AssertionTimeValidatorInterface */
+    /** @var AssertionTimeValidatorInterface */
     protected $assertionTimeValidator;
 
-    /** @var  TimeProviderInterface */
+    /** @var TimeProviderInterface */
     protected $timeProvider;
 
-    /** @var int  */
+    /** @var int */
     protected $allowedSecondsSkew;
 
     /**

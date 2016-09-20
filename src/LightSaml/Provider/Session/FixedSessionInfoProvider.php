@@ -13,13 +13,13 @@ namespace LightSaml\Provider\Session;
 
 class FixedSessionInfoProvider implements SessionInfoProviderInterface
 {
-    /** @var  int */
+    /** @var int */
     protected $authnInstant;
 
-    /** @var  string */
+    /** @var string */
     protected $sessionIndex;
 
-    /** @var  string */
+    /** @var string */
     protected $authnContextClassRef;
 
     /**

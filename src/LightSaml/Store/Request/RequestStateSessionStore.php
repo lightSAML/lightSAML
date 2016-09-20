@@ -15,13 +15,13 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class RequestStateSessionStore extends AbstractRequestStateArrayStore
 {
-    /** @var \Symfony\Component\HttpFoundation\Session\SessionInterface  */
+    /** @var \Symfony\Component\HttpFoundation\Session\SessionInterface */
     protected $session;
 
-    /** @var string  */
+    /** @var string */
     protected $providerId;
 
-    /** @var string  */
+    /** @var string */
     protected $prefix;
 
     /**

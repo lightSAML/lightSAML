@@ -23,7 +23,7 @@ use LightSaml\Credential\Criteria\UsageCriteria;
 
 class SignatureValidator implements SignatureValidatorInterface
 {
-    /** @var  CredentialResolverInterface */
+    /** @var CredentialResolverInterface */
     protected $credentialResolver;
 
     /**

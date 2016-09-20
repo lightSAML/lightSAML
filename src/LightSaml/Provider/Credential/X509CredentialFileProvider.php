@@ -29,7 +29,7 @@ class X509CredentialFileProvider implements CredentialProviderInterface
     /** @var string */
     private $privateKeyPassword;
 
-    /** @var  X509Credential */
+    /** @var X509Credential */
     private $credential;
 
     /**

@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
  */
 class MessageVersionAction extends AbstractProfileAction
 {
-    /** @var  string */
+    /** @var string */
     private $version;
 
     /**

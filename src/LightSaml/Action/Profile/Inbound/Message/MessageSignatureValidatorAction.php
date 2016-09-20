@@ -26,7 +26,7 @@ use Psr\Log\LoggerInterface;
  */
 class MessageSignatureValidatorAction extends AbstractProfileAction
 {
-    /** @var  SignatureValidatorInterface */
+    /** @var SignatureValidatorInterface */
     protected $signatureValidator;
 
     /**

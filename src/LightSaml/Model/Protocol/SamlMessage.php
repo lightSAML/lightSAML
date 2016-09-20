@@ -32,19 +32,19 @@ abstract class SamlMessage extends AbstractSamlModel
     /** @var int */
     protected $issueInstant;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $destination;
 
     /** @var Issuer|null */
     protected $issuer;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $consent;
 
-    /** @var  Signature|null */
+    /** @var Signature|null */
     protected $signature;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $relayState;
 
     /**

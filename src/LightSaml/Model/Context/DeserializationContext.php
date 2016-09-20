@@ -16,10 +16,10 @@ use RobRichards\XMLSecLibs\XMLSecEnc;
 
 class DeserializationContext
 {
-    /** @var  \DOMDocument */
+    /** @var \DOMDocument */
     private $document;
 
-    /** @var  \DOMXPath */
+    /** @var \DOMXPath */
     private $xpath;
 
     /**

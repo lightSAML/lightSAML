@@ -15,7 +15,7 @@ use LightSaml\Model\Metadata\EntityDescriptor;
 
 class FixedEntityDescriptorProvider implements EntityDescriptorProviderInterface
 {
-    /** @var  EntityDescriptor */
+    /** @var EntityDescriptor */
     protected $entityDescriptor;
 
     /**

@@ -16,7 +16,7 @@ class ExceptionContext extends AbstractProfileContext
     /** @var \Exception */
     protected $exception;
 
-    /** @var  ExceptionContext|null */
+    /** @var ExceptionContext|null */
     protected $nextExceptionContext;
 
     /**

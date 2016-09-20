@@ -24,7 +24,7 @@ use LightSaml\Store\Credential\CredentialStoreInterface;
 
 class CredentialResolverFactory
 {
-    /** @var  CredentialStoreInterface */
+    /** @var CredentialStoreInterface */
     protected $credentialStore;
 
     /**

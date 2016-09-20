@@ -17,10 +17,10 @@ use LightSaml\SamlConstants;
 
 abstract class SSODescriptor extends RoleDescriptor
 {
-    /** @var  SingleLogoutService[] */
+    /** @var SingleLogoutService[] */
     protected $singleLogoutServices = array();
 
-    /** @var  string[]|null */
+    /** @var string[]|null */
     protected $nameIDFormats;
 
     /**

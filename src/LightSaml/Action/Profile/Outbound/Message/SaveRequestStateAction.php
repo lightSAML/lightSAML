@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 
 class SaveRequestStateAction extends AbstractProfileAction
 {
-    /** @var  RequestStateStoreInterface */
+    /** @var RequestStateStoreInterface */
     protected $requestStore;
 
     /**

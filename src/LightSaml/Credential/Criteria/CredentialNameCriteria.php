@@ -13,7 +13,7 @@ namespace LightSaml\Credential\Criteria;
 
 class CredentialNameCriteria implements TrustCriteriaInterface
 {
-    /** @var  string */
+    /** @var string */
     protected $name;
 
     /**

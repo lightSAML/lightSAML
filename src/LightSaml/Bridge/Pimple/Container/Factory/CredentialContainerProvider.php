@@ -22,10 +22,10 @@ use Pimple\ServiceProviderInterface;
 
 class CredentialContainerProvider implements ServiceProviderInterface
 {
-    /** @var  PartyContainerInterface */
+    /** @var PartyContainerInterface */
     private $partyContainer;
 
-    /** @var  OwnContainerInterface */
+    /** @var OwnContainerInterface */
     private $ownContainer;
 
     /** @var CredentialInterface[] */

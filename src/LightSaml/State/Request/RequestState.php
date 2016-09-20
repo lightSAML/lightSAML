@@ -13,10 +13,10 @@ namespace LightSaml\State\Request;
 
 class RequestState implements \Serializable
 {
-    /** @var  string */
+    /** @var string */
     protected $id;
 
-    /** @var  mixed */
+    /** @var mixed */
     protected $nonce;
 
     /**
@@ -83,7 +83,7 @@ class RequestState implements \Serializable
     }
 
     /**
-     * @param string $serialized The string representation of the object.
+     * @param string $serialized The string representation of the object
      *
      * @return void
      */

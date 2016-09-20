@@ -37,7 +37,7 @@ class BuildContainer extends AbstractPimpleContainer implements BuildContainerIn
     /** @var CredentialContainerInterface */
     private $credentialContainer;
 
-    /** @var  ServiceContainerInterface */
+    /** @var ServiceContainerInterface */
     private $serviceContainer;
 
     /** @var OwnContainerInterface */

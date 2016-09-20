@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractBinding
 {
-    /** @var  EventDispatcherInterface|null */
+    /** @var EventDispatcherInterface|null */
     protected $eventDispatcher;
 
     /**

@@ -15,7 +15,7 @@ use LightSaml\Model\Protocol\StatusResponse;
 
 class LightSamlAuthenticationException extends LightSamlValidationException
 {
-    /** @var StatusResponse  */
+    /** @var StatusResponse */
     protected $response;
 
     /**

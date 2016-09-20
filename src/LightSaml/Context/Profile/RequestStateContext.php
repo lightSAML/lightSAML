@@ -15,7 +15,7 @@ use LightSaml\State\Request\RequestState;
 
 class RequestStateContext extends AbstractProfileContext
 {
-    /** @var  RequestState */
+    /** @var RequestState */
     protected $requestState;
 
     /**

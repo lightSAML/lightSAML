@@ -24,10 +24,10 @@ class EncryptedElementReader extends EncryptedElement
     /** @var XMLSecEnc */
     protected $xmlEnc;
 
-    /** @var  XMLSecurityKey */
+    /** @var XMLSecurityKey */
     protected $symmetricKey;
 
-    /** @var  XMLSecurityKey */
+    /** @var XMLSecurityKey */
     protected $symmetricKeyInfo;
 
     /**

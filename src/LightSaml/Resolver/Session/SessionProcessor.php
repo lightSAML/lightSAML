@@ -19,10 +19,10 @@ use LightSaml\Store\Sso\SsoStateStoreInterface;
 
 class SessionProcessor implements SessionProcessorInterface
 {
-    /** @var  SsoStateStoreInterface */
+    /** @var SsoStateStoreInterface */
     protected $ssoStateStore;
 
-    /** @var  TimeProviderInterface */
+    /** @var TimeProviderInterface */
     protected $timeProvider;
 
     /**

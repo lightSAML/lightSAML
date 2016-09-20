@@ -18,7 +18,7 @@ use LightSaml\Credential\Criteria\EntityIdCriteria;
 
 class EntityIdResolver extends AbstractQueryableResolver
 {
-    /** @var  CredentialStoreInterface */
+    /** @var CredentialStoreInterface */
     protected $credentialStore;
 
     /**

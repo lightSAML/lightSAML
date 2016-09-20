@@ -21,7 +21,7 @@ use Psr\Log\LoggerInterface;
 
 class AssertionAction extends AbstractProfileAction implements DebugPrintTreeActionInterface
 {
-    /** @var  ActionInterface */
+    /** @var ActionInterface */
     private $assertionAction;
 
     /**

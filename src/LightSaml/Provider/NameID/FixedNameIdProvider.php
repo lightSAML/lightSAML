@@ -16,7 +16,7 @@ use LightSaml\Model\Assertion\NameID;
 
 class FixedNameIdProvider implements NameIdProviderInterface
 {
-    /** @var  NameID|null */
+    /** @var NameID|null */
     protected $nameId;
 
     /**

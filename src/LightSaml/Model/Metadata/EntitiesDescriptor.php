@@ -19,19 +19,19 @@ use LightSaml\SamlConstants;
 
 class EntitiesDescriptor extends Metadata
 {
-    /** @var  int */
+    /** @var int */
     protected $validUntil;
 
-    /** @var  string */
+    /** @var string */
     protected $cacheDuration;
 
-    /** @var  string */
+    /** @var string */
     protected $id;
 
-    /** @var  string */
+    /** @var string */
     protected $name;
 
-    /** @var  Signature */
+    /** @var Signature */
     protected $signature;
 
     /** @var EntitiesDescriptor[]|EntityDescriptor[] */

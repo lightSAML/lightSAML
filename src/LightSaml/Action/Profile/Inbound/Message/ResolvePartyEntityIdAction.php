@@ -25,13 +25,13 @@ use Psr\Log\LoggerInterface;
  */
 class ResolvePartyEntityIdAction extends AbstractProfileAction
 {
-    /** @var  EntityDescriptorStoreInterface */
+    /** @var EntityDescriptorStoreInterface */
     private $spEntityDescriptorProvider;
 
-    /** @var  EntityDescriptorStoreInterface */
+    /** @var EntityDescriptorStoreInterface */
     private $idpEntityDescriptorProvider;
 
-    /** @var  TrustOptionsStoreInterface */
+    /** @var TrustOptionsStoreInterface */
     protected $trustOptionsProvider;
 
     /**

@@ -29,7 +29,7 @@ use Psr\Log\LoggerInterface;
 
 class DecryptAssertionsAction extends AbstractProfileAction
 {
-    /** @var  CredentialResolverInterface */
+    /** @var CredentialResolverInterface */
     protected $credentialResolver;
 
     /**

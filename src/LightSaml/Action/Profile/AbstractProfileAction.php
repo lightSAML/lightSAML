@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 
 abstract class AbstractProfileAction implements ActionInterface
 {
-    /** @var  LoggerInterface */
+    /** @var LoggerInterface */
     protected $logger;
 
     /**

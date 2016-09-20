@@ -13,7 +13,7 @@ namespace LightSaml\Resolver\Credential;
 
 abstract class AbstractCompositeResolver extends AbstractQueryableResolver
 {
-    /** @var  CredentialResolverInterface[] */
+    /** @var CredentialResolverInterface[] */
     protected $resolvers = array();
 
     /**

@@ -17,13 +17,13 @@ use LightSaml\SamlConstants;
 
 class SpSsoDescriptor extends SSODescriptor
 {
-    /** @var  bool|null */
+    /** @var bool|null */
     protected $authnRequestsSigned;
 
-    /** @var  bool|null */
+    /** @var bool|null */
     protected $wantAssertionsSigned;
 
-    /** @var  AssertionConsumerService[]|null */
+    /** @var AssertionConsumerService[]|null */
     protected $assertionConsumerServices;
 
     /**

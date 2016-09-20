@@ -26,7 +26,7 @@ use Psr\Log\LoggerInterface;
  */
 class RepeatedIdValidatorAction extends AbstractAssertionAction
 {
-    /** @var  IdStoreInterface */
+    /** @var IdStoreInterface */
     protected $idStore;
 
     /**

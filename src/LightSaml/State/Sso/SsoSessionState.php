@@ -15,31 +15,31 @@ use LightSaml\Error\LightSamlException;
 
 class SsoSessionState implements \Serializable
 {
-    /** @var  string */
+    /** @var string */
     protected $idpEntityId;
 
-    /** @var  string */
+    /** @var string */
     protected $spEntityId;
 
-    /** @var  string */
+    /** @var string */
     protected $nameId;
 
-    /** @var  string */
+    /** @var string */
     protected $nameIdFormat;
 
-    /** @var  string */
+    /** @var string */
     protected $sessionIndex;
 
-    /** @var  \DateTime */
+    /** @var \DateTime */
     protected $sessionInstant;
 
-    /** @var  \DateTime */
+    /** @var \DateTime */
     protected $firstAuthOn;
 
-    /** @var  \DateTime */
+    /** @var \DateTime */
     protected $lastAuthOn;
 
-    /** @var  array */
+    /** @var array */
     protected $options = [];
 
     /**

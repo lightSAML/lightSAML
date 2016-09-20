@@ -22,25 +22,25 @@ class EntityDescriptor extends Metadata
     /** @var string */
     protected $entityID;
 
-    /** @var  int|null */
+    /** @var int|null */
     protected $validUntil;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $cacheDuration;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $id;
 
-    /** @var  Signature|null */
+    /** @var Signature|null */
     protected $signature;
 
     /** @var IdpSsoDescriptor[]|SpSsoDescriptor[] */
     protected $items;
 
-    /** @var  Organization[]|null */
+    /** @var Organization[]|null */
     protected $organizations;
 
-    /** @var  ContactPerson[]|null */
+    /** @var ContactPerson[]|null */
     protected $contactPersons;
 
     /**

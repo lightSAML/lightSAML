@@ -13,10 +13,10 @@ namespace LightSaml\State\Sso;
 
 class SsoState implements \Serializable
 {
-    /** @var  string */
+    /** @var string */
     protected $localSessionId;
 
-    /** @var  array */
+    /** @var array */
     protected $options = [];
 
     /** @var SsoSessionState[] */

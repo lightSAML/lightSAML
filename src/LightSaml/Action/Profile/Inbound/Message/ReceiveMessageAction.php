@@ -24,7 +24,7 @@ use Psr\Log\LoggerInterface;
  */
 class ReceiveMessageAction extends AbstractProfileAction
 {
-    /** @var  BindingFactoryInterface */
+    /** @var BindingFactoryInterface */
     protected $bindingFactory;
 
     /**

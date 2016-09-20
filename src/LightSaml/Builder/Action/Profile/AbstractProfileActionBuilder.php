@@ -17,7 +17,7 @@ use LightSaml\Error\LightSamlBuildException;
 
 abstract class AbstractProfileActionBuilder extends CompositeActionBuilder
 {
-    /** @var  BuildContainerInterface */
+    /** @var BuildContainerInterface */
     protected $buildContainer;
 
     /** @var bool */

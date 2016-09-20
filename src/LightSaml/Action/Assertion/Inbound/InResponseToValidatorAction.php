@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 
 class InResponseToValidatorAction extends AbstractAssertionAction
 {
-    /** @var  RequestStateStoreInterface */
+    /** @var RequestStateStoreInterface */
     protected $requestStore;
 
     /**

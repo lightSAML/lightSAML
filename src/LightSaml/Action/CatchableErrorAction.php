@@ -17,10 +17,10 @@ use LightSaml\Context\Profile\ProfileContexts;
 
 class CatchableErrorAction implements ActionInterface
 {
-    /** @var  ActionInterface */
+    /** @var ActionInterface */
     protected $mainAction;
 
-    /** @var  ActionInterface */
+    /** @var ActionInterface */
     protected $errorAction;
 
     /**

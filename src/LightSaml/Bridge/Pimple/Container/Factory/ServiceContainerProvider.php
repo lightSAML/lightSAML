@@ -37,13 +37,13 @@ use Pimple\ServiceProviderInterface;
 
 class ServiceContainerProvider implements ServiceProviderInterface
 {
-    /** @var  CredentialContainerInterface */
+    /** @var CredentialContainerInterface */
     private $credentialContainer;
 
     /** @var SystemContainerInterface */
     private $systemContainer;
 
-    /** @var  StoreContainerInterface */
+    /** @var StoreContainerInterface */
     private $storeContainer;
 
     /**

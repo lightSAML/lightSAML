@@ -24,7 +24,7 @@ class ProfileContextBuilder
     /** @var EntityDescriptorProviderInterface */
     private $ownEntityDescriptorProvider;
 
-    /** @var  int */
+    /** @var int */
     private $profileId;
 
     /** @var string */

@@ -20,10 +20,10 @@ use Pimple\ServiceProviderInterface;
 
 class OwnContainerProvider implements ServiceProviderInterface
 {
-    /** @var  CredentialInterface[] */
+    /** @var CredentialInterface[] */
     private $ownCredentials = array();
 
-    /** @var  EntityDescriptorProviderInterface */
+    /** @var EntityDescriptorProviderInterface */
     private $ownEntityDescriptorProvider;
 
     /**

@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 
 class SendMessageAction extends AbstractProfileAction
 {
-    /** @var  BindingFactoryInterface */
+    /** @var BindingFactoryInterface */
     protected $bindingFactory;
 
     /**

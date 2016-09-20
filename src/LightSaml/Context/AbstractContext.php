@@ -13,7 +13,7 @@ namespace LightSaml\Context;
 
 abstract class AbstractContext implements ContextInterface
 {
-    /** @var  ContextInterface|null */
+    /** @var ContextInterface|null */
     private $parent;
 
     /** @var ContextInterface[] */

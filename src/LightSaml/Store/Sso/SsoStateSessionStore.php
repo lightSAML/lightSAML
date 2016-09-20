@@ -16,10 +16,10 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SsoStateSessionStore implements SsoStateStoreInterface
 {
-    /** @var  SessionInterface */
+    /** @var SessionInterface */
     protected $session;
 
-    /** @var  string */
+    /** @var string */
     protected $key;
 
     /**

@@ -17,13 +17,13 @@ use LightSaml\Model\AbstractSamlModel;
 
 abstract class Endpoint extends AbstractSamlModel
 {
-    /** @var  string */
+    /** @var string */
     protected $binding;
 
-    /** @var  string */
+    /** @var string */
     protected $location;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $responseLocation;
 
     /**

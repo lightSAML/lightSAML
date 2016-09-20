@@ -15,7 +15,7 @@ use LightSaml\Criteria\CriteriaInterface;
 
 class DescriptorTypeCriteria implements CriteriaInterface
 {
-    /** @var  string */
+    /** @var string */
     protected $descriptorType;
 
     /**

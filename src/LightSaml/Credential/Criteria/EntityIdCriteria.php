@@ -13,7 +13,7 @@ namespace LightSaml\Credential\Criteria;
 
 class EntityIdCriteria implements TrustCriteriaInterface
 {
-    /** @var  string */
+    /** @var string */
     protected $entityId;
 
     /**

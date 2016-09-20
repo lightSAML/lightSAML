@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 
 class KnownAssertionIssuerAction extends AbstractAssertionAction
 {
-    /** @var  EntityDescriptorStoreInterface */
+    /** @var EntityDescriptorStoreInterface */
     private $idpEntityDescriptorProvider;
 
     /**

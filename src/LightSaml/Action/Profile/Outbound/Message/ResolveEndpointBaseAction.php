@@ -34,7 +34,7 @@ use Psr\Log\LoggerInterface;
  */
 abstract class ResolveEndpointBaseAction extends AbstractProfileAction
 {
-    /** @var  EndpointResolverInterface */
+    /** @var EndpointResolverInterface */
     protected $endpointResolver;
 
     /**

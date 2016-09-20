@@ -15,7 +15,7 @@ use LightSaml\Model\Metadata\Endpoint;
 
 class EndpointContext extends AbstractProfileContext
 {
-    /** @var  Endpoint */
+    /** @var Endpoint */
     private $endpoint;
 
     /**

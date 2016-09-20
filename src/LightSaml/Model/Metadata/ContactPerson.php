@@ -24,22 +24,22 @@ class ContactPerson extends AbstractSamlModel
     const TYPE_BILLING = 'billing';
     const TYPE_OTHER = 'other';
 
-    /** @var  string */
+    /** @var string */
     protected $contactType;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $company;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $givenName;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $surName;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $emailAddress;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $telephoneNumber;
 
     /**

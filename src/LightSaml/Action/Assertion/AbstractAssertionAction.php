@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 
 abstract class AbstractAssertionAction implements ActionInterface
 {
-    /** @var  LoggerInterface */
+    /** @var LoggerInterface */
     protected $logger;
 
     /**

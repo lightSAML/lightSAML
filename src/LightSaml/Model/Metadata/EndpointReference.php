@@ -13,13 +13,13 @@ namespace LightSaml\Model\Metadata;
 
 class EndpointReference
 {
-    /** @var  EntityDescriptor */
+    /** @var EntityDescriptor */
     protected $entityDescriptor;
 
     /** @var RoleDescriptor */
     protected $descriptor;
 
-    /** @var  Endpoint */
+    /** @var Endpoint */
     protected $endpoint;
 
     /**

@@ -15,7 +15,7 @@ use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class X509Credential extends AbstractCredential implements X509CredentialInterface
 {
-    /** @var  X509Certificate */
+    /** @var X509Certificate */
     protected $certificate;
 
     /**

@@ -22,10 +22,10 @@ use Psr\Log\LoggerInterface;
 
 class IssuerValidatorAction extends AbstractProfileAction
 {
-    /** @var  NameIdValidatorInterface */
+    /** @var NameIdValidatorInterface */
     protected $nameIdValidator;
 
-    /** @var  string */
+    /** @var string */
     protected $allowedFormat;
 
     /**

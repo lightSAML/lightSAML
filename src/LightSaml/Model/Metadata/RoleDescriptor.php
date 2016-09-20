@@ -20,31 +20,31 @@ use LightSaml\SamlConstants;
 
 abstract class RoleDescriptor extends AbstractSamlModel
 {
-    /** @var  string|null */
+    /** @var string|null */
     protected $id;
 
-    /** @var  int|null */
+    /** @var int|null */
     protected $validUntil;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $cacheDuration;
 
-    /** @var  string */
+    /** @var string */
     protected $protocolSupportEnumeration = SamlConstants::PROTOCOL_SAML2;
 
-    /** @var  string|null */
+    /** @var string|null */
     protected $errorURL;
 
-    /** @var  Signature[]|null */
+    /** @var Signature[]|null */
     protected $signatures;
 
-    /** @var  KeyDescriptor[]|null */
+    /** @var KeyDescriptor[]|null */
     protected $keyDescriptors;
 
-    /** @var  Organization[]|null */
+    /** @var Organization[]|null */
     protected $organizations;
 
-    /** @var  ContactPerson[]|null */
+    /** @var ContactPerson[]|null */
     protected $contactPersons;
 
     /**

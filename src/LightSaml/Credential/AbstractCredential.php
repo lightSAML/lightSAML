@@ -16,25 +16,25 @@ use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 abstract class AbstractCredential implements CredentialInterface
 {
-    /** @var  string */
+    /** @var string */
     private $entityId;
 
-    /** @var  string */
+    /** @var string */
     private $usageType;
 
-    /** @var  string[] */
+    /** @var string[] */
     private $keyNames = array();
 
-    /** @var  XMLSecurityKey|null */
+    /** @var XMLSecurityKey|null */
     private $publicKey;
 
-    /** @var  XMLSecurityKey|null */
+    /** @var XMLSecurityKey|null */
     private $privateKey;
 
-    /** @var  string|null */
+    /** @var string|null */
     private $secretKey;
 
-    /** @var  CredentialContextSet */
+    /** @var CredentialContextSet */
     private $credentialContext;
 
     public function __construct()

@@ -17,10 +17,10 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 class DispatchEventAction implements ActionInterface
 {
-    /** @var  EventDispatcherInterface */
+    /** @var EventDispatcherInterface */
     protected $eventDispatcher;
 
-    /** @var  string */
+    /** @var string */
     protected $event;
 
     /**

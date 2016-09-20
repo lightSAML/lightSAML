@@ -16,10 +16,10 @@ use LightSaml\Credential\CredentialInterface;
 
 class CredentialResolverQuery extends CriteriaSet
 {
-    /** @var  CredentialResolverInterface */
+    /** @var CredentialResolverInterface */
     private $resolver;
 
-    /** @var  CredentialInterface[] */
+    /** @var CredentialInterface[] */
     private $arrCredentials;
 
     /**

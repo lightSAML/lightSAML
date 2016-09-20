@@ -19,7 +19,7 @@ class AssertionContext extends AbstractProfileContext
     /** @var Assertion|null */
     private $assertion;
 
-    /** @var  EncryptedElement|null */
+    /** @var EncryptedElement|null */
     private $encryptedAssertion;
 
     /** @var string */

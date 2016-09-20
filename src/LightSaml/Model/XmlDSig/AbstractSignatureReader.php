@@ -18,7 +18,7 @@ use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 abstract class AbstractSignatureReader extends Signature
 {
-    /** @var  XMLSecurityKey|null */
+    /** @var XMLSecurityKey|null */
     protected $key;
 
     /**

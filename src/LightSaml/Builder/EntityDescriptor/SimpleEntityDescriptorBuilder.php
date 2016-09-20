@@ -24,16 +24,16 @@ use LightSaml\Credential\X509Certificate;
 
 class SimpleEntityDescriptorBuilder implements EntityDescriptorProviderInterface
 {
-    /** @var  string */
+    /** @var string */
     protected $entityId;
 
-    /** @var  string */
+    /** @var string */
     protected $acsUrl;
 
-    /** @var  string[] */
+    /** @var string[] */
     protected $acsBindings;
 
-    /** @var  string */
+    /** @var string */
     protected $ssoUrl;
 
     /** @var string[] */
@@ -42,10 +42,10 @@ class SimpleEntityDescriptorBuilder implements EntityDescriptorProviderInterface
     /** @var string[]|null */
     protected $use;
 
-    /** @var  X509Certificate */
+    /** @var X509Certificate */
     protected $ownCertificate;
 
-    /** @var  EntityDescriptor */
+    /** @var EntityDescriptor */
     private $entityDescriptor;
 
     /**
