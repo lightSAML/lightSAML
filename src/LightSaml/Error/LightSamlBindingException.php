@@ -11,6 +11,6 @@
 
 namespace LightSaml\Error;
 
-class LightSamlBindingException extends \RuntimeException
+class LightSamlBindingException extends LightSamlException
 {
 }

@@ -25,6 +25,9 @@ class ProfileContext extends AbstractProfileContext
     /** @var string */
     private $ownRole;
 
+    /** @var string */
+    private $relayState;
+
     /**
      * @param string $profileId
      * @param string $ownRole
@@ -49,6 +52,26 @@ class ProfileContext extends AbstractProfileContext
     public function getOwnRole()
     {
         return $this->ownRole;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRelayState()
+    {
+        return $this->relayState;
+    }
+
+    /**
+     * @param string $relayState
+     *
+     * @return ProfileContext
+     */
+    public function setRelayState($relayState)
+    {
+        $this->relayState = $relayState;
+
+        return $this;
     }
 
     /**

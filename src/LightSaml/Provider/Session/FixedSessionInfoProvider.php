@@ -27,11 +27,47 @@ class FixedSessionInfoProvider implements SessionInfoProviderInterface
      * @param string $sessionIndex
      * @param string $authnContextClassRef
      */
-    public function __construct($authnInstant, $sessionIndex, $authnContextClassRef)
+    public function __construct($authnInstant = 0, $sessionIndex = null, $authnContextClassRef = null)
     {
         $this->authnInstant = $authnInstant;
         $this->sessionIndex = $sessionIndex;
         $this->authnContextClassRef = $authnContextClassRef;
+    }
+
+    /**
+     * @param int $authnInstant
+     *
+     * @return FixedSessionInfoProvider
+     */
+    public function setAuthnInstant($authnInstant)
+    {
+        $this->authnInstant = intval($authnInstant);
+
+        return $this;
+    }
+
+    /**
+     * @param string $sessionIndex
+     *
+     * @return FixedSessionInfoProvider
+     */
+    public function setSessionIndex($sessionIndex)
+    {
+        $this->sessionIndex = $sessionIndex;
+
+        return $this;
+    }
+
+    /**
+     * @param string $authnContextClassRef
+     *
+     * @return FixedSessionInfoProvider
+     */
+    public function setAuthnContextClassRef($authnContextClassRef)
+    {
+        $this->authnContextClassRef = $authnContextClassRef;
+
+        return $this;
     }
 
     /**

@@ -27,6 +27,13 @@ class ProfileContextTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(ProfileContext::ROLE_IDP, $profileContext->getOwnRole());
     }
 
+    public function test_gets_set_relay_state()
+    {
+        $profileContext = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
+        $profileContext->setRelayState($expected = 'some-state');
+        $this->assertEquals($expected, $profileContext->getRelayState());
+    }
+
     public function subContextCreationProvider()
     {
         return [

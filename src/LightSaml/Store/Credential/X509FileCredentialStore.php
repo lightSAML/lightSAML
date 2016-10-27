@@ -59,9 +59,10 @@ class X509FileCredentialStore implements CredentialStoreInterface
         }
 
         if (null == $this->credential) {
+            $certificate = X509Certificate::fromFile($this->certificatePath);
             $this->credential = new X509Credential(
-                X509Certificate::fromFile($this->certificatePath),
-                KeyHelper::createPrivateKey($this->keyPath, $this->password, true)
+                $certificate,
+                KeyHelper::createPrivateKey($this->keyPath, $this->password, true, KeyHelper::getXmlSecTypeFromCertificate($certificate))
             );
             $this->credential->setEntityId($this->entityId);
         }

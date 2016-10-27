@@ -22,10 +22,11 @@ class ForwardRelayStateAction extends AbstractProfileAction
             return;
         }
 
-        $this->logger->debug(sprintf('Forwarding relay state: "%s"', $context->getInboundMessage()->getRelayState()));
-
-        $context->getOutboundMessage()->setRelayState(
-            $context->getInboundMessage()->getRelayState()
-        );
+        if ($context->getInboundMessage()->getRelayState()) {
+            $this->logger->debug(sprintf('Forwarding relay state from inbound message: "%s"', $context->getInboundMessage()->getRelayState()));
+            $context->getOutboundMessage()->setRelayState(
+                $context->getInboundMessage()->getRelayState()
+            );
+        }
     }
 }

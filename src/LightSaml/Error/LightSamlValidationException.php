@@ -11,6 +11,6 @@
 
 namespace LightSaml\Error;
 
-class LightSamlValidationException extends \RuntimeException
+class LightSamlValidationException extends LightSamlException
 {
 }

@@ -32,6 +32,21 @@ class FixedAttributeValueProvider implements AttributeValueProviderInterface
     }
 
     /**
+     * @param \LightSaml\Model\Assertion\Attribute[] $attributes
+     *
+     * @return FixedAttributeValueProvider
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = [];
+        foreach ($attributes as $attribute) {
+            $this->add($attribute);
+        }
+
+        return $this;
+    }
+
+    /**
      * @param AssertionContext $context
      *
      * @return Attribute[]

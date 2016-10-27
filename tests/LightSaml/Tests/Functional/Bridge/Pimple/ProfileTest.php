@@ -120,16 +120,6 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \LightSaml\Error\LightSamlBuildException
-     * @expectedExceptionMessage Attribute name provider not set
-     */
-    public function test_attribute_name_provider_throws_exception()
-    {
-        $buildContainer = $this->getBuildContainer();
-        $buildContainer->getProviderContainer()->getAttributeNameProvider();
-    }
-
-    /**
-     * @expectedException \LightSaml\Error\LightSamlBuildException
      * @expectedExceptionMessage Session info provider not set
      */
     public function test_session_info_provider_throws_exception()
