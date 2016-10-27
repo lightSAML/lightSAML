@@ -15,7 +15,6 @@ use LightSaml\Credential\CredentialInterface;
 use LightSaml\Credential\X509Credential;
 use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
-use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class X509FileCredentialStore implements CredentialStoreInterface
 {
