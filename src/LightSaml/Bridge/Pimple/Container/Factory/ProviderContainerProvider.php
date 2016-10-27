@@ -27,10 +27,6 @@ class ProviderContainerProvider implements ServiceProviderInterface
             throw new LightSamlBuildException('Attribute value provider not set');
         };
 
-        $pimple[ProviderContainer::ATTRIBUTE_NAME_PROVIDER] = function () {
-            throw new LightSamlBuildException('Attribute name provider not set');
-        };
-
         $pimple[ProviderContainer::SESSION_INFO_PROVIDER] = function () {
             throw new LightSamlBuildException('Session info provider not set');
         };

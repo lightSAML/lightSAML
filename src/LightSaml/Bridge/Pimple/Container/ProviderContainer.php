@@ -12,7 +12,6 @@
 namespace LightSaml\Bridge\Pimple\Container;
 
 use LightSaml\Build\Container\ProviderContainerInterface;
-use LightSaml\Provider\Attribute\AttributeNameProviderInterface;
 use LightSaml\Provider\Attribute\AttributeValueProviderInterface;
 use LightSaml\Provider\NameID\NameIdProviderInterface;
 use LightSaml\Provider\Session\SessionInfoProviderInterface;
@@ -20,7 +19,6 @@ use LightSaml\Provider\Session\SessionInfoProviderInterface;
 class ProviderContainer extends AbstractPimpleContainer implements ProviderContainerInterface
 {
     const ATTRIBUTE_VALUE_PROVIDER = 'lightsaml.container.attribute_value_provider';
-    const ATTRIBUTE_NAME_PROVIDER = 'lightsaml.container.attribute_name_provider';
     const SESSION_INFO_PROVIDER = 'lightsaml.container.session_info_provider';
     const NAME_ID_PROVIDER = 'lightsaml.container.name_id_provider';
 
@@ -30,14 +28,6 @@ class ProviderContainer extends AbstractPimpleContainer implements ProviderConta
     public function getAttributeValueProvider()
     {
         return $this->pimple[self::ATTRIBUTE_VALUE_PROVIDER];
-    }
-
-    /**
-     * @return AttributeNameProviderInterface
-     */
-    public function getAttributeNameProvider()
-    {
-        return $this->pimple[self::ATTRIBUTE_NAME_PROVIDER];
     }
 
     /**
