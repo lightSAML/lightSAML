@@ -20,6 +20,7 @@ use LightSaml\Action\Profile\Outbound\Message\MessageIssueInstantAction;
 use LightSaml\Action\Profile\Outbound\Message\ResolveEndpointIdpSsoAction;
 use LightSaml\Action\Profile\Outbound\Message\SaveRequestStateAction;
 use LightSaml\Action\Profile\Outbound\Message\SendMessageAction;
+use LightSaml\Action\Profile\Outbound\Message\SetRelayStateAction;
 use LightSaml\Action\Profile\Outbound\Message\SignMessageAction;
 use LightSaml\Action\Profile\Outbound\Message\MessageVersionAction;
 use LightSaml\Builder\Action\Profile\AbstractProfileActionBuilder;
@@ -39,6 +40,9 @@ class SsoSpSendAuthnRequestActionBuilder extends AbstractProfileActionBuilder
             $this->buildContainer->getServiceContainer()->getEndpointResolver()
         ), 100);
         $this->add(new CreateAuthnRequestAction(
+            $this->buildContainer->getSystemContainer()->getLogger()
+        ));
+        $this->add(new SetRelayStateAction(
             $this->buildContainer->getSystemContainer()->getLogger()
         ));
         $this->add(new MessageIdAction(
