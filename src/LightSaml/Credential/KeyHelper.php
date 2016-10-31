@@ -16,13 +16,6 @@ use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class KeyHelper
 {
-    private static $typeMap = [
-        'RSA-SHA1' => XMLSecurityKey::RSA_SHA1,
-        'RSA-SHA256' => XMLSecurityKey::RSA_SHA256,
-        'RSA-SHA384' => XMLSecurityKey::RSA_SHA384,
-        'RSA-SHA512' => XMLSecurityKey::RSA_SHA512,
-    ];
-
     /**
      * @param string $key        Key content or key filename
      * @param string $passphrase Passphrase for the private key
@@ -38,23 +31,6 @@ class KeyHelper
         $result->loadKey($key, $isFile, false);
 
         return $result;
-    }
-
-    /**
-     * @param X509Certificate $certificate
-     * @param string          $default
-     *
-     * @return string One of XMLSecurityKey constants or default value if certificate signature type is unrecognized
-     */
-    public static function getXmlSecTypeFromCertificate(X509Certificate $certificate, $default = XMLSecurityKey::RSA_SHA1)
-    {
-        $info = $certificate->getInfo();
-        $signatureType = isset($info['signatureTypeSN']) ? $info['signatureTypeSN'] : '';
-        if ($signatureType && isset(self::$typeMap[$signatureType])) {
-            return self::$typeMap[$signatureType];
-        }
-
-        return $default;
     }
 
     /**

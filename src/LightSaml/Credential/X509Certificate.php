@@ -18,6 +18,13 @@ use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class X509Certificate
 {
+    private static $typeMap = [
+        'RSA-SHA1' => XMLSecurityKey::RSA_SHA1,
+        'RSA-SHA256' => XMLSecurityKey::RSA_SHA256,
+        'RSA-SHA384' => XMLSecurityKey::RSA_SHA384,
+        'RSA-SHA512' => XMLSecurityKey::RSA_SHA512,
+    ];
+
     /** @var string */
     protected $data;
 
@@ -116,33 +123,41 @@ class X509Certificate
 
         $res = openssl_x509_read($this->toPem());
         $this->info = openssl_x509_parse($res);
-        openssl_x509_export($res, $out, false);
         $this->signatureAlgorithm = null;
-        if (preg_match('/^\s+Signature Algorithm:\s*(.*)\s*$/m', $out, $match)) {
-            switch ($match[1]) {
-                case 'sha1WithRSAEncryption':
-                case 'sha1WithRSA':
-                    $this->signatureAlgorithm = XMLSecurityKey::RSA_SHA1;
-                    break;
-                case 'sha256WithRSAEncryption':
-                case 'sha256WithRSA':
-                    $this->signatureAlgorithm = XMLSecurityKey::RSA_SHA256;
-                    break;
-                case 'sha384WithRSAEncryption':
-                case 'sha384WithRSA':
-                    $this->signatureAlgorithm = XMLSecurityKey::RSA_SHA384;
-                    break;
-                case 'sha512WithRSAEncryption':
-                case 'sha512WithRSA':
-                    $this->signatureAlgorithm = XMLSecurityKey::RSA_SHA512;
-                    break;
-                case 'md5WithRSAEncryption':
-                case 'md5WithRSA':
-                    $this->signatureAlgorithm = SamlConstants::XMLDSIG_DIGEST_MD5;
-                    break;
-                default:
-                    throw new LightSamlSecurityException(sprintf('Unrecognized signature algorithm "%s"', $match[1]));
+        $signatureType = isset($info['signatureTypeSN']) ? $info['signatureTypeSN'] : '';
+        if ($signatureType && isset(self::$typeMap[$signatureType])) {
+            $this->signatureAlgorithm = self::$typeMap[$signatureType];
+        } else {
+            openssl_x509_export($res, $out, false);
+            if (preg_match('/^\s+Signature Algorithm:\s*(.*)\s*$/m', $out, $match)) {
+                switch ($match[1]) {
+                    case 'sha1WithRSAEncryption':
+                    case 'sha1WithRSA':
+                        $this->signatureAlgorithm = XMLSecurityKey::RSA_SHA1;
+                        break;
+                    case 'sha256WithRSAEncryption':
+                    case 'sha256WithRSA':
+                        $this->signatureAlgorithm = XMLSecurityKey::RSA_SHA256;
+                        break;
+                    case 'sha384WithRSAEncryption':
+                    case 'sha384WithRSA':
+                        $this->signatureAlgorithm = XMLSecurityKey::RSA_SHA384;
+                        break;
+                    case 'sha512WithRSAEncryption':
+                    case 'sha512WithRSA':
+                        $this->signatureAlgorithm = XMLSecurityKey::RSA_SHA512;
+                        break;
+                    case 'md5WithRSAEncryption':
+                    case 'md5WithRSA':
+                        $this->signatureAlgorithm = SamlConstants::XMLDSIG_DIGEST_MD5;
+                        break;
+                    default:
+                }
             }
+        }
+
+        if (!$this->signatureAlgorithm) {
+            throw new LightSamlSecurityException('Unrecognized signature algorithm');
         }
     }
 
