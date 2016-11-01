@@ -435,6 +435,12 @@ class EntityDescriptor extends Metadata
         $this->attributesToXml(array('entityID', 'validUntil', 'cacheDuration', 'ID'), $result);
 
         $this->manyElementsToXml($this->getAllItems(), $result, $context, null);
+        if ($this->organizations) {
+            $this->manyElementsToXml($this->organizations, $result, $context, null);
+        }
+        if ($this->contactPersons) {
+            $this->manyElementsToXml($this->contactPersons, $result, $context, null);
+        }
 
         $this->singleElementsToXml(array('Signature'), $result, $context);
     }

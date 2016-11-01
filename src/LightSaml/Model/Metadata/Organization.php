@@ -11,6 +11,7 @@
 
 namespace LightSaml\Model\Metadata;
 
+use LightSaml\Error\LightSamlXmlException;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
 use LightSaml\Model\AbstractSamlModel;
@@ -26,6 +27,28 @@ class Organization extends AbstractSamlModel
 
     /** @var string */
     protected $organizationURL;
+
+    protected $lang = 'en-US';
+
+    /**
+     * @return string
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }
+
+    /**
+     * @param string $lang
+     *
+     * @return Organization
+     */
+    public function setLang($lang)
+    {
+        $this->lang = $lang;
+
+        return $this;
+    }
 
     /**
      * @param string $organizationDisplayName
@@ -95,14 +118,28 @@ class Organization extends AbstractSamlModel
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
+        if (!$this->lang) {
+            throw new LightSamlXmlException('Lang is required');
+        }
+
         $result = $this->createElement('Organization', SamlConstants::NS_METADATA, $parent, $context);
 
+        $elements = array('OrganizationName', 'OrganizationDisplayName', 'OrganizationURL');
         $this->singleElementsToXml(
-            array('OrganizationName', 'OrganizationDisplayName', 'OrganizationURL'),
+            $elements,
             $result,
             $context,
             SamlConstants::NS_METADATA
         );
+
+        /** @var \DOMNode $node */
+        foreach ($result->childNodes as $node) {
+            if ($node instanceof \DOMElement) {
+                if (in_array($node->tagName, $elements)) {
+                    $node->setAttribute('xml:lang', $this->lang);
+                }
+            }
+        }
     }
 
     /**
