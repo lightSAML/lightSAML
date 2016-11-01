@@ -163,7 +163,11 @@ abstract class AbstractSamlModel implements SamlElementInterface
     {
         $value = $this->getPropertyValue($name);
         if ($value !== null && $value !== '') {
-            $element->setAttribute($name, $value);
+            if (is_bool($value)) {
+                $element->setAttribute($name, $value ? 'true' : 'false');
+            } else {
+                $element->setAttribute($name, $value);
+            }
 
             return true;
         }

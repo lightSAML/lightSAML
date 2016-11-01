@@ -89,9 +89,9 @@ class EntityDescriptorTest extends \PHPUnit_Framework_TestCase
       </ds:KeyInfo>
     </KeyDescriptor>
     <Organization>
-      <OrganizationName>Organization Name</OrganizationName>
-      <OrganizationDisplayName>Display Name</OrganizationDisplayName>
-      <OrganizationURL>http://organization.org</OrganizationURL>
+      <OrganizationName xml:lang="en-US">Organization Name</OrganizationName>
+      <OrganizationDisplayName xml:lang="en-US">Display Name</OrganizationDisplayName>
+      <OrganizationURL xml:lang="en-US">http://organization.org</OrganizationURL>
     </Organization>
     <ContactPerson contactType="support">
       <GivenName>Support</GivenName>
