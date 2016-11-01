@@ -57,15 +57,16 @@ class XsdValidator
             throw new LightSamlXmlException('Invalid schema specified');
         }
 
-        $ok = $doc->loadXML($xml);
-        restore_error_handler();
+        $ok = @$doc->loadXML($xml);
+        if (!$ok) {
+            restore_error_handler();
 
-        if ($ok) {
-            $ok = $doc->schemaValidate($schemaFile);
-            if ($ok) {
-                return $result;
-            }
+            return [
+                new XsdError(XsdError::FATAL, 0, 'Invalid XML', 0, 0),
+            ];
         }
+
+        @$doc->schemaValidate($schemaFile);
 
         /** @var \LibXMLError[] $errors */
         $errors = libxml_get_errors();
@@ -73,6 +74,8 @@ class XsdValidator
             $err = XsdError::fromLibXMLError($error);
             $result[] = $err;
         }
+
+        restore_error_handler();
 
         return $result;
     }
