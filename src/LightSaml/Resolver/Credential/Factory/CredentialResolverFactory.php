@@ -18,6 +18,7 @@ use LightSaml\Resolver\Credential\CredentialResolverInterface;
 use LightSaml\Resolver\Credential\EntityIdResolver;
 use LightSaml\Resolver\Credential\MetadataFilterResolver;
 use LightSaml\Resolver\Credential\PrivateKeyResolver;
+use LightSaml\Resolver\Credential\PublicKeyThumbprintResolver;
 use LightSaml\Resolver\Credential\UsageFilterResolver;
 use LightSaml\Resolver\Credential\X509CredentialResolver;
 use LightSaml\Store\Credential\CredentialStoreInterface;
@@ -48,6 +49,7 @@ class CredentialResolverFactory
             ->add(new UsageFilterResolver())
             ->add(new PrivateKeyResolver())
             ->add(new X509CredentialResolver())
+            ->add(new PublicKeyThumbprintResolver())
         ;
 
         return $result;

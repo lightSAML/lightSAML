@@ -12,6 +12,7 @@
 namespace LightSaml\Validator\Model\Signature;
 
 use LightSaml\Credential\CredentialInterface;
+use LightSaml\Credential\Criteria\PublicKeyThumbprintCriteria;
 use LightSaml\Error\LightSamlSecurityException;
 use LightSaml\Model\XmlDSig\AbstractSignatureReader;
 use LightSaml\Resolver\Credential\CredentialResolverInterface;
@@ -49,6 +50,9 @@ class SignatureValidator implements SignatureValidatorInterface
             ->add(new MetadataCriteria($metadataType, SamlConstants::VERSION_20))
             ->add(new UsageCriteria(UsageType::SIGNING))
         ;
+        if ($signature->getKey() && $signature->getKey()->getX509Thumbprint()) {
+            $query->add(new PublicKeyThumbprintCriteria($signature->getKey()->getX509Thumbprint()));
+        }
         $query->resolve();
 
         $credentialCandidates = $query->allCredentials();
