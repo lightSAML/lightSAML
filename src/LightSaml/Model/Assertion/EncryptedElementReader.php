@@ -137,8 +137,6 @@ class EncryptedElementReader extends EncryptedElement
         if ($this->symmetricKeyInfo->isEncrypted) {
             $this->decryptSymmetricKey($inputKey);
         } else {
-            $this->checkInputAndMessageKeyAlgoSame($inputKey->getAlgorith(), $this->symmetricKey->getAlgorith());
-
             $this->symmetricKey = $inputKey;
         }
 
@@ -203,16 +201,6 @@ class EncryptedElementReader extends EncryptedElement
      */
     protected function decryptSymmetricKey(XMLSecurityKey $inputKey)
     {
-        $inputKeyAlgo = $inputKey->getAlgorith();
-        if ($this->symmetricKeyInfo->getAlgorith() === XMLSecurityKey::RSA_OAEP_MGF1P &&
-            ($inputKeyAlgo === XMLSecurityKey::RSA_1_5 || $inputKeyAlgo === XMLSecurityKey::RSA_SHA1)) {
-            // The RSA key formats are equal, so loading an RSA_1_5 key into an RSA_OAEP_MGF1P key can be done without problems.
-            // We therefore pretend that the input key is an RSA_OAEP_MGF1P key.
-            $inputKeyAlgo = XMLSecurityKey::RSA_OAEP_MGF1P;
-        }
-
-        $this->checkInputAndMessageKeyAlgoSame($inputKeyAlgo, $this->symmetricKeyInfo->getAlgorith());
-
         /** @var XMLSecEnc $encKey */
         $encKey = $this->symmetricKeyInfo->encryptedCtx;
         $this->symmetricKeyInfo->key = $inputKey->key;
@@ -242,24 +230,6 @@ class EncryptedElementReader extends EncryptedElement
         }
 
         $this->symmetricKey->loadkey($key);
-    }
-
-    /**
-     * @param string $inputKeyAlgo
-     * @param string $messageKeyAlgo
-     *
-     * @throws LightSamlSecurityException If two specified key algorithms are not the same
-     */
-    protected function checkInputAndMessageKeyAlgoSame($inputKeyAlgo, $messageKeyAlgo)
-    {
-        // Make sure that the input key format is the same as the one used to encrypt the key.
-        if ($inputKeyAlgo !== $messageKeyAlgo) {
-            throw new LightSamlSecurityException(sprintf(
-                "Algorithm mismatch between input key and key used to encrypt the symmetric key for the message. Input key algo is: '%s'. Message key algo is '%s'",
-                $inputKeyAlgo,
-                $messageKeyAlgo
-            ));
-        }
     }
 
     /**
