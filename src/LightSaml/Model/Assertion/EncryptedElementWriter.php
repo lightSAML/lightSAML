@@ -23,6 +23,22 @@ abstract class EncryptedElementWriter extends EncryptedElement
     /** @var \DOMElement */
     protected $encryptedElement;
 
+    /** @var string */
+    protected $blockEncryptionAlgorithm = XMLSecurityKey::AES128_CBC;
+
+    /** @var string */
+    protected $keyTransportEncryption = XMLSecurityKey::RSA_1_5;
+
+    /**
+     * @param string $blockEncryptionAlgorithm
+     * @param string $keyTransportEncryption
+     */
+    public function __construct($blockEncryptionAlgorithm = XMLSecurityKey::AES128_CBC, $keyTransportEncryption = XMLSecurityKey::RSA_1_5)
+    {
+        $this->blockEncryptionAlgorithm = $blockEncryptionAlgorithm;
+        $this->keyTransportEncryption = $keyTransportEncryption;
+    }
+
     /**
      * @param AbstractSamlModel $object
      * @param XMLSecurityKey    $key
@@ -31,6 +47,10 @@ abstract class EncryptedElementWriter extends EncryptedElement
      */
     public function encrypt(AbstractSamlModel $object, XMLSecurityKey $key)
     {
+        $oldKey = $key;
+        $key = new XMLSecurityKey($this->keyTransportEncryption, ['type' => 'public']);
+        $key->loadKey($oldKey->key);
+
         $serializationContext = new SerializationContext();
         $object->serialize($serializationContext->getDocument(), $serializationContext);
 
@@ -52,7 +72,7 @@ abstract class EncryptedElementWriter extends EncryptedElement
             case XMLSecurityKey::RSA_SHA384:
             case XMLSecurityKey::RSA_SHA512:
             case XMLSecurityKey::RSA_OAEP_MGF1P:
-                $symmetricKey = new XMLSecurityKey(XMLSecurityKey::AES128_CBC);
+                $symmetricKey = new XMLSecurityKey($this->blockEncryptionAlgorithm);
                 $symmetricKey->generateSessionKey();
 
                 $enc->encryptKey($key, $symmetricKey);

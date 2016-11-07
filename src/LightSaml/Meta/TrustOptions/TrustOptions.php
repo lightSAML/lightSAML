@@ -11,6 +11,9 @@
 
 namespace LightSaml\Meta\TrustOptions;
 
+use RobRichards\XMLSecLibs\XMLSecurityDSig;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
+
 class TrustOptions
 {
     /** @var bool */
@@ -27,6 +30,15 @@ class TrustOptions
 
     /** @var bool */
     protected $signResponse = true;
+
+    /** @var string */
+    protected $signatureDigestAlgorithm = XMLSecurityDSig::SHA1;
+
+    /** @var string */
+    protected $blockEncryptionAlgorithm = XMLSecurityKey::AES128_CBC;
+
+    /** @var string */
+    protected $keyTransportEncryptionAlgorithm = XMLSecurityKey::RSA_OAEP_MGF1P;
 
     /**
      * @return bool
@@ -124,6 +136,66 @@ class TrustOptions
     public function setSignResponse($signResponse)
     {
         $this->signResponse = (bool) $signResponse;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSignatureDigestAlgorithm()
+    {
+        return $this->signatureDigestAlgorithm;
+    }
+
+    /**
+     * @param string $signatureDigestAlgorithm
+     *
+     * @return TrustOptions
+     */
+    public function setSignatureDigestAlgorithm($signatureDigestAlgorithm)
+    {
+        $this->signatureDigestAlgorithm = $signatureDigestAlgorithm;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBlockEncryptionAlgorithm()
+    {
+        return $this->blockEncryptionAlgorithm;
+    }
+
+    /**
+     * @param string $blockEncryptionAlgorithm
+     *
+     * @return TrustOptions
+     */
+    public function setBlockEncryptionAlgorithm($blockEncryptionAlgorithm)
+    {
+        $this->blockEncryptionAlgorithm = $blockEncryptionAlgorithm;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKeyTransportEncryptionAlgorithm()
+    {
+        return $this->keyTransportEncryptionAlgorithm;
+    }
+
+    /**
+     * @param string $keyTransportEncryptionAlgorithm
+     *
+     * @return TrustOptions
+     */
+    public function setKeyTransportEncryptionAlgorithm($keyTransportEncryptionAlgorithm)
+    {
+        $this->keyTransportEncryptionAlgorithm = $keyTransportEncryptionAlgorithm;
 
         return $this;
     }
