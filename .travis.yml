@@ -16,14 +16,14 @@ matrix:
 before_install:
     - composer self-update
     - composer --version
-    - wget http://get.sensiolabs.org/php-cs-fixer.phar -O php-cs-fixer.phar
+    - wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v1.12.3/php-cs-fixer.phar -O php-cs-fixer.phar
 
 install:
     - COMPOSER_ROOT_VERSION=dev-master composer update --prefer-source $COMPOSER_FLAGS
 
 script:
-    - php php-cs-fixer.phar fix --dry-run -v
+    - if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then php php-cs-fixer.phar fix --dry-run -v; fi
     - bin/phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
-    - php bin/coveralls -v
+    - if [ "$TRAVIS_PHP_VERSION" == "7.0" ]; then php bin/coveralls -v; fi

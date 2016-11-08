@@ -30,6 +30,8 @@ class SignatureWriter extends Signature
     /** @var X509Certificate */
     protected $certificate;
 
+    protected $digestAlgorithm = XMLSecurityDSig::SHA1;
+
     /** @var SigningOptions */
     protected $signingOptions;
 
@@ -62,11 +64,33 @@ class SignatureWriter extends Signature
     /**
      * @param X509Certificate|null $certificate
      * @param XMLSecurityKey|null  $xmlSecurityKey
+     * @param string               $digestAlgorithm
      */
-    public function __construct(X509Certificate $certificate = null, XMLSecurityKey $xmlSecurityKey = null)
+    public function __construct(X509Certificate $certificate = null, XMLSecurityKey $xmlSecurityKey = null, $digestAlgorithm = XMLSecurityDSig::SHA1)
     {
         $this->certificate = $certificate;
         $this->xmlSecurityKey = $xmlSecurityKey;
+        $this->digestAlgorithm = $digestAlgorithm;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDigestAlgorithm()
+    {
+        return $this->digestAlgorithm;
+    }
+
+    /**
+     * @param string $digestAlgorithm
+     *
+     * @return SignatureWriter
+     */
+    public function setDigestAlgorithm($digestAlgorithm)
+    {
+        $this->digestAlgorithm = $digestAlgorithm;
+
+        return $this;
     }
 
     /**
@@ -162,23 +186,10 @@ class SignatureWriter extends Signature
         $objXMLSecDSig = new XMLSecurityDSig();
         $objXMLSecDSig->setCanonicalMethod($this->getCanonicalMethod());
         $key = $this->getXmlSecurityKey();
-        switch ($key->type) {
-            case XMLSecurityKey::RSA_SHA256:
-                $type = XMLSecurityDSig::SHA256;
-                break;
-            case XMLSecurityKey::RSA_SHA384:
-                $type = XMLSecurityDSig::SHA384;
-                break;
-            case XMLSecurityKey::RSA_SHA512:
-                $type = XMLSecurityDSig::SHA512;
-                break;
-            default:
-                $type = XMLSecurityDSig::SHA1;
-        }
 
         $objXMLSecDSig->addReferenceList(
             array($parent),
-            $type,
+            $this->digestAlgorithm,
             array(SamlConstants::XMLSEC_TRANSFORM_ALGORITHM_ENVELOPED_SIGNATURE, XMLSecurityDSig::EXC_C14N),
             array('id_name' => $this->getIDName(), 'overwrite' => false)
         );

@@ -48,8 +48,9 @@ class OwnSignatureResolver implements SignatureResolverInterface
         if (null == $credential) {
             throw new LightSamlContextException($context, 'Unable to find signing credential');
         }
+        $trustOptions = $context->getProfileContext()->getTrustOptions();
 
-        $signature = new SignatureWriter($credential->getCertificate(), $credential->getPrivateKey());
+        $signature = new SignatureWriter($credential->getCertificate(), $credential->getPrivateKey(), $trustOptions->getSignatureDigestAlgorithm());
 
         return $signature;
     }

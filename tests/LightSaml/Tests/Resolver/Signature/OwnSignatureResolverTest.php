@@ -11,6 +11,7 @@ use LightSaml\Credential\Criteria\X509CredentialCriteria;
 use LightSaml\Credential\UsageType;
 use LightSaml\Credential\X509Certificate;
 use LightSaml\Criteria\CriteriaSet;
+use LightSaml\Meta\TrustOptions\TrustOptions;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Profile\Profiles;
 use LightSaml\Resolver\Credential\CredentialResolverQuery;
@@ -48,6 +49,7 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
 
         $context = TestHelper::getProfileContext();
         $context->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor($ownEntityId = 'http://own.id'));
+        $context->getPartyEntityContext()->setTrustOptions(new TrustOptions());
 
         $credentialResolverMock->method('query')->willReturn($query = new CredentialResolverQuery($credentialResolverMock));
         $credentialResolverMock->method('resolve')->willReturn([
@@ -85,6 +87,7 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
 
         $context = TestHelper::getProfileContext(Profiles::METADATA, $profileRole);
         $context->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor($ownEntityId = 'http://own.id'));
+        $context->getPartyEntityContext()->setTrustOptions(new TrustOptions());
 
         $credentialResolverMock->method('query')->willReturn($query = new CredentialResolverQuery($credentialResolverMock));
         $credentialResolverMock->method('resolve')
