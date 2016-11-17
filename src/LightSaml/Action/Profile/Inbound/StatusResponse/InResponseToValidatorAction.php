@@ -18,6 +18,7 @@ use LightSaml\Context\Profile\Helper\MessageContextHelper;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Context\Profile\RequestStateContext;
 use LightSaml\Error\LightSamlContextException;
+use LightSaml\State\Request\RequestStateParameters;
 use LightSaml\Store\Request\RequestStateStoreInterface;
 use Psr\Log\LoggerInterface;
 
@@ -48,8 +49,17 @@ class InResponseToValidatorAction extends AbstractProfileAction
             $requestState = $this->requestStore->get($inResponseTo);
             if (null == $requestState) {
                 $message = sprintf("Unknown InResponseTo '%s'", $inResponseTo);
-                $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, array(
+                $this->logger->critical($message, LogHelper::getActionErrorContext($context, $this, array(
                     'in_response_to' => $inResponseTo,
+                )));
+                throw new LightSamlContextException($context, $message);
+            }
+            $sentToParty = $requestState->getParameters()->get(RequestStateParameters::PARTY);
+            if ($sentToParty && $response->getIssuer() && $response->getIssuer()->getValue() != $sentToParty) {
+                $message = sprintf('AuthnRequest with id "%s" sent to party "%s" but StatusResponse for that request issued by party "%s"', $inResponseTo, $sentToParty, $response->getIssuer()->getValue());
+                $this->logger->critical($message, LogHelper::getActionErrorContext($context, $this, array(
+                    'sent_to' => $sentToParty,
+                    'received_from' => $response->getIssuer()->getValue(),
                 )));
                 throw new LightSamlContextException($context, $message);
             }

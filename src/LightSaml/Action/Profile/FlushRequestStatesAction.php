@@ -68,7 +68,7 @@ class FlushRequestStatesAction extends AbstractProfileAction
                     LogHelper::getActionContext($requestStateContext, $this)
                 );
             } else {
-                $this->logger->debug(
+                $this->logger->warning(
                     sprintf('Request state "%s" does not exist', $requestStateContext->getRequestState()->getId()),
                     LogHelper::getActionContext($requestStateContext, $this)
                 );

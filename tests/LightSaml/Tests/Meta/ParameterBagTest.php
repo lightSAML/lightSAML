@@ -83,7 +83,7 @@ class ParameterBagTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($bag->has('unknown'), '->has() return false if a parameter is not defined');
     }
 
-    public function testGetIterator()
+    public function test_get_iterator()
     {
         $parameters = array('foo' => 'bar', 'hello' => 'world');
         $bag = new ParameterBag($parameters);
@@ -97,11 +97,22 @@ class ParameterBagTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(count($parameters), $i);
     }
 
-    public function testCount()
+    public function test_count()
     {
         $parameters = array('foo' => 'bar', 'hello' => 'world');
         $bag = new ParameterBag($parameters);
 
         $this->assertEquals(count($parameters), count($bag));
+    }
+
+    public function test_serialization()
+    {
+        $expectedData = ['a' => 'aaa', 'b' => 2, 'c' => [1, 2, 3]];
+        $bag = new ParameterBag($expectedData);
+        $serialized = serialize($bag);
+        /** @var ParameterBag $other */
+        $other = unserialize($serialized);
+        $this->assertInstanceOf(ParameterBag::class, $other);
+        $this->assertEquals($expectedData, $other->all());
     }
 }

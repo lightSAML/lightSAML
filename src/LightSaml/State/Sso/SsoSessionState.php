@@ -12,6 +12,7 @@
 namespace LightSaml\State\Sso;
 
 use LightSaml\Error\LightSamlException;
+use LightSaml\Meta\ParameterBag;
 
 class SsoSessionState implements \Serializable
 {
@@ -39,8 +40,13 @@ class SsoSessionState implements \Serializable
     /** @var \DateTime */
     protected $lastAuthOn;
 
-    /** @var array */
-    protected $options = [];
+    /** @var ParameterBag */
+    protected $parameters;
+
+    public function __construct()
+    {
+        $this->parameters = new ParameterBag();
+    }
 
     /**
      * @return string
@@ -203,14 +209,26 @@ class SsoSessionState implements \Serializable
     }
 
     /**
+     * @return ParameterBag
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @deprecated Since 1.2, will be removed in 2.0. Use getParameters() instead
+     *
      * @return array
      */
     public function getOptions()
     {
-        return $this->options;
+        return $this->parameters->all();
     }
 
     /**
+     * @deprecated Since 1.2, will be removed in 2.0. Use getParameters() instead
+     *
      * @param string $name
      * @param mixed  $value
      *
@@ -218,31 +236,35 @@ class SsoSessionState implements \Serializable
      */
     public function addOption($name, $value)
     {
-        $this->options[$name] = $value;
+        $this->parameters->set($name, $value);
 
         return $this;
     }
 
     /**
+     * @deprecated Since 1.2, will be removed in 2.0. Use getParameters() instead
+     *
      * @param string $name
      *
      * @return SsoSessionState
      */
     public function removeOption($name)
     {
-        unset($this->options[$name]);
+        $this->parameters->remove($name);
 
         return $this;
     }
 
     /**
+     * @deprecated Since 1.2, will be removed in 2.0. Use getParameters() instead
+     *
      * @param string $name
      *
      * @return bool
      */
     public function hasOption($name)
     {
-        return isset($this->options[$name]);
+        return $this->parameters->has($name);
     }
 
     /**
@@ -281,7 +303,8 @@ class SsoSessionState implements \Serializable
             $this->sessionInstant,
             $this->firstAuthOn,
             $this->lastAuthOn,
-            $this->options,
+            [],
+            $this->parameters,
         ));
     }
 
@@ -307,7 +330,13 @@ class SsoSessionState implements \Serializable
             $this->sessionInstant,
             $this->firstAuthOn,
             $this->lastAuthOn,
-            $this->options
+            $options,
+            $this->parameters
         ) = $data;
+
+        // if deserialized from old format, set old options to new parameters
+        if ($options && $this->parameters->count() == 0) {
+            $this->parameters->replace($options);
+        }
     }
 }

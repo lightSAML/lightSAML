@@ -2,6 +2,7 @@
 
 namespace LightSaml\Tests\State\Sso;
 
+use LightSaml\Meta\ParameterBag;
 use LightSaml\State\Sso\SsoSessionState;
 use LightSaml\State\Sso\SsoState;
 
@@ -169,6 +170,9 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @deprecated Options methods will be removed in 2.0
+     */
     public function test_options()
     {
         $state = new SsoState();
@@ -194,7 +198,49 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($session1, $sessions[0]);
         $this->assertSame($session2, $sessions[1]);
     }
-    
+
+    public function test_has_parameters()
+    {
+        $state = new SsoState();
+        $this->assertInstanceOf(ParameterBag::class, $state->getParameters());
+    }
+
+    public function test_serialization()
+    {
+        $state = new SsoState();
+        $state->setLocalSessionId('local-id');
+        $state->getParameters()->add(['a' => 'aaa', 'b' => 2, 'c' => [1,2,3]]);
+        $state->addSsoSession($session1 = new SsoSessionState());
+        $session1->setIdpEntityId($idp1 = 'idp1');
+        $state->addSsoSession($session2 = new SsoSessionState());
+        $session2->setIdpEntityId($idp2 = 'idp2');
+
+        /** @var SsoState $other */
+        $other = unserialize(serialize($state));
+
+        $this->assertEquals($state->getLocalSessionId(), $other->getLocalSessionId());
+        $this->assertInstanceOf(ParameterBag::class, $other->getParameters());
+        $this->assertEquals($state->getParameters()->all(), $other->getParameters()->all());
+        $this->assertEquals(count($state->getSsoSessions()), count($other->getSsoSessions()));
+    }
+
+    public function test_modify()
+    {
+        $state = new SsoState();
+        $state->addSsoSession($session1 = new SsoSessionState());
+        $session1->setIdpEntityId('idp-1');
+        $state->addSsoSession($session2 = new SsoSessionState());
+        $session2->setIdpEntityId('idp-2');
+
+        $state->modify(function (SsoSessionState $session) use ($session1) {
+            return $session->getIdpEntityId() != $session1->getIdpEntityId();
+        });
+
+        $sessions = $state->getSsoSessions();
+        $this->assertCount(1, $sessions);
+        $this->assertEquals($session2->getIdpEntityId(), $sessions[0]->getIdpEntityId());
+    }
+
     /**
      * @param array $arrIdp
      * @param array $arrSp

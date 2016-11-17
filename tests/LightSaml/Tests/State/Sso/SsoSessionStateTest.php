@@ -2,6 +2,7 @@
 
 namespace LightSaml\Tests\State\Sso;
 
+use LightSaml\Meta\ParameterBag;
 use LightSaml\State\Sso\SsoSessionState;
 
 class SsoSessionStateTest extends \PHPUnit_Framework_TestCase
@@ -96,6 +97,9 @@ class SsoSessionStateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['b'=>'bbbbb'], $state->getOptions());
     }
 
+    /**
+     * @deprecated Options will be removed in 2.0
+     */
     public function test_has_option()
     {
         $state = new SsoSessionState();
@@ -103,5 +107,35 @@ class SsoSessionStateTest extends \PHPUnit_Framework_TestCase
 
         $state->addOption('a', 123);
         $this->assertTrue($state->hasOption('a'));
+    }
+
+    public function test_has_parameters()
+    {
+        $state = new SsoSessionState();
+        $this->assertInstanceOf(ParameterBag::class, $state->getParameters());
+    }
+
+    public function test_serialization()
+    {
+        $state = new SsoSessionState();
+        $state->setIdpEntityId('idp');
+        $state->setSpEntityId('sp');
+        $state->setNameId('name-id');
+        $state->setNameIdFormat('name-id-format');
+        $state->setSessionIndex('session-index');
+        $state->getParameters()->replace(['a' => 'abc', 'b' => 22, 'c' => [1, 2]]);
+
+        /** @var SsoSessionState $other */
+        $other = unserialize(serialize($state));
+
+        $this->assertInstanceOf(SsoSessionState::class, $other);
+        $this->assertInstanceOf(ParameterBag::class, $other->getParameters());
+
+        $this->assertEquals($state->getIdpEntityId(), $other->getIdpEntityId());
+        $this->assertEquals($state->getSpEntityId(), $other->getSpEntityId());
+        $this->assertEquals($state->getNameId(), $other->getNameId());
+        $this->assertEquals($state->getNameIdFormat(), $other->getNameIdFormat());
+        $this->assertEquals($state->getSessionIndex(), $other->getSessionIndex());
+        $this->assertEquals($state->getParameters()->all(), $other->getParameters()->all());
     }
 }
