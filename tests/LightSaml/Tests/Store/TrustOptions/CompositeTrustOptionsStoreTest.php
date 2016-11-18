@@ -17,15 +17,7 @@ class CompositeTrustOptionsStoreTest extends \PHPUnit_Framework_TestCase
     {
         new CompositeTrustOptionsStore([$this->getTrustOptionsStoreMock(), $this->getTrustOptionsStoreMock()]);
     }
-
-    /**
-     * @expectedException \TypeError
-     */
-    public function test_breaks_on_non_store_constructor_argument()
-    {
-        new CompositeTrustOptionsStore(['aaa']);
-    }
-
+    
     public function test_can_add_stores()
     {
         $composite = new CompositeTrustOptionsStore();
