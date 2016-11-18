@@ -119,7 +119,7 @@ class SignatureStringReader extends AbstractSignatureReader
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
-        throw new \LogicException('AbstractSignatureReader can not be serialized');
+        throw new \LogicException('SignatureStringReader can not be serialized');
     }
 
     /**
@@ -128,6 +128,6 @@ class SignatureStringReader extends AbstractSignatureReader
      */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
-        throw new \LogicException('AbstractSignatureReader can not be serialized');
+        throw new \LogicException('SignatureStringReader can not be deserialized');
     }
 }
