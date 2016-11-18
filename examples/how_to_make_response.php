@@ -5,6 +5,7 @@ require_once __DIR__.'/../autoload.php';
 $response = new \LightSaml\Model\Protocol\Response();
 $response
     ->addAssertion($assertion = new \LightSaml\Model\Assertion\Assertion())
+    ->setStatus(new \LightSaml\Model\Protocol\Status(new \LightSaml\Model\Protocol\StatusCode(\LightSaml\SamlConstants::STATUS_SUCCESS)))
     ->setID(\LightSaml\Helper::generateID())
     ->setIssueInstant(new \DateTime())
     ->setDestination('https://sp.com/acs')
