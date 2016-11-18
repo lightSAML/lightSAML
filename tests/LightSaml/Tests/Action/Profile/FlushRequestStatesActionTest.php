@@ -62,11 +62,16 @@ class FlushRequestStatesActionTest extends \PHPUnit_Framework_TestCase
             )
             ->willReturnOnConsecutiveCalls(true, true, false)
         ;
-        $loggerMock->expects($this->exactly(3))
+        $loggerMock->expects($this->exactly(2))
             ->method('debug')
             ->withConsecutive(
                 [$this->equalTo(sprintf('Removed request state "%s"', $expectedIds[0]))],
                 [$this->equalTo(sprintf('Removed request state "%s"', $expectedIds[1]))],
+                [$this->equalTo(sprintf('Request state "%s" does not exist', $expectedIds[2]))]
+            );
+        $loggerMock->expects($this->exactly(1))
+            ->method('warning')
+            ->withConsecutive(
                 [$this->equalTo(sprintf('Request state "%s" does not exist', $expectedIds[2]))]
             );
 

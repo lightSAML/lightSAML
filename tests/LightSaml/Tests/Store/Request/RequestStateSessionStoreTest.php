@@ -2,6 +2,7 @@
 
 namespace LightSaml\Tests\Store\Request;
 
+use LightSaml\Meta\ParameterBag;
 use LightSaml\State\Request\RequestState;
 use LightSaml\Store\Request\RequestStateSessionStore;
 use LightSaml\Tests\TestHelper;

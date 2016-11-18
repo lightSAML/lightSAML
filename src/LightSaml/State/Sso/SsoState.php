@@ -11,16 +11,23 @@
 
 namespace LightSaml\State\Sso;
 
+use LightSaml\Meta\ParameterBag;
+
 class SsoState implements \Serializable
 {
     /** @var string */
-    protected $localSessionId;
+    private $localSessionId;
 
-    /** @var array */
-    protected $options = [];
+    /** @var ParameterBag */
+    private $parameters;
 
     /** @var SsoSessionState[] */
-    protected $ssoSessions = array();
+    private $ssoSessions = array();
+
+    public function __construct()
+    {
+        $this->parameters = new ParameterBag();
+    }
 
     /**
      * @return string
@@ -33,7 +40,7 @@ class SsoState implements \Serializable
     /**
      * @param string $localSessionId
      *
-     * @return SsoSessionState
+     * @return SsoState
      */
     public function setLocalSessionId($localSessionId)
     {
@@ -43,14 +50,26 @@ class SsoState implements \Serializable
     }
 
     /**
+     * @return ParameterBag
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @deprecated Since 1.2, to be removed in 2.0. Use getParameters() instead
+     *
      * @return array
      */
     public function getOptions()
     {
-        return $this->options;
+        return $this->parameters->all();
     }
 
     /**
+     * @deprecated Since 1.2, to be removed in 2.0. Use getParameters() instead
+     *
      * @param string $name
      * @param mixed  $value
      *
@@ -58,31 +77,35 @@ class SsoState implements \Serializable
      */
     public function addOption($name, $value)
     {
-        $this->options[$name] = $value;
+        $this->parameters->set($name, $value);
 
         return $this;
     }
 
     /**
+     * @deprecated Since 1.2, to be removed in 2.0. Use getParameters() instead
+     *
      * @param string $name
      *
      * @return SsoState
      */
     public function removeOption($name)
     {
-        unset($this->options[$name]);
+        $this->parameters->remove($name);
 
         return $this;
     }
 
     /**
+     * @deprecated Since 1.2, to be removed in 2.0. Use getParameters() instead
+     *
      * @param string $name
      *
      * @return bool
      */
     public function hasOption($name)
     {
-        return isset($this->options[$name]);
+        return $this->parameters->has($name);
     }
 
     /**
@@ -148,6 +171,18 @@ class SsoState implements \Serializable
     }
 
     /**
+     * @param callable $callback
+     *
+     * @return SsoState
+     */
+    public function modify($callback)
+    {
+        $this->ssoSessions = array_values(array_filter($this->ssoSessions, $callback));
+
+        return $this;
+    }
+
+    /**
      * @return string the string representation of the object or null
      */
     public function serialize()
@@ -155,7 +190,8 @@ class SsoState implements \Serializable
         return serialize(array(
             $this->localSessionId,
             $this->ssoSessions,
-            $this->options,
+            [],
+            $this->parameters,
         ));
     }
 
@@ -171,10 +207,17 @@ class SsoState implements \Serializable
         // add a few extra elements in the array to ensure that we have enough keys when unserializing
         // older data which does not include all properties.
         $data = array_merge($data, array_fill(0, 5, null));
+        $oldOptions = null;
 
         list(
             $this->localSessionId,
             $this->ssoSessions,
-            $this->options) = $data;
+            $oldOptions, // old deprecated options
+            $this->parameters) = $data;
+
+        // in case it was serialized in old way, copy old options to parameters
+        if ($oldOptions && $this->parameters->count() == 0) {
+            $this->parameters->add($oldOptions);
+        }
     }
 }

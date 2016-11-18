@@ -77,7 +77,7 @@ class InResponseToValidatorActionTest extends \PHPUnit_Framework_TestCase
             ->willReturn(null);
 
         $loggerMock->expects($this->once())
-            ->method('error');
+            ->method('critical');
 
         $action->execute($context);
     }
