@@ -34,7 +34,7 @@ class IdpSsoDescriptor extends SSODescriptor
      */
     public function setWantAuthnRequestsSigned($wantAuthnRequestsSigned)
     {
-        $this->wantAuthnRequestsSigned = filter_var($wantAuthnRequestsSigned, FILTER_VALIDATE_BOOLEAN, [ 'flags' => FILTER_NULL_ON_FAILURE ]);
+        $this->wantAuthnRequestsSigned = filter_var($wantAuthnRequestsSigned, FILTER_VALIDATE_BOOLEAN, ['flags' => FILTER_NULL_ON_FAILURE]);
 
         return $this;
     }

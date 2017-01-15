@@ -79,6 +79,7 @@ class SsoSpSendAuthnRequestProfileBuilder extends AbstractProfileBuilder
 
     /**
      * @param EntityDescriptor $idpEd
+     *
      * @return TrustOptions
      */
     private function getTrustOptions(EntityDescriptor $idpEd)

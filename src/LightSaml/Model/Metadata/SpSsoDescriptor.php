@@ -125,7 +125,7 @@ class SpSsoDescriptor extends SSODescriptor
      */
     public function setAuthnRequestsSigned($authnRequestsSigned)
     {
-        $this->authnRequestsSigned = filter_var($authnRequestsSigned, FILTER_VALIDATE_BOOLEAN, [ 'flags' => FILTER_NULL_ON_FAILURE ]);
+        $this->authnRequestsSigned = filter_var($authnRequestsSigned, FILTER_VALIDATE_BOOLEAN, ['flags' => FILTER_NULL_ON_FAILURE]);
 
         return $this;
     }
@@ -145,7 +145,7 @@ class SpSsoDescriptor extends SSODescriptor
      */
     public function setWantAssertionsSigned($wantAssertionsSigned)
     {
-        $this->wantAssertionsSigned = filter_var($wantAssertionsSigned, FILTER_VALIDATE_BOOLEAN, [ 'flags' => FILTER_NULL_ON_FAILURE ]);
+        $this->wantAssertionsSigned = filter_var($wantAssertionsSigned, FILTER_VALIDATE_BOOLEAN, ['flags' => FILTER_NULL_ON_FAILURE]);
 
         return $this;
     }

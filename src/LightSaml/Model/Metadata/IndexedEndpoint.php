@@ -29,7 +29,7 @@ class IndexedEndpoint extends Endpoint
      */
     public function setIsDefault($isDefault)
     {
-        $this->isDefault = filter_var($isDefault, FILTER_VALIDATE_BOOLEAN, [ 'flags' => FILTER_NULL_ON_FAILURE ]);
+        $this->isDefault = filter_var($isDefault, FILTER_VALIDATE_BOOLEAN, ['flags' => FILTER_NULL_ON_FAILURE]);
 
         return $this;
     }
