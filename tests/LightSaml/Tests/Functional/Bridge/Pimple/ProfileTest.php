@@ -79,6 +79,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('AuthnRequest', $root->getName());
         $this->assertEquals(self::OWN_ENTITY_ID, (string) $root->children('saml', true)->Issuer);
         $this->assertEquals('https://localhost/lightsaml/lightSAML-IDP/web/idp/login.php', $root['Destination']);
+        $this->assertEquals('Signature', $root->children('ds', true)->Signature->getName());
     }
 
     public function test_receive_response_profile()
