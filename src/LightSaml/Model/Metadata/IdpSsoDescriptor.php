@@ -34,7 +34,7 @@ class IdpSsoDescriptor extends SSODescriptor
      */
     public function setWantAuthnRequestsSigned($wantAuthnRequestsSigned)
     {
-        $this->wantAuthnRequestsSigned = $wantAuthnRequestsSigned !== null ? (bool) $wantAuthnRequestsSigned : null;
+        $this->wantAuthnRequestsSigned = filter_var($wantAuthnRequestsSigned, FILTER_VALIDATE_BOOLEAN, ['flags' => FILTER_NULL_ON_FAILURE]);
 
         return $this;
     }
@@ -193,7 +193,7 @@ class IdpSsoDescriptor extends SSODescriptor
         $this->manyElementsFromXml(
             $node,
             $context,
-            'SingleSignOnService',
+            'Attribute',
             'saml',
             'LightSaml\Model\Assertion\Attribute',
             'addAttribute'
