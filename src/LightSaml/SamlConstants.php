@@ -104,6 +104,23 @@ abstract class SamlConstants
      *
      * @return bool
      */
+    public static function isNsValid($value)
+    {
+        static $arr = array(
+            self::NS_PROTOCOL,
+            self::NS_METADATA,
+            self::NS_ASSERTION,
+            self::NS_XMLDSIG
+        );
+
+        return in_array($value, $arr);
+    }
+
+   /**
+     * @param string $value
+     *
+     * @return bool
+     */
     public static function isNameIdFormatValid($value)
     {
         static $arr = array(
