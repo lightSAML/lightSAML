@@ -120,4 +120,26 @@ abstract class SamlConstants
 
         return in_array($value, $arr);
     }
+
+    /**
+     * @param string $value
+     *
+     * @return bool
+     */
+    public static function isStatusValid($value)
+    {
+        static $arr = array(
+            self::STATUS_SUCCESS,
+            self::STATUS_REQUESTER,
+            self::STATUS_RESPONDER,
+            self::STATUS_VERSION_MISMATCH,
+            self::STATUS_NO_PASSIVE,
+            self::STATUS_PARTIAL_LOGOUT,
+            self::STATUS_PROXY_COUNT_EXCEEDED,
+            self::STATUS_INVALID_NAME_ID_POLICY,
+            self::STATUS_UNSUPPORTED_BINDING
+        );
+
+        return in_array($value, $arr);
+    }
 }
