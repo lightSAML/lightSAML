@@ -177,4 +177,20 @@ abstract class SamlConstants
 
         return in_array($value, $arr);
     }
+
+    /**
+     * @param string $value
+     *
+     * @return bool
+     */
+    public static function isConfirmationMethodValid($value)
+    {
+        static $arr = array(
+            self::CONFIRMATION_METHOD_BEARER,
+            self::CONFIRMATION_METHOD_HOK,
+            self::CONFIRMATION_METHOD_SENDER_VOUCHES
+        );
+
+        return in_array($value, $arr);
+    }
 }
