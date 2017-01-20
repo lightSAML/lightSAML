@@ -86,6 +86,24 @@ abstract class SamlConstants
      *
      * @return bool
      */
+    public static function isProtocolValid($value)
+    {
+        static $arr = array(
+            self::PROTOCOL_SAML2,
+            self::PROTOCOL_SAML1,
+            self::PROTOCOL_SAML11,
+            self::PROTOCOL_SHIB1,
+            self::PROTOCOL_WS_FED
+        );
+
+        return in_array($value, $arr);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return bool
+     */
     public static function isNameIdFormatValid($value)
     {
         static $arr = array(
