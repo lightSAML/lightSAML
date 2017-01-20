@@ -98,4 +98,26 @@ abstract class SamlConstants
 
         return in_array($value, $arr);
     }
+
+    /**
+     * @param string $value
+     *
+     * @return bool
+     */
+    public static function isBindingValid($value)
+    {
+        static $arr = array(
+            self::BINDING_SAML2_HTTP_REDIRECT,
+            self::BINDING_SAML2_HTTP_POST,
+            self::BINDING_SAML2_HTTP_ARTIFACT,
+            self::BINDING_SAML2_SOAP,
+            self::BINDING_SAML2_HTTP_POST_SIMPLE_SIGN,
+            self::BINDING_SHIB1_AUTHN_REQUEST,
+            self::BINDING_SAML1_BROWSER_POST,
+            self::BINDING_SAML1_ARTIFACT1,
+            self::BINDING_WS_FED_WEB_SVC
+        );
+
+        return in_array($value, $arr);
+    }
 }
