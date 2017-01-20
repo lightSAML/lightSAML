@@ -193,4 +193,21 @@ abstract class SamlConstants
 
         return in_array($value, $arr);
     }
+
+    /**
+     * @param string $value
+     *
+     * @return bool
+     */
+    public static function isAuthnContextValid($value)
+    {
+        static $arr = array(
+            self::AUTHN_CONTEXT_PASSWORD,
+            self::AUTHN_CONTEXT_UNSPECIFIED,
+            self::AUTHN_CONTEXT_PASSWORD_PROTECTED_TRANSPORT,
+            self::AUTHN_CONTEXT_WINDOWS
+        );
+
+        return in_array($value, $arr);
+    }
 }
