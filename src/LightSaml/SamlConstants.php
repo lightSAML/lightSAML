@@ -210,4 +210,21 @@ abstract class SamlConstants
 
         return in_array($value, $arr);
     }
+
+    /**
+     * @param string $value
+     *
+     * @return bool
+     */
+    public static function isLogoutReasonValid($value)
+    {
+        static $arr = array(
+            self::LOGOUT_REASON_USER,
+            self::LOGOUT_REASON_ADMIN,
+            self::LOGOUT_REASON_GLOBAL_TIMEOUT,
+            self::LOGOUT_REASON_SP_TIMEOUT
+        );
+
+        return in_array($value, $arr);
+    }
 }
