@@ -19,7 +19,7 @@ class SamlConstantsTest extends \PHPUnit_Framework_TestCase
      */
     public function test__is_valid_method($method, $constant)
     {
-        $value = constant('\LightSaml\SamlConstants::' . $constant);
+        $value = constant('\LightSaml\SamlConstants::'.$constant);
         $this->assertTrue(SamlConstants::$method($value));
     }
 
@@ -33,7 +33,7 @@ class SamlConstantsTest extends \PHPUnit_Framework_TestCase
             array('isStatusValid'),
             array('isConfirmationMethodValid'),
             array('isAuthnContextValid'),
-            array('isLogoutReasonValid')
+            array('isLogoutReasonValid'),
         );
     }
 
@@ -58,9 +58,9 @@ class SamlConstantsTest extends \PHPUnit_Framework_TestCase
         $prefix = strtoupper(
             preg_replace('/([a-z])([A-Z])/', '$1_$2', $method)
         );
-        $method = 'is' . $method . 'Valid';
+        $method = 'is'.$method.'Valid';
 
-        foreach($ref->getConstants() as $constant => $value) {
+        foreach ($ref->getConstants() as $constant => $value) {
             if (strpos($constant, $prefix) === 0) {
                 $ret[] = array($method, $constant);
             }

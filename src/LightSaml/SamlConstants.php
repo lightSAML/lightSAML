@@ -93,7 +93,7 @@ abstract class SamlConstants
             self::PROTOCOL_SAML1,
             self::PROTOCOL_SAML11,
             self::PROTOCOL_SHIB1,
-            self::PROTOCOL_WS_FED
+            self::PROTOCOL_WS_FED,
         );
 
         return in_array($value, $arr);
@@ -110,13 +110,13 @@ abstract class SamlConstants
             self::NS_PROTOCOL,
             self::NS_METADATA,
             self::NS_ASSERTION,
-            self::NS_XMLDSIG
+            self::NS_XMLDSIG,
         );
 
         return in_array($value, $arr);
     }
 
-   /**
+    /**
      * @param string $value
      *
      * @return bool
@@ -133,7 +133,7 @@ abstract class SamlConstants
             self::NAME_ID_FORMAT_X509_SUBJECT_NAME,
             self::NAME_ID_FORMAT_WINDOWS,
             self::NAME_ID_FORMAT_KERBEROS,
-            self::NAME_ID_FORMAT_UNSPECIFIED
+            self::NAME_ID_FORMAT_UNSPECIFIED,
         );
 
         return in_array($value, $arr);
@@ -155,7 +155,7 @@ abstract class SamlConstants
             self::BINDING_SHIB1_AUTHN_REQUEST,
             self::BINDING_SAML1_BROWSER_POST,
             self::BINDING_SAML1_ARTIFACT1,
-            self::BINDING_WS_FED_WEB_SVC
+            self::BINDING_WS_FED_WEB_SVC,
         );
 
         return in_array($value, $arr);
@@ -177,7 +177,7 @@ abstract class SamlConstants
             self::STATUS_PARTIAL_LOGOUT,
             self::STATUS_PROXY_COUNT_EXCEEDED,
             self::STATUS_INVALID_NAME_ID_POLICY,
-            self::STATUS_UNSUPPORTED_BINDING
+            self::STATUS_UNSUPPORTED_BINDING,
         );
 
         return in_array($value, $arr);
@@ -193,7 +193,7 @@ abstract class SamlConstants
         static $arr = array(
             self::CONFIRMATION_METHOD_BEARER,
             self::CONFIRMATION_METHOD_HOK,
-            self::CONFIRMATION_METHOD_SENDER_VOUCHES
+            self::CONFIRMATION_METHOD_SENDER_VOUCHES,
         );
 
         return in_array($value, $arr);
@@ -210,7 +210,7 @@ abstract class SamlConstants
             self::AUTHN_CONTEXT_PASSWORD,
             self::AUTHN_CONTEXT_UNSPECIFIED,
             self::AUTHN_CONTEXT_PASSWORD_PROTECTED_TRANSPORT,
-            self::AUTHN_CONTEXT_WINDOWS
+            self::AUTHN_CONTEXT_WINDOWS,
         );
 
         return in_array($value, $arr);
@@ -227,7 +227,7 @@ abstract class SamlConstants
             self::LOGOUT_REASON_USER,
             self::LOGOUT_REASON_ADMIN,
             self::LOGOUT_REASON_GLOBAL_TIMEOUT,
-            self::LOGOUT_REASON_SP_TIMEOUT
+            self::LOGOUT_REASON_SP_TIMEOUT,
         );
 
         return in_array($value, $arr);
