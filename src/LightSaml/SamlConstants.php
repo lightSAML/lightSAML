@@ -125,10 +125,15 @@ abstract class SamlConstants
     {
         static $arr = array(
             self::NAME_ID_FORMAT_NONE,
+            self::NAME_ID_FORMAT_ENTITY,
             self::NAME_ID_FORMAT_PERSISTENT,
             self::NAME_ID_FORMAT_TRANSIENT,
             self::NAME_ID_FORMAT_EMAIL,
             self::NAME_ID_FORMAT_SHIB_NAME_ID,
+            self::NAME_ID_FORMAT_X509_SUBJECT_NAME,
+            self::NAME_ID_FORMAT_WINDOWS,
+            self::NAME_ID_FORMAT_KERBEROS,
+            self::NAME_ID_FORMAT_UNSPECIFIED
         );
 
         return in_array($value, $arr);
