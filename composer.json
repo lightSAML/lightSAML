@@ -1,5 +1,5 @@
 {
-    "name": "lightsaml/lightsaml",
+    "name": "illuminateeducation/lightsaml",
     "license": "MIT",
     "type": "library",
     "description": "Light SAML 2.0 PHP library",
@@ -39,8 +39,8 @@
         "satooshi/php-coveralls": "~0.6"
     },
     "suggest": {
-        "lightsaml/symfony-bridge": "Symfony 2 build container bridge",
-        "lightsaml/sp-bundle": "Symfony 2 SP security bundle"
+        "illuminateeducation/symfony-bridge": "Symfony 2 build container bridge",
+        "illuminateeducation/sp-bundle": "Symfony 2 SP security bundle"
     },
     "config": {
         "bin-dir": "bin"
