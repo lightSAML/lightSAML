@@ -190,7 +190,7 @@ class SubjectConfirmationData extends AbstractSamlModel
      */
      public function serialize(\DOMNode $parent, SerializationContext $context)
      {
-         $this->singleElementsToXml(['SubjectConfirmationData'], $parent, $context, SamlConstants::NS_ASSERTION);
+         $this->singleElementsToXml(array('SubjectConfirmationData'), $parent, $context, SamlConstants::NS_ASSERTION);
      }
 
     /**
