@@ -188,15 +188,10 @@ class SubjectConfirmationData extends AbstractSamlModel
      *
      * @return void
      */
-    public function serialize(\DOMNode $parent, SerializationContext $context)
-    {
-        $result = $this->createElement('SubjectConfirmationData', SamlConstants::NS_ASSERTION, $parent, $context);
-
-        $this->attributesToXml(
-            array('InResponseTo', 'NotBefore', 'NotOnOrAfter', 'Address', 'Recipient'),
-            $result
-        );
-    }
+     public function serialize(\DOMNode $parent, SerializationContext $context)
+     {
+         $this->singleElementsToXml(['SubjectConfirmationData'], $parent, $context, SamlConstants::NS_ASSERTION);
+     }
 
     /**
      * @param \DOMNode               $node
@@ -209,5 +204,18 @@ class SubjectConfirmationData extends AbstractSamlModel
         $this->attributesFromXml($node, array(
             'InResponseTo', 'NotBefore', 'NotOnOrAfter', 'Address', 'Recipient',
         ));
+    }
+
+    /**
+     * Return the string of SubjectConfirmationData
+     * @return string
+     */
+    protected function getSubjectConfirmationDataString()
+    {
+        return "InResponseTo='{$this->getInResponseTo()}' \n"
+            ."Address='{$this->getAddress()}' \n"
+            ."NotBefore='{$this->getNotBeforeString()}' \n"
+            ."NotOnOrAfter='{$this->getNotOnOrAfterString()}' \n"
+            ."Recipient='{$this->getRecipient()}' \n";
     }
 }
