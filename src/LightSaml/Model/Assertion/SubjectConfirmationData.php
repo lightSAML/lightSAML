@@ -212,10 +212,10 @@ class SubjectConfirmationData extends AbstractSamlModel
      */
     protected function getSubjectConfirmationDataString()
     {
-        return "InResponseTo='{$this->getInResponseTo()}' \n"
-            ."Address='{$this->getAddress()}' \n"
-            ."NotBefore='{$this->getNotBeforeString()}' \n"
-            ."NotOnOrAfter='{$this->getNotOnOrAfterString()}' \n"
-            ."Recipient='{$this->getRecipient()}' \n";
+        return 'InResponseTo="'.$this->getInResponseTo().'" '
+            .'Address="'.$this->getAddress().'" '
+            .'NotBefore="'.$this->getNotBeforeString().'" '
+            .'NotOnOrAfter="'.$this->getNotOnOrAfterString().'" '
+            .'Recipient="'.$this->getRecipient().'" ';
     }
 }
