@@ -182,12 +182,12 @@ class SubjectConfirmationData extends AbstractSamlModel
         return $this->recipient;
     }
 
-    /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
-     * @return void
-     */
+     /**
+      * @param \DOMNode             $parent
+      * @param SerializationContext $context
+      *
+      * @return void
+      */
      public function serialize(\DOMNode $parent, SerializationContext $context)
      {
          $this->singleElementsToXml(array('SubjectConfirmationData'), $parent, $context, SamlConstants::NS_ASSERTION);
@@ -207,8 +207,9 @@ class SubjectConfirmationData extends AbstractSamlModel
     }
 
     /**
-     * Return the string of SubjectConfirmationData
-     * @return string
+     * Return the string of SubjectConfirmationData.
+     *
+     * @return string Returns string representation
      */
     protected function getSubjectConfirmationDataString()
     {
