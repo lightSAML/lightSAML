@@ -3,6 +3,7 @@
 namespace LightSaml\Tests\Model\Protocol;
 
 use LightSaml\Model\Protocol\Status;
+use LightSaml\Model\Protocol\StatusCode;
 use LightSaml\SamlConstants;
 
 class StatusTest extends \PHPUnit_Framework_TestCase
