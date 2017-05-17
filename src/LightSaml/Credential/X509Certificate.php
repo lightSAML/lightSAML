@@ -124,7 +124,7 @@ class X509Certificate
         $res = openssl_x509_read($this->toPem());
         $this->info = openssl_x509_parse($res);
         $this->signatureAlgorithm = null;
-        $signatureType = isset($info['signatureTypeSN']) ? $info['signatureTypeSN'] : '';
+        $signatureType = isset($this->info['signatureTypeSN']) ? $this->info['signatureTypeSN'] : '';
         if ($signatureType && isset(self::$typeMap[$signatureType])) {
             $this->signatureAlgorithm = self::$typeMap[$signatureType];
         } else {
