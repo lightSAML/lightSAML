@@ -169,7 +169,7 @@ abstract class AbstractContext implements ContextInterface
     public function debugPrintTree($ownName = 'root')
     {
         $result = array(
-            $ownName => static::class,
+            $ownName => get_class(self),
         );
 
         if ($this->subContexts) {

@@ -25,13 +25,13 @@ class BindingEndpointResolver implements EndpointResolverInterface
      */
     public function resolve(CriteriaSet $criteriaSet, array $candidates)
     {
-        if (false === $criteriaSet->has(BindingCriteria::class)) {
+        if (false === $criteriaSet->has('LightSaml\Resolver\Endpoint\Criteria\BindingCriteria')) {
             return $candidates;
         }
 
         $arrOrdered = array();
         /** @var BindingCriteria $bindingCriteria */
-        foreach ($criteriaSet->get(BindingCriteria::class) as $bindingCriteria) {
+        foreach ($criteriaSet->get('LightSaml\Resolver\Endpoint\Criteria\BindingCriteria') as $bindingCriteria) {
             foreach ($candidates as $endpointReference) {
                 $preference = $bindingCriteria->getPreference($endpointReference->getEndpoint()->getBinding());
                 if (null !== $preference) {

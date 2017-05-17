@@ -26,13 +26,13 @@ class IndexEndpointResolver implements EndpointResolverInterface
      */
     public function resolve(CriteriaSet $criteriaSet, array $candidates)
     {
-        if (false === $criteriaSet->has(IndexCriteria::class)) {
+        if (false === $criteriaSet->has('LightSaml\Resolver\Endpoint\Criteria\IndexCriteria')) {
             return $candidates;
         }
 
         $result = array();
         /** @var IndexCriteria $indexCriteria */
-        foreach ($criteriaSet->get(IndexCriteria::class) as $indexCriteria) {
+        foreach ($criteriaSet->get('LightSaml\Resolver\Endpoint\Criteria\IndexCriteria') as $indexCriteria) {
             foreach ($candidates as $endpointReference) {
                 $endpoint = $endpointReference->getEndpoint();
                 if ($endpoint instanceof IndexedEndpoint) {

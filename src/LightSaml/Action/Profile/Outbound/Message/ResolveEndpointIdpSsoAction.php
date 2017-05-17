@@ -18,6 +18,6 @@ class ResolveEndpointIdpSsoAction extends ResolveEndpointBaseAction
 {
     protected function getServiceType(ProfileContext $context)
     {
-        return SingleSignOnService::class;
+        return 'LightSaml\Model\Metadata\SingleSignOnService';
     }
 }

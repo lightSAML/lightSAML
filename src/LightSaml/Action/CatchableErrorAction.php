@@ -44,7 +44,7 @@ class CatchableErrorAction implements ActionInterface
             $this->mainAction->execute($context);
         } catch (\Exception $ex) {
             /** @var ExceptionContext $exceptionContext */
-            $exceptionContext = $context->getSubContext(ProfileContexts::EXCEPTION, ExceptionContext::class);
+            $exceptionContext = $context->getSubContext(ProfileContexts::EXCEPTION, 'LightSaml\Context\Profile\ExceptionContext');
             $exceptionContext->addException($ex);
 
             $this->errorAction->execute($context);
