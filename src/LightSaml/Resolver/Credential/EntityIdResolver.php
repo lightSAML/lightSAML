@@ -38,7 +38,7 @@ class EntityIdResolver extends AbstractQueryableResolver
     public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = array())
     {
         $result = array();
-        foreach ($criteriaSet->get(EntityIdCriteria::class) as $criteria) {
+        foreach ($criteriaSet->get('LightSaml\Credential\Criteria\EntityIdCriteria') as $criteria) {
             /* @var EntityIdCriteria $criteria */
             $result = array_merge($result, $this->credentialStore->getByEntityId($criteria->getEntityId()));
         }

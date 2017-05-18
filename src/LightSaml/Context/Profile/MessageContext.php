@@ -120,7 +120,7 @@ class MessageContext extends AbstractProfileContext
      */
     public function getSerializationContext()
     {
-        return $this->getSubContext(ProfileContexts::SERIALIZATION, SerializationContext::class);
+        return $this->getSubContext(ProfileContexts::SERIALIZATION, 'LightSaml\Model\Context\SerializationContext');
     }
 
     /**
@@ -128,6 +128,6 @@ class MessageContext extends AbstractProfileContext
      */
     public function getDeserializationContext()
     {
-        return $this->getSubContext(ProfileContexts::DESERIALIZATION, DeserializationContext::class);
+        return $this->getSubContext(ProfileContexts::DESERIALIZATION, 'LightSaml\Model\Context\DeserializationContext');
     }
 }

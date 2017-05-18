@@ -55,7 +55,7 @@ class InResponseToValidatorAction extends AbstractAssertionAction
                 );
 
                 /** @var RequestStateContext $requestStateContext */
-                $requestStateContext = $context->getSubContext(ProfileContexts::REQUEST_STATE, RequestStateContext::class);
+                $requestStateContext = $context->getSubContext(ProfileContexts::REQUEST_STATE, 'LightSaml\Context\Profile\RequestStateContext');
                 $requestStateContext->setRequestState($requestState);
             }
         }

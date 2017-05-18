@@ -26,7 +26,7 @@ class X509CredentialResolver extends AbstractQueryableResolver
      */
     public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = array())
     {
-        if (false == $criteriaSet->has(X509CredentialCriteria::class)) {
+        if (false == $criteriaSet->has('LightSaml\Credential\Criteria\X509CredentialCriteria')) {
             return $arrCredentials;
         }
 

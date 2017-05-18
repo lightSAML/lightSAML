@@ -77,8 +77,8 @@ class RecipientValidatorAction extends AbstractAssertionAction
         }
 
         $criteriaSet = new CriteriaSet([
-            new DescriptorTypeCriteria(SpSsoDescriptor::class),
-            new ServiceTypeCriteria(AssertionConsumerService::class),
+            new DescriptorTypeCriteria('LightSaml\Model\Metadata\SpSsoDescriptor'),
+            new ServiceTypeCriteria('LightSaml\Model\Metadata\AssertionConsumerService'),
             new LocationCriteria($recipient),
         ]);
         $ownEntityDescriptor = $context->getProfileContext()->getOwnEntityDescriptor();

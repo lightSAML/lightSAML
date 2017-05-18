@@ -25,12 +25,12 @@ class CredentialNameFilterResolver extends AbstractQueryableResolver
      */
     public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = array())
     {
-        if (false == $criteriaSet->has(CredentialNameCriteria::class)) {
+        if (false == $criteriaSet->has('LightSaml\Credential\Criteria\CredentialNameCriteria')) {
             return $arrCredentials;
         }
 
         $result = array();
-        foreach ($criteriaSet->get(CredentialNameCriteria::class) as $criteria) {
+        foreach ($criteriaSet->get('LightSaml\Credential\Criteria\CredentialNameCriteria') as $criteria) {
             /* @var CredentialNameCriteria $criteria */
             foreach ($arrCredentials as $credential) {
                 $arrCredentialNames = $credential->getKeyNames();
