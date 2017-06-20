@@ -30,13 +30,13 @@ class DescriptorTypeEndpointResolver implements EndpointResolverInterface
      */
     public function resolve(CriteriaSet $criteriaSet, array $candidates)
     {
-        if (false === $criteriaSet->has(DescriptorTypeCriteria::class)) {
+        if (false === $criteriaSet->has('LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria')) {
             return $candidates;
         }
 
         $result = array();
         /** @var DescriptorTypeCriteria $descriptorTypeCriteria */
-        foreach ($criteriaSet->get(DescriptorTypeCriteria::class) as $descriptorTypeCriteria) {
+        foreach ($criteriaSet->get('LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria') as $descriptorTypeCriteria) {
             foreach ($candidates as $endpointReference) {
                 $type = $descriptorTypeCriteria->getDescriptorType();
                 if ($endpointReference->getDescriptor() instanceof $type) {

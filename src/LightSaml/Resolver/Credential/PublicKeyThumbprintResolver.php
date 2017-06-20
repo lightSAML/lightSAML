@@ -25,13 +25,13 @@ class PublicKeyThumbprintResolver extends AbstractQueryableResolver
      */
     public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = array())
     {
-        if (false == $criteriaSet->has(PublicKeyThumbprintCriteria::class)) {
+        if (false == $criteriaSet->has('LightSaml\Credential\Criteria\PublicKeyThumbprintCriteria')) {
             return $arrCredentials;
         }
 
         $result = array();
         /** @var PublicKeyThumbprintCriteria $criteria */
-        foreach ($criteriaSet->get(PublicKeyThumbprintCriteria::class) as $criteria) {
+        foreach ($criteriaSet->get('LightSaml\Credential\Criteria\PublicKeyThumbprintCriteria') as $criteria) {
             foreach ($arrCredentials as $credential) {
                 if ($credential->getPublicKey() && $credential->getPublicKey()->getX509Thumbprint() == $criteria->getThumbprint()) {
                     $result[] = $credential;

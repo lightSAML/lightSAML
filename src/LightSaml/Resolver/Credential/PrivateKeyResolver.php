@@ -25,7 +25,7 @@ class PrivateKeyResolver extends AbstractQueryableResolver
      */
     public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = array())
     {
-        if (false == $criteriaSet->has(PrivateKeyCriteria::class)) {
+        if (false == $criteriaSet->has('LightSaml\Credential\Criteria\PrivateKeyCriteria')) {
             return $arrCredentials;
         }
 
