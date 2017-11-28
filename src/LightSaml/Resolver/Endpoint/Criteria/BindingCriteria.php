@@ -20,7 +20,7 @@ class BindingCriteria implements CriteriaInterface
      *
      * @var int[]
      */
-    protected $bindings;
+    protected $bindings = [];
 
     /**
      * @param string[] $bindings Ordered by preference, first being most preferable, last least preferable
