@@ -68,26 +68,34 @@ final class Helper
      */
     public static function parseSAMLTime($time)
     {
-        $matches = array();
+        $matches = [];
         if (preg_match(
-            '/^(\\d\\d\\d\\d)-(\\d\\d)-(\\d\\d)T(\\d\\d):(\\d\\d):(\\d\\d)(?:\\.\\d+)?Z$/D',
-            $time,
-            $matches
-        ) == 0) {
-            throw new \InvalidArgumentException('Invalid SAML2 timestamp: '.$time);
+                '/^(\\d\\d\\d\\d)-(\\d\\d)-(\\d\\d)T(\\d\\d):(\\d\\d):(\\d\\d)(?:\\.\\d+)?(Z|[+-]\\d\\d:\\d\\d)$/D',
+                $time,
+                $matches
+            ) == 0) {
+            throw new \InvalidArgumentException('Invalid SAML2 timestamp: ' . $time);
         }
 
-        $year = intval($matches[1]);
-        $month = intval($matches[2]);
-        $day = intval($matches[3]);
-        $hour = intval($matches[4]);
-        $minute = intval($matches[5]);
-        $second = intval($matches[6]);
+        if (false !== strpos($time, 'Z')) {
+            $year   = intval($matches[1]);
+            $month  = intval($matches[2]);
+            $day    = intval($matches[3]);
+            $hour   = intval($matches[4]);
+            $minute = intval($matches[5]);
+            $second = intval($matches[6]);
 
-        // Use gmmktime because the timestamp will always be given in UTC.
-        $ts = gmmktime($hour, $minute, $second, $month, $day, $year);
+            // Use gmmktime because the timestamp will always be given in UTC.
+            return gmmktime($hour, $minute, $second, $month, $day, $year);
+        } else {
+            $format   = (false === strpos($time, '.')) ? 'Y-m-d\TH:i:sP' : 'Y-m-d\TH:i:s.uP';
+            $dateTime = \DateTime::createFromFormat($format, $time);
 
-        return $ts;
+            if (!$dateTime instanceof \DateTime) {
+                throw new \InvalidArgumentException('Error creating \DateTime from SAML2 timestamp: ' . $time);
+            }
+            return $dateTime->getTimestamp();
+        }
     }
 
     /**
@@ -124,7 +132,7 @@ final class Helper
     public static function stringToHex($bytes)
     {
         $result = '';
-        $len = strlen($bytes);
+        $len    = strlen($bytes);
         for ($i = 0; $i < $len; ++$i) {
             $result .= sprintf('%02x', ord($bytes[$i]));
         }
@@ -137,7 +145,7 @@ final class Helper
      */
     public static function generateID()
     {
-        return '_'.self::stringToHex(self::generateRandomBytes(21));
+        return '_' . self::stringToHex(self::generateRandomBytes(21));
     }
 
     /**
