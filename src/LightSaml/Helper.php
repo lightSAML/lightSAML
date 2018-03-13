@@ -68,26 +68,16 @@ final class Helper
      */
     public static function parseSAMLTime($time)
     {
-        $matches = array();
+        $matches = [];
         if (preg_match(
-            '/^(\\d\\d\\d\\d)-(\\d\\d)-(\\d\\d)T(\\d\\d):(\\d\\d):(\\d\\d)(?:\\.\\d+)?Z$/D',
-            $time,
-            $matches
-        ) == 0) {
+                '/^(\\d\\d\\d\\d)-(\\d\\d)-(\\d\\d)T(\\d\\d):(\\d\\d):(\\d\\d)(?:\\.\\d+)?(Z|[+-]\\d\\d:\\d\\d)$/D',
+                $time,
+                $matches
+            ) == 0) {
             throw new \InvalidArgumentException('Invalid SAML2 timestamp: '.$time);
         }
 
-        $year = intval($matches[1]);
-        $month = intval($matches[2]);
-        $day = intval($matches[3]);
-        $hour = intval($matches[4]);
-        $minute = intval($matches[5]);
-        $second = intval($matches[6]);
-
-        // Use gmmktime because the timestamp will always be given in UTC.
-        $ts = gmmktime($hour, $minute, $second, $month, $day, $year);
-
-        return $ts;
+        return strtotime($time);
     }
 
     /**
