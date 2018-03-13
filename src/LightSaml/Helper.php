@@ -77,26 +77,7 @@ final class Helper
             throw new \InvalidArgumentException('Invalid SAML2 timestamp: '.$time);
         }
 
-        if (false !== strpos($time, 'Z')) {
-            $year = intval($matches[1]);
-            $month = intval($matches[2]);
-            $day = intval($matches[3]);
-            $hour = intval($matches[4]);
-            $minute = intval($matches[5]);
-            $second = intval($matches[6]);
-
-            // Use gmmktime because the timestamp will always be given in UTC.
-            return gmmktime($hour, $minute, $second, $month, $day, $year);
-        } else {
-            $format = (false === strpos($time, '.')) ? 'Y-m-d\TH:i:sP' : 'Y-m-d\TH:i:s.uP';
-            $dateTime = \DateTime::createFromFormat($format, $time);
-
-            if (!$dateTime instanceof \DateTime) {
-                throw new \InvalidArgumentException('Error creating \DateTime from SAML2 timestamp: '.$time);
-            }
-
-            return $dateTime->getTimestamp();
-        }
+        return strtotime($time);
     }
 
     /**
