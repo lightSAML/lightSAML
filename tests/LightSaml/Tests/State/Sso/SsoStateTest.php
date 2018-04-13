@@ -44,7 +44,7 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
         $session1->setSpEntityId($session1sp = 'http://sp-1.com');
         $state->addSsoSession($session1);
 
-        $this->assertTrue(is_array($state->getSsoSessions()));
+        $this->assertInternalType('array', $state->getSsoSessions());
         $this->assertCount(1, $state->getSsoSessions());
 
         $session2 = new SsoSessionState();
@@ -76,7 +76,7 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
         foreach ($arr as $session) {
             $this->assertEquals($arrIdp[0], $session->getIdpEntityId());
         }
-        $this->assertTrue(is_array($arr));
+        $this->assertInternalType('array', $arr);
         $this->assertCount(3, $arr);
         $this->assertSame($allSessions[0], $arr[0]);
         $this->assertSame($allSessions[1], $arr[1]);
@@ -84,7 +84,7 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
 
         $arr = $state->filter($arrIdp[1], null, null, null, null);
 
-        $this->assertTrue(is_array($arr));
+        $this->assertInternalType('array', $arr);
         $this->assertCount(3, $arr);
         $this->assertSame($allSessions[3], $arr[0]);
         $this->assertSame($allSessions[4], $arr[1]);
@@ -92,7 +92,7 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
 
         $arr = $state->filter($arrIdp[2], null, null, null, null);
 
-        $this->assertTrue(is_array($arr));
+        $this->assertInternalType('array', $arr);
         $this->assertCount(3, $arr);
         $this->assertSame($allSessions[6], $arr[0]);
         $this->assertSame($allSessions[7], $arr[1]);
@@ -120,7 +120,7 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
         foreach ($arr as $session) {
             $this->assertEquals($arrSp[0], $session->getSpEntityId());
         }
-        $this->assertTrue(is_array($arr));
+        $this->assertInternalType('array', $arr);
         $this->assertCount(3, $arr);
         $this->assertSame($allSessions[0], $arr[0]);
         $this->assertSame($allSessions[3], $arr[1]);
@@ -131,7 +131,7 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
         foreach ($arr as $session) {
             $this->assertEquals($arrSp[0], $session->getSpEntityId());
         }
-        $this->assertTrue(is_array($arr));
+        $this->assertInternalType('array', $arr);
         $this->assertCount(3, $arr);
         $this->assertSame($allSessions[0], $arr[0]);
         $this->assertSame($allSessions[3], $arr[1]);
@@ -163,7 +163,7 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
         $otherSessions = $otherState->getSsoSessions();
 
         $this->assertEquals($state->getOptions(), $otherState->getOptions());
-        $this->assertEquals(count($sessions), count($otherSessions));
+        $this->assertCount(count($sessions), $otherSessions);
         foreach ($sessions as $k => $session) {
             $this->assertEquals($session->getIdpEntityId(), $otherSessions[$k]->getIdpEntityId());
             $this->assertEquals($session->getSpEntityId(), $otherSessions[$k]->getSpEntityId());
@@ -221,7 +221,7 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($state->getLocalSessionId(), $other->getLocalSessionId());
         $this->assertInstanceOf(ParameterBag::class, $other->getParameters());
         $this->assertEquals($state->getParameters()->all(), $other->getParameters()->all());
-        $this->assertEquals(count($state->getSsoSessions()), count($other->getSsoSessions()));
+        $this->assertCount(count($state->getSsoSessions()), $other->getSsoSessions());
     }
 
     public function test_modify()

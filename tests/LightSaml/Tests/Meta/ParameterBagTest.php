@@ -102,7 +102,7 @@ class ParameterBagTest extends \PHPUnit_Framework_TestCase
         $parameters = array('foo' => 'bar', 'hello' => 'world');
         $bag = new ParameterBag($parameters);
 
-        $this->assertEquals(count($parameters), count($bag));
+        $this->assertCount(count($parameters), $bag);
     }
 
     public function test_serialization()

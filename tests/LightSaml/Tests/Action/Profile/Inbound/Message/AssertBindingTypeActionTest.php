@@ -49,7 +49,7 @@ class AssertBindingTypeActionTest extends \PHPUnit_Framework_TestCase
             ->method('critical')
             ->willReturnCallback(function ($message, $arr) {
                 $this->assertEquals('Unexpected binding type "urn:oasis:names:tc:SAML:2.0:bindings:SOAP" - expected binding types are: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST', $message);
-                $this->assertTrue(is_array($arr));
+                $this->assertInternalType('array', $arr);
             });
 
         $action->execute($context);
