@@ -36,6 +36,7 @@ abstract class MessageContextHelper
 
         throw new LightSamlContextException($context, 'Missing SamlMessage');
     }
+
     /**
      * @param MessageContext $context
      *

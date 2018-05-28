@@ -170,7 +170,7 @@ abstract class AbstractNameID extends AbstractSamlModel
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
         $this->prepareForXml();
-        if ($parent->namespaceURI == SamlConstants::NS_ASSERTION) {
+        if (SamlConstants::NS_ASSERTION == $parent->namespaceURI) {
             $result = $this->createElement($this->getElementName(), SamlConstants::NS_ASSERTION, $parent, $context);
         } else {
             $result = $this->createElement('saml:'.$this->getElementName(), SamlConstants::NS_ASSERTION, $parent, $context);

@@ -88,7 +88,7 @@ class SsoSpSendAuthnRequestProfileBuilder extends AbstractProfileBuilder
 
         $wantAuthnRequestsSigned = $idpEd->getFirstIdpSsoDescriptor()->getWantAuthnRequestsSigned();
 
-        if ($wantAuthnRequestsSigned !== null) {
+        if (null !== $wantAuthnRequestsSigned) {
             $trustOptions->setSignAuthnRequest($wantAuthnRequestsSigned);
         }
 

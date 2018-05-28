@@ -69,11 +69,11 @@ final class Helper
     public static function parseSAMLTime($time)
     {
         $matches = [];
-        if (preg_match(
+        if (0 == preg_match(
                 '/^(\\d\\d\\d\\d)-(\\d\\d)-(\\d\\d)T(\\d\\d):(\\d\\d):(\\d\\d)(?:\\.\\d+)?(Z|[+-]\\d\\d:\\d\\d)$/D',
                 $time,
                 $matches
-            ) == 0) {
+            )) {
             throw new \InvalidArgumentException('Invalid SAML2 timestamp: '.$time);
         }
 
@@ -159,7 +159,7 @@ final class Helper
      */
     public static function validateOptionalString($value)
     {
-        return $value === null || self::validateRequiredString($value);
+        return null === $value || self::validateRequiredString($value);
     }
 
     /**
@@ -170,7 +170,7 @@ final class Helper
     public static function validateWellFormedUriString($value)
     {
         $value = trim($value);
-        if ($value == '' || strlen($value) > 65520) {
+        if ('' == $value || strlen($value) > 65520) {
             return false;
         }
 
@@ -199,7 +199,7 @@ final class Helper
      */
     public static function validateNotBefore($notBefore, $now, $allowedSecondsSkew)
     {
-        return $notBefore == null || (($notBefore - $allowedSecondsSkew) < $now);
+        return null == $notBefore || (($notBefore - $allowedSecondsSkew) < $now);
     }
 
     /**
@@ -211,6 +211,6 @@ final class Helper
      */
     public static function validateNotOnOrAfter($notOnOrAfter, $now, $allowedSecondsSkew)
     {
-        return $notOnOrAfter == null || ($now < ($notOnOrAfter + $allowedSecondsSkew));
+        return null == $notOnOrAfter || ($now < ($notOnOrAfter + $allowedSecondsSkew));
     }
 }

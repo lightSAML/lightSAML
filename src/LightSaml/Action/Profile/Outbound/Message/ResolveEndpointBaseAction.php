@@ -148,6 +148,7 @@ abstract class ResolveEndpointBaseAction extends AbstractProfileAction
             SamlConstants::BINDING_SAML2_HTTP_REDIRECT,
         );
     }
+
     /**
      * @param ProfileContext $context
      *
@@ -155,7 +156,7 @@ abstract class ResolveEndpointBaseAction extends AbstractProfileAction
      */
     protected function getDescriptorType(ProfileContext $context)
     {
-        return $context->getOwnRole() == ProfileContext::ROLE_IDP
+        return ProfileContext::ROLE_IDP == $context->getOwnRole()
             ? SpSsoDescriptor::class
             : IdpSsoDescriptor::class;
     }

@@ -50,7 +50,7 @@ class DecryptAssertionsAction extends AbstractProfileAction
     {
         $response = MessageContextHelper::asResponse($context->getInboundContext());
 
-        if (count($response->getAllEncryptedAssertions()) === 0) {
+        if (0 === count($response->getAllEncryptedAssertions())) {
             $this->logger->debug('Response has no encrypted assertions', LogHelper::getActionContext($context, $this));
 
             return;

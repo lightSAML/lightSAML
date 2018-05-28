@@ -70,7 +70,7 @@ class KeyHelper
         }
 
         $keyInfo = openssl_pkey_get_details($key->key);
-        if ($keyInfo === false) {
+        if (false === $keyInfo) {
             throw new LightSamlSecurityException('Unable to get key details from XMLSecurityKey.');
         }
         if (false == isset($keyInfo['key'])) {

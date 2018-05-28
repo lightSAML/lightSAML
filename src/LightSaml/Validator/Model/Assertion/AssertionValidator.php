@@ -74,7 +74,7 @@ class AssertionValidator implements AssertionValidatorInterface
         if (false == Helper::validateRequiredString($assertion->getVersion())) {
             throw new LightSamlValidationException('Assertion element must have the Version attribute set.');
         }
-        if ($assertion->getVersion() != SamlConstants::VERSION_20) {
+        if (SamlConstants::VERSION_20 != $assertion->getVersion()) {
             throw new LightSamlValidationException('Assertion element must have the Version attribute value equal to 2.0.');
         }
         if (false == Helper::validateRequiredString($assertion->getId())) {

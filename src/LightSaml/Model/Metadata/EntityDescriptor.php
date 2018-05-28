@@ -199,7 +199,7 @@ class EntityDescriptor extends Metadata
      */
     public function setID($id)
     {
-        $this->id = $id !== null ? (string) $id : null;
+        $this->id = null !== $id ? (string) $id : null;
 
         return $this;
     }

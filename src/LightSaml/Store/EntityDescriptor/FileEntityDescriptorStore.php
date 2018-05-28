@@ -59,7 +59,7 @@ class FileEntityDescriptorStore implements EntityDescriptorStoreInterface
      */
     public function has($entityId)
     {
-        return $this->get($entityId) != null;
+        return null != $this->get($entityId);
     }
 
     /**
