@@ -9,8 +9,9 @@ use LightSaml\Model\XmlDSig\SignatureXmlReader;
 use LightSaml\SamlConstants;
 use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
+use LightSaml\Tests\BaseTestCase;
 
-class ResponseFunctionalTest extends \PHPUnit_Framework_TestCase
+class ResponseFunctionalTest extends BaseTestCase
 {
     public function test_deserialize_response01()
     {

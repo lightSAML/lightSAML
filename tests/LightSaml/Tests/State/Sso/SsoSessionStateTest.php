@@ -4,12 +4,14 @@ namespace LightSaml\Tests\State\Sso;
 
 use LightSaml\Meta\ParameterBag;
 use LightSaml\State\Sso\SsoSessionState;
+use LightSaml\Tests\BaseTestCase;
 
-class SsoSessionStateTest extends \PHPUnit_Framework_TestCase
+class SsoSessionStateTest extends BaseTestCase
 {
     public function test_constructs_without_arguments()
     {
         new SsoSessionState();
+        $this->assertTrue(true);
     }
 
     public function property_getter_setter_provider()

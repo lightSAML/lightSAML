@@ -12,8 +12,9 @@ use LightSaml\Model\Metadata\SingleSignOnService;
 use LightSaml\Model\Metadata\SpSsoDescriptor;
 use LightSaml\Model\Metadata\SSODescriptor;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 
-class EntityDescriptorFunctionalTest extends \PHPUnit_Framework_TestCase
+class EntityDescriptorFunctionalTest extends BaseTestCase
 {
     public function test__deserialization_idp2_ed()
     {

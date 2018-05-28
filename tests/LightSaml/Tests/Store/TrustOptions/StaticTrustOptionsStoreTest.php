@@ -4,18 +4,21 @@ namespace LightSaml\Tests\Store\TrustOptions;
 
 use LightSaml\Meta\TrustOptions\TrustOptions;
 use LightSaml\Store\TrustOptions\StaticTrustOptionsStore;
+use LightSaml\Tests\BaseTestCase;
 
-class StaticTrustOptionsStoreTest extends \PHPUnit_Framework_TestCase
+class StaticTrustOptionsStoreTest extends BaseTestCase
 {
     public function test_can_be_constructed_without_arguments()
     {
         new StaticTrustOptionsStore();
+        $this->assertTrue(true);
     }
 
     public function test_can_add_trust_options()
     {
         $store = new StaticTrustOptionsStore();
         $store->add('id', new TrustOptions());
+        $this->assertTrue(true);
     }
 
     public function test_get_returns_null_if_such_id_was_not_added()

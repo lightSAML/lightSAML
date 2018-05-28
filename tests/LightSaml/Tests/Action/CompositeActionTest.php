@@ -4,10 +4,11 @@ namespace LightSaml\Tests\Action;
 
 use LightSaml\Action\ActionInterface;
 use LightSaml\Action\CompositeAction;
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Tests\Mock\Action\BarAction;
 use LightSaml\Tests\Mock\Action\FooAction;
 
-class CompositeActionTest extends \PHPUnit_Framework_TestCase
+class CompositeActionTest extends BaseTestCase
 {
     public function test__can_be_constructed_without_arguments()
     {
@@ -134,7 +135,7 @@ EOT;
      */
     private function getActionMock()
     {
-        return $this->getMock('LightSaml\Action\ActionInterface');
+        return $this->getMockBuilder(\LightSaml\Action\ActionInterface::class)->getMock();
     }
 
     /**
@@ -142,6 +143,6 @@ EOT;
      */
     private function getContextMock()
     {
-        return $this->getMock('LightSaml\Context\ContextInterface');
+        return $this->getMockBuilder(\LightSaml\Context\ContextInterface::class)->getMock();
     }
 }

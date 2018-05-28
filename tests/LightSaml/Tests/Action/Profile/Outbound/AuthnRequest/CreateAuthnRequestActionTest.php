@@ -6,18 +6,19 @@ use LightSaml\Action\Profile\Outbound\AuthnRequest\CreateAuthnRequestAction;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Profile\Profiles;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class CreateAuthnRequestActionTest extends \PHPUnit_Framework_TestCase
+class CreateAuthnRequestActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger()
     {
-        new CreateAuthnRequestAction(TestHelper::getLoggerMock($this));
+        new CreateAuthnRequestAction($this->getLoggerMock());
+        $this->assertTrue(true);
     }
 
     public function test_creates_outbounding_authn_request()
     {
-        $action = new CreateAuthnRequestAction(TestHelper::getLoggerMock($this));
+        $action = new CreateAuthnRequestAction($this->getLoggerMock());
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_SP);
 

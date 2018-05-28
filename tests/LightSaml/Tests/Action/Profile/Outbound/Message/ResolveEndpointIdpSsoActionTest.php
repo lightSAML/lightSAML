@@ -9,7 +9,6 @@ use LightSaml\Criteria\CriteriaSet;
 use LightSaml\Model\Metadata\SingleSignOnService;
 use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
-use LightSaml\Tests\TestHelper;
 use Psr\Log\LoggerInterface;
 
 class ResolveEndpointIdpSsoActionTest extends AbstractResolveEndpointActionTest
@@ -22,7 +21,7 @@ class ResolveEndpointIdpSsoActionTest extends AbstractResolveEndpointActionTest
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) {
             $this->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, SingleSignOnService::class);
 
-            return [TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService())];
+            return [$this->getEndpointReferenceMock($endpoint = new SingleSignOnService())];
         });
 
         $this->action->execute($context);

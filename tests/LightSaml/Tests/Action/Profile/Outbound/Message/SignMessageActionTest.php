@@ -8,13 +8,14 @@ use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Model\Protocol\Response;
 use LightSaml\Model\Protocol\SamlMessage;
 use LightSaml\Model\XmlDSig\SignatureWriter;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class SignMessageActionTest extends \PHPUnit_Framework_TestCase
+class SignMessageActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger_and_signature_resolver()
     {
-        new SignMessageAction(TestHelper::getLoggerMock($this), TestHelper::getSignatureResolverMock($this));
+        new SignMessageAction($this->getLoggerMock(), $this->getSignatureResolverMock());
+        $this->assertTrue(true);
     }
 
     public function supports_message_provider()
@@ -30,14 +31,16 @@ class SignMessageActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_supports_message($trustOptionsMethod, SamlMessage $message)
     {
-        $action = new SignMessageAction(TestHelper::getLoggerMock($this), TestHelper::getSignatureResolverMock($this));
+        $action = new SignMessageAction($this->getLoggerMock(), $this->getSignatureResolverMock());
 
-        $context = TestHelper::getProfileContext();
+        $context = $this->getProfileContext();
         $context->getPartyEntityContext()->setTrustOptions(new TrustOptions());
         $context->getTrustOptions()->{$trustOptionsMethod}(false);
         $context->getOutboundContext()->setMessage($message);
 
         $action->execute($context);
+
+        $this->assertTrue(true);
     }
 
     public function does_not_support_message_provider()
@@ -54,9 +57,9 @@ class SignMessageActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_does_not_support_message(SamlMessage $message)
     {
-        $action = new SignMessageAction(TestHelper::getLoggerMock($this), TestHelper::getSignatureResolverMock($this));
+        $action = new SignMessageAction($this->getLoggerMock(), $this->getSignatureResolverMock());
 
-        $context = TestHelper::getProfileContext();
+        $context = $this->getProfileContext();
         $context->getPartyEntityContext()->setTrustOptions(new TrustOptions());
         $context->getOutboundContext()->setMessage($message);
 
@@ -66,11 +69,11 @@ class SignMessageActionTest extends \PHPUnit_Framework_TestCase
     public function test_logs_disabled_signing()
     {
         $action = new SignMessageAction(
-            $loggerMock = TestHelper::getLoggerMock($this),
-            $signatureResolverMock = TestHelper::getSignatureResolverMock($this)
+            $loggerMock = $this->getLoggerMock(),
+            $signatureResolverMock = $this->getSignatureResolverMock()
         );
 
-        $context = TestHelper::getProfileContext();
+        $context = $this->getProfileContext();
         $context->getPartyEntityContext()->setTrustOptions(new TrustOptions());
         $context->getTrustOptions()->setSignAuthnRequest(false);
         $context->getOutboundContext()->setMessage($message = new AuthnRequest());
@@ -88,11 +91,11 @@ class SignMessageActionTest extends \PHPUnit_Framework_TestCase
     public function test_logs_no_signature_resolved()
     {
         $action = new SignMessageAction(
-            $loggerMock = TestHelper::getLoggerMock($this),
-            $signatureResolverMock = TestHelper::getSignatureResolverMock($this)
+            $loggerMock = $this->getLoggerMock(),
+            $signatureResolverMock = $this->getSignatureResolverMock()
         );
 
-        $context = TestHelper::getProfileContext();
+        $context = $this->getProfileContext();
         $context->getPartyEntityContext()->setTrustOptions(new TrustOptions());
         $context->getTrustOptions()->setSignAuthnRequest(true);
         $context->getOutboundContext()->setMessage($message = new AuthnRequest());
@@ -107,16 +110,16 @@ class SignMessageActionTest extends \PHPUnit_Framework_TestCase
     public function test_signs_message_when_signing_enabled()
     {
         $action = new SignMessageAction(
-            $loggerMock = TestHelper::getLoggerMock($this),
-            $signatureResolverMock = TestHelper::getSignatureResolverMock($this)
+            $loggerMock = $this->getLoggerMock(),
+            $signatureResolverMock = $this->getSignatureResolverMock()
         );
 
-        $context = TestHelper::getProfileContext();
+        $context = $this->getProfileContext();
         $context->getPartyEntityContext()->setTrustOptions(new TrustOptions());
         $context->getTrustOptions()->setSignAuthnRequest(true);
         $context->getOutboundContext()->setMessage($message = new AuthnRequest());
 
-        $signature = new SignatureWriter($certificateMock = TestHelper::getX509CertificateMock($this));
+        $signature = new SignatureWriter($certificateMock = $this->getX509CertificateMock());
         $certificateMock->expects($this->any())
             ->method('getInfo')
             ->willReturn($expectedInfo = ['a'=>1]);

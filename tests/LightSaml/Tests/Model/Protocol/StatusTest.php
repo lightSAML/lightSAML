@@ -5,8 +5,9 @@ namespace LightSaml\Tests\Model\Protocol;
 use LightSaml\Model\Protocol\Status;
 use LightSaml\Model\Protocol\StatusCode;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 
-class StatusTest extends \PHPUnit_Framework_TestCase
+class StatusTest extends BaseTestCase
 {
     public function test_status_set_message_constructor()
     {

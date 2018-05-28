@@ -16,14 +16,15 @@ use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Profile\Profiles;
 use LightSaml\Resolver\Credential\CredentialResolverQuery;
 use LightSaml\Resolver\Signature\OwnSignatureResolver;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 
-class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
+class OwnSignatureResolverTest extends BaseTestCase
 {
     public function test_constructs_with_credential_resolver()
     {
-        new OwnSignatureResolver(TestHelper::getCredentialResolverMock($this));
+        new OwnSignatureResolver($this->getCredentialResolverMock());
+        $this->assertTrue(true);
     }
 
     /**
@@ -32,9 +33,9 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_context_exception_when_no_credential_resolved()
     {
-        $signatureResolver = new OwnSignatureResolver($credentialResolverMock = TestHelper::getCredentialResolverMock($this));
+        $signatureResolver = new OwnSignatureResolver($credentialResolverMock = $this->getCredentialResolverMock());
 
-        $context = TestHelper::getProfileContext();
+        $context = $this->getProfileContext();
         $context->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor($ownEntityId = 'http://own.id'));
 
         $credentialResolverMock->method('query')->willReturn($query = new CredentialResolverQuery($credentialResolverMock));
@@ -45,16 +46,16 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
 
     public function test_returns_signature_writer_with_first_resolved_credential()
     {
-        $signatureResolver = new OwnSignatureResolver($credentialResolverMock = TestHelper::getCredentialResolverMock($this));
+        $signatureResolver = new OwnSignatureResolver($credentialResolverMock = $this->getCredentialResolverMock());
 
-        $context = TestHelper::getProfileContext();
+        $context = $this->getProfileContext();
         $context->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor($ownEntityId = 'http://own.id'));
         $context->getPartyEntityContext()->setTrustOptions(new TrustOptions());
 
         $credentialResolverMock->method('query')->willReturn($query = new CredentialResolverQuery($credentialResolverMock));
         $credentialResolverMock->method('resolve')->willReturn([
-            $credential1 = TestHelper::getX509CredentialMock($this),
-            $credential2 = TestHelper::getX509CredentialMock($this),
+            $credential1 = $this->getX509CredentialMock(),
+            $credential2 = $this->getX509CredentialMock(),
         ]);
 
         $credential1->expects($this->once())
@@ -83,21 +84,21 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
      */
     public function test_credential_criterias($profileRole, $expectedMetadataType)
     {
-        $signatureResolver = new OwnSignatureResolver($credentialResolverMock = TestHelper::getCredentialResolverMock($this));
+        $signatureResolver = new OwnSignatureResolver($credentialResolverMock = $this->getCredentialResolverMock());
 
-        $context = TestHelper::getProfileContext(Profiles::METADATA, $profileRole);
+        $context = $this->getProfileContext(Profiles::METADATA, $profileRole);
         $context->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor($ownEntityId = 'http://own.id'));
         $context->getPartyEntityContext()->setTrustOptions(new TrustOptions());
 
         $credentialResolverMock->method('query')->willReturn($query = new CredentialResolverQuery($credentialResolverMock));
         $credentialResolverMock->method('resolve')
             ->willReturnCallback(function (CriteriaSet $criteriaSet) use ($ownEntityId, $expectedMetadataType) {
-                TestHelper::assertCriteria($this, $criteriaSet, EntityIdCriteria::class, 'getEntityId', $ownEntityId);
-                TestHelper::assertCriteria($this, $criteriaSet, UsageCriteria::class, 'getUsage', UsageType::SIGNING);
-                TestHelper::assertCriteria($this, $criteriaSet, X509CredentialCriteria::class, null, null);
-                TestHelper::assertCriteria($this, $criteriaSet, MetadataCriteria::class, 'getMetadataType', $expectedMetadataType);
+                $this->assertCriteria($criteriaSet, EntityIdCriteria::class, 'getEntityId', $ownEntityId);
+                $this->assertCriteria($criteriaSet, UsageCriteria::class, 'getUsage', UsageType::SIGNING);
+                $this->assertCriteria($criteriaSet, X509CredentialCriteria::class, null, null);
+                $this->assertCriteria($criteriaSet, MetadataCriteria::class, 'getMetadataType', $expectedMetadataType);
 
-                return [TestHelper::getX509CredentialMock($this)];
+                return [$this->getX509CredentialMock()];
             });
 
         $signatureResolver->getSignature($context);
@@ -109,13 +110,13 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_logic_exception_when_returned_value_if_not_credential()
     {
-        $signatureResolver = new OwnSignatureResolver($credentialResolverMock = TestHelper::getCredentialResolverMock($this));
+        $signatureResolver = new OwnSignatureResolver($credentialResolverMock = $this->getCredentialResolverMock());
 
-        $context = TestHelper::getProfileContext();
+        $context = $this->getProfileContext();
         $context->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor($ownEntityId = 'http://own.id'));
 
         $credentialResolverMock->method('query')->willReturn($query = new CredentialResolverQuery($credentialResolverMock));
-        $credentialResolverMock->method('resolve')->willReturn([$this->getMock(CredentialInterface::class)]);
+        $credentialResolverMock->method('resolve')->willReturn([$this->getMockBuilder(CredentialInterface::class)->getMock()]);
 
         $signatureResolver->getSignature($context);
     }

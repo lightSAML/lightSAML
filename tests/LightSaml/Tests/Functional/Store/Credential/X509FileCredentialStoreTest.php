@@ -4,8 +4,9 @@ namespace LightSaml\Tests\Functional\Store\Credential;
 
 use LightSaml\Credential\CredentialInterface;
 use LightSaml\Store\Credential\X509FileCredentialStore;
+use LightSaml\Tests\BaseTestCase;
 
-class X509FileCredentialStoreTest extends \PHPUnit_Framework_TestCase
+class X509FileCredentialStoreTest extends BaseTestCase
 {
     public function test_returns_null_if_entity_id_does_not_match()
     {

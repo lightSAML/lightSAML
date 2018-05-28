@@ -4,9 +4,10 @@ namespace LightSaml\Tests\Binding;
 
 use LightSaml\Binding\BindingFactory;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
-class BindingFactoryTest extends \PHPUnit_Framework_TestCase
+class BindingFactoryTest extends BaseTestCase
 {
     public function test__create_http_redirect()
     {

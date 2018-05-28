@@ -10,14 +10,15 @@ use LightSaml\Model\Metadata\SpSsoDescriptor;
 use LightSaml\Resolver\Endpoint\BindingEndpointResolver;
 use LightSaml\Resolver\Endpoint\Criteria\BindingCriteria;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 
-class BindingEndpointResolverTest extends \PHPUnit_Framework_TestCase
+class BindingEndpointResolverTest extends BaseTestCase
 {
     public function test__does_not_modify_when_criteria_not_present()
     {
         $candidates = [
-            $firstEndpoint = $this->getMock(EndpointReference::class, [], [], '', false),
-            $secondEndpoint = $this->getMock(EndpointReference::class, [], [], '', false),
+            $firstEndpoint = $this->getMockBuilder(EndpointReference::class)->disableOriginalConstructor()->getMock(),
+            $secondEndpoint = $this->getMockBuilder(EndpointReference::class)->disableOriginalConstructor()->getMock(),
         ];
 
         $resolver = new BindingEndpointResolver();

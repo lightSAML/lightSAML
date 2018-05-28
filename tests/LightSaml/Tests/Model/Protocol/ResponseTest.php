@@ -24,8 +24,9 @@ use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\SamlConstants;
 use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
+use LightSaml\Tests\BaseTestCase;
 
-class ResponseTest extends \PHPUnit_Framework_TestCase
+class ResponseTest extends BaseTestCase
 {
     public function test_serialization()
     {

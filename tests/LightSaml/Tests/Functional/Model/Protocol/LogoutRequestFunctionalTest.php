@@ -5,8 +5,9 @@ namespace LightSaml\Tests\Functional\Model\Protocol;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Protocol\LogoutRequest;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 
-class LogoutRequestFunctionalTest extends \PHPUnit_Framework_TestCase
+class LogoutRequestFunctionalTest extends BaseTestCase
 {
     public function test__deserialize_logout_request01()
     {

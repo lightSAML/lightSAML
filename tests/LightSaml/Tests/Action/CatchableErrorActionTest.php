@@ -9,12 +9,14 @@ use LightSaml\Context\ContextInterface;
 use LightSaml\Context\Profile\ExceptionContext;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Context\Profile\ProfileContexts;
+use LightSaml\Tests\BaseTestCase;
 
-class CatchableErrorActionTest extends \PHPUnit_Framework_TestCase
+class CatchableErrorActionTest extends BaseTestCase
 {
     public function test_constructs_with_two_actions()
     {
         new CatchableErrorAction($this->getActionMock(), $this->getActionMock());
+        $this->assertTrue(true);
     }
 
     public function test_execute_calls_first_action()
@@ -63,7 +65,7 @@ class CatchableErrorActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getActionMock()
     {
-        return $this->getMock(ActionInterface::class);
+        return $this->getMockBuilder(ActionInterface::class)->getMock();
     }
 
     /**

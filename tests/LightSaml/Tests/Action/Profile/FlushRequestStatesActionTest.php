@@ -10,9 +10,10 @@ use LightSaml\Context\Profile\RequestStateContext;
 use LightSaml\Profile\Profiles;
 use LightSaml\State\Request\RequestState;
 use LightSaml\Store\Request\RequestStateStoreInterface;
+use LightSaml\Tests\BaseTestCase;
 use Psr\Log\LoggerInterface;
 
-class FlushRequestStatesActionTest extends \PHPUnit_Framework_TestCase
+class FlushRequestStatesActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger_and_request_state_store()
     {
@@ -20,6 +21,8 @@ class FlushRequestStatesActionTest extends \PHPUnit_Framework_TestCase
         $requestStoreMock = $this->getRequestStateStoreMock();
 
         new FlushRequestStatesAction($loggerMock, $requestStoreMock);
+
+        $this->assertTrue(true);
     }
 
     public function test_flushes_store_with_inbound_request_state()
@@ -76,21 +79,5 @@ class FlushRequestStatesActionTest extends \PHPUnit_Framework_TestCase
             );
 
         $action->execute($context);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Store\Request\RequestStateStoreInterface
-     */
-    private function getRequestStateStoreMock()
-    {
-        return $this->getMock(RequestStateStoreInterface::class);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\Log\LoggerInterface
-     */
-    private function getLoggerMock()
-    {
-        return $this->getMock(LoggerInterface::class);
     }
 }

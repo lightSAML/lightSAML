@@ -11,8 +11,9 @@ use LightSaml\Credential\X509Certificate;
 use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\Model\XmlDSig\SignatureXmlReader;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 
-class AuthnRequestFunctionalTest extends \PHPUnit_Framework_TestCase
+class AuthnRequestFunctionalTest extends BaseTestCase
 {
     public function test__deserialize_request01()
     {

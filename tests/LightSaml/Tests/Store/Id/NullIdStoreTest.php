@@ -3,8 +3,9 @@
 namespace LightSaml\Tests\Store\Id;
 
 use LightSaml\Store\Id\NullIdStore;
+use LightSaml\Tests\BaseTestCase;
 
-class NullIdStoreTest extends \PHPUnit_Framework_TestCase
+class NullIdStoreTest extends BaseTestCase
 {
     public function test_returns_false()
     {

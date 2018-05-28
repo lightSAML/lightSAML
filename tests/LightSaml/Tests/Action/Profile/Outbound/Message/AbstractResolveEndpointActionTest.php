@@ -15,10 +15,10 @@ use LightSaml\Resolver\Endpoint\Criteria\IndexCriteria;
 use LightSaml\Resolver\Endpoint\Criteria\LocationCriteria;
 use LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria;
 use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 use Psr\Log\LoggerInterface;
 
-abstract class AbstractResolveEndpointActionTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractResolveEndpointActionTest extends BaseTestCase
 {
     /** @var ResolveEndpointBaseAction|\PHPUnit_Framework_MockObject_MockObject */
     protected $action;
@@ -34,8 +34,8 @@ abstract class AbstractResolveEndpointActionTest extends \PHPUnit_Framework_Test
      */
     protected function setUp()
     {
-        $this->logger = TestHelper::getLoggerMock($this);
-        $this->endpointResolver = $this->getMock(EndpointResolverInterface::class);
+        $this->logger = $this->getLoggerMock();
+        $this->endpointResolver = $this->getMockBuilder(EndpointResolverInterface::class)->getMock();
         $this->action = $this->createAction($this->logger, $this->endpointResolver);
     }
 
@@ -79,7 +79,7 @@ abstract class AbstractResolveEndpointActionTest extends \PHPUnit_Framework_Test
         EntityDescriptor $partyEntityDescriptor = null,
         $profileId = Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST
     ) {
-        $context = TestHelper::getProfileContext($profileId, $ownRole);
+        $context = $this->getProfileContext($profileId, $ownRole);
 
         if ($endpoint) {
             $context->getEndpointContext()->setEndpoint($endpoint);

@@ -2,9 +2,10 @@
 
 namespace LightSaml\Tests\Model\Xsd;
 
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Validator\Model\Xsd\XsdValidator;
 
-class XsdValidatorTest extends \PHPUnit_Framework_TestCase
+class XsdValidatorTest extends BaseTestCase
 {
     public function test_fails_on_invalid_xml()
     {

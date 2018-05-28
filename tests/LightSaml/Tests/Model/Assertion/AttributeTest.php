@@ -3,8 +3,9 @@
 namespace LightSaml\Tests\Model\Assertion;
 
 use LightSaml\Model\Assertion\Attribute;
+use LightSaml\Tests\BaseTestCase;
 
-class AttributeTest extends \PHPUnit_Framework_TestCase
+class AttributeTest extends BaseTestCase
 {
     public function test_set_scalar_value()
     {

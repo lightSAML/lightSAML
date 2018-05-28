@@ -5,14 +5,14 @@ namespace LightSaml\Tests\Store\Request;
 use LightSaml\Meta\ParameterBag;
 use LightSaml\State\Request\RequestState;
 use LightSaml\Store\Request\RequestStateSessionStore;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class RequestStateSessionStoreTest extends \PHPUnit_Framework_TestCase
+class RequestStateSessionStoreTest extends BaseTestCase
 {
     public function test_sets_to_session()
     {
         $store = new RequestStateSessionStore(
-            $sessionMock = TestHelper::getSessionMock($this),
+            $sessionMock = $this->getSessionMock(),
             'main'
         );
 
@@ -31,7 +31,7 @@ class RequestStateSessionStoreTest extends \PHPUnit_Framework_TestCase
     public function test_gets_from_session()
     {
         $store = new RequestStateSessionStore(
-            $sessionMock = TestHelper::getSessionMock($this),
+            $sessionMock = $this->getSessionMock(),
             'main'
         );
 
@@ -48,7 +48,7 @@ class RequestStateSessionStoreTest extends \PHPUnit_Framework_TestCase
     public function test_remove()
     {
         $store = new RequestStateSessionStore(
-            $sessionMock = TestHelper::getSessionMock($this),
+            $sessionMock = $this->getSessionMock(),
             'main'
         );
 
@@ -66,7 +66,7 @@ class RequestStateSessionStoreTest extends \PHPUnit_Framework_TestCase
     public function test_clear()
     {
         $store = new RequestStateSessionStore(
-            $sessionMock = TestHelper::getSessionMock($this),
+            $sessionMock = $this->getSessionMock(),
             'main'
         );
 

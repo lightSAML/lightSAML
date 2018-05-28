@@ -3,8 +3,9 @@
 namespace LightSaml\Tests\Functional\Store\EntityDescriptor;
 
 use LightSaml\Store\EntityDescriptor\FileEntityDescriptorStore;
+use LightSaml\Tests\BaseTestCase;
 
-class FileEntityDescriptorStoreTest extends \PHPUnit_Framework_TestCase
+class FileEntityDescriptorStoreTest extends BaseTestCase
 {
     public function test_loads_entity_descriptor_file()
     {

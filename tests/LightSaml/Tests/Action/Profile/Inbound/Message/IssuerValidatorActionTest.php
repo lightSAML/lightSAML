@@ -9,14 +9,15 @@ use LightSaml\Model\Assertion\Issuer;
 use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Profile\Profiles;
 use LightSaml\SamlConstants;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Validator\Model\NameId\NameIdValidatorInterface;
 
-class IssuerValidatorActionTest extends \PHPUnit_Framework_TestCase
+class IssuerValidatorActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger_name_id_validator_and_string()
     {
-        new IssuerValidatorAction(TestHelper::getLoggerMock($this), $this->getNameIdValidatorMock(), '');
+        new IssuerValidatorAction($this->getLoggerMock(), $this->getNameIdValidatorMock(), '');
+        $this->assertTrue(true);
     }
 
     /**
@@ -25,7 +26,7 @@ class IssuerValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_if_inbound_message_has_no_issuer()
     {
-        $action = new IssuerValidatorAction(TestHelper::getLoggerMock($this), $this->getNameIdValidatorMock(), '');
+        $action = new IssuerValidatorAction($this->getLoggerMock(), $this->getNameIdValidatorMock(), '');
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage(new AuthnRequest());
@@ -39,7 +40,7 @@ class IssuerValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_if_inbound_message_issuer_format_different_then_allowed()
     {
-        $action = new IssuerValidatorAction(TestHelper::getLoggerMock($this), $this->getNameIdValidatorMock(), SamlConstants::NAME_ID_FORMAT_EMAIL);
+        $action = new IssuerValidatorAction($this->getLoggerMock(), $this->getNameIdValidatorMock(), SamlConstants::NAME_ID_FORMAT_EMAIL);
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage(new AuthnRequest());
@@ -54,7 +55,7 @@ class IssuerValidatorActionTest extends \PHPUnit_Framework_TestCase
     public function test_calls_name_id_validator()
     {
         $nameIdValidatorMock = $this->getNameIdValidatorMock();
-        $action = new IssuerValidatorAction(TestHelper::getLoggerMock($this), $nameIdValidatorMock, $allowedFormat = SamlConstants::NAME_ID_FORMAT_EMAIL);
+        $action = new IssuerValidatorAction($this->getLoggerMock(), $nameIdValidatorMock, $allowedFormat = SamlConstants::NAME_ID_FORMAT_EMAIL);
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage(new AuthnRequest());
@@ -77,7 +78,7 @@ class IssuerValidatorActionTest extends \PHPUnit_Framework_TestCase
     public function test_wrapps_validation_exception_in_context_exception()
     {
         $nameIdValidatorMock = $this->getNameIdValidatorMock();
-        $action = new IssuerValidatorAction(TestHelper::getLoggerMock($this), $nameIdValidatorMock, $allowedFormat = SamlConstants::NAME_ID_FORMAT_EMAIL);
+        $action = new IssuerValidatorAction($this->getLoggerMock(), $nameIdValidatorMock, $allowedFormat = SamlConstants::NAME_ID_FORMAT_EMAIL);
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage(new AuthnRequest());
@@ -100,6 +101,6 @@ class IssuerValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     public function getNameIdValidatorMock()
     {
-        return $this->getMock(NameIdValidatorInterface::class);
+        return $this->getMockBuilder(NameIdValidatorInterface::class)->getMock();
     }
 }

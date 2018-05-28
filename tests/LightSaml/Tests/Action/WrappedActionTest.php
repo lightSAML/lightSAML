@@ -4,15 +4,16 @@ namespace LightSaml\Tests\Action;
 
 use LightSaml\Action\ActionInterface;
 use LightSaml\Action\WrappedAction;
+use LightSaml\Tests\BaseTestCase;
 
-class WrappedActionTest extends \PHPUnit_Framework_TestCase
+class WrappedActionTest extends BaseTestCase
 {
     public function test__before_and_after_called()
     {
         $context = $this->getContextMock();
 
         /** @var ActionInterface|\PHPUnit_Framework_MockObject_MockObject $action */
-        $action = $this->getMock(ActionInterface::class);
+        $action = $this->getMockBuilder(ActionInterface::class)->getMock();
         /** @var WrappedAction|\PHPUnit_Framework_MockObject_MockObject $wrapper */
         $wrapper = $this->getMockForAbstractClass(WrappedAction::class, array($action));
 
@@ -62,6 +63,6 @@ class WrappedActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getContextMock()
     {
-        return $this->getMock('LightSaml\Context\ContextInterface');
+        return $this->getMockBuilder(\LightSaml\Context\ContextInterface::class)->getMock();
     }
 }

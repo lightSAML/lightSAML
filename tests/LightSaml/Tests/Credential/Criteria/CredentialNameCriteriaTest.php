@@ -4,8 +4,9 @@ namespace LightSaml\Tests\Credential\Criteria;
 
 use LightSaml\Credential\Criteria\CredentialNameCriteria;
 use LightSaml\Credential\Criteria\TrustCriteriaInterface;
+use LightSaml\Tests\BaseTestCase;
 
-class CredentialNameCriteriaTest extends \PHPUnit_Framework_TestCase
+class CredentialNameCriteriaTest extends BaseTestCase
 {
     public function test_implements_trust_criteria_interface()
     {

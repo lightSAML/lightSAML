@@ -11,14 +11,13 @@ use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Model\Protocol\Response;
 use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
 use LightSaml\SamlConstants;
-use LightSaml\Tests\TestHelper;
 use Psr\Log\LoggerInterface;
 
 class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
 {
     public function test_does_nothing_if_endpoint_already_set()
     {
-        $context = TestHelper::getProfileContext();
+        $context = $this->getProfileContext();
         $context->getEndpointContext()->setEndpoint($endpoint = new SingleSignOnService());
         $endpoint->setLocation('http://location.com');
         $endpoint->setBinding(SamlConstants::BINDING_SAML2_HTTP_POST);
@@ -50,7 +49,7 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
             $this->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, SpSsoDescriptor::class);
             $this->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, null);
 
-            return [TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService())];
+            return [$this->getEndpointReferenceMock($endpoint = new SingleSignOnService())];
         });
 
         $this->action->execute($context);
@@ -84,7 +83,7 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($index) {
             $this->criteriaSetShouldHaveIndexCriteria($criteriaSet, $index);
 
-            return [TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService())];
+            return [$this->getEndpointReferenceMock($endpoint = new SingleSignOnService())];
         });
 
         $this->action->execute($context);
@@ -99,7 +98,7 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($url) {
             $this->criteriaSetShouldHaveLocationCriteria($criteriaSet, $url);
 
-            return [TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService())];
+            return [$this->getEndpointReferenceMock($endpoint = new SingleSignOnService())];
         });
 
         $this->action->execute($context);

@@ -5,18 +5,20 @@ namespace LightSaml\Tests\Meta;
 use LightSaml\Credential\X509Certificate;
 use LightSaml\Meta\ParameterBag;
 use LightSaml\Meta\SigningOptions;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class SigningOptionsTest extends \PHPUnit_Framework_TestCase
+class SigningOptionsTest extends BaseTestCase
 {
     public function test_constructs_wout_arguments()
     {
         new SigningOptions();
+        $this->assertTrue(true);
     }
 
     public function test_constructs_with_xml_key_and_certificate()
     {
-        new SigningOptions(TestHelper::getXmlSecurityKeyMock($this), new X509Certificate());
+        new SigningOptions($this->getXmlSecurityKeyMock(), new X509Certificate());
+        $this->assertTrue(true);
     }
 
     public function test_enabled_by_default()
@@ -34,13 +36,13 @@ class SigningOptionsTest extends \PHPUnit_Framework_TestCase
 
     public function test_returns_certificate_constructed_with()
     {
-        $options = new SigningOptions($key = TestHelper::getXmlSecurityKeyMock($this), $certificate = new X509Certificate());
+        $options = new SigningOptions($key = $this->getXmlSecurityKeyMock(), $certificate = new X509Certificate());
         $this->assertSame($certificate, $options->getCertificate());
     }
 
     public function test_returns_xml_key_constructed_with()
     {
-        $options = new SigningOptions($key = TestHelper::getXmlSecurityKeyMock($this), $certificate = new X509Certificate());
+        $options = new SigningOptions($key = $this->getXmlSecurityKeyMock(), $certificate = new X509Certificate());
         $this->assertSame($key, $options->getPrivateKey());
     }
 
@@ -54,7 +56,7 @@ class SigningOptionsTest extends \PHPUnit_Framework_TestCase
     public function test_returns_set_xml_key()
     {
         $options = new SigningOptions();
-        $options->setPrivateKey($key = TestHelper::getXmlSecurityKeyMock($this));
+        $options->setPrivateKey($key = $this->getXmlSecurityKeyMock());
         $this->assertSame($key, $options->getPrivateKey());
     }
 

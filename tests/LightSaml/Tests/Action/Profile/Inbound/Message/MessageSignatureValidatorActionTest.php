@@ -11,20 +11,21 @@ use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Model\XmlDSig\SignatureStringReader;
 use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\Profile\Profiles;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Validator\Model\Signature\SignatureValidatorInterface;
 
-class MessageSignatureValidatorActionTest extends \PHPUnit_Framework_TestCase
+class MessageSignatureValidatorActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger_and_signature_validator()
     {
-        new MessageSignatureValidatorAction(TestHelper::getLoggerMock($this), $this->getSignatureValidatorMock());
+        new MessageSignatureValidatorAction($this->getLoggerMock(), $this->getSignatureValidatorMock());
+        $this->assertTrue(true);
     }
 
     public function test_does_nothing_when_message_does_not_have_signature()
     {
         $action = new MessageSignatureValidatorAction(
-            $logger = TestHelper::getLoggerMock($this),
+            $logger = $this->getLoggerMock(),
             $signatureValidator = $this->getSignatureValidatorMock()
         );
 
@@ -46,7 +47,7 @@ class MessageSignatureValidatorActionTest extends \PHPUnit_Framework_TestCase
     public function test_throws_if_not_signature_reader()
     {
         $action = new MessageSignatureValidatorAction(
-            $logger = TestHelper::getLoggerMock($this),
+            $logger = $this->getLoggerMock(),
             $signatureValidator = $this->getSignatureValidatorMock()
         );
 
@@ -77,7 +78,7 @@ class MessageSignatureValidatorActionTest extends \PHPUnit_Framework_TestCase
     public function test_success_on_validator_returns_credential($ownRole, $metadataType)
     {
         $action = new MessageSignatureValidatorAction(
-            $logger = TestHelper::getLoggerMock($this),
+            $logger = $this->getLoggerMock(),
             $signatureValidator = $this->getSignatureValidatorMock()
         );
 
@@ -111,7 +112,7 @@ class MessageSignatureValidatorActionTest extends \PHPUnit_Framework_TestCase
     public function test_warning_logged_if_no_verification()
     {
         $action = new MessageSignatureValidatorAction(
-            $logger = TestHelper::getLoggerMock($this),
+            $logger = $this->getLoggerMock(),
             $signatureValidator = $this->getSignatureValidatorMock()
         );
 
@@ -141,7 +142,7 @@ class MessageSignatureValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getSignatureValidatorMock()
     {
-        return $this->getMock(SignatureValidatorInterface::class);
+        return $this->getMockBuilder(SignatureValidatorInterface::class)->getMock();
     }
 
     /**
@@ -149,6 +150,6 @@ class MessageSignatureValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getCredentialMock()
     {
-        return $this->getMock(CredentialInterface::class);
+        return $this->getMockBuilder(CredentialInterface::class)->getMock();
     }
 }

@@ -4,17 +4,20 @@ namespace LightSaml\Tests\State\Request;
 
 use LightSaml\Meta\ParameterBag;
 use LightSaml\State\Request\RequestState;
+use LightSaml\Tests\BaseTestCase;
 
-class RequestStateTest extends \PHPUnit_Framework_TestCase
+class RequestStateTest extends BaseTestCase
 {
     public function test_can_be_constructed_without_arguments()
     {
         new RequestState();
+        $this->assertTrue(true);
     }
 
     public function test_can_be_constructed_wit_id_argument()
     {
         new RequestState('id');
+        $this->assertTrue(true);
     }
 
     /**
@@ -23,6 +26,7 @@ class RequestStateTest extends \PHPUnit_Framework_TestCase
     public function test_can_be_constructed_wit_id_and_nonce_argument()
     {
         new RequestState('id', 'nonce');
+        $this->assertTrue(true);
     }
 
     public function test_returns_id()

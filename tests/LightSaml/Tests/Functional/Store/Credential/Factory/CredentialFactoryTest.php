@@ -9,8 +9,9 @@ use LightSaml\Credential\X509Credential;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Store\Credential\Factory\CredentialFactory;
 use LightSaml\Store\EntityDescriptor\FixedEntityDescriptorStore;
+use LightSaml\Tests\BaseTestCase;
 
-class CredentialFactoryTest extends \PHPUnit_Framework_TestCase
+class CredentialFactoryTest extends BaseTestCase
 {
     public function test_creates_composite_store()
     {

@@ -17,8 +17,9 @@ use LightSaml\Model\Metadata\SingleSignOnService;
 use LightSaml\Model\Metadata\SpSsoDescriptor;
 use LightSaml\SamlConstants;
 use LightSaml\Credential\X509Certificate;
+use LightSaml\Tests\BaseTestCase;
 
-class EntityDescriptorTest extends \PHPUnit_Framework_TestCase
+class EntityDescriptorTest extends BaseTestCase
 {
     public function test_serialization()
     {

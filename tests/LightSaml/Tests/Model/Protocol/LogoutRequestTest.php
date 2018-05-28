@@ -7,8 +7,9 @@ use LightSaml\Model\Assertion\Issuer;
 use LightSaml\Model\Assertion\NameID;
 use LightSaml\Model\Protocol\LogoutRequest;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 
-class LogoutRequestTest extends \PHPUnit_Framework_TestCase
+class LogoutRequestTest extends BaseTestCase
 {
     public function test__serialize()
     {

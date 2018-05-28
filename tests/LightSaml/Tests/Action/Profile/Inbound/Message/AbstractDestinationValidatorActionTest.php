@@ -13,24 +13,25 @@ use LightSaml\Profile\Profiles;
 use LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria;
 use LightSaml\Resolver\Endpoint\Criteria\LocationCriteria;
 use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
+class AbstractDestinationValidatorActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger_and_endpoint_resolver()
     {
         $this->getMockForAbstractClass(
             AbstractDestinationValidatorAction::class,
             [
-                TestHelper::getLoggerMock($this),
+                $this->getLoggerMock(),
                 $this->getEndpointResolverMock(),
             ]
         );
+        $this->assertTrue(true);
     }
 
     public function test_passes_if_inbound_message_destination_is_empty()
     {
-        $loggerMock = TestHelper::getLoggerMock($this);
+        $loggerMock = $this->getLoggerMock();
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */
         $action = $this->getMockForAbstractClass(AbstractDestinationValidatorAction::class, [$loggerMock, $endpointResolverMock]);
@@ -38,11 +39,13 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
         $context = $this->buildContext(ProfileContext::ROLE_IDP, null);
 
         $action->execute($context);
+
+        $this->assertTrue(true);
     }
 
     public function test_passes_if_message_destination_matches_to_one_of_own_locations()
     {
-        $loggerMock = TestHelper::getLoggerMock($this);
+        $loggerMock = $this->getLoggerMock();
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */
         $action = $this->getMockForAbstractClass(AbstractDestinationValidatorAction::class, [$loggerMock, $endpointResolverMock]);
@@ -73,7 +76,7 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_makes_descriptor_type_criteria_for_own_role($ownRole, $descriptorType)
     {
-        $loggerMock = TestHelper::getLoggerMock($this);
+        $loggerMock = $this->getLoggerMock();
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */
         $action = $this->getMockForAbstractClass(AbstractDestinationValidatorAction::class, [$loggerMock, $endpointResolverMock]);
@@ -110,7 +113,7 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_exception_when_destination_does_not_match()
     {
-        $loggerMock = TestHelper::getLoggerMock($this);
+        $loggerMock = $this->getLoggerMock();
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */
         $action = $this->getMockForAbstractClass(AbstractDestinationValidatorAction::class, [$loggerMock, $endpointResolverMock]);
@@ -143,11 +146,4 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
         return $context;
     }
 
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Resolver\Endpoint\EndpointResolverInterface
-     */
-    private function getEndpointResolverMock()
-    {
-        return $this->getMock(EndpointResolverInterface::class);
-    }
 }

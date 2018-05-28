@@ -6,9 +6,10 @@ use LightSaml\Action\ActionInterface;
 use LightSaml\Action\CompositeAction;
 use LightSaml\Builder\Action\CompositeActionBuilder;
 use LightSaml\Context\ContextInterface;
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Tests\Mock\Action\FooAction;
 
-class CompositeActionBuilderTest extends \PHPUnit_Framework_TestCase
+class CompositeActionBuilderTest extends BaseTestCase
 {
     /**
      * @expectedException \InvalidArgumentException
@@ -44,7 +45,7 @@ class CompositeActionBuilderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(CompositeAction::class, $compositeAction);
 
-        $compositeAction->execute($this->getMock(ContextInterface::class));
+        $compositeAction->execute($this->getMockBuilder(ContextInterface::class)->getMock());
     }
 
     public function test__ranked_as_given_priority_parameter()
@@ -63,7 +64,7 @@ class CompositeActionBuilderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(CompositeAction::class, $compositeAction);
 
-        $compositeAction->execute($this->getMock(ContextInterface::class));
+        $compositeAction->execute($this->getMockBuilder(ContextInterface::class)->getMock());
     }
 
     /**
@@ -74,7 +75,7 @@ class CompositeActionBuilderTest extends \PHPUnit_Framework_TestCase
      */
     private function getActionMock($expectedOrder, &$order)
     {
-        $action = $this->getMock(ActionInterface::class);
+        $action = $this->getMockBuilder(ActionInterface::class)->getMock();
         $action->expects($this->once())
             ->method('execute')
             ->willReturnCallback(function () use ($expectedOrder, &$order) {

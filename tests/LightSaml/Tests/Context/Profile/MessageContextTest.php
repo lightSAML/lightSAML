@@ -8,8 +8,9 @@ use LightSaml\Model\Protocol\LogoutRequest;
 use LightSaml\Model\Protocol\LogoutResponse;
 use LightSaml\Model\Protocol\Response;
 use LightSaml\Model\Protocol\SamlMessage;
+use LightSaml\Tests\BaseTestCase;
 
-class MessageContextTest extends \PHPUnit_Framework_TestCase
+class MessageContextTest extends BaseTestCase
 {
     public function message_as_concrete_type_provider()
     {

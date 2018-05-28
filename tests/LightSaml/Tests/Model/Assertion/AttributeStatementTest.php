@@ -4,8 +4,9 @@ namespace LightSaml\Tests\Model\Assertion;
 
 use LightSaml\Model\Assertion\Attribute;
 use LightSaml\Model\Assertion\AttributeStatement;
+use LightSaml\Tests\BaseTestCase;
 
-class AttributeStatementTest extends \PHPUnit_Framework_TestCase
+class AttributeStatementTest extends BaseTestCase
 {
     public function test_get_first_attribute_by_name_returns_attribute()
     {

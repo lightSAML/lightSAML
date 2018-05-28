@@ -4,8 +4,9 @@ namespace LightSaml\Tests\Credential\Context;
 
 use LightSaml\Credential\Context\CredentialContextSet;
 use LightSaml\Credential\Context\MetadataCredentialContext;
+use LightSaml\Tests\BaseTestCase;
 
-class CredentialContextSetTest extends \PHPUnit_Framework_TestCase
+class CredentialContextSetTest extends BaseTestCase
 {
     public function test_metadata_context_is_null_upon_creation()
     {
@@ -46,6 +47,8 @@ class CredentialContextSetTest extends \PHPUnit_Framework_TestCase
      */
     private function getMetadataContextMock()
     {
-        return $this->getMock('LightSaml\Credential\Context\MetadataCredentialContext', array(), array(), '', false);
+        return $this->getMockBuilder(\LightSaml\Credential\Context\MetadataCredentialContext::class)
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 }

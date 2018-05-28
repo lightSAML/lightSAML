@@ -11,15 +11,15 @@ use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Profile\Profiles;
 use LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria;
 use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class DestinationValidatorResponseActionTest extends \PHPUnit_Framework_TestCase
+class DestinationValidatorResponseActionTest extends BaseTestCase
 {
     public function test_creates_acs_service_type_criteria()
     {
         $endpointResolverMock = $this->getEndpointResolverMock();
 
-        $action = new DestinationValidatorResponseAction(TestHelper::getLoggerMock($this), $endpointResolverMock);
+        $action = new DestinationValidatorResponseAction($this->getLoggerMock(), $endpointResolverMock);
 
         $context = $this->buildContext(ProfileContext::ROLE_IDP, 'http://localhost');
 
@@ -56,13 +56,5 @@ class DestinationValidatorResponseActionTest extends \PHPUnit_Framework_TestCase
         $context->getOwnEntityContext()->setEntityDescriptor(new EntityDescriptor());
 
         return $context;
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Resolver\Endpoint\EndpointResolverInterface
-     */
-    private function getEndpointResolverMock()
-    {
-        return $this->getMock(EndpointResolverInterface::class);
     }
 }

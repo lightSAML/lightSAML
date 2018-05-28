@@ -13,12 +13,13 @@ use LightSaml\Provider\TimeProvider\TimeProviderInterface;
 use LightSaml\SamlConstants;
 use LightSaml\State\Request\RequestState;
 use LightSaml\Store\Request\RequestStateArrayStore;
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Tests\Fixtures\Meta\TimeProviderMock;
 use Pimple\Container;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProfileTest extends \PHPUnit_Framework_TestCase
+class ProfileTest extends BaseTestCase
 {
     const OWN_ENTITY_ID = 'https://localhost/lightSAML/lightSAML';
 

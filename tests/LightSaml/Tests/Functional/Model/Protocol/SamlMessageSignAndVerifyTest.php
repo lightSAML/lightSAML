@@ -21,8 +21,9 @@ use LightSaml\Model\Protocol\StatusCode;
 use LightSaml\Model\XmlDSig\AbstractSignatureReader;
 use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 
-class SamlMessageSignAndVerifyTest extends \PHPUnit_Framework_TestCase
+class SamlMessageSignAndVerifyTest extends BaseTestCase
 {
     public function test_authn_request()
     {

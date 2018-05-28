@@ -14,19 +14,20 @@ use LightSaml\Resolver\Endpoint\Criteria\BindingCriteria;
 use LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria;
 use LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria;
 use LightSaml\SamlConstants;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
+class ACSUrlActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger_and_endpoint_resolver()
     {
-        new ACSUrlAction(TestHelper::getLoggerMock($this), $this->getEndpointResolverMock());
+        new ACSUrlAction($this->getLoggerMock(), $this->getEndpointResolverMock());
+        $this->assertTrue(true);
     }
 
     public function test_finds_acs_endpoint_and_sets_outbounding_authn_request_acs_url()
     {
         $action = new ACSUrlAction(
-            $loggerMock = TestHelper::getLoggerMock($this),
+            $loggerMock = $this->getLoggerMock(),
             $endpointResolverMock = $this->getEndpointResolverMock()
         );
 
@@ -35,7 +36,7 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
 
         $entityDescriptorMock->expects($this->once())
             ->method('getAllEndpoints')
-            ->willReturn([TestHelper::getEndpointReferenceMock($this, $endpoint = new AssertionConsumerService('http://localhost/acs'))]);
+            ->willReturn([$this->getEndpointReferenceMock($endpoint = new AssertionConsumerService('http://localhost/acs'))]);
 
         $endpointResolverMock->expects($this->once())
             ->method('resolve')
@@ -67,7 +68,7 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
     public function test_throws_context_exception_if_no_own_acs_service()
     {
         $action = new ACSUrlAction(
-            $loggerMock = TestHelper::getLoggerMock($this),
+            $loggerMock = $this->getLoggerMock(),
             $endpointResolverMock = $this->getEndpointResolverMock()
         );
 
@@ -93,14 +94,6 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getEntityDescriptorMock()
     {
-        return $this->getMock(EntityDescriptor::class);
-    }
-
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Resolver\Endpoint\EndpointResolverInterface
-     */
-    private function getEndpointResolverMock()
-    {
-        return $this->getMock(\LightSaml\Resolver\Endpoint\EndpointResolverInterface::class);
+        return $this->getMockBuilder(EntityDescriptor::class)->getMock();
     }
 }

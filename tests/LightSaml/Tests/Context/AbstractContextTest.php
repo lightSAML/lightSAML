@@ -7,9 +7,9 @@ use LightSaml\Context\Profile\AssertionContext;
 use LightSaml\Context\Profile\EntityContext;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Context\Profile\RequestStateContext;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class AbstractContextTest extends \PHPUnit_Framework_TestCase
+class AbstractContextTest extends BaseTestCase
 {
     public function test_set_value_sets_parent()
     {
@@ -191,7 +191,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
 
     public function test_debug_tree()
     {
-        $profileContext = TestHelper::getProfileContext();
+        $profileContext = $this->getProfileContext();
         $profileContext->getOwnEntityContext();
         $profileContext->getPartyEntityContext();
         $profileContext->addSubContext('assertion_01', $assertionSubContext01 = new AssertionContext());
@@ -216,7 +216,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
 
     public function test_to_string_gives_debug_tree_string()
     {
-        $profileContext = TestHelper::getProfileContext();
+        $profileContext = $this->getProfileContext();
         $profileContext->getOwnEntityContext();
         $profileContext->getPartyEntityContext();
         $profileContext->addSubContext('assertion_01', $assertionSubContext01 = new AssertionContext());

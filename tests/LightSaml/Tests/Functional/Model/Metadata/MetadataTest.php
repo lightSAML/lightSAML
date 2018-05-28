@@ -5,8 +5,9 @@ namespace LightSaml\Tests\Functional\Model\Metadata;
 use LightSaml\Model\Metadata\EntitiesDescriptor;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Model\Metadata\Metadata;
+use LightSaml\Tests\BaseTestCase;
 
-class MetadataTest extends \PHPUnit_Framework_TestCase
+class MetadataTest extends BaseTestCase
 {
     public function test_loads_from_entity_descriptor()
     {
