@@ -8,18 +8,19 @@ use LightSaml\Model\Assertion\Assertion;
 use LightSaml\Model\Assertion\AuthnStatement;
 use LightSaml\Model\Protocol\Response;
 use LightSaml\Profile\Profiles;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class HasAuthnStatementValidatorActionTest extends \PHPUnit_Framework_TestCase
+class HasAuthnStatementValidatorActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger()
     {
-        new HasAuthnStatementValidatorAction(TestHelper::getLoggerMock($this));
+        new HasAuthnStatementValidatorAction($this->getLoggerMock());
+        $this->assertTrue(true);
     }
 
     public function test_does_nothing_if_there_is_at_least_one_authn_statement()
     {
-        $action = new HasAuthnStatementValidatorAction(TestHelper::getLoggerMock($this));
+        $action = new HasAuthnStatementValidatorAction($this->getLoggerMock());
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage($response = new Response());
@@ -27,6 +28,8 @@ class HasAuthnStatementValidatorActionTest extends \PHPUnit_Framework_TestCase
         $assertion->addItem(new AuthnStatement());
 
         $action->execute($context);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -35,7 +38,7 @@ class HasAuthnStatementValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_context_exception_if_no_authn_statement()
     {
-        $action = new HasAuthnStatementValidatorAction(TestHelper::getLoggerMock($this));
+        $action = new HasAuthnStatementValidatorAction($this->getLoggerMock());
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage($response = new Response());

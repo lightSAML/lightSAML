@@ -67,7 +67,7 @@ class ProxyRestriction extends AbstractCondition
      */
     public function setCount($count)
     {
-        $this->count = $count !== null ? intval($count) : null;
+        $this->count = null !== $count ? intval($count) : null;
 
         return $this;
     }

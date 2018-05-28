@@ -3,8 +3,9 @@
 namespace LightSaml\Tests\Credential;
 
 use LightSaml\Credential\UsageType;
+use LightSaml\Tests\BaseTestCase;
 
-class AbstractCredentialTest extends \PHPUnit_Framework_TestCase
+class AbstractCredentialTest extends BaseTestCase
 {
     public function test__set_get_entity_id()
     {

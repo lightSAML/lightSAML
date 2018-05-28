@@ -4,8 +4,9 @@ namespace LightSaml\Tests\Functional\Provider\EntityDescriptor;
 
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Provider\EntityDescriptor\FileEntityDescriptorProvider;
+use LightSaml\Tests\BaseTestCase;
 
-class FileEntityDescriptorProviderTest extends \PHPUnit_Framework_TestCase
+class FileEntityDescriptorProviderTest extends BaseTestCase
 {
     public function test_loads_from_file()
     {

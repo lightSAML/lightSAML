@@ -10,25 +10,28 @@ use LightSaml\Model\Assertion\Subject;
 use LightSaml\Model\Assertion\SubjectConfirmation;
 use LightSaml\Model\Assertion\SubjectConfirmationData;
 use LightSaml\State\Request\RequestState;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class InResponseToValidatorActionTest extends \PHPUnit_Framework_TestCase
+class InResponseToValidatorActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger()
     {
-        new InResponseToValidatorAction(TestHelper::getLoggerMock($this), TestHelper::getRequestStateStoreMock($this));
+        new InResponseToValidatorAction($this->getLoggerMock(), $this->getRequestStateStoreMock());
+        $this->assertTrue(true);
     }
 
     public function test_does_nothing_if_assertion_has_no_subject()
     {
         $action = new InResponseToValidatorAction(
-            TestHelper::getLoggerMock($this),
-            TestHelper::getRequestStateStoreMock($this)
+            $this->getLoggerMock(),
+            $this->getRequestStateStoreMock()
         );
 
-        $context = TestHelper::getAssertionContext($assertion = new Assertion());
+        $context = $this->getAssertionContext($assertion = new Assertion());
 
         $action->execute($context);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -38,11 +41,11 @@ class InResponseToValidatorActionTest extends \PHPUnit_Framework_TestCase
     public function test_throws_context_exception_on_unknown_in_response_to()
     {
         $action = new InResponseToValidatorAction(
-            TestHelper::getLoggerMock($this),
-            TestHelper::getRequestStateStoreMock($this)
+            $this->getLoggerMock(),
+            $this->getRequestStateStoreMock()
         );
 
-        $context = TestHelper::getAssertionContext($assertion = new Assertion());
+        $context = $this->getAssertionContext($assertion = new Assertion());
         $assertion->setSubject($subject = new Subject());
         $subject->addSubjectConfirmation($subjectConfirmation = new SubjectConfirmation());
         $subjectConfirmation->setSubjectConfirmationData(new SubjectConfirmationData());
@@ -54,11 +57,11 @@ class InResponseToValidatorActionTest extends \PHPUnit_Framework_TestCase
     public function test_adds_known_in_response_to_request_state_to_context()
     {
         $action = new InResponseToValidatorAction(
-            TestHelper::getLoggerMock($this),
-            $requestStateMock = TestHelper::getRequestStateStoreMock($this)
+            $this->getLoggerMock(),
+            $requestStateMock = $this->getRequestStateStoreMock()
         );
 
-        $context = TestHelper::getAssertionContext($assertion = new Assertion());
+        $context = $this->getAssertionContext($assertion = new Assertion());
         $assertion->setSubject($subject = new Subject());
         $subject->addSubjectConfirmation($subjectConfirmation = new SubjectConfirmation());
         $subjectConfirmation->setSubjectConfirmationData(new SubjectConfirmationData());

@@ -3,11 +3,12 @@
 namespace LightSaml\Tests\Helper;
 
 use LightSaml\Model\Metadata\ContactPerson;
+use LightSaml\Tests\BaseTestCase;
 
 class ContactPersonChecker
 {
     public static function check(
-        \PHPUnit_Framework_TestCase $test,
+        BaseTestCase $test,
         $type,
         $company,
         $givenName,

@@ -82,7 +82,7 @@ class ResolvePartyEntityIdAction extends AbstractProfileAction
         if (null == $partyContext->getEntityDescriptor()) {
             $partyEntityDescriptor = $this->getPartyEntityDescriptor(
                 $context,
-                $context->getOwnRole() === ProfileContext::ROLE_IDP
+                ProfileContext::ROLE_IDP === $context->getOwnRole()
                 ? $this->spEntityDescriptorProvider
                 : $this->idpEntityDescriptorProvider,
                 $context->getPartyEntityContext()->getEntityId()

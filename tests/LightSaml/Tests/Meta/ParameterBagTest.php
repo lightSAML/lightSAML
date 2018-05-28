@@ -3,12 +3,14 @@
 namespace LightSaml\Tests\Meta;
 
 use LightSaml\Meta\ParameterBag;
+use LightSaml\Tests\BaseTestCase;
 
-class ParameterBagTest extends \PHPUnit_Framework_TestCase
+class ParameterBagTest extends BaseTestCase
 {
     public function test_constructs_wout_arguments()
     {
         new ParameterBag();
+        $this->assertTrue(true);
     }
 
     public function test_all()

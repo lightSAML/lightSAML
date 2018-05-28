@@ -5,20 +5,21 @@ namespace LightSaml\Tests\Model\XmlDSig;
 use LightSaml\Meta\SigningOptions;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\XmlDSig\SignatureWriter;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class SignatureWriterTest extends \PHPUnit_Framework_TestCase
+class SignatureWriterTest extends BaseTestCase
 {
     public function test_create_with_signing_options()
     {
         SignatureWriter::create(new SigningOptions());
+        $this->assertTrue(true);
     }
 
     public function test_create_with_key_and_certificate()
     {
         $writer = SignatureWriter::createByKeyAndCertificate(
-            TestHelper::getX509CertificateMock($this),
-            TestHelper::getXmlSecurityKeyMock($this)
+            $this->getX509CertificateMock(),
+            $this->getXmlSecurityKeyMock()
         );
 
         $this->assertNotNull($writer->getSigningOptions());
@@ -28,8 +29,8 @@ class SignatureWriterTest extends \PHPUnit_Framework_TestCase
     public function test_constructs_with_certificate_and_key()
     {
         $writer = new SignatureWriter(
-            TestHelper::getX509CertificateMock($this),
-            TestHelper::getXmlSecurityKeyMock($this)
+            $this->getX509CertificateMock(),
+            $this->getXmlSecurityKeyMock()
         );
 
         $this->assertNull($writer->getSigningOptions());
@@ -38,6 +39,7 @@ class SignatureWriterTest extends \PHPUnit_Framework_TestCase
     public function test_can_be_constructed_wout_arguments()
     {
         new SignatureWriter();
+        $this->assertTrue(true);
     }
 
     /**
@@ -55,14 +57,14 @@ class SignatureWriterTest extends \PHPUnit_Framework_TestCase
     public function test_returns_set_certificate()
     {
         $writer = new SignatureWriter();
-        $writer->setCertificate($certificate = TestHelper::getX509CertificateMock($this));
+        $writer->setCertificate($certificate = $this->getX509CertificateMock());
         $this->assertSame($certificate, $writer->getCertificate());
     }
 
     public function test_returns_set_key()
     {
         $writer = new SignatureWriter();
-        $writer->setXmlSecurityKey($key = TestHelper::getXmlSecurityKeyMock($this));
+        $writer->setXmlSecurityKey($key = $this->getXmlSecurityKeyMock());
         $this->assertSame($key, $writer->getXmlSecurityKey());
     }
 }

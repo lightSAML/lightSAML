@@ -162,7 +162,7 @@ abstract class AbstractSamlModel implements SamlElementInterface
     protected function singleAttributeToXml($name, \DOMElement $element)
     {
         $value = $this->getPropertyValue($name);
-        if ($value !== null && $value !== '') {
+        if (null !== $value && '' !== $value) {
             if (is_bool($value)) {
                 $element->setAttribute($name, $value ? 'true' : 'false');
             } else {
@@ -223,7 +223,7 @@ abstract class AbstractSamlModel implements SamlElementInterface
     protected function singleAttributeFromXml(\DOMElement $node, $attributeName)
     {
         $value = $node->getAttribute($attributeName);
-        if ($value !== '') {
+        if ('' !== $value) {
             $setter = 'set'.$attributeName;
             if (method_exists($this, $setter)) {
                 $this->{$setter}($value);
@@ -312,7 +312,7 @@ abstract class AbstractSamlModel implements SamlElementInterface
      */
     private function getPropertyValue($name)
     {
-        if (($pos = strpos($name, ':')) !== false) {
+        if (false !== ($pos = strpos($name, ':'))) {
             $name = substr($name, $pos + 1);
         }
         $getter = 'get'.$name.'String';

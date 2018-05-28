@@ -8,17 +8,20 @@ use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
 use LightSaml\Model\XmlDSig\AbstractSignatureReader;
 use LightSaml\Model\XmlDSig\SignatureStringReader;
+use LightSaml\Tests\BaseTestCase;
 
-class SignatureStringReaderTest extends \PHPUnit_Framework_TestCase
+class SignatureStringReaderTest extends BaseTestCase
 {
     public function test_can_be_constructed_without_arguments()
     {
         new SignatureStringReader();
+        $this->assertTrue(true);
     }
 
     public function test_can_be_constructed_with_signature_algorithm_and_data()
     {
         new SignatureStringReader('signature', 'algo', 'data');
+        $this->assertTrue(true);
     }
 
     public function test_extends_abstract_signature_reader()

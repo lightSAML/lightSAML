@@ -96,9 +96,9 @@ class BindingFactory implements BindingFactoryInterface
     public function detectBindingType(Request $request)
     {
         $requestMethod = trim(strtoupper($request->getMethod()));
-        if ($requestMethod == 'GET') {
+        if ('GET' == $requestMethod) {
             return $this->processGET($request);
-        } elseif ($requestMethod == 'POST') {
+        } elseif ('POST' == $requestMethod) {
             return $this->processPOST($request);
         }
 
@@ -141,7 +141,7 @@ class BindingFactory implements BindingFactoryInterface
                     $contentType = substr($contentType, 0, $pos);
                 }
 
-                if ($contentType === 'text/xml') {
+                if ('text/xml' === $contentType) {
                     return SamlConstants::BINDING_SAML2_SOAP;
                 }
             }

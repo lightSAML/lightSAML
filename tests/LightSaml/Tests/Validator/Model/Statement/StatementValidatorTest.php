@@ -8,9 +8,10 @@ use LightSaml\Model\Assertion\AuthnContext;
 use LightSaml\Model\Assertion\AuthnStatement;
 use LightSaml\Model\Assertion\SubjectLocality;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Validator\Model\Statement\StatementValidator;
 
-class StatementValidatorTest extends \PHPUnit_Framework_TestCase
+class StatementValidatorTest extends BaseTestCase
 {
     /**
      * @expectedException \LightSaml\Error\LightSamlValidationException
@@ -188,6 +189,8 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new StatementValidator();
 
         $validator->validateStatement($authnStatement);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -225,5 +228,7 @@ class StatementValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new StatementValidator();
 
         $validator->validateStatement($attributeStatement);
+
+        $this->assertTrue(true);
     }
 }

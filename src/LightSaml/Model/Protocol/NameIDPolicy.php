@@ -50,10 +50,10 @@ class NameIDPolicy extends AbstractSamlModel
      */
     public function setAllowCreate($allowCreate)
     {
-        if ($allowCreate === null) {
+        if (null === $allowCreate) {
             $this->allowCreate = null;
         } elseif (is_string($allowCreate) || is_int($allowCreate)) {
-            $this->allowCreate = strcasecmp($allowCreate, 'true') == 0 || $allowCreate === true || $allowCreate == 1;
+            $this->allowCreate = 0 == strcasecmp($allowCreate, 'true') || true === $allowCreate || 1 == $allowCreate;
         } else {
             $this->allowCreate = (bool) $allowCreate;
         }
@@ -74,7 +74,7 @@ class NameIDPolicy extends AbstractSamlModel
      */
     public function getAllowCreateString()
     {
-        if ($this->allowCreate === null) {
+        if (null === $this->allowCreate) {
             return null;
         }
 

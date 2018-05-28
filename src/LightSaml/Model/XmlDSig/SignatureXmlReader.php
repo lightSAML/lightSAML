@@ -101,7 +101,7 @@ class SignatureXmlReader extends AbstractSignatureReader
         $xpath->registerNamespace('ds', XMLSecurityDSig::XMLDSIGNS);
 
         $list = $xpath->query('./ds:SignedInfo/ds:SignatureMethod', $this->signature->sigNode);
-        if (!$list || $list->length == 0) {
+        if (!$list || 0 == $list->length) {
             throw new LightSamlXmlException('Missing SignatureMethod element');
         }
         /** @var $sigMethod \DOMElement */

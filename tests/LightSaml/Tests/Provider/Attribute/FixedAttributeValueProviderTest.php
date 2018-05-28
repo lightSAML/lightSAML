@@ -6,8 +6,9 @@ use LightSaml\Context\Profile\AssertionContext;
 use LightSaml\Model\Assertion\Attribute;
 use LightSaml\Provider\Attribute\AttributeValueProviderInterface;
 use LightSaml\Provider\Attribute\FixedAttributeValueProvider;
+use LightSaml\Tests\BaseTestCase;
 
-class FixedAttributeValueProviderTest extends \PHPUnit_Framework_TestCase
+class FixedAttributeValueProviderTest extends BaseTestCase
 {
     public function test_implements_attribute_value_provider_interface()
     {

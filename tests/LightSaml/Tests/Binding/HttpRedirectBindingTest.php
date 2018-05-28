@@ -4,9 +4,10 @@ namespace LightSaml\Tests\Binding;
 
 use LightSaml\Binding\HttpRedirectBinding;
 use LightSaml\Context\Profile\MessageContext;
+use LightSaml\Tests\BaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
-class HttpRedirectBindingTest extends \PHPUnit_Framework_TestCase
+class HttpRedirectBindingTest extends BaseTestCase
 {
     /**
      * @expectedException \LightSaml\Error\LightSamlBindingException

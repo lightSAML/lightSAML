@@ -11,11 +11,12 @@ use LightSaml\Model\XmlDSig\SignatureStringReader;
 use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
+use LightSaml\Tests\BaseTestCase;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class HttpRedirectBindingFunctionalTest extends \PHPUnit_Framework_TestCase
+class HttpRedirectBindingFunctionalTest extends BaseTestCase
 {
     public function test__send_authn_request()
     {
@@ -186,6 +187,6 @@ class HttpRedirectBindingFunctionalTest extends \PHPUnit_Framework_TestCase
      */
     private function getEventDispatcherMock()
     {
-        return $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        return $this->getMockBuilder(\Symfony\Component\EventDispatcher\EventDispatcherInterface::class)->getMock();
     }
 }

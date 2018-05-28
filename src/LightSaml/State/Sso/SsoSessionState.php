@@ -289,6 +289,7 @@ class SsoSessionState implements \Serializable
             $this->spEntityId
         ));
     }
+
     /**
      * @return string the string representation of the object or null
      */
@@ -335,7 +336,7 @@ class SsoSessionState implements \Serializable
         ) = $data;
 
         // if deserialized from old format, set old options to new parameters
-        if ($options && $this->parameters->count() == 0) {
+        if ($options && 0 == $this->parameters->count()) {
             $this->parameters->replace($options);
         }
     }

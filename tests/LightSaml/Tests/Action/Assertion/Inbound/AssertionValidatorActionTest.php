@@ -4,28 +4,30 @@ namespace LightSaml\Tests\Action\Assertion\Inbound;
 
 use LightSaml\Action\Assertion\Inbound\AssertionValidatorAction;
 use LightSaml\Model\Assertion\Assertion;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class AssertionValidatorActionTest extends \PHPUnit_Framework_TestCase
+class AssertionValidatorActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger_and_assertion_validator()
     {
-        new AssertionValidatorAction(TestHelper::getLoggerMock($this), TestHelper::getAssertionValidatorMock($this));
+        new AssertionValidatorAction($this->getLoggerMock(), $this->getAssertionValidatorMock());
+        $this->assertTrue(true);
     }
 
     public function test_calls_assertion_validator_with_assertion_from_context()
     {
         $action = new AssertionValidatorAction(
-            TestHelper::getLoggerMock($this),
-            $assertionValidatorMock = TestHelper::getAssertionValidatorMock($this)
+            $this->getLoggerMock(),
+            $assertionValidatorMock = $this->getAssertionValidatorMock()
         );
 
-        $context = TestHelper::getAssertionContext($assertion = new Assertion());
+        $context = $this->getAssertionContext($assertion = new Assertion());
 
         $assertionValidatorMock->expects($this->once())
             ->method('validateAssertion')
             ->with($assertion);
 
         $action->execute($context);
+        $this->assertTrue(true);
     }
 }

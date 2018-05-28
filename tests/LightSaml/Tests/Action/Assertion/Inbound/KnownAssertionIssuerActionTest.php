@@ -5,13 +5,14 @@ namespace LightSaml\Tests\Action\Assertion\Inbound;
 use LightSaml\Action\Assertion\Inbound\KnownAssertionIssuerAction;
 use LightSaml\Model\Assertion\Assertion;
 use LightSaml\Model\Assertion\Issuer;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class KnownAssertionIssuerActionTest extends \PHPUnit_Framework_TestCase
+class KnownAssertionIssuerActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger_and_entity_descriptor_store()
     {
-        new KnownAssertionIssuerAction(TestHelper::getLoggerMock($this), TestHelper::getEntityDescriptorStoreMock($this));
+        new KnownAssertionIssuerAction($this->getLoggerMock(), $this->getEntityDescriptorStoreMock());
+        $this->assertTrue(true);
     }
 
     /**
@@ -21,11 +22,11 @@ class KnownAssertionIssuerActionTest extends \PHPUnit_Framework_TestCase
     public function test_throws_context_exception_when_assertion_has_no_issuer()
     {
         $action = new KnownAssertionIssuerAction(
-            $loggerMock = TestHelper::getLoggerMock($this),
-            $entityDescriptorStoreMock = TestHelper::getEntityDescriptorStoreMock($this)
+            $loggerMock = $this->getLoggerMock(),
+            $entityDescriptorStoreMock = $this->getEntityDescriptorStoreMock()
         );
 
-        $context = TestHelper::getAssertionContext($assertion = new Assertion());
+        $context = $this->getAssertionContext($assertion = new Assertion());
 
         $loggerMock->expects($this->once())
             ->method('error')
@@ -41,11 +42,11 @@ class KnownAssertionIssuerActionTest extends \PHPUnit_Framework_TestCase
     public function test_throws_context_exception_on_unknown_issuer()
     {
         $action = new KnownAssertionIssuerAction(
-            $loggerMock = TestHelper::getLoggerMock($this),
-            $entityDescriptorStoreMock = TestHelper::getEntityDescriptorStoreMock($this)
+            $loggerMock = $this->getLoggerMock(),
+            $entityDescriptorStoreMock = $this->getEntityDescriptorStoreMock()
         );
 
-        $context = TestHelper::getAssertionContext($assertion = new Assertion());
+        $context = $this->getAssertionContext($assertion = new Assertion());
         $assertion->setIssuer(new Issuer($issuer = 'http://issuer.com'));
 
         $entityDescriptorStoreMock->expects($this->once())
@@ -63,11 +64,11 @@ class KnownAssertionIssuerActionTest extends \PHPUnit_Framework_TestCase
     public function test_logs_known_issuer()
     {
         $action = new KnownAssertionIssuerAction(
-            $loggerMock = TestHelper::getLoggerMock($this),
-            $entityDescriptorStoreMock = TestHelper::getEntityDescriptorStoreMock($this)
+            $loggerMock = $this->getLoggerMock(),
+            $entityDescriptorStoreMock = $this->getEntityDescriptorStoreMock()
         );
 
-        $context = TestHelper::getAssertionContext($assertion = new Assertion());
+        $context = $this->getAssertionContext($assertion = new Assertion());
         $assertion->setIssuer(new Issuer($issuer = 'http://issuer.com'));
 
         $entityDescriptorStoreMock->expects($this->once())

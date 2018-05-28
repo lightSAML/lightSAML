@@ -17,8 +17,9 @@ use LightSaml\Criteria\CriteriaSet;
 use LightSaml\Credential\Criteria\EntityIdCriteria;
 use LightSaml\Credential\Criteria\MetadataCriteria;
 use LightSaml\Credential\Criteria\UsageCriteria;
+use LightSaml\Tests\BaseTestCase;
 
-class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
+class ResolverFunctionalTest extends BaseTestCase
 {
     public function test__idp2()
     {

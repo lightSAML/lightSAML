@@ -4,9 +4,10 @@ namespace LightSaml\Tests\Validator\Model\NameId;
 
 use LightSaml\Model\Assertion\NameID;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Validator\Model\NameId\NameIdValidator;
 
-class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
+class NameIdValidatorTest extends BaseTestCase
 {
     public function test_ok_if_no_format()
     {
@@ -15,6 +16,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -29,6 +32,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     public function test_valid_email_format()
@@ -40,6 +45,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -55,6 +62,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -69,6 +78,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     public function test_valid_x509_subject_format()
@@ -80,6 +91,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -94,6 +107,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     public function test_valid_windows_format_with_domain()
@@ -105,6 +120,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     public function test_valid_windows_format_with_out_domain()
@@ -116,6 +133,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -130,6 +149,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     public function test_valid_kerberos_format_full()
@@ -141,6 +162,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     public function test_valid_kerberos_format_short()
@@ -152,6 +175,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -167,6 +192,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -182,6 +209,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -196,6 +225,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     public function test_valid_entity_format()
@@ -207,6 +238,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -221,6 +254,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -236,6 +271,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -252,6 +289,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -268,6 +307,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -284,6 +325,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     public function test_valid_persistent_format()
@@ -295,6 +338,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     public function test_valid_persistent_format_with_other_attributes()
@@ -310,6 +355,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -324,6 +371,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -339,6 +388,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     public function test_valid_transient_format()
@@ -350,6 +401,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     public function test_valid_transient_format_with_other_attributes()
@@ -365,6 +418,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -379,6 +434,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -394,6 +451,8 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -409,5 +468,7 @@ class NameIdValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new NameIdValidator();
 
         $validator->validateNameId($nameId);
+
+        $this->assertTrue(true);
     }
 }

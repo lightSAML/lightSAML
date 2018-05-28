@@ -11,9 +11,10 @@ use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Model\Protocol\SamlMessage;
 use LightSaml\Model\SamlElementInterface;
 use LightSaml\Model\XmlDSig\SignatureWriter;
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Validator\Model\Xsd\XsdValidator;
 
-abstract class AbstractXsdValidationTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractXsdValidationTest extends BaseTestCase
 {
     protected function setUp()
     {
@@ -50,6 +51,7 @@ abstract class AbstractXsdValidationTest extends \PHPUnit_Framework_TestCase
         if ($errors) {
             $this->fail("\n".implode("\n", $errors)."\n\n$xml\n\n");
         }
+        $this->assertTrue(true);
     }
 
     /**
@@ -63,6 +65,7 @@ abstract class AbstractXsdValidationTest extends \PHPUnit_Framework_TestCase
         if ($errors) {
             $this->fail("\n".implode("\n", $errors)."\n\n$xml\n\n");
         }
+        $this->assertTrue(true);
     }
 
     /**

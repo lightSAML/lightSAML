@@ -3,9 +3,10 @@
 namespace LightSaml\Tests\Model\Metadata;
 
 use LightSaml\Model\XmlDSig\SignatureWriter;
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Tests\Fixtures\Model\Metadata\RoleDescriptorMock;
 
-class RoleDescriptorTest extends \PHPUnit_Framework_TestCase
+class RoleDescriptorTest extends BaseTestCase
 {
     public function test__set_valid_cache_duration()
     {

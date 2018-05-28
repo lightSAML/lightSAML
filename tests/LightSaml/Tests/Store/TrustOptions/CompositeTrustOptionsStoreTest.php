@@ -5,23 +5,27 @@ namespace LightSaml\Tests\Store\TrustOptions;
 use LightSaml\Meta\TrustOptions\TrustOptions;
 use LightSaml\Store\TrustOptions\CompositeTrustOptionsStore;
 use LightSaml\Store\TrustOptions\TrustOptionsStoreInterface;
+use LightSaml\Tests\BaseTestCase;
 
-class CompositeTrustOptionsStoreTest extends \PHPUnit_Framework_TestCase
+class CompositeTrustOptionsStoreTest extends BaseTestCase
 {
     public function test_constructs_without_arguments()
     {
         new CompositeTrustOptionsStore();
+        $this->assertTrue(true);
     }
 
     public function test_constructs_wit_array_of_stores()
     {
         new CompositeTrustOptionsStore([$this->getTrustOptionsStoreMock(), $this->getTrustOptionsStoreMock()]);
+        $this->assertTrue(true);
     }
     
     public function test_can_add_stores()
     {
         $composite = new CompositeTrustOptionsStore();
         $composite->add($this->getTrustOptionsStoreMock());
+        $this->assertTrue(true);
     }
 
     public function test_get_calls_each_store()

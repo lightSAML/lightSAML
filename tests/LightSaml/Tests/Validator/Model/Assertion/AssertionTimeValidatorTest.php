@@ -8,9 +8,10 @@ use LightSaml\Model\Assertion\Conditions;
 use LightSaml\Model\Assertion\Subject;
 use LightSaml\Model\Assertion\SubjectConfirmation;
 use LightSaml\Model\Assertion\SubjectConfirmationData;
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Validator\Model\Assertion\AssertionTimeValidator;
 
-class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
+class AssertionTimeValidatorTest extends BaseTestCase
 {
     /**
      * @expectedException \LightSaml\Error\LightSamlValidationException
@@ -130,5 +131,7 @@ class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new AssertionTimeValidator();
 
         $validator->validateTimeRestrictions($assertion, $now, 10);
+
+        $this->assertTrue(true);
     }
 }

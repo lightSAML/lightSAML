@@ -3,8 +3,9 @@
 namespace LightSaml\Tests\Store\Id;
 
 use LightSaml\Store\Id\IdArrayStore;
+use LightSaml\Tests\BaseTestCase;
 
-class IdArrayStoreTest extends \PHPUnit_Framework_TestCase
+class IdArrayStoreTest extends BaseTestCase
 {
     public function test_works()
     {

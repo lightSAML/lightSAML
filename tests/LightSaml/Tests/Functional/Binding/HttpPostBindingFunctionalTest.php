@@ -9,10 +9,11 @@ use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
+use LightSaml\Tests\BaseTestCase;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 
-class HttpPostBindingFunctionalTest extends \PHPUnit_Framework_TestCase
+class HttpPostBindingFunctionalTest extends BaseTestCase
 {
     public function test_send_authn_request()
     {
@@ -147,6 +148,6 @@ class HttpPostBindingFunctionalTest extends \PHPUnit_Framework_TestCase
      */
     private function getEventDispatcherMock()
     {
-        return $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        return $this->getMockBuilder(\Symfony\Component\EventDispatcher\EventDispatcherInterface::class)->getMock();
     }
 }

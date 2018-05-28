@@ -4,9 +4,10 @@ namespace LightSaml\Tests\Credential\Criteria;
 
 use LightSaml\Credential\Criteria\AlgorithmCriteria;
 use LightSaml\Credential\Criteria\TrustCriteriaInterface;
+use LightSaml\Tests\BaseTestCase;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 
-class AlgorithmCriteriaTest extends \PHPUnit_Framework_TestCase
+class AlgorithmCriteriaTest extends BaseTestCase
 {
     public function test_implements_trust_criteria_interface()
     {

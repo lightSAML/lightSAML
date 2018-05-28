@@ -4,9 +4,10 @@ namespace LightSaml\Tests\Action;
 
 use LightSaml\Action\ActionInterface;
 use LightSaml\Action\ActionLogWrapper;
+use LightSaml\Tests\BaseTestCase;
 use Psr\Log\LoggerInterface;
 
-class ActionLogWrapperTest extends \PHPUnit_Framework_TestCase
+class ActionLogWrapperTest extends BaseTestCase
 {
     public function test__builds_loggable_action_with_given_logger()
     {
@@ -37,19 +38,11 @@ class ActionLogWrapperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\Log\LoggerInterface
-     */
-    private function getLoggerMock()
-    {
-        return $this->getMock(LoggerInterface::class);
-    }
-
-    /**
      * @return \PHPUnit_Framework_MockObject_MockObject|ActionInterface
      */
     private function getActionMock()
     {
-        return $this->getMock(ActionInterface::class);
+        return $this->getMockBuilder(ActionInterface::class)->getMock();
     }
 
     /**
@@ -57,6 +50,6 @@ class ActionLogWrapperTest extends \PHPUnit_Framework_TestCase
      */
     private function getContextMock()
     {
-        return $this->getMock('LightSaml\Context\ContextInterface');
+        return $this->getMockBuilder(\LightSaml\Context\ContextInterface::class)->getMock();
     }
 }

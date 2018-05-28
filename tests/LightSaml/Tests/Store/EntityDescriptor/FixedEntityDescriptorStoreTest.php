@@ -5,8 +5,9 @@ namespace LightSaml\Tests\Store\EntityDescriptor;
 use LightSaml\Model\Metadata\EntitiesDescriptor;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Store\EntityDescriptor\FixedEntityDescriptorStore;
+use LightSaml\Tests\BaseTestCase;
 
-class FixedEntityDescriptorStoreTest extends \PHPUnit_Framework_TestCase
+class FixedEntityDescriptorStoreTest extends BaseTestCase
 {
     public function test_entity_descriptor_can_be_added()
     {

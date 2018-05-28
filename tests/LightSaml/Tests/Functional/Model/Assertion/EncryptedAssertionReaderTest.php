@@ -9,8 +9,9 @@ use LightSaml\Credential\X509Credential;
 use LightSaml\Model\Assertion\EncryptedAssertionReader;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Protocol\Response;
+use LightSaml\Tests\BaseTestCase;
 
-class EncryptedAssertionReaderTest extends \PHPUnit_Framework_TestCase
+class EncryptedAssertionReaderTest extends BaseTestCase
 {
     public function test_decrypt()
     {

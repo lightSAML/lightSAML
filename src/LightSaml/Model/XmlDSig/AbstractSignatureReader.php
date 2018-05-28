@@ -61,7 +61,7 @@ abstract class AbstractSignatureReader extends Signature
             try {
                 $result = $this->validate($credential->getPublicKey());
 
-                if ($result === false) {
+                if (false === $result) {
                     return null;
                 }
 

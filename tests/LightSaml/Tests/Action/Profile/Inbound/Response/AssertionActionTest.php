@@ -8,19 +8,20 @@ use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Model\Assertion\Assertion;
 use LightSaml\Model\Protocol\Response;
 use LightSaml\Profile\Profiles;
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Tests\Mock\Action\FooAction;
-use LightSaml\Tests\TestHelper;
 
-class AssertionActionTest extends \PHPUnit_Framework_TestCase
+class AssertionActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger_and_action()
     {
-        new AssertionAction(TestHelper::getLoggerMock($this), $this->getActionMock());
+        new AssertionAction($this->getLoggerMock(), $this->getActionMock());
+        $this->assertTrue(true);
     }
 
     public function test_calls_action_for_each_assertion()
     {
-        $action = new AssertionAction(TestHelper::getLoggerMock($this), $assertionActionMock = $this->getActionMock());
+        $action = new AssertionAction($this->getLoggerMock(), $assertionActionMock = $this->getActionMock());
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage($response = new Response());
@@ -52,7 +53,7 @@ class AssertionActionTest extends \PHPUnit_Framework_TestCase
 
     public function test_creates_context_for_each_assertion()
     {
-        $action = new AssertionAction(TestHelper::getLoggerMock($this), $assertionActionMock = $this->getActionMock());
+        $action = new AssertionAction($this->getLoggerMock(), $assertionActionMock = $this->getActionMock());
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage($response = new Response());
@@ -75,8 +76,8 @@ class AssertionActionTest extends \PHPUnit_Framework_TestCase
 
     public function test_debug_tree()
     {
-        $innerAction = new AssertionAction(TestHelper::getLoggerMock($this), new FooAction());
-        $outerAction = new AssertionAction(TestHelper::getLoggerMock($this), $innerAction);
+        $innerAction = new AssertionAction($this->getLoggerMock(), new FooAction());
+        $outerAction = new AssertionAction($this->getLoggerMock(), $innerAction);
 
         $actualTree = $outerAction->debugPrintTree();
 
@@ -96,6 +97,6 @@ class AssertionActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getActionMock()
     {
-        return $this->getMock(\LightSaml\Action\ActionInterface::class);
+        return $this->getMockBuilder(\LightSaml\Action\ActionInterface::class)->getMock();
     }
 }

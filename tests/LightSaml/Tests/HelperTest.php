@@ -4,8 +4,9 @@ namespace LightSaml\Tests\Tests;
 
 use LightSaml\Helper;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 
-class HelperTest extends \PHPUnit_Framework_TestCase
+class HelperTest extends BaseTestCase
 {
     protected $timestamps = array(
         array(1412399250, '2014-10-04T05:07:30Z'),

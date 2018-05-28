@@ -204,7 +204,7 @@ class SignatureWriter extends Signature
         );
 
         $firstChild = $parent->hasChildNodes() ? $parent->firstChild : null;
-        if ($firstChild && $firstChild->localName == 'Issuer') {
+        if ($firstChild && 'Issuer' == $firstChild->localName) {
             // The signature node should come after the issuer node
             $firstChild = $firstChild->nextSibling;
         }

@@ -4,12 +4,14 @@ namespace LightSaml\Tests\Store\Sso;
 
 use LightSaml\State\Sso\SsoState;
 use LightSaml\Store\Sso\SsoStateFixedStore;
+use LightSaml\Tests\BaseTestCase;
 
-class SsoStateFixedStoreTest extends \PHPUnit_Framework_TestCase
+class SsoStateFixedStoreTest extends BaseTestCase
 {
     public function test_can_be_constructed_without_arguments()
     {
         new SsoStateFixedStore();
+        $this->assertTrue(true);
     }
 
     public function test_get_returns_object_created_by_default()
@@ -23,6 +25,7 @@ class SsoStateFixedStoreTest extends \PHPUnit_Framework_TestCase
     {
         $store = new SsoStateFixedStore();
         $store->set(new SsoState());
+        $this->assertTrue(true);
     }
 
     public function test_get_returns_set_object()

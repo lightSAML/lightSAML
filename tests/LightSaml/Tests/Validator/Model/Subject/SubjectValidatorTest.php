@@ -7,9 +7,10 @@ use LightSaml\Model\Assertion\Subject;
 use LightSaml\Model\Assertion\SubjectConfirmation;
 use LightSaml\Model\Assertion\SubjectConfirmationData;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Validator\Model\Subject\SubjectValidator;
 
-class SubjectValidatorTest extends \PHPUnit_Framework_TestCase
+class SubjectValidatorTest extends BaseTestCase
 {
     /**
      * @expectedException \LightSaml\Error\LightSamlValidationException
@@ -168,6 +169,6 @@ class SubjectValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function getNameIdValidatorMock()
     {
-        return $this->getMock('LightSaml\Validator\Model\NameId\NameIdValidatorInterface');
+        return $this->getMockBuilder(\LightSaml\Validator\Model\NameId\NameIdValidatorInterface::class)->getMock();
     }
 }

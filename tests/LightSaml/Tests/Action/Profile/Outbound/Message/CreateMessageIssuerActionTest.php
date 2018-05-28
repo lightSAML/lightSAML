@@ -8,18 +8,19 @@ use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Profile\Profiles;
 use LightSaml\SamlConstants;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class CreateMessageIssuerActionTest extends \PHPUnit_Framework_TestCase
+class CreateMessageIssuerActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger()
     {
-        new CreateMessageIssuerAction(TestHelper::getLoggerMock($this));
+        new CreateMessageIssuerAction($this->getLoggerMock());
+        $this->assertTrue(true);
     }
 
     public function test_sets_own_entity_id_to_outbounding_message_issuer_with_name_id_format_entity()
     {
-        $action = new CreateMessageIssuerAction(TestHelper::getLoggerMock($this));
+        $action = new CreateMessageIssuerAction($this->getLoggerMock());
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getOutboundContext()->setMessage($message = new AuthnRequest());

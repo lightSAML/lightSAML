@@ -3,8 +3,9 @@
 namespace LightSaml\Tests\Tests;
 
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 
-class SamlConstantsTest extends \PHPUnit_Framework_TestCase
+class SamlConstantsTest extends BaseTestCase
 {
     /**
      * @dataProvider methodsProvider

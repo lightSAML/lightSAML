@@ -206,7 +206,7 @@ class EncryptedElementReader extends EncryptedElement
         $this->symmetricKeyInfo->key = $inputKey->key;
 
         $keySize = $this->symmetricKey->getSymmetricKeySize();
-        if ($keySize === null) {
+        if (null === $keySize) {
             // To protect against "key oracle" attacks, we need to be able to create a
             // symmetric key, and for that we need to know the key size.
             throw new LightSamlSecurityException(sprintf(

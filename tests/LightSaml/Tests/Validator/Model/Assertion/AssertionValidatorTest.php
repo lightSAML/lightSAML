@@ -11,9 +11,10 @@ use LightSaml\Model\Assertion\Issuer;
 use LightSaml\Model\Assertion\OneTimeUse;
 use LightSaml\Model\Assertion\ProxyRestriction;
 use LightSaml\Model\Assertion\Subject;
+use LightSaml\Tests\BaseTestCase;
 use LightSaml\Validator\Model\Assertion\AssertionValidator;
 
-class AssertionValidatorTest extends \PHPUnit_Framework_TestCase
+class AssertionValidatorTest extends BaseTestCase
 {
     /**
      * @expectedException \LightSaml\Error\LightSamlValidationException
@@ -465,7 +466,7 @@ class AssertionValidatorTest extends \PHPUnit_Framework_TestCase
      */
     private function getNameIdValidatorMock()
     {
-        return $this->getMock('LightSaml\Validator\Model\NameId\NameIdValidatorInterface');
+        return $this->getMockBuilder(\LightSaml\Validator\Model\NameId\NameIdValidatorInterface::class)->getMock();
     }
 
     /**
@@ -473,7 +474,7 @@ class AssertionValidatorTest extends \PHPUnit_Framework_TestCase
      */
     private function getStatementValidatorMock()
     {
-        return $this->getMock('LightSaml\Validator\Model\Statement\StatementValidatorInterface');
+        return $this->getMockBuilder(\LightSaml\Validator\Model\Statement\StatementValidatorInterface::class)->getMock();
     }
 
     /**
@@ -481,6 +482,6 @@ class AssertionValidatorTest extends \PHPUnit_Framework_TestCase
      */
     private function getSubjectValidatorMock()
     {
-        return $this->getMock('LightSaml\Validator\Model\Subject\SubjectValidatorInterface');
+        return $this->getMockBuilder(\LightSaml\Validator\Model\Subject\SubjectValidatorInterface::class)->getMock();
     }
 }

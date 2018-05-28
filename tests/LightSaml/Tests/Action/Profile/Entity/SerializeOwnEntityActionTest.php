@@ -6,22 +6,21 @@ use LightSaml\Action\Profile\Entity\SerializeOwnEntityAction;
 use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Profile\Profiles;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SerializeOwnEntityActionTest extends \PHPUnit_Framework_TestCase
+class SerializeOwnEntityActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger()
     {
-        $loggerMock = TestHelper::getLoggerMock($this);
-
-        new SerializeOwnEntityAction($loggerMock);
+        new SerializeOwnEntityAction($this->getLoggerMock());
+        $this->assertTrue(true);
     }
 
     public function test_creates_http_response_with_serialized_own_entity()
     {
-        $loggerMock = TestHelper::getLoggerMock($this);
+        $loggerMock = $this->getLoggerMock();
 
         $action = new SerializeOwnEntityAction($loggerMock);
 

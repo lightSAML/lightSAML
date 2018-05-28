@@ -3,10 +3,11 @@
 namespace LightSaml\Tests\Helper;
 
 use LightSaml\Model\Metadata\KeyDescriptor;
+use LightSaml\Tests\BaseTestCase;
 
 class KeyDescriptorChecker
 {
-    public static function checkCertificateCN(\PHPUnit_Framework_TestCase $test, $use, $cn, KeyDescriptor $kd = null)
+    public static function checkCertificateCN(BaseTestCase $test, $use, $cn, KeyDescriptor $kd = null)
     {
         $test->assertNotNull($kd);
         $test->assertEquals($use, $kd->getUse());

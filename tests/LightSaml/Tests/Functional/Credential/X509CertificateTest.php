@@ -4,9 +4,10 @@ namespace LightSaml\Tests\Functional\Credential;
 
 use LightSaml\Credential\X509Certificate;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 
-class X509CertificateTest extends \PHPUnit_Framework_TestCase
+class X509CertificateTest extends BaseTestCase
 {
     public function test_get_name()
     {

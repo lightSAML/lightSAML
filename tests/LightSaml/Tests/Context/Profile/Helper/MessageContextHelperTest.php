@@ -12,8 +12,9 @@ use LightSaml\Model\Protocol\LogoutResponse;
 use LightSaml\Model\Protocol\Response;
 use LightSaml\Model\Protocol\SamlMessage;
 use LightSaml\Model\Protocol\StatusResponse;
+use LightSaml\Tests\BaseTestCase;
 
-class MessageContextHelperTest extends \PHPUnit_Framework_TestCase
+class MessageContextHelperTest extends BaseTestCase
 {
     public function helperProvider()
     {

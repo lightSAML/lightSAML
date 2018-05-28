@@ -5,8 +5,9 @@ namespace LightSaml\Tests\Functional\Credential;
 use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
 use LightSaml\Credential\X509Credential;
+use LightSaml\Tests\BaseTestCase;
 
-class X509CredentialTest extends \PHPUnit_Framework_TestCase
+class X509CredentialTest extends BaseTestCase
 {
     public function test_public_key()
     {

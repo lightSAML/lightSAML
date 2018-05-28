@@ -5,8 +5,9 @@ namespace LightSaml\Tests\Functional\Provider\Credential;
 use LightSaml\Credential\X509CredentialInterface;
 use LightSaml\Provider\Credential\CredentialProviderInterface;
 use LightSaml\Provider\Credential\X509CredentialFileProvider;
+use LightSaml\Tests\BaseTestCase;
 
-class X509CredentialFileProviderTest extends \PHPUnit_Framework_TestCase
+class X509CredentialFileProviderTest extends BaseTestCase
 {
     public function test___implements_credential_provider_interface()
     {

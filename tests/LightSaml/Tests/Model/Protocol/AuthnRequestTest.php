@@ -9,8 +9,9 @@ use LightSaml\Model\Assertion\Subject;
 use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Model\Protocol\NameIDPolicy;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 
-class AuthnRequestTest extends \PHPUnit_Framework_TestCase
+class AuthnRequestTest extends BaseTestCase
 {
     public function test__set_subject()
     {

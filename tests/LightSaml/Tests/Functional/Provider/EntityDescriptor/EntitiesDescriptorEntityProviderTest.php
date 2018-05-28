@@ -5,8 +5,9 @@ namespace LightSaml\Tests\Functional\Provider\EntityDescriptor;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Provider\EntitiesDescriptor\FileEntitiesDescriptorProvider;
 use LightSaml\Provider\EntityDescriptor\EntitiesDescriptorEntityProvider;
+use LightSaml\Tests\BaseTestCase;
 
-class EntitiesDescriptorEntityProviderTest extends \PHPUnit_Framework_TestCase
+class EntitiesDescriptorEntityProviderTest extends BaseTestCase
 {
     public function test___provides_by_specified_entity_id()
     {

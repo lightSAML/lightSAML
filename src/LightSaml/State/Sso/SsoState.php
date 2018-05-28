@@ -216,7 +216,7 @@ class SsoState implements \Serializable
             $this->parameters) = $data;
 
         // in case it was serialized in old way, copy old options to parameters
-        if ($oldOptions && $this->parameters->count() == 0) {
+        if ($oldOptions && 0 == $this->parameters->count()) {
             $this->parameters->add($oldOptions);
         }
     }

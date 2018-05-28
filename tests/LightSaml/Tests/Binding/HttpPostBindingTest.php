@@ -7,10 +7,11 @@ use LightSaml\Binding\HttpPostBinding;
 use LightSaml\Context\Profile\MessageContext;
 use LightSaml\Model\Protocol\Response;
 use LightSaml\SamlConstants;
+use LightSaml\Tests\BaseTestCase;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Request;
 
-class HttpPostBindingTest extends \PHPUnit_Framework_TestCase
+class HttpPostBindingTest extends BaseTestCase
 {
     /**
      * @expectedException \LightSaml\Error\LightSamlBindingException

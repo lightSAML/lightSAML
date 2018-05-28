@@ -8,18 +8,19 @@ use LightSaml\Model\Assertion\Assertion;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Model\Protocol\Response;
 use LightSaml\Profile\Profiles;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class SpSsoStateActionTest extends \PHPUnit_Framework_TestCase
+class SpSsoStateActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger_and_session_processor()
     {
-        new SpSsoStateAction(TestHelper::getLoggerMock($this), $this->getSessionProcessorMock());
+        new SpSsoStateAction($this->getLoggerMock(), $this->getSessionProcessorMock());
+        $this->assertTrue(true);
     }
 
     public function test_calls_session_processor()
     {
-        $action = new SpSsoStateAction(TestHelper::getLoggerMock($this), $sessionProcessorMock = $this->getSessionProcessorMock());
+        $action = new SpSsoStateAction($this->getLoggerMock(), $sessionProcessorMock = $this->getSessionProcessorMock());
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
         $context->getInboundContext()->setMessage($response = new Response());
@@ -46,6 +47,6 @@ class SpSsoStateActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getSessionProcessorMock()
     {
-        return $this->getMock(\LightSaml\Resolver\Session\SessionProcessorInterface::class);
+        return $this->getMockBuilder(\LightSaml\Resolver\Session\SessionProcessorInterface::class)->getMock();
     }
 }

@@ -6,24 +6,25 @@ use LightSaml\Action\Profile\Outbound\Message\SendMessageAction;
 use LightSaml\Context\Profile\MessageContext;
 use LightSaml\Model\Metadata\SingleSignOnService;
 use LightSaml\SamlConstants;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class SendMessageActionTest extends \PHPUnit_Framework_TestCase
+class SendMessageActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger_and_binding_factory()
     {
-        new SendMessageAction(TestHelper::getLoggerMock($this), TestHelper::getBindingFactoryMock($this));
+        new SendMessageAction($this->getLoggerMock(), $this->getBindingFactoryMock());
+        $this->assertTrue(true);
     }
 
     public function test_calls_binding_factory_with_endpoint_type_and_calls_binding_and_sets_response_to_context()
     {
         $action = new SendMessageAction(
-            $loggerMock = TestHelper::getLoggerMock($this),
-            $bindingFactoryMock = TestHelper::getBindingFactoryMock($this)
+            $loggerMock = $this->getLoggerMock(),
+            $bindingFactoryMock = $this->getBindingFactoryMock()
         );
 
-        $context = TestHelper::getProfileContext();
+        $context = $this->getProfileContext();
         $context->getEndpointContext()->setEndpoint(new SingleSignOnService(
             $location = 'http://example/com',
             $bindingType = SamlConstants::BINDING_SAML2_HTTP_POST
@@ -32,7 +33,7 @@ class SendMessageActionTest extends \PHPUnit_Framework_TestCase
         $bindingFactoryMock->expects($this->once())
             ->method('create')
             ->with($bindingType)
-            ->willReturn($bindingMock = TestHelper::getBindingMock($this));
+            ->willReturn($bindingMock = $this->getBindingMock());
 
         $bindingMock->expects($this->once())
             ->method('send')

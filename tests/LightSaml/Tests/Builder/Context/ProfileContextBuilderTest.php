@@ -7,13 +7,15 @@ use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Profile\Profiles;
 use LightSaml\Provider\EntityDescriptor\FixedEntityDescriptorProvider;
+use LightSaml\Tests\BaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProfileContextBuilderTest extends \PHPUnit_Framework_TestCase
+class ProfileContextBuilderTest extends BaseTestCase
 {
     public function test_constructs_without_arguments()
     {
         new ProfileContextBuilder();
+        $this->assertTrue(true);
     }
 
     public function getters_setters_provider()

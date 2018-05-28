@@ -3,13 +3,13 @@
 namespace LightSaml\Tests\Error;
 
 use LightSaml\Error\LightSamlContextException;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class LightSamlContextExceptionTest extends \PHPUnit_Framework_TestCase
+class LightSamlContextExceptionTest extends BaseTestCase
 {
     public function test_returns_context_its_constructed_with()
     {
-        $context = TestHelper::getProfileContext();
+        $context = $this->getProfileContext();
 
         $exception = new LightSamlContextException($context, 'message');
 

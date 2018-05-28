@@ -86,7 +86,7 @@ class Subject extends AbstractSamlModel
         $result = array();
         if ($this->getAllSubjectConfirmations()) {
             foreach ($this->getAllSubjectConfirmations() as $confirmation) {
-                if ($confirmation->getMethod() == SamlConstants::CONFIRMATION_METHOD_BEARER) {
+                if (SamlConstants::CONFIRMATION_METHOD_BEARER == $confirmation->getMethod()) {
                     $result[] = $confirmation;
                     break;
                 }

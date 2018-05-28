@@ -17,8 +17,9 @@ use LightSaml\Store\Credential\CompositeCredentialStore;
 use LightSaml\Store\Credential\MetadataCredentialStore;
 use LightSaml\Store\Credential\StaticCredentialStore;
 use LightSaml\Store\EntityDescriptor\FixedEntityDescriptorStore;
+use LightSaml\Tests\BaseTestCase;
 
-class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
+class ResolverFunctionalTest extends BaseTestCase
 {
     public function test_idp2()
     {

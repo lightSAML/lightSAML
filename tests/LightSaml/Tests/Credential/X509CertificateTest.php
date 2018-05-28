@@ -3,8 +3,9 @@
 namespace LightSaml\Tests\Credential;
 
 use LightSaml\Credential\X509Certificate;
+use LightSaml\Tests\BaseTestCase;
 
-class X509CertificateTest extends \PHPUnit_Framework_TestCase
+class X509CertificateTest extends BaseTestCase
 {
     /**
      * @expectedException \InvalidArgumentException

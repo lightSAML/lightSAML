@@ -15,9 +15,10 @@ use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Model\Protocol\SamlMessage;
 use LightSaml\Profile\Profiles;
 use LightSaml\State\Sso\SsoSessionState;
+use LightSaml\Tests\BaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProfileContextTest extends \PHPUnit_Framework_TestCase
+class ProfileContextTest extends BaseTestCase
 {
     public function test__profile_id_and_own_role_set_in_constructor()
     {

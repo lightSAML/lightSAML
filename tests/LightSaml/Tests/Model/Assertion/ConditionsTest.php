@@ -6,8 +6,9 @@ use LightSaml\Model\Assertion\AudienceRestriction;
 use LightSaml\Model\Assertion\Conditions;
 use LightSaml\Model\Assertion\OneTimeUse;
 use LightSaml\Model\Assertion\ProxyRestriction;
+use LightSaml\Tests\BaseTestCase;
 
-class ConditionsTest extends \PHPUnit_Framework_TestCase
+class ConditionsTest extends BaseTestCase
 {
     public function test_get_all_audience_restrictions()
     {

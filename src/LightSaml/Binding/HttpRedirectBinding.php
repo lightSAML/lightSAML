@@ -213,7 +213,7 @@ class HttpRedirectBinding extends AbstractBinding
      */
     protected function addRelayStateToUrl(&$msg, SamlMessage $message)
     {
-        if ($message->getRelayState() !== null) {
+        if (null !== $message->getRelayState()) {
             $msg .= '&RelayState='.urlencode($message->getRelayState());
         }
     }
@@ -244,7 +244,7 @@ class HttpRedirectBinding extends AbstractBinding
     protected function getDestinationUrl($msg, SamlMessage $message, $destination)
     {
         $destination = $message->getDestination() ? $message->getDestination() : $destination;
-        if (strpos($destination, '?') === false) {
+        if (false === strpos($destination, '?')) {
             $destination .= '?'.$msg;
         } else {
             $destination .= '&'.$msg;
@@ -300,7 +300,7 @@ class HttpRedirectBinding extends AbstractBinding
         foreach (explode('&', $queryString) as $e) {
             $tmp = explode('=', $e, 2);
             $name = $tmp[0];
-            $value = count($tmp) === 2 ? $value = $tmp[1] : '';
+            $value = 2 === count($tmp) ? $value = $tmp[1] : '';
             $name = urldecode($name);
             $result[$name] = $urlDecodeValues ? urldecode($value) : $value;
         }

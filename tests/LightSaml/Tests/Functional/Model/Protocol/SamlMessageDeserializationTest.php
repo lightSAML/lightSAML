@@ -8,8 +8,9 @@ use LightSaml\Model\Protocol\LogoutRequest;
 use LightSaml\Model\Protocol\LogoutResponse;
 use LightSaml\Model\Protocol\Response;
 use LightSaml\Model\Protocol\SamlMessage;
+use LightSaml\Tests\BaseTestCase;
 
-class SamlMessageDeserializationTest extends \PHPUnit_Framework_TestCase
+class SamlMessageDeserializationTest extends BaseTestCase
 {
     public function deserialize_provider()
     {

@@ -142,7 +142,7 @@ class AuthnRequest extends AbstractRequest
      */
     public function setIsPassive($isPassive)
     {
-        $this->isPassive = strcasecmp($isPassive, 'true') == 0 || $isPassive === true || $isPassive == 1;
+        $this->isPassive = 0 == strcasecmp($isPassive, 'true') || true === $isPassive || 1 == $isPassive;
 
         return $this;
     }
@@ -160,7 +160,7 @@ class AuthnRequest extends AbstractRequest
      */
     public function getIsPassiveString()
     {
-        if ($this->isPassive === null) {
+        if (null === $this->isPassive) {
             return null;
         }
 
@@ -174,7 +174,7 @@ class AuthnRequest extends AbstractRequest
      */
     public function setForceAuthn($forceAuthn)
     {
-        $this->forceAuthn = strcasecmp($forceAuthn, 'true') == 0 || $forceAuthn === true || $forceAuthn == 1;
+        $this->forceAuthn = 0 == strcasecmp($forceAuthn, 'true') || true === $forceAuthn || 1 == $forceAuthn;
 
         return $this;
     }
@@ -192,7 +192,7 @@ class AuthnRequest extends AbstractRequest
      */
     public function getForceAuthnString()
     {
-        if ($this->forceAuthn === null) {
+        if (null === $this->forceAuthn) {
             return null;
         }
 
@@ -226,7 +226,7 @@ class AuthnRequest extends AbstractRequest
      */
     public function setAttributeConsumingServiceIndex($attributeConsumingServiceIndex)
     {
-        $this->attributeConsumingServiceIndex = $attributeConsumingServiceIndex !== null
+        $this->attributeConsumingServiceIndex = null !== $attributeConsumingServiceIndex
             ? intval(((string) $attributeConsumingServiceIndex))
             : null;
 
@@ -268,7 +268,7 @@ class AuthnRequest extends AbstractRequest
      */
     public function setAssertionConsumerServiceIndex($assertionConsumerServiceIndex)
     {
-        $this->assertionConsumerServiceIndex = $assertionConsumerServiceIndex !== null
+        $this->assertionConsumerServiceIndex = null !== $assertionConsumerServiceIndex
             ? intval((string) $assertionConsumerServiceIndex)
             : null;
 

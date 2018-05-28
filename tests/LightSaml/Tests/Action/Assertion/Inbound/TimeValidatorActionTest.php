@@ -4,25 +4,26 @@ namespace LightSaml\Tests\Action\Assertion\Inbound;
 
 use LightSaml\Action\Assertion\Inbound\TimeValidatorAction;
 use LightSaml\Model\Assertion\Assertion;
-use LightSaml\Tests\TestHelper;
+use LightSaml\Tests\BaseTestCase;
 
-class TimeValidatorActionTest extends \PHPUnit_Framework_TestCase
+class TimeValidatorActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger_validator_time_provider_and_allowed_skew()
     {
-        new TimeValidatorAction(TestHelper::getLoggerMock($this), TestHelper::getAssertionTimeValidatorMock($this), TestHelper::getTimeProviderMock($this), 120);
+        new TimeValidatorAction($this->getLoggerMock(), $this->getAssertionTimeValidatorMock(), $this->getTimeProviderMock(), 120);
+        $this->assertTrue(true);
     }
 
     public function test_calls_validator()
     {
         $action = new TimeValidatorAction(
-            $loggerMock = TestHelper::getLoggerMock($this),
-            $validatorMock = TestHelper::getAssertionTimeValidatorMock($this),
-            $timeProviderMock = TestHelper::getTimeProviderMock($this),
+            $loggerMock = $this->getLoggerMock(),
+            $validatorMock = $this->getAssertionTimeValidatorMock(),
+            $timeProviderMock = $this->getTimeProviderMock(),
             $allowedSkew = 120
         );
 
-        $context = TestHelper::getAssertionContext($assertion = new Assertion());
+        $context = $this->getAssertionContext($assertion = new Assertion());
 
         $timeProviderMock->expects($this->once())
             ->method('getTimestamp')

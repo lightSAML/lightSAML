@@ -9,7 +9,6 @@ use LightSaml\Criteria\CriteriaSet;
 use LightSaml\Model\Metadata\AssertionConsumerService;
 use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
-use LightSaml\Tests\TestHelper;
 use Psr\Log\LoggerInterface;
 
 class ResolveEndpointSpAcsActionTest extends AbstractResolveEndpointActionTest
@@ -22,7 +21,7 @@ class ResolveEndpointSpAcsActionTest extends AbstractResolveEndpointActionTest
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) {
             $this->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, AssertionConsumerService::class);
 
-            return [TestHelper::getEndpointReferenceMock($this, $endpoint = new AssertionConsumerService())];
+            return [$this->getEndpointReferenceMock($endpoint = new AssertionConsumerService())];
         });
 
         $this->action->execute($context);
