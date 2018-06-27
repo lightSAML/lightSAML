@@ -21,6 +21,15 @@ use LightSaml\Tests\BaseTestCase;
 
 class EntityDescriptorTest extends BaseTestCase
 {
+    /**
+     * @expectedException \LightSaml\Error\LightSamlException
+     * @expectedExceptionMessage Given XML content to load is empty.
+     */
+    public function test_load_xml_throws_exception_on_empty_xml()
+    {
+        EntityDescriptor::loadXml('');
+    }
+
     public function test_serialization()
     {
         $ed = new EntityDescriptor();

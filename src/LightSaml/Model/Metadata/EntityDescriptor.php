@@ -11,6 +11,7 @@
 
 namespace LightSaml\Model\Metadata;
 
+use LightSaml\Error\LightSamlException;
 use LightSaml\Helper;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
@@ -50,7 +51,18 @@ class EntityDescriptor extends Metadata
      */
     public static function load($filename)
     {
-        return self::loadXml(file_get_contents($filename));
+        $fileContent = file_get_contents($filename);
+        if ($fileContent === false) {
+            throw
+                new LightSamlException(
+                    sprintf(
+                        'Attempt to load file with URI "%s" results in an error. Consider verifying SSL certificates.',
+                        $filename
+                    ),
+                    1530105894244
+                );
+        }
+        return self::loadXml($fileContent);
     }
 
     /**
@@ -60,6 +72,13 @@ class EntityDescriptor extends Metadata
      */
     public static function loadXml($xml)
     {
+        if (empty($xml)) {
+            throw
+                new LightSamlException(
+                    'Given XML content to load is empty.',
+                    1530107980150
+                );
+        }
         $context = new DeserializationContext();
         $context->getDocument()->loadXML($xml);
         $ed = new self();
