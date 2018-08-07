@@ -27,7 +27,7 @@ class SimpleEntityDescriptorBuilder implements EntityDescriptorProviderInterface
     /** @var string */
     protected $entityId;
 
-    /** @var string */
+    /** @var string|null */
     protected $acsUrl;
 
     /** @var string[] */
