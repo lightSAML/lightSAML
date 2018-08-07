@@ -186,7 +186,7 @@ class Conditions extends AbstractSamlModel
     }
 
     /**
-     * @param int|null $notOnOrAfter
+     * @param int|string|\DateTime|null $notOnOrAfter
      *
      * @return Conditions
      */
