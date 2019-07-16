@@ -372,8 +372,8 @@ class EntityDescriptor extends Metadata
     public function getAllIdpKeyDescriptors()
     {
         $result = array();
-        foreach ($this->getAllIdpSsoDescriptors() as $idp) {
-            foreach ($idp->getAllKeyDescriptors() as $key) {
+        foreach ($this->getAllIdpSsoDescriptors() ?? [] as $idp) {
+            foreach ($idp->getAllKeyDescriptors() ?? [] as $key) {
                 $result[] = $key;
             }
         }
@@ -387,8 +387,8 @@ class EntityDescriptor extends Metadata
     public function getAllSpKeyDescriptors()
     {
         $result = array();
-        foreach ($this->getAllSpSsoDescriptors() as $sp) {
-            foreach ($sp->getAllKeyDescriptors() as $key) {
+        foreach ($this->getAllSpSsoDescriptors() ?? [] as $sp) {
+            foreach ($sp->getAllKeyDescriptors() ?? [] as $key) {
                 $result[] = $key;
             }
         }
