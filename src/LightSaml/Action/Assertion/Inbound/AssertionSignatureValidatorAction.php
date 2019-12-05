@@ -27,20 +27,15 @@ class AssertionSignatureValidatorAction extends AbstractAssertionAction
     /** @var SignatureValidatorInterface */
     protected $signatureValidator;
 
-    /** @var bool */
-    protected $requireSignature;
-
     /**
      * @param LoggerInterface             $logger
      * @param SignatureValidatorInterface $signatureValidator
-     * @param bool                        $requireSignature
      */
-    public function __construct(LoggerInterface $logger, SignatureValidatorInterface $signatureValidator, $requireSignature = true)
+    public function __construct(LoggerInterface $logger, SignatureValidatorInterface $signatureValidator)
     {
         parent::__construct($logger);
 
         $this->signatureValidator = $signatureValidator;
-        $this->requireSignature = $requireSignature;
     }
 
     /**
@@ -52,7 +47,9 @@ class AssertionSignatureValidatorAction extends AbstractAssertionAction
     {
         $signature = $context->getAssertion()->getSignature();
         if (null === $signature) {
-            if ($this->requireSignature) {
+            $spSsoDescriptor = $context->getProfileContext()->getOwnEntityDescriptor()->getFirstSpSsoDescriptor();
+            $requireSignature = $spSsoDescriptor ? $spSsoDescriptor->getWantAssertionsSigned() : false;
+            if ($requireSignature) {
                 $message = 'Assertions must be signed';
                 $this->logger->critical($message, LogHelper::getActionErrorContext($context, $this));
                 throw new LightSamlContextException($context, $message);
