@@ -21,16 +21,16 @@ class DispatchEventAction implements ActionInterface
     protected $eventDispatcher;
 
     /** @var string */
-    protected $event;
+    protected $eventName;
 
     /**
      * @param EventDispatcherInterface $eventDispatcher
-     * @param string                   $event
+     * @param string                   $eventName
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, $event)
+    public function __construct(EventDispatcherInterface $eventDispatcher, $eventName)
     {
         $this->eventDispatcher = $eventDispatcher;
-        $this->event = $event;
+        $this->eventName = $eventName;
     }
 
     /**
@@ -40,6 +40,6 @@ class DispatchEventAction implements ActionInterface
      */
     public function execute(ContextInterface $context)
     {
-        $this->eventDispatcher->dispatch($this->event, new GenericEvent($context));
+        $this->eventDispatcher->dispatch(new GenericEvent($context), $this->eventName);
     }
 }
