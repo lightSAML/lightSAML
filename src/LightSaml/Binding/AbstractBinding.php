@@ -48,7 +48,7 @@ abstract class AbstractBinding
     protected function dispatchReceive($messageString)
     {
         if ($this->eventDispatcher) {
-            $this->eventDispatcher->dispatch(Events::BINDING_MESSAGE_RECEIVED, new GenericEvent($messageString));
+            $this->eventDispatcher->dispatch(new GenericEvent($messageString), Events::BINDING_MESSAGE_RECEIVED);
         }
     }
 
@@ -58,7 +58,7 @@ abstract class AbstractBinding
     protected function dispatchSend($messageString)
     {
         if ($this->eventDispatcher) {
-            $this->eventDispatcher->dispatch(Events::BINDING_MESSAGE_SENT, new GenericEvent($messageString));
+            $this->eventDispatcher->dispatch(new GenericEvent($messageString), Events::BINDING_MESSAGE_SENT);
         }
     }
 
