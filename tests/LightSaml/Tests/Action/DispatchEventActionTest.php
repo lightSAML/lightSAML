@@ -4,17 +4,16 @@ namespace LightSaml\Tests\Action;
 
 use LightSaml\Action\DispatchEventAction;
 use LightSaml\Context\ContextInterface;
+use LightSaml\Event\BeforeEncrypt;
 use LightSaml\Tests\BaseTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class DispatchEventActionTest extends BaseTestCase
 {
     public function test_constructs_with_logger_event_dispatcher_and_event_name()
     {
         new DispatchEventAction(
-            $this->getEventDispatcherMock(),
-            'name'
+            $this->getEventDispatcherMock()
         );
         $this->assertTrue(true);
     }
@@ -23,18 +22,19 @@ class DispatchEventActionTest extends BaseTestCase
     {
         $eventDispatcherMock = $this->getEventDispatcherMock();
 
+
         $action = new DispatchEventAction(
-            $eventDispatcherMock,
-            $expectedEventName = 'name'
+            $eventDispatcherMock
         );
 
         $context = $this->getContextMock();
+        $event = new BeforeEncrypt($context);
 
         $eventDispatcherMock->expects($this->once())
             ->method('dispatch')
             ->with(
-                $this->equalTo($expectedEventName),
-                $this->isInstanceOf(GenericEvent::class)
+                $this->equalTo($event),
+                $event::NAME
             );
 
         $action->execute($context);

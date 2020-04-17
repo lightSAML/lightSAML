@@ -3,16 +3,16 @@
 namespace LightSaml\Tests\Functional\Binding;
 
 use LightSaml\Binding\HttpRedirectBinding;
+use LightSaml\Event\BindingMessageReceived;
+use LightSaml\Event\BindingMessageSent;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Context\Profile\MessageContext;
-use LightSaml\Event\Events;
 use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Model\XmlDSig\SignatureStringReader;
 use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
 use LightSaml\Tests\BaseTestCase;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -32,12 +32,13 @@ class HttpRedirectBindingFunctionalTest extends BaseTestCase
         $eventDispatcherMock = $this->getEventDispatcherMock();
         $eventDispatcherMock->expects($this->once())
             ->method('dispatch')
-            ->willReturnCallback(function ($name, GenericEvent $event) {
-                $this->assertEquals(Events::BINDING_MESSAGE_SENT, $name);
-                $this->assertNotEmpty($event->getSubject());
+            ->willReturnCallback(function ($event, $name) {
+                $this->assertEquals(BindingMessageSent::NAME, $name);
+                $this->assertNotEmpty($event->getMessageString());
                 $doc = new \DOMDocument();
-                $doc->loadXML($event->getSubject());
+                $doc->loadXML($event->getMessageString());
                 $this->assertEquals('AuthnRequest', $doc->firstChild->localName);
+                return $event;
             });
 
         $biding->setEventDispatcher($eventDispatcherMock);
@@ -122,12 +123,13 @@ class HttpRedirectBindingFunctionalTest extends BaseTestCase
         $eventDispatcherMock = $this->getEventDispatcherMock();
         $eventDispatcherMock->expects($this->once())
             ->method('dispatch')
-            ->willReturnCallback(function ($name, GenericEvent $event) {
-                $this->assertEquals(Events::BINDING_MESSAGE_RECEIVED, $name);
-                $this->assertNotEmpty($event->getSubject());
+            ->willReturnCallback(function ($event, $name) {
+                $this->assertEquals(BindingMessageReceived::NAME, $name);
+                $this->assertNotEmpty($event->getMessageString());
                 $doc = new \DOMDocument();
-                $doc->loadXML($event->getSubject());
+                $doc->loadXML($event->getMessageString());
                 $this->assertEquals('AuthnRequest', $doc->firstChild->localName);
+                return $event;
             });
 
         $binding->setEventDispatcher($eventDispatcherMock);

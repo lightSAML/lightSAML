@@ -12,25 +12,20 @@
 namespace LightSaml\Action;
 
 use LightSaml\Context\ContextInterface;
+use LightSaml\Event\BeforeEncrypt;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class DispatchEventAction implements ActionInterface
 {
     /** @var EventDispatcherInterface */
     protected $eventDispatcher;
 
-    /** @var string */
-    protected $event;
-
     /**
      * @param EventDispatcherInterface $eventDispatcher
-     * @param string                   $event
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, $event)
+    public function __construct(EventDispatcherInterface $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;
-        $this->event = $event;
     }
 
     /**
@@ -40,6 +35,7 @@ class DispatchEventAction implements ActionInterface
      */
     public function execute(ContextInterface $context)
     {
-        $this->eventDispatcher->dispatch($this->event, new GenericEvent($context));
+        $event = new BeforeEncrypt($context);
+        $this->eventDispatcher->dispatch($event, $event::NAME);
     }
 }

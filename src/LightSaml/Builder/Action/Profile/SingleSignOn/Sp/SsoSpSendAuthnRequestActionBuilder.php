@@ -24,7 +24,6 @@ use LightSaml\Action\Profile\Outbound\Message\SetRelayStateAction;
 use LightSaml\Action\Profile\Outbound\Message\SignMessageAction;
 use LightSaml\Action\Profile\Outbound\Message\MessageVersionAction;
 use LightSaml\Builder\Action\Profile\AbstractProfileActionBuilder;
-use LightSaml\Event\Events;
 use LightSaml\SamlConstants;
 
 class SsoSpSendAuthnRequestActionBuilder extends AbstractProfileActionBuilder
@@ -67,8 +66,7 @@ class SsoSpSendAuthnRequestActionBuilder extends AbstractProfileActionBuilder
             $this->buildContainer->getStoreContainer()->getRequestStateStore()
         ));
         $this->add(new DispatchEventAction(
-            $this->buildContainer->getSystemContainer()->getEventDispatcher(),
-            Events::BEFORE_ENCRYPT
+            $this->buildContainer->getSystemContainer()->getEventDispatcher()
         ));
         $this->add(new SignMessageAction(
             $this->buildContainer->getSystemContainer()->getLogger(),

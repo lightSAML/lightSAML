@@ -27,12 +27,12 @@
     "require": {
         "php": "^7.2.5",
         "robrichards/xmlseclibs": "^3.0.4",
-        "symfony/http-foundation": "^4.4.7",
-        "symfony/event-dispatcher": "^4.4.7"
+        "symfony/http-foundation": "^5.0.7",
+        "symfony/event-dispatcher": "^5.0.7"
     },
     "require-dev": {
-        "symfony/dom-crawler": "^4.4.7",
-        "symfony/css-selector": "^4.4.7",
+        "symfony/dom-crawler": "^5.0.7",
+        "symfony/css-selector": "^5.0.7",
         "pimple/pimple": "^3.3",
         "phpunit/phpunit": "^8.4",
         "monolog/monolog": "^2.0.0"

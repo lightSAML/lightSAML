@@ -12,9 +12,9 @@
 namespace LightSaml\Binding;
 
 use LightSaml\Context\Profile\MessageContext;
-use LightSaml\Event\Events;
+use LightSaml\Event\BindingMessageReceived;
+use LightSaml\Event\BindingMessageSent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractBinding
@@ -48,7 +48,8 @@ abstract class AbstractBinding
     protected function dispatchReceive($messageString)
     {
         if ($this->eventDispatcher) {
-            $this->eventDispatcher->dispatch(Events::BINDING_MESSAGE_RECEIVED, new GenericEvent($messageString));
+            $event = new BindingMessageReceived($messageString);
+            $this->eventDispatcher->dispatch($event, $event::NAME);
         }
     }
 
@@ -58,7 +59,8 @@ abstract class AbstractBinding
     protected function dispatchSend($messageString)
     {
         if ($this->eventDispatcher) {
-            $this->eventDispatcher->dispatch(Events::BINDING_MESSAGE_SENT, new GenericEvent($messageString));
+            $event = new BindingMessageSent($messageString);
+            $this->eventDispatcher->dispatch($event, $event::NAME);
         }
     }
 
