@@ -33,12 +33,10 @@ class CredentialContextSetTest extends BaseTestCase
         $this->assertSame($expected[1], $all[1]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Expected CredentialContextInterface
-     */
     public function test_throws_invalid_argument_exception_if_constructed_with_non_credential_context_array()
     {
+        $this->expectExceptionMessage("Expected CredentialContextInterface");
+        $this->expectException(\InvalidArgumentException::class);
         new CredentialContextSet([new \stdClass()]);
     }
 

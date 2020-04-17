@@ -17,12 +17,10 @@ class ReceiveMessageActionTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlBindingException
-     * @expectedExceptionMessage Unable to resolve binding type, invalid or unsupported http request
-     */
     public function test_throws_on_invalid_binding()
     {
+        $this->expectExceptionMessage("Unable to resolve binding type, invalid or unsupported http request");
+        $this->expectException(\LightSaml\Error\LightSamlBindingException::class);
         $action = new ReceiveMessageAction($logger = $this->getLoggerMock(), $bindingFactory = $this->getBindingFactoryMock());
 
         $context = new ProfileContext(Profiles::SSO_SP_SEND_AUTHN_REQUEST, ProfileContext::ROLE_SP);

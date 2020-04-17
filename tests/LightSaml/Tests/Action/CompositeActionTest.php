@@ -127,7 +127,7 @@ class CompositeActionTest extends BaseTestCase
 }
 EOT;
 
-        $this->assertEquals($expectedValue, $actualValue);
+        $this->assertJsonStringEqualsJsonString($expectedValue, $actualValue);
     }
 
     /**

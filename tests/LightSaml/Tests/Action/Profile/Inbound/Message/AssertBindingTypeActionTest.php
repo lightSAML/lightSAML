@@ -34,12 +34,10 @@ class AssertBindingTypeActionTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Unexpected binding type "urn:oasis:names:tc:SAML:2.0:bindings:SOAP" - expected binding types are: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST
-     */
     public function test_throws_when_inbound_binding_type_not_one_of_expected()
     {
+        $this->expectExceptionMessage("Unexpected binding type \"urn:oasis:names:tc:SAML:2.0:bindings:SOAP\" - expected binding types are: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST");
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
         $action = new AssertBindingTypeAction(
             $logger = $this->getLoggerMock(),
             [SamlConstants::BINDING_SAML2_HTTP_POST]

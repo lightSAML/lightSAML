@@ -16,7 +16,7 @@ use LightSaml\Validator\Model\Xsd\XsdValidator;
 
 abstract class AbstractXsdValidationTest extends BaseTestCase
 {
-    protected function setUp()
+    protected function setUp() : void
     {
         libxml_use_internal_errors(true);
     }

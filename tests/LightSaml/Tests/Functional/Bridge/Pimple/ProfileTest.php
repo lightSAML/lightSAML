@@ -110,32 +110,26 @@ class ProfileTest extends BaseTestCase
             ->getFirstAttributeByName(ClaimTypes::EMAIL_ADDRESS)->getFirstAttributeValue());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlBuildException
-     * @expectedExceptionMessage Attribute value provider not set
-     */
     public function test_attribute_value_provider_throws_exception()
     {
+        $this->expectExceptionMessage("Attribute value provider not set");
+        $this->expectException(\LightSaml\Error\LightSamlBuildException::class);
         $buildContainer = $this->getBuildContainer();
         $buildContainer->getProviderContainer()->getAttributeValueProvider();
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlBuildException
-     * @expectedExceptionMessage Session info provider not set
-     */
     public function test_session_info_provider_throws_exception()
     {
+        $this->expectExceptionMessage("Session info provider not set");
+        $this->expectException(\LightSaml\Error\LightSamlBuildException::class);
         $buildContainer = $this->getBuildContainer();
         $buildContainer->getProviderContainer()->getSessionInfoProvider();
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlBuildException
-     * @expectedExceptionMessage Name ID provider not set
-     */
     public function test_name_id_provider_throws_exception()
     {
+        $this->expectExceptionMessage("Name ID provider not set");
+        $this->expectException(\LightSaml\Error\LightSamlBuildException::class);
         $buildContainer = $this->getBuildContainer();
         $buildContainer->getProviderContainer()->getNameIdProvider();
     }

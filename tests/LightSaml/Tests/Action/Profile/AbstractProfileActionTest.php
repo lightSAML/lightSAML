@@ -24,12 +24,10 @@ class AbstractProfileActionTest extends BaseTestCase
         $action->execute($profileContext);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Expected ProfileContext but got
-     */
     public function test_throws_exception_on_non_profile_context()
     {
+        $this->expectExceptionMessage("Expected ProfileContext but got");
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
         /** @var LoggerInterface|\PHPUnit_Framework_MockObject_MockObject $loggerMock */
         $loggerMock = $this->getMockBuilder(LoggerInterface::class)->getMock();
         $loggerMock->expects($this->once())
