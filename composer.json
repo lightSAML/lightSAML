@@ -1,5 +1,5 @@
 {
-    "name": "lightsaml/lightsaml",
+    "name": "drkwi/lightsaml",
     "license": "MIT",
     "type": "library",
     "description": "Light SAML 2.0 PHP library",
@@ -14,8 +14,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/lightsaml/lightsaml/issues",
-        "source": "https://github.com/lightSAML/lightSAML",
+        "issues": "https://github.com/drkwi/lightsaml/issues",
+        "source": "https://github.com/drkwi/lightsaml",
         "docs": "http://www.lightsaml.com/LightSAML-Core/"
     },
     "autoload": {
