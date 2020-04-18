@@ -20,8 +20,12 @@
     },
     "autoload": {
         "psr-0": {
-            "LightSaml\\Tests\\": "tests/",
             "LightSaml\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "LightSaml\\Tests\\": "tests/"
         }
     },
     "require": {
@@ -33,6 +37,7 @@
     "require-dev": {
         "symfony/dom-crawler": "^5.0.7",
         "symfony/css-selector": "^5.0.7",
+        "symfony/var-dumper": "^5.0.7",
         "pimple/pimple": "^3.3",
         "phpunit/phpunit": "^8.4",
         "monolog/monolog": "^2.0.0"
@@ -40,9 +45,6 @@
     "suggest": {
         "lightsaml/symfony-bridge": "Symfony 2 build container bridge",
         "lightsaml/sp-bundle": "Symfony 2 SP security bundle"
-    },
-    "config": {
-        "bin-dir": "bin"
     },
     "prefer-stable": true,
     "minimum-stability": "stable"
