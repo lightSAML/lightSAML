@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Outbound\AuthnRequest;
 
 use LightSaml\Action\Profile\Outbound\AuthnRequest\ACSUrlAction;
@@ -61,12 +70,11 @@ class ACSUrlActionTest extends BaseTestCase
         $this->assertEquals($endpoint->getLocation(), $authnRequest->getAssertionConsumerServiceURL());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Missing ACS Service with HTTP POST binding in own SP SSO Descriptor
-     */
     public function test_throws_context_exception_if_no_own_acs_service()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Missing ACS Service with HTTP POST binding in own SP SSO Descriptor');
+
         $action = new ACSUrlAction(
             $loggerMock = $this->getLoggerMock(),
             $endpointResolverMock = $this->getEndpointResolverMock()
@@ -90,7 +98,7 @@ class ACSUrlActionTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|EntityDescriptor
+     * @return \PHPUnit\Framework\MockObject\MockObject|EntityDescriptor
      */
     private function getEntityDescriptorMock()
     {

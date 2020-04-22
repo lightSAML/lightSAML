@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Inbound\Message;
 
 use LightSaml\Action\Profile\Inbound\Message\MessageSignatureValidatorAction;
@@ -40,12 +49,11 @@ class MessageSignatureValidatorActionTest extends BaseTestCase
         $action->execute($context);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlModelException
-     * @expectedExceptionMessage Expected AbstractSignatureReader
-     */
     public function test_throws_if_not_signature_reader()
     {
+        $this->expectException(\LightSaml\Error\LightSamlModelException::class);
+        $this->expectExceptionMessage('Expected AbstractSignatureReader');
+
         $action = new MessageSignatureValidatorAction(
             $logger = $this->getLoggerMock(),
             $signatureValidator = $this->getSignatureValidatorMock()
@@ -138,7 +146,7 @@ class MessageSignatureValidatorActionTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Validator\Model\Signature\SignatureValidatorInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Validator\Model\Signature\SignatureValidatorInterface
      */
     private function getSignatureValidatorMock()
     {
@@ -146,7 +154,7 @@ class MessageSignatureValidatorActionTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Credential\CredentialInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Credential\CredentialInterface
      */
     private function getCredentialMock()
     {

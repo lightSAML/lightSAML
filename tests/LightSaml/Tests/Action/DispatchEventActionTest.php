@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action;
 
 use LightSaml\Action\DispatchEventAction;
@@ -33,15 +42,15 @@ class DispatchEventActionTest extends BaseTestCase
         $eventDispatcherMock->expects($this->once())
             ->method('dispatch')
             ->with(
-                $this->equalTo($expectedEventName),
-                $this->isInstanceOf(GenericEvent::class)
+                $this->isInstanceOf(GenericEvent::class),
+                $this->equalTo($expectedEventName)
             );
 
         $action->execute($context);
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Context\ContextInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Context\ContextInterface
      */
     private function getContextMock()
     {
@@ -49,7 +58,7 @@ class DispatchEventActionTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\EventDispatcher\EventDispatcherInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\EventDispatcher\EventDispatcherInterface
      */
     private function getEventDispatcherMock()
     {

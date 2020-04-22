@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Functional\Bridge\Pimple;
 
 use LightSaml\Bridge\Pimple\Container\BuildContainer;
@@ -110,32 +119,29 @@ class ProfileTest extends BaseTestCase
             ->getFirstAttributeByName(ClaimTypes::EMAIL_ADDRESS)->getFirstAttributeValue());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlBuildException
-     * @expectedExceptionMessage Attribute value provider not set
-     */
     public function test_attribute_value_provider_throws_exception()
     {
+        $this->expectException(\LightSaml\Error\LightSamlBuildException::class);
+        $this->expectExceptionMessage('Attribute value provider not set');
+
         $buildContainer = $this->getBuildContainer();
         $buildContainer->getProviderContainer()->getAttributeValueProvider();
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlBuildException
-     * @expectedExceptionMessage Session info provider not set
-     */
     public function test_session_info_provider_throws_exception()
     {
+        $this->expectException(\LightSaml\Error\LightSamlBuildException::class);
+        $this->expectExceptionMessage('Session info provider not set');
+
         $buildContainer = $this->getBuildContainer();
         $buildContainer->getProviderContainer()->getSessionInfoProvider();
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlBuildException
-     * @expectedExceptionMessage Name ID provider not set
-     */
     public function test_name_id_provider_throws_exception()
     {
+        $this->expectException(\LightSaml\Error\LightSamlBuildException::class);
+        $this->expectExceptionMessage('Name ID provider not set');
+
         $buildContainer = $this->getBuildContainer();
         $buildContainer->getProviderContainer()->getNameIdProvider();
     }

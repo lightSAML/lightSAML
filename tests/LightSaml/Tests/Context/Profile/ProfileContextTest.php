@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Context\Profile;
 
 use LightSaml\Context\Profile\EndpointContext;
@@ -48,6 +57,7 @@ class ProfileContextTest extends BaseTestCase
             ['getLogoutContext', LogoutContext::class],
         ];
     }
+
     /**
      * @dataProvider subContextCreationProvider
      */
@@ -58,12 +68,11 @@ class ProfileContextTest extends BaseTestCase
         $this->assertInstanceOf($expectedClass, $subContext);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Missing Request in HTTP request context
-     */
     public function test__get_http_request_throws_on_empty_context()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Missing Request in HTTP request context');
+
         $profileContext = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
         $profileContext->getHttpRequest();
     }
@@ -75,12 +84,11 @@ class ProfileContextTest extends BaseTestCase
         $this->assertSame($expectedValue, $profileContext->getHttpRequest());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Missing message in inbound context
-     */
     public function test__get_inbound_message_throws_on_empty_context()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Missing message in inbound context');
+
         $profileContext = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
         $profileContext->getInboundMessage();
     }
@@ -92,12 +100,11 @@ class ProfileContextTest extends BaseTestCase
         $this->assertSame($expectedValue, $profileContext->getInboundMessage());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Missing message in outbound context
-     */
     public function test__get_outbound_message_throws_on_empty_context()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Missing message in outbound context');
+
         $profileContext = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
         $profileContext->getOutboundMessage();
     }
@@ -109,12 +116,11 @@ class ProfileContextTest extends BaseTestCase
         $this->assertSame($expectedValue, $profileContext->getOutboundMessage());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Missing Endpoint in endpoint context
-     */
     public function test__get_endpoint_throws_on_empty_context()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Missing Endpoint in endpoint context');
+
         $profileContext = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
         $profileContext->getEndpoint();
     }
@@ -126,12 +132,11 @@ class ProfileContextTest extends BaseTestCase
         $this->assertSame($expectedValue, $profileContext->getEndpoint());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Missing EntityDescriptor in own entity context
-     */
     public function test__get_own_entity_descriptor_throws_on_empty_context()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Missing EntityDescriptor in own entity context');
+
         $profileContext = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
         $profileContext->getOwnEntityDescriptor();
     }
@@ -143,12 +148,11 @@ class ProfileContextTest extends BaseTestCase
         $this->assertSame($expectedValue, $profileContext->getOwnEntityDescriptor());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Missing EntityDescriptor in party entity context
-     */
     public function test__get_party_entity_descriptor_throws_on_empty_context()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Missing EntityDescriptor in party entity context');
+
         $profileContext = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
         $profileContext->getPartyEntityDescriptor();
     }
@@ -160,12 +164,11 @@ class ProfileContextTest extends BaseTestCase
         $this->assertSame($expectedValue, $profileContext->getPartyEntityDescriptor());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Missing TrustOptions in party entity context
-     */
     public function test__get_trust_options_throws_on_empty_context()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Missing TrustOptions in party entity context');
+
         $profileContext = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
         $profileContext->getTrustOptions();
     }
@@ -177,12 +180,11 @@ class ProfileContextTest extends BaseTestCase
         $this->assertSame($expectedValue, $profileContext->getTrustOptions());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Missing SsoSessionState in logout context
-     */
     public function test__get_logout_sso_session_state_throws_on_empty_context()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Missing SsoSessionState in logout context');
+
         $profileContext = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
         $profileContext->getLogoutSsoSessionState();
     }

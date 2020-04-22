@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Model\Xsd;
 
 use LightSaml\Credential\KeyHelper;
@@ -16,7 +25,7 @@ use LightSaml\Validator\Model\Xsd\XsdValidator;
 
 abstract class AbstractXsdValidationTest extends BaseTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         libxml_use_internal_errors(true);
     }
@@ -40,9 +49,6 @@ abstract class AbstractXsdValidationTest extends BaseTestCase
         ));
     }
 
-    /**
-     * @param SamlElementInterface $samlElement
-     */
     protected function validateProtocol(SamlElementInterface $samlElement)
     {
         $validator = new XsdValidator();
@@ -54,9 +60,6 @@ abstract class AbstractXsdValidationTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @param SamlElementInterface $samlElement
-     */
     protected function validateMetadata(SamlElementInterface $samlElement)
     {
         $validator = new XsdValidator();
@@ -69,8 +72,6 @@ abstract class AbstractXsdValidationTest extends BaseTestCase
     }
 
     /**
-     * @param SamlElementInterface $samlElement
-     *
      * @return string
      */
     private function serialize(SamlElementInterface $samlElement)

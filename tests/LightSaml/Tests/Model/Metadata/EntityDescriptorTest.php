@@ -1,11 +1,21 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Model\Metadata;
 
 use LightSaml\ClaimTypes;
+use LightSaml\Credential\X509Certificate;
+use LightSaml\Model\Assertion\Attribute;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\Assertion\Attribute;
 use LightSaml\Model\Metadata\AssertionConsumerService;
 use LightSaml\Model\Metadata\ContactPerson;
 use LightSaml\Model\Metadata\EntityDescriptor;
@@ -16,7 +26,6 @@ use LightSaml\Model\Metadata\SingleLogoutService;
 use LightSaml\Model\Metadata\SingleSignOnService;
 use LightSaml\Model\Metadata\SpSsoDescriptor;
 use LightSaml\SamlConstants;
-use LightSaml\Credential\X509Certificate;
 use LightSaml\Tests\BaseTestCase;
 
 class EntityDescriptorTest extends BaseTestCase

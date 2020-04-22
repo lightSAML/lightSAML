@@ -12,9 +12,9 @@
 namespace LightSaml\Store\Credential;
 
 use LightSaml\Credential\CredentialInterface;
-use LightSaml\Credential\X509Credential;
 use LightSaml\Credential\KeyHelper;
 use LightSaml\Credential\X509Certificate;
+use LightSaml\Credential\X509Credential;
 
 class X509FileCredentialStore implements CredentialStoreInterface
 {

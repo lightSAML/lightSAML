@@ -23,17 +23,12 @@ class SubjectValidator implements SubjectValidatorInterface
     /** @var NameIdValidatorInterface */
     protected $nameIdValidator;
 
-    /**
-     * @param NameIdValidatorInterface $nameIdValidator
-     */
     public function __construct(NameIdValidatorInterface $nameIdValidator)
     {
         $this->nameIdValidator = $nameIdValidator;
     }
 
     /**
-     * @param Subject $subject
-     *
      * @throws LightSamlValidationException
      *
      * @return void
@@ -56,8 +51,6 @@ class SubjectValidator implements SubjectValidatorInterface
     }
 
     /**
-     * @param SubjectConfirmation $subjectConfirmation
-     *
      * @throws \LightSaml\Error\LightSamlValidationException
      */
     protected function validateSubjectConfirmation(SubjectConfirmation $subjectConfirmation)

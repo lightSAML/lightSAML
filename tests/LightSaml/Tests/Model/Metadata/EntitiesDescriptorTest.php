@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Model\Metadata;
 
 use LightSaml\Model\Context\DeserializationContext;
@@ -31,20 +40,18 @@ class EntitiesDescriptorTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test_throw_on_set_invalid_string_to_valid_until()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $ed = new EntitiesDescriptor();
         $ed->setValidUntil('something');
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test_throw_on_set_negative_int_to_valid_until()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $ed = new EntitiesDescriptor();
         $ed->setValidUntil(-1);
     }
@@ -56,11 +63,10 @@ class EntitiesDescriptorTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test_throw_on_invalid_period_string_set_to_cache_duration()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $ed = new EntitiesDescriptor();
         $ed->setCacheDuration('83D2Y');
     }
@@ -79,47 +85,42 @@ class EntitiesDescriptorTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test_throw_on_invalid_object_type_given_to_add_item()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $ed = new EntitiesDescriptor();
         $ed->addItem(new \stdClass());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test_throw_on_array_given_to_add_item()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $ed = new EntitiesDescriptor();
-        $ed->addItem(array());
+        $ed->addItem([]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test_throw_on_string_given_to_add_item()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $ed = new EntitiesDescriptor();
         $ed->addItem('foo');
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test_throw_on_int_given_to_add_item()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $ed = new EntitiesDescriptor();
         $ed->addItem(123);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test_throw_when_itself_given_to_add_item()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $ed = new EntitiesDescriptor();
         $ed->addItem($ed);
     }
@@ -151,11 +152,10 @@ class EntitiesDescriptorTest extends BaseTestCase
         $this->assertFalse($o3->containsItem($x2));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test_throw_when_circular_reference_detected_in_add_item()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $esd1 = new EntitiesDescriptor();
         $esd1->addItem(new EntityDescriptor('ed1'));
         $esd1->addItem(new EntityDescriptor('ed2'));

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\State\Sso;
 
 use LightSaml\Meta\ParameterBag;
@@ -18,7 +27,7 @@ class SsoStateTest extends BaseTestCase
     public function property_getter_setter_provider()
     {
         return [
-            ['LocalSessionId']
+            ['LocalSessionId'],
         ];
     }
 
@@ -62,12 +71,12 @@ class SsoStateTest extends BaseTestCase
         $arrIdp = [
             'http://idp-1.com',
             'http://idp-2.com',
-            'http://idp-3.com'
+            'http://idp-3.com',
         ];
         $arrSp = [
             'http://sp-1.com',
             'http://sp-2.com',
-            'http://sp-3.com'
+            'http://sp-3.com',
         ];
 
         $state = $this->buildAllStateCombinations($arrIdp, $arrSp);
@@ -106,12 +115,12 @@ class SsoStateTest extends BaseTestCase
         $arrIdp = [
             'http://idp-1.com',
             'http://idp-2.com',
-            'http://idp-3.com'
+            'http://idp-3.com',
         ];
         $arrSp = [
             'http://sp-1.com',
             'http://sp-2.com',
-            'http://sp-3.com'
+            'http://sp-3.com',
         ];
 
         $state = $this->buildAllStateCombinations($arrIdp, $arrSp);
@@ -145,12 +154,12 @@ class SsoStateTest extends BaseTestCase
         $arrIdp = [
             'http://idp-1.com',
             'http://idp-2.com',
-            'http://idp-3.com'
+            'http://idp-3.com',
         ];
         $arrSp = [
             'http://sp-1.com',
             'http://sp-2.com',
-            'http://sp-3.com'
+            'http://sp-3.com',
         ];
 
         $state = $this->buildAllStateCombinations($arrIdp, $arrSp);
@@ -183,7 +192,7 @@ class SsoStateTest extends BaseTestCase
 
         $state->addOption('a', 1);
         $this->assertTrue($state->hasOption('a'));
-        $this->assertEquals(['a'=>1], $state->getOptions());
+        $this->assertEquals(['a' => 1], $state->getOptions());
 
         $state->removeOption('a');
         $this->assertFalse($state->hasOption('a'));
@@ -211,7 +220,7 @@ class SsoStateTest extends BaseTestCase
     {
         $state = new SsoState();
         $state->setLocalSessionId('local-id');
-        $state->getParameters()->add(['a' => 'aaa', 'b' => 2, 'c' => [1,2,3]]);
+        $state->getParameters()->add(['a' => 'aaa', 'b' => 2, 'c' => [1, 2, 3]]);
         $state->addSsoSession($session1 = new SsoSessionState());
         $session1->setIdpEntityId($idp1 = 'idp1');
         $state->addSsoSession($session2 = new SsoSessionState());
@@ -244,9 +253,6 @@ class SsoStateTest extends BaseTestCase
     }
 
     /**
-     * @param array $arrIdp
-     * @param array $arrSp
-     *
      * @return SsoState
      */
     private function buildAllStateCombinations(array $arrIdp, array $arrSp)

@@ -1,16 +1,27 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Functional\Binding;
 
 use LightSaml\Binding\HttpRedirectBinding;
-use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Context\Profile\MessageContext;
+use LightSaml\Credential\KeyHelper;
+use LightSaml\Credential\X509Certificate;
+use LightSaml\Event\BindingMessageReceivedEvent;
+use LightSaml\Event\BindingMessageSentEvent;
 use LightSaml\Event\Events;
+use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Model\XmlDSig\SignatureStringReader;
 use LightSaml\Model\XmlDSig\SignatureWriter;
-use LightSaml\Credential\KeyHelper;
-use LightSaml\Credential\X509Certificate;
 use LightSaml\Tests\BaseTestCase;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -32,12 +43,14 @@ class HttpRedirectBindingFunctionalTest extends BaseTestCase
         $eventDispatcherMock = $this->getEventDispatcherMock();
         $eventDispatcherMock->expects($this->once())
             ->method('dispatch')
-            ->willReturnCallback(function ($name, GenericEvent $event) {
+            ->willReturnCallback(function (BindingMessageSentEvent $event, $name) {
                 $this->assertEquals(Events::BINDING_MESSAGE_SENT, $name);
                 $this->assertNotEmpty($event->getSubject());
                 $doc = new \DOMDocument();
                 $doc->loadXML($event->getSubject());
                 $this->assertEquals('AuthnRequest', $doc->firstChild->localName);
+
+                return $event;
             });
 
         $biding->setEventDispatcher($eventDispatcherMock);
@@ -58,7 +71,7 @@ class HttpRedirectBindingFunctionalTest extends BaseTestCase
 
         $this->assertEquals($expectedDestination, $urlInfo['scheme'].'://'.$urlInfo['host'].$urlInfo['path']);
 
-        $query = array();
+        $query = [];
         parse_str($urlInfo['query'], $query);
 
         $this->assertArrayHasKey('SAMLRequest', $query);
@@ -122,24 +135,26 @@ class HttpRedirectBindingFunctionalTest extends BaseTestCase
         $eventDispatcherMock = $this->getEventDispatcherMock();
         $eventDispatcherMock->expects($this->once())
             ->method('dispatch')
-            ->willReturnCallback(function ($name, GenericEvent $event) {
+            ->willReturnCallback(function (BindingMessageReceivedEvent $event, $name) {
                 $this->assertEquals(Events::BINDING_MESSAGE_RECEIVED, $name);
                 $this->assertNotEmpty($event->getSubject());
                 $doc = new \DOMDocument();
                 $doc->loadXML($event->getSubject());
                 $this->assertEquals('AuthnRequest', $doc->firstChild->localName);
+
+                return $event;
             });
 
         $binding->setEventDispatcher($eventDispatcherMock);
         $this->assertSame($eventDispatcherMock, $binding->getEventDispatcher());
 
         $request = new Request();
-        $request->server->add(array(
+        $request->server->add([
             'QUERY_STRING' => 'SAMLRequest='.urlencode('RY/NCsIwEITvPkXI3TaptY3BKkIvBb2oePAiMUmxYBPtbsXHdxFEGBgY5tuf5frd39nLD9DFUHGZCL5eTZabEW9h75+jB2TUCFDxcQg6GuhAB9N70Gj1YbPb6iwR+jFEjDbeOWvqil+Us7ZYqHlbuEU7IxfXq8vnReZblSvfzowvlVOlKzk7/XbTHMIBRt8EQBOQIiHzqZCko8y0EKQzZzUd1QWDX+qG+ACdpu4fJjb2qaEPeLqafAA=').
                                 '&RelayState='.urlencode($expectedRelayState).
                                 '&SigAlg='.urlencode('http://www.w3.org/2000/09/xmldsig#rsa-sha1').
                                 '&Signature='.urlencode('SI4nZH+9tjLO24k2La/v5DJ/OfGWw/nKKc/Nh8ih/AN71HuIzFl30F3Va+pDOidRYgJ8dIB2Juf5DIQYggDz+AiR/NI9gkAIGKRYZ3bhBPzC0XVtTQ075Qxwa3HWimh2Lywj7WV0QANOptodnjp1aUf4SuSHfEYrcWTf5C0gOZhiXT7XIQH0wpL1BdLwaePlduVCfaaMq2iNadNFBHi2+d9+FrCHyxYdmR8r5CbNg1vNEHj1xYwWUMBEtvJIYAt116++ei78dQYKlv5Mz98pTB1bkjRtONh+w7Mdy1gGT+D/gDz1kl+kAfxIT6D2x54GFBKM01gAGRUrb0Z6j2Nn6Q=='),
-        ));
+        ]);
 
         $messageContext = new MessageContext();
         $binding->receive($request, $messageContext);
@@ -183,7 +198,7 @@ class HttpRedirectBindingFunctionalTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\EventDispatcher\EventDispatcherInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\EventDispatcher\EventDispatcherInterface
      */
     private function getEventDispatcherMock()
     {

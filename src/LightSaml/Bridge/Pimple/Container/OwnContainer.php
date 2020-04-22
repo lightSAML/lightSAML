@@ -12,8 +12,8 @@
 namespace LightSaml\Bridge\Pimple\Container;
 
 use LightSaml\Build\Container\OwnContainerInterface;
-use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
 use LightSaml\Credential\CredentialInterface;
+use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
 
 class OwnContainer extends AbstractPimpleContainer implements OwnContainerInterface
 {

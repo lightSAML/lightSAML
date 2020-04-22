@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\State\Sso;
 
 use LightSaml\Meta\ParameterBag;
@@ -78,7 +87,7 @@ class SsoSessionStateTest extends BaseTestCase
         $values = [
             'a' => 1,
             'bbb' => 'bbbbbbb',
-            'ccccccccccc' => new \DateTime('2015-10-22 12:13:14')
+            'ccccccccccc' => new \DateTime('2015-10-22 12:13:14'),
         ];
         foreach ($values as $k => $v) {
             $state->addOption($k, $v);
@@ -93,10 +102,10 @@ class SsoSessionStateTest extends BaseTestCase
 
         $state->addOption('aaa', 123);
         $state->addOption('b', 'bbbbb');
-        $this->assertEquals(['aaa'=>123, 'b'=>'bbbbb'], $state->getOptions());
+        $this->assertEquals(['aaa' => 123, 'b' => 'bbbbb'], $state->getOptions());
 
         $state->removeOption('aaa');
-        $this->assertEquals(['b'=>'bbbbb'], $state->getOptions());
+        $this->assertEquals(['b' => 'bbbbb'], $state->getOptions());
     }
 
     /**

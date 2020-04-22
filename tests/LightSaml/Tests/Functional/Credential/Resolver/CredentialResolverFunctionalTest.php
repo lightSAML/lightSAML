@@ -1,18 +1,27 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Functional\Credential\Resolver;
 
 use LightSaml\Credential\Context\MetadataCredentialContext;
 use LightSaml\Credential\Criteria\EntityIdCriteria;
 use LightSaml\Credential\Criteria\MetadataCriteria;
 use LightSaml\Credential\Criteria\UsageCriteria;
+use LightSaml\Credential\KeyHelper;
+use LightSaml\Credential\UsageType;
+use LightSaml\Credential\X509Certificate;
+use LightSaml\Credential\X509Credential;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Resolver\Credential\Factory\CredentialResolverFactory;
 use LightSaml\SamlConstants;
-use LightSaml\Credential\UsageType;
-use LightSaml\Credential\X509Credential;
-use LightSaml\Credential\KeyHelper;
-use LightSaml\Credential\X509Certificate;
 use LightSaml\Store\Credential\CompositeCredentialStore;
 use LightSaml\Store\Credential\MetadataCredentialStore;
 use LightSaml\Store\Credential\StaticCredentialStore;

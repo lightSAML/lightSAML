@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Validator\Model\Assertion;
 
 use LightSaml\Model\Assertion\Assertion;
@@ -16,12 +25,11 @@ use LightSaml\Validator\Model\Assertion\AssertionValidator;
 
 class AssertionValidatorTest extends BaseTestCase
 {
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Assertion element must have the Version attribute set
-     */
     public function test_must_have_version()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Assertion element must have the Version attribute set');
+
         $validator = new AssertionValidator(
             $this->getNameIdValidatorMock(),
             $this->getSubjectValidatorMock(),
@@ -34,12 +42,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Assertion element must have the Version attribute value equal to 2.0
-     */
     public function test_must_have_version20()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Assertion element must have the Version attribute value equal to 2.0');
+
         $validator = new AssertionValidator(
             $this->getNameIdValidatorMock(),
             $this->getSubjectValidatorMock(),
@@ -52,12 +59,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Assertion element must have the ID attribute set
-     */
     public function test_must_have_id()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Assertion element must have the ID attribute set');
+
         $validator = new AssertionValidator(
             $this->getNameIdValidatorMock(),
             $this->getSubjectValidatorMock(),
@@ -69,12 +75,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Assertion element must have an ID attribute with at least 16 characters (the equivalent of 128 bits)
-     */
     public function test_must_have_valid_id()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Assertion element must have an ID attribute with at least 16 characters (the equivalent of 128 bits)');
+
         $validator = new AssertionValidator(
             $this->getNameIdValidatorMock(),
             $this->getSubjectValidatorMock(),
@@ -87,12 +92,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Assertion element must have the IssueInstant attribute set
-     */
     public function test_must_have_issue_instant()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Assertion element must have the IssueInstant attribute set');
+
         $validator = new AssertionValidator(
             $this->getNameIdValidatorMock(),
             $this->getSubjectValidatorMock(),
@@ -105,12 +109,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Assertion element must have an issuer element
-     */
     public function test_must_have_issuer()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Assertion element must have an issuer element');
+
         $validator = new AssertionValidator(
             $this->getNameIdValidatorMock(),
             $this->getSubjectValidatorMock(),
@@ -124,12 +127,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Assertion with no Statements must have a subject
-     */
     public function test_no_subject_no_statements_fails()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Assertion with no Statements must have a subject');
+
         $nameIdValidatorMock = $this->getNameIdValidatorMock();
         $subjectValidatorMock = $this->getSubjectValidatorMock();
         $statementValidatorMock = $this->getStatementValidatorMock();
@@ -148,12 +150,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage AuthnStatement, AuthzDecisionStatement and AttributeStatement require a subject
-     */
     public function test_authn_statement_requires_subject()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('AuthnStatement, AuthzDecisionStatement and AttributeStatement require a subject');
+
         $nameIdValidatorMock = $this->getNameIdValidatorMock();
         $subjectValidatorMock = $this->getSubjectValidatorMock();
         $statementValidatorMock = $this->getStatementValidatorMock();
@@ -173,12 +174,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage AuthnStatement, AuthzDecisionStatement and AttributeStatement require a subject
-     */
     public function test_attribute_statement_requires_subject()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('AuthnStatement, AuthzDecisionStatement and AttributeStatement require a subject');
+
         $nameIdValidatorMock = $this->getNameIdValidatorMock();
         $subjectValidatorMock = $this->getSubjectValidatorMock();
         $statementValidatorMock = $this->getStatementValidatorMock();
@@ -226,12 +226,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Conditions NotBefore MUST BE less than NotOnOrAfter
-     */
     public function test_conditions_not_before_must_be_less_than_not_on_or_after()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Conditions NotBefore MUST BE less than NotOnOrAfter');
+
         $nameIdValidatorMock = $this->getNameIdValidatorMock();
         $subjectValidatorMock = $this->getSubjectValidatorMock();
         $statementValidatorMock = $this->getStatementValidatorMock();
@@ -256,12 +255,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Assertion contained more than one condition of type OneTimeUse
-     */
     public function test_conditions_one_time_use_not_more_than_one()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Assertion contained more than one condition of type OneTimeUse');
+
         $nameIdValidatorMock = $this->getNameIdValidatorMock();
         $subjectValidatorMock = $this->getSubjectValidatorMock();
         $statementValidatorMock = $this->getStatementValidatorMock();
@@ -286,12 +284,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Count attribute of ProxyRestriction MUST BE a non-negative integer
-     */
     public function test_conditions_proxy_restriction_count_must_be_non_negative_integer()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Count attribute of ProxyRestriction MUST BE a non-negative integer');
+
         $nameIdValidatorMock = $this->getNameIdValidatorMock();
         $subjectValidatorMock = $this->getSubjectValidatorMock();
         $statementValidatorMock = $this->getStatementValidatorMock();
@@ -315,12 +312,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage ProxyRestriction Audience MUST BE a wellformed uri
-     */
     public function test_conditions_proxy_restriction_audience_must_be_well_formed_uri_string()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('ProxyRestriction Audience MUST BE a wellformed uri');
+
         $nameIdValidatorMock = $this->getNameIdValidatorMock();
         $subjectValidatorMock = $this->getSubjectValidatorMock();
         $statementValidatorMock = $this->getStatementValidatorMock();
@@ -346,12 +342,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Assertion contained more than one condition of type ProxyRestriction
-     */
     public function test_conditions_proxy_restriction_not_more_than_one()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Assertion contained more than one condition of type ProxyRestriction');
+
         $nameIdValidatorMock = $this->getNameIdValidatorMock();
         $subjectValidatorMock = $this->getSubjectValidatorMock();
         $statementValidatorMock = $this->getStatementValidatorMock();
@@ -376,12 +371,11 @@ class AssertionValidatorTest extends BaseTestCase
         $validator->validateAssertion($assertion);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage AudienceRestriction MUST BE a wellformed uri
-     */
     public function test_conditions_audience_must_be_well_formed_uri_string()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('AudienceRestriction MUST BE a wellformed uri');
+
         $nameIdValidatorMock = $this->getNameIdValidatorMock();
         $subjectValidatorMock = $this->getSubjectValidatorMock();
         $statementValidatorMock = $this->getStatementValidatorMock();
@@ -462,7 +456,7 @@ class AssertionValidatorTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Validator\Model\NameId\NameIdValidatorInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Validator\Model\NameId\NameIdValidatorInterface
      */
     private function getNameIdValidatorMock()
     {
@@ -470,7 +464,7 @@ class AssertionValidatorTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Validator\Model\Statement\StatementValidatorInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Validator\Model\Statement\StatementValidatorInterface
      */
     private function getStatementValidatorMock()
     {
@@ -478,7 +472,7 @@ class AssertionValidatorTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Validator\Model\Subject\SubjectValidatorInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Validator\Model\Subject\SubjectValidatorInterface
      */
     private function getSubjectValidatorMock()
     {

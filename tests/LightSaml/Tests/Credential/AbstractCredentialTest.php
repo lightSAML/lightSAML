@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Credential;
 
 use LightSaml\Credential\UsageType;
@@ -42,17 +51,17 @@ class AbstractCredentialTest extends BaseTestCase
     {
         $credential = $this->getAbstractCredentialMock();
 
-        $this->assertEquals(array(), $credential->getKeyNames());
+        $this->assertEquals([], $credential->getKeyNames());
 
         $credential->addKeyName($keyName1 = 'foo');
-        $this->assertEquals(array($keyName1), $credential->getKeyNames());
+        $this->assertEquals([$keyName1], $credential->getKeyNames());
 
         $credential->addKeyName($keyName2 = 'bar');
-        $this->assertEquals(array($keyName1, $keyName2), $credential->getKeyNames());
+        $this->assertEquals([$keyName1, $keyName2], $credential->getKeyNames());
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Credential\AbstractCredential
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Credential\AbstractCredential
      */
     private function getAbstractCredentialMock()
     {

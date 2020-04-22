@@ -23,10 +23,6 @@ class SingleLogoutService extends Endpoint
         parent::serialize($result, $context);
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'SingleLogoutService', SamlConstants::NS_METADATA);

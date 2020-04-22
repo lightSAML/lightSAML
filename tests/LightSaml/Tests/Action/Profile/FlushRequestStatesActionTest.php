@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile;
 
 use LightSaml\Action\Profile\FlushRequestStatesAction;
@@ -9,9 +18,7 @@ use LightSaml\Context\Profile\ProfileContexts;
 use LightSaml\Context\Profile\RequestStateContext;
 use LightSaml\Profile\Profiles;
 use LightSaml\State\Request\RequestState;
-use LightSaml\Store\Request\RequestStateStoreInterface;
 use LightSaml\Tests\BaseTestCase;
-use Psr\Log\LoggerInterface;
 
 class FlushRequestStatesActionTest extends BaseTestCase
 {

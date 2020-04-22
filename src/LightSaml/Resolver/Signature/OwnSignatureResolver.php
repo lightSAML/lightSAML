@@ -13,33 +13,28 @@ namespace LightSaml\Resolver\Signature;
 
 use LightSaml\Context\Profile\AbstractProfileContext;
 use LightSaml\Context\Profile\ProfileContext;
-use LightSaml\Error\LightSamlContextException;
-use LightSaml\Model\XmlDSig\SignatureWriter;
-use LightSaml\Resolver\Credential\CredentialResolverInterface;
-use LightSaml\SamlConstants;
-use LightSaml\Credential\UsageType;
-use LightSaml\Credential\X509CredentialInterface;
 use LightSaml\Credential\Criteria\EntityIdCriteria;
 use LightSaml\Credential\Criteria\MetadataCriteria;
 use LightSaml\Credential\Criteria\UsageCriteria;
 use LightSaml\Credential\Criteria\X509CredentialCriteria;
+use LightSaml\Credential\UsageType;
+use LightSaml\Credential\X509CredentialInterface;
+use LightSaml\Error\LightSamlContextException;
+use LightSaml\Model\XmlDSig\SignatureWriter;
+use LightSaml\Resolver\Credential\CredentialResolverInterface;
+use LightSaml\SamlConstants;
 
 class OwnSignatureResolver implements SignatureResolverInterface
 {
     /** @var CredentialResolverInterface */
     protected $credentialResolver;
 
-    /**
-     * @param CredentialResolverInterface $credentialResolver
-     */
     public function __construct(CredentialResolverInterface $credentialResolver)
     {
         $this->credentialResolver = $credentialResolver;
     }
 
     /**
-     * @param AbstractProfileContext $context
-     *
      * @return SignatureWriter
      */
     public function getSignature(AbstractProfileContext $context)
@@ -56,8 +51,6 @@ class OwnSignatureResolver implements SignatureResolverInterface
     }
 
     /**
-     * @param AbstractProfileContext $context
-     *
      * @return X509CredentialInterface|null
      */
     private function getSigningCredential(AbstractProfileContext $context)

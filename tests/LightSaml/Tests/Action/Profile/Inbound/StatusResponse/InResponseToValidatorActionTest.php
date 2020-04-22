@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Inbound\StatusResponse;
 
 use LightSaml\Action\Profile\Inbound\StatusResponse\InResponseToValidatorAction;
@@ -58,12 +67,11 @@ class InResponseToValidatorActionTest extends BaseTestCase
         $this->assertSame($requestState, $requestStateContext->getRequestState());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Unknown InResponseTo '1234567890'
-     */
     public function test_throws_context_exception_if_no_request_state_for_in_response_to_from_message()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Unknown InResponseTo \'1234567890\'');
+
         $action = new InResponseToValidatorAction(
             $loggerMock = $this->getLoggerMock(),
             $requestStateStoreMock = $this->getRequestStateStoreMock()
@@ -86,7 +94,7 @@ class InResponseToValidatorActionTest extends BaseTestCase
     /**
      * @param string $inResponseTo
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Model\Protocol\StatusResponse
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Model\Protocol\StatusResponse
      */
     private function getStatusResponseMock($inResponseTo = null)
     {

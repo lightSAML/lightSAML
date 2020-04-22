@@ -11,14 +11,13 @@
 
 namespace LightSaml\Resolver\Endpoint;
 
-use LightSaml\Model\Metadata\EndpointReference;
 use LightSaml\Criteria\CriteriaSet;
+use LightSaml\Model\Metadata\EndpointReference;
 use LightSaml\Resolver\Endpoint\Criteria\BindingCriteria;
 
 class BindingEndpointResolver implements EndpointResolverInterface
 {
     /**
-     * @param CriteriaSet         $criteriaSet
      * @param EndpointReference[] $candidates
      *
      * @return EndpointReference[]
@@ -29,7 +28,7 @@ class BindingEndpointResolver implements EndpointResolverInterface
             return $candidates;
         }
 
-        $arrOrdered = array();
+        $arrOrdered = [];
         /** @var BindingCriteria $bindingCriteria */
         foreach ($criteriaSet->get(BindingCriteria::class) as $bindingCriteria) {
             foreach ($candidates as $endpointReference) {
@@ -42,7 +41,7 @@ class BindingEndpointResolver implements EndpointResolverInterface
 
         ksort($arrOrdered);
 
-        $result = array();
+        $result = [];
         foreach ($arrOrdered as $arr) {
             foreach ($arr as $endpointReference) {
                 $result[] = $endpointReference;

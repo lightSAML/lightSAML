@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Outbound\Message;
 
 use LightSaml\Action\Profile\Outbound\Message\ResolveEndpointBaseAction;
@@ -28,9 +37,6 @@ class ResolveEndpointIdpSsoActionTest extends AbstractResolveEndpointActionTest
     }
 
     /**
-     * @param LoggerInterface           $logger
-     * @param EndpointResolverInterface $endpointResolver
-     *
      * @return ResolveEndpointBaseAction
      */
     protected function createAction(LoggerInterface $logger, EndpointResolverInterface $endpointResolver)

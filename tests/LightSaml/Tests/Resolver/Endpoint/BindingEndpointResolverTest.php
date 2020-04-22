@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Resolver\Endpoint;
 
 use LightSaml\Criteria\CriteriaSet;
@@ -34,7 +43,7 @@ class BindingEndpointResolverTest extends BaseTestCase
     {
         $criteriaSet = new CriteriaSet([new BindingCriteria([
             SamlConstants::BINDING_SAML2_HTTP_POST,
-            SamlConstants::BINDING_SAML2_HTTP_REDIRECT
+            SamlConstants::BINDING_SAML2_HTTP_REDIRECT,
         ])]);
 
         $candidates = [

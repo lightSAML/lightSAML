@@ -23,10 +23,6 @@ class CatchableErrorAction implements ActionInterface
     /** @var ActionInterface */
     protected $errorAction;
 
-    /**
-     * @param ActionInterface $mainAction
-     * @param ActionInterface $errorAction
-     */
     public function __construct(ActionInterface $mainAction, ActionInterface $errorAction)
     {
         $this->mainAction = $mainAction;
@@ -34,8 +30,6 @@ class CatchableErrorAction implements ActionInterface
     }
 
     /**
-     * @param ContextInterface $context
-     *
      * @return void
      */
     public function execute(ContextInterface $context)

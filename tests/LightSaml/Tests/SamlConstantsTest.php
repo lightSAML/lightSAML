@@ -1,9 +1,17 @@
 <?php
 
-namespace LightSaml\Tests\Tests;
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace LightSaml\Tests;
 
 use LightSaml\SamlConstants;
-use LightSaml\Tests\BaseTestCase;
 
 class SamlConstantsTest extends BaseTestCase
 {
@@ -26,16 +34,16 @@ class SamlConstantsTest extends BaseTestCase
 
     public function methodsProvider()
     {
-        return array(
-            array('isProtocolValid'),
-            array('isNsValid'),
-            array('isNameIdFormatValid'),
-            array('isBindingValid'),
-            array('isStatusValid'),
-            array('isConfirmationMethodValid'),
-            array('isAuthnContextValid'),
-            array('isLogoutReasonValid'),
-        );
+        return [
+            ['isProtocolValid'],
+            ['isNsValid'],
+            ['isNameIdFormatValid'],
+            ['isBindingValid'],
+            ['isStatusValid'],
+            ['isConfirmationMethodValid'],
+            ['isAuthnContextValid'],
+            ['isLogoutReasonValid'],
+        ];
     }
 
     public function constantsProvider()
@@ -54,7 +62,7 @@ class SamlConstantsTest extends BaseTestCase
 
     public function getConstants($method)
     {
-        $ret = array();
+        $ret = [];
         $ref = new \ReflectionClass('\LightSaml\SamlConstants');
         $prefix = strtoupper(
             preg_replace('/([a-z])([A-Z])/', '$1_$2', $method)
@@ -62,8 +70,8 @@ class SamlConstantsTest extends BaseTestCase
         $method = 'is'.$method.'Valid';
 
         foreach ($ref->getConstants() as $constant => $value) {
-            if (strpos($constant, $prefix) === 0) {
-                $ret[] = array($method, $constant);
+            if (0 === strpos($constant, $prefix)) {
+                $ret[] = [$method, $constant];
             }
         }
 

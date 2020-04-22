@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Model\XmlDSig;
 
 use LightSaml\Meta\SigningOptions;
@@ -42,12 +51,11 @@ class SignatureWriterTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage SignatureWriter can not be deserialized
-     */
     public function test_throws_logic_exception_on_deserialize()
     {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('SignatureWriter can not be deserialized');
+
         $deserializationContext = new DeserializationContext();
         $deserializationContext->getDocument()->loadXML('<a></a>');
         $writer = new SignatureWriter();

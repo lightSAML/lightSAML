@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Validator\Model\Subject;
 
 use LightSaml\Model\Assertion\NameID;
@@ -12,12 +21,11 @@ use LightSaml\Validator\Model\Subject\SubjectValidator;
 
 class SubjectValidatorTest extends BaseTestCase
 {
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Subject MUST contain either an identifier or a subject confirmation
-     */
     public function test_fails_when_no_subject_and_no_subject_confirmation()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Subject MUST contain either an identifier or a subject confirmation');
+
         $subject = new Subject();
 
         $nameIdValidatorMock = $this->getNameIdValidatorMock();
@@ -84,12 +92,11 @@ class SubjectValidatorTest extends BaseTestCase
         $validator->validateSubject($subject);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Method attribute of SubjectConfirmation MUST contain at least one non-whitespace character
-     */
     public function test_fails_on_empty_method()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Method attribute of SubjectConfirmation MUST contain at least one non-whitespace character');
+
         $subject = new Subject();
 
         $subjectConfirmation = new SubjectConfirmation();
@@ -101,12 +108,11 @@ class SubjectValidatorTest extends BaseTestCase
         $validator->validateSubject($subject);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage SubjectConfirmation element has Method attribute which is not a wellformed absolute uri
-     */
     public function test_fails_on_invalid_method()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('SubjectConfirmation element has Method attribute which is not a wellformed absolute uri');
+
         $subject = new Subject();
 
         $subjectConfirmation = new SubjectConfirmation();
@@ -119,12 +125,11 @@ class SubjectValidatorTest extends BaseTestCase
         $validator->validateSubject($subject);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage Recipient of SubjectConfirmationData must be a wellformed absolute URI
-     */
     public function test_fails_on_invalid_recipient()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('Recipient of SubjectConfirmationData must be a wellformed absolute URI');
+
         $subject = new Subject();
 
         $subjectConfirmationData = new SubjectConfirmationData();
@@ -141,12 +146,11 @@ class SubjectValidatorTest extends BaseTestCase
         $validator->validateSubject($subject);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlValidationException
-     * @expectedExceptionMessage SubjectConfirmationData NotBefore MUST be less than NotOnOrAfter
-     */
     public function test_fails_on_not_on_or_after_less_then_not_before()
     {
+        $this->expectException(\LightSaml\Error\LightSamlValidationException::class);
+        $this->expectExceptionMessage('SubjectConfirmationData NotBefore MUST be less than NotOnOrAfter');
+
         $subject = new Subject();
 
         $subjectConfirmationData = new SubjectConfirmationData();
@@ -165,7 +169,7 @@ class SubjectValidatorTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Validator\Model\NameId\NameIdValidatorInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Validator\Model\NameId\NameIdValidatorInterface
      */
     public function getNameIdValidatorMock()
     {

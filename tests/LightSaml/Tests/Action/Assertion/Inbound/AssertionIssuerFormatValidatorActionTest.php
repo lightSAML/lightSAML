@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Assertion\Inbound;
 
 use LightSaml\Action\Assertion\Inbound\AssertionIssuerFormatValidatorAction;
@@ -16,12 +25,11 @@ class AssertionIssuerFormatValidatorActionTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Assertion element must have an issuer element
-     */
     public function test_throws_context_exception_when_assertion_has_no_issuer()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Assertion element must have an issuer element');
+
         $action = new AssertionIssuerFormatValidatorAction(
             $loggerMock = $this->getLoggerMock(),
             $expectedIssuerFormat = SamlConstants::NAME_ID_FORMAT_EMAIL
@@ -36,12 +44,11 @@ class AssertionIssuerFormatValidatorActionTest extends BaseTestCase
         $action->execute($context);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Response Issuer Format if set must have value 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress' but it was 'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent'
-     */
     public function test_throws_context_exception_when_assertion_issuer_format_does_not_matches_expected_format()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Response Issuer Format if set must have value \'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress\' but it was \'urn:oasis:names:tc:SAML:2.0:nameid-format:persistent\'');
+
         $action = new AssertionIssuerFormatValidatorAction(
             $loggerMock = $this->getLoggerMock(),
             $expectedIssuerFormat = SamlConstants::NAME_ID_FORMAT_EMAIL

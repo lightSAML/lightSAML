@@ -1,11 +1,19 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action;
 
 use LightSaml\Action\ActionInterface;
 use LightSaml\Action\ActionLogWrapper;
 use LightSaml\Tests\BaseTestCase;
-use Psr\Log\LoggerInterface;
 
 class ActionLogWrapperTest extends BaseTestCase
 {
@@ -18,7 +26,7 @@ class ActionLogWrapperTest extends BaseTestCase
             ->method('execute')
             ->with($context);
 
-        $loggerMock  = $this->getLoggerMock();
+        $loggerMock = $this->getLoggerMock();
         $loggerMock->expects($this->once())
             ->method('debug')
             ->willReturnCallback(function ($pMessage, $pContext) use ($action, $context) {
@@ -38,7 +46,7 @@ class ActionLogWrapperTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|ActionInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|ActionInterface
      */
     private function getActionMock()
     {
@@ -46,7 +54,7 @@ class ActionLogWrapperTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Context\ContextInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Context\ContextInterface
      */
     private function getContextMock()
     {

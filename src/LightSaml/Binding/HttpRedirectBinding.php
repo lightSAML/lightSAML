@@ -16,8 +16,8 @@ use LightSaml\Context\Profile\MessageContext;
 use LightSaml\Error\LightSamlBindingException;
 use LightSaml\Model\Protocol\AbstractRequest;
 use LightSaml\Model\Protocol\SamlMessage;
-use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\Model\XmlDSig\SignatureStringReader;
+use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\SamlConstants;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -26,8 +26,7 @@ use Symfony\Component\HttpFoundation\Request;
 class HttpRedirectBinding extends AbstractBinding
 {
     /**
-     * @param MessageContext $context
-     * @param null|string    $destination
+     * @param string|null $destination
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -40,10 +39,6 @@ class HttpRedirectBinding extends AbstractBinding
         return new RedirectResponse($url);
     }
 
-    /**
-     * @param Request        $request
-     * @param MessageContext $context
-     */
     public function receive(Request $request, MessageContext $context)
     {
         $data = $this->parseQuery($request);
@@ -52,9 +47,6 @@ class HttpRedirectBinding extends AbstractBinding
     }
 
     /**
-     * @param array          $data
-     * @param MessageContext $context
-     *
      * @throws \Exception
      */
     protected function processData(array $data, MessageContext $context)
@@ -75,8 +67,6 @@ class HttpRedirectBinding extends AbstractBinding
     }
 
     /**
-     * @param array $data
-     *
      * @return string
      *
      * @throws LightSamlBindingException
@@ -93,8 +83,6 @@ class HttpRedirectBinding extends AbstractBinding
     }
 
     /**
-     * @param array $data
-     *
      * @return string
      */
     protected function getEncodingFromData(array $data)
@@ -146,8 +134,7 @@ class HttpRedirectBinding extends AbstractBinding
     }
 
     /**
-     * @param MessageContext $context
-     * @param string|null    $destination
+     * @param string|null $destination
      *
      * @return string
      */
@@ -168,9 +155,6 @@ class HttpRedirectBinding extends AbstractBinding
     }
 
     /**
-     * @param SamlMessage    $message
-     * @param MessageContext $context
-     *
      * @return string
      */
     protected function getMessageEncodedXml(SamlMessage $message, MessageContext $context)
@@ -190,8 +174,7 @@ class HttpRedirectBinding extends AbstractBinding
     }
 
     /**
-     * @param SamlMessage $message
-     * @param string      $xml
+     * @param string $xml
      *
      * @return string
      */
@@ -208,8 +191,7 @@ class HttpRedirectBinding extends AbstractBinding
     }
 
     /**
-     * @param string      $msg
-     * @param SamlMessage $message
+     * @param string $msg
      */
     protected function addRelayStateToUrl(&$msg, SamlMessage $message)
     {
@@ -219,8 +201,7 @@ class HttpRedirectBinding extends AbstractBinding
     }
 
     /**
-     * @param string               $msg
-     * @param SignatureWriter|null $signature
+     * @param string $msg
      */
     protected function addSignatureToUrl(&$msg, SignatureWriter $signature = null)
     {
@@ -236,7 +217,6 @@ class HttpRedirectBinding extends AbstractBinding
 
     /**
      * @param string      $msg
-     * @param SamlMessage $message
      * @param string|null $destination
      *
      * @return string
@@ -254,8 +234,6 @@ class HttpRedirectBinding extends AbstractBinding
     }
 
     /**
-     * @param Request $request
-     *
      * @return array
      */
     protected function parseQuery(Request $request)
@@ -267,7 +245,7 @@ class HttpRedirectBinding extends AbstractBinding
          */
         $sigQuery = $relayState = $sigAlg = '';
         $data = $this->parseQueryString($request->server->get('QUERY_STRING'), false);
-        $result = array();
+        $result = [];
         foreach ($data as $name => $value) {
             $result[$name] = urldecode($value);
             switch ($name) {
@@ -296,7 +274,7 @@ class HttpRedirectBinding extends AbstractBinding
      */
     protected function parseQueryString($queryString, $urlDecodeValues = false)
     {
-        $result = array();
+        $result = [];
         foreach (explode('&', $queryString) as $e) {
             $tmp = explode('=', $e, 2);
             $name = $tmp[0];

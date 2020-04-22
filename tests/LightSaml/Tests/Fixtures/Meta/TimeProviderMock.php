@@ -1,12 +1,21 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Fixtures\Meta;
 
 use LightSaml\Provider\TimeProvider\TimeProviderInterface;
 
 class TimeProviderMock implements TimeProviderInterface
 {
-    /** @var  \DateTime */
+    /** @var \DateTime */
     protected $value;
 
     /**
@@ -18,8 +27,6 @@ class TimeProviderMock implements TimeProviderInterface
     }
 
     /**
-     * @param \DateTime $value
-     *
      * @return TimeProviderMock
      */
     public function setNow(\DateTime $value)

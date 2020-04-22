@@ -17,7 +17,7 @@ use LightSaml\Model\Metadata\EntityDescriptor;
 class FixedEntityDescriptorStore implements EntityDescriptorStoreInterface
 {
     /** @var array|EntityDescriptor[] entityId=>descriptor */
-    protected $descriptors = array();
+    protected $descriptors = [];
 
     /**
      * @param EntityDescriptor|EntitiesDescriptor $entityDescriptor

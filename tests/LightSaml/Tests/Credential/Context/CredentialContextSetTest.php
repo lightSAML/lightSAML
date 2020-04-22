@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Credential\Context;
 
 use LightSaml\Credential\Context\CredentialContextSet;
@@ -33,17 +42,16 @@ class CredentialContextSetTest extends BaseTestCase
         $this->assertSame($expected[1], $all[1]);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Expected CredentialContextInterface
-     */
     public function test_throws_invalid_argument_exception_if_constructed_with_non_credential_context_array()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Expected CredentialContextInterface');
+
         new CredentialContextSet([new \stdClass()]);
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Credential\Context\MetadataCredentialContext
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Credential\Context\MetadataCredentialContext
      */
     private function getMetadataContextMock()
     {

@@ -14,12 +14,12 @@ namespace LightSaml\Credential\Context;
 class CredentialContextSet
 {
     /** @var CredentialContextInterface[] */
-    protected $contexts = array();
+    protected $contexts = [];
 
     /**
      * @param CredentialContextInterface[] $contexts
      */
-    public function __construct(array $contexts = array())
+    public function __construct(array $contexts = [])
     {
         foreach ($contexts as $context) {
             if (false == $context instanceof CredentialContextInterface) {

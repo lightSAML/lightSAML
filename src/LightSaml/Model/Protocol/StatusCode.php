@@ -11,9 +11,9 @@
 
 namespace LightSaml\Model\Protocol;
 
+use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\AbstractSamlModel;
 use LightSaml\SamlConstants;
 
 class StatusCode extends AbstractSamlModel
@@ -69,32 +69,25 @@ class StatusCode extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
         $result = $this->createElement('samlp:StatusCode', SamlConstants::NS_PROTOCOL, $parent, $context);
 
-        $this->attributesToXml(array('Value'), $result);
+        $this->attributesToXml(['Value'], $result);
 
-        $this->singleElementsToXml(array('StatusCode'), $result, $context);
+        $this->singleElementsToXml(['StatusCode'], $result, $context);
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'StatusCode', SamlConstants::NS_PROTOCOL);
 
-        $this->attributesFromXml($node, array('Value'));
+        $this->attributesFromXml($node, ['Value']);
 
-        $this->singleElementsFromXml($node, $context, array(
-            'StatusCode' => array('samlp', 'LightSaml\Model\Protocol\StatusCode'),
-        ));
+        $this->singleElementsFromXml($node, $context, [
+            'StatusCode' => ['samlp', 'LightSaml\Model\Protocol\StatusCode'],
+        ]);
     }
 }

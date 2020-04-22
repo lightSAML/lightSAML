@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Resolver\Signature;
 
 use LightSaml\Context\Profile\ProfileContext;
@@ -27,12 +36,11 @@ class OwnSignatureResolverTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Unable to find signing credential
-     */
     public function test_throws_context_exception_when_no_credential_resolved()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Unable to find signing credential');
+
         $signatureResolver = new OwnSignatureResolver($credentialResolverMock = $this->getCredentialResolverMock());
 
         $context = $this->getProfileContext();
@@ -104,12 +112,11 @@ class OwnSignatureResolverTest extends BaseTestCase
         $signatureResolver->getSignature($context);
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage Expected X509CredentialInterface but got
-     */
     public function test_throws_logic_exception_when_returned_value_if_not_credential()
     {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('Expected X509CredentialInterface but got');
+
         $signatureResolver = new OwnSignatureResolver($credentialResolverMock = $this->getCredentialResolverMock());
 
         $context = $this->getProfileContext();

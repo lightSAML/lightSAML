@@ -1,10 +1,20 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Model\Protocol;
 
 use LightSaml\ClaimTypes;
+use LightSaml\Credential\KeyHelper;
+use LightSaml\Credential\X509Certificate;
 use LightSaml\Meta\SigningOptions;
-use LightSaml\Model\Context\SerializationContext;
 use LightSaml\Model\Assertion\Assertion;
 use LightSaml\Model\Assertion\Attribute;
 use LightSaml\Model\Assertion\AttributeStatement;
@@ -17,13 +27,10 @@ use LightSaml\Model\Assertion\NameID;
 use LightSaml\Model\Assertion\Subject;
 use LightSaml\Model\Assertion\SubjectConfirmation;
 use LightSaml\Model\Assertion\SubjectConfirmationData;
+use LightSaml\Model\Context\SerializationContext;
 use LightSaml\Model\Protocol\Response;
-use LightSaml\Model\Protocol\Status;
-use LightSaml\Model\Protocol\StatusCode;
 use LightSaml\Model\XmlDSig\SignatureWriter;
 use LightSaml\SamlConstants;
-use LightSaml\Credential\KeyHelper;
-use LightSaml\Credential\X509Certificate;
 use LightSaml\Tests\BaseTestCase;
 
 class ResponseTest extends BaseTestCase

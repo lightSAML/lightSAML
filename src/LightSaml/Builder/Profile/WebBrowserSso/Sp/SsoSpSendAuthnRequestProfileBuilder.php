@@ -24,8 +24,7 @@ class SsoSpSendAuthnRequestProfileBuilder extends AbstractProfileBuilder
     protected $idpEntityId;
 
     /**
-     * @param BuildContainerInterface $buildContainer
-     * @param string                  $idpEntityId
+     * @param string $idpEntityId
      */
     public function __construct(BuildContainerInterface $buildContainer, $idpEntityId)
     {
@@ -78,8 +77,6 @@ class SsoSpSendAuthnRequestProfileBuilder extends AbstractProfileBuilder
     }
 
     /**
-     * @param EntityDescriptor $idpEd
-     *
      * @return TrustOptions
      */
     private function getTrustOptions(EntityDescriptor $idpEd)

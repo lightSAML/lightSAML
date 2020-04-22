@@ -11,12 +11,12 @@
 
 namespace LightSaml\Model\Assertion;
 
-use LightSaml\Model\Context\DeserializationContext;
-use LightSaml\Model\Context\SerializationContext;
 use LightSaml\Error\LightSamlException;
 use LightSaml\Model\AbstractSamlModel;
-use RobRichards\XMLSecLibs\XMLSecurityKey;
+use LightSaml\Model\Context\DeserializationContext;
+use LightSaml\Model\Context\SerializationContext;
 use RobRichards\XMLSecLibs\XMLSecEnc;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 abstract class EncryptedElementWriter extends EncryptedElement
 {
@@ -40,9 +40,6 @@ abstract class EncryptedElementWriter extends EncryptedElement
     }
 
     /**
-     * @param AbstractSamlModel $object
-     * @param XMLSecurityKey    $key
-     *
      * @return SerializationContext
      */
     public function encrypt(AbstractSamlModel $object, XMLSecurityKey $key)
@@ -89,17 +86,11 @@ abstract class EncryptedElementWriter extends EncryptedElement
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return \DOMElement
      */
     abstract protected function createRootElement(\DOMNode $parent, SerializationContext $context);
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
@@ -113,10 +104,6 @@ abstract class EncryptedElementWriter extends EncryptedElement
         $root->appendChild($context->getDocument()->importNode($this->encryptedElement, true));
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         throw new \LogicException('EncryptedElementWriter can not be used for deserialization');

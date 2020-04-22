@@ -18,9 +18,6 @@ class SsoSpSendAuthnRequestProfileBuilderFactory
     /** @var BuildContainerInterface */
     private $buildContainer;
 
-    /**
-     * @param BuildContainerInterface $buildContainer
-     */
     public function __construct(BuildContainerInterface $buildContainer)
     {
         $this->buildContainer = $buildContainer;

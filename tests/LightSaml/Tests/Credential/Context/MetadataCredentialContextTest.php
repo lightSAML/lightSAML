@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Credential\Context;
 
 use LightSaml\Credential\Context\MetadataCredentialContext;
@@ -21,7 +30,7 @@ class MetadataCredentialContextTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Model\Metadata\KeyDescriptor
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Model\Metadata\KeyDescriptor
      */
     private function getKeyDescriptorMock()
     {
@@ -29,7 +38,7 @@ class MetadataCredentialContextTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Model\Metadata\RoleDescriptor
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Model\Metadata\RoleDescriptor
      */
     private function getRoleDescriptorMock()
     {
@@ -37,7 +46,7 @@ class MetadataCredentialContextTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Model\Metadata\EntityDescriptor
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Model\Metadata\EntityDescriptor
      */
     private function getEntityDescriptorMock()
     {

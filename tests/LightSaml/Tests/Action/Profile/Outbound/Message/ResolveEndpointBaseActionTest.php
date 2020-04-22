@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Outbound\Message;
 
 use LightSaml\Action\Profile\Outbound\Message\ResolveEndpointBaseAction;
@@ -57,12 +66,11 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
         $this->assertSame($endpoint, $context->getEndpoint());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Unable to determine endpoint for entity 'https://B1.bead.loc/adfs/services/trust'
-     */
     public function test_throws_context_exception_when_no_endpoint_resolved()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Unable to determine endpoint for entity \'https://B1.bead.loc/adfs/services/trust\'');
+
         $message = new Response();
         $context = $this->createContext(ProfileContext::ROLE_IDP, $message);
 
@@ -105,9 +113,6 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
     }
 
     /**
-     * @param LoggerInterface           $logger
-     * @param EndpointResolverInterface $endpointResolver
-     *
      * @return ResolveEndpointBaseAction
      */
     protected function createAction(LoggerInterface $logger, EndpointResolverInterface $endpointResolver)

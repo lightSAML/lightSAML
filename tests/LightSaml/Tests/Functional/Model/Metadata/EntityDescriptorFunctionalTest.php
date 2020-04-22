@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Functional\Model\Metadata;
 
 use LightSaml\Model\Context\DeserializationContext;
@@ -120,12 +129,11 @@ class EntityDescriptorFunctionalTest extends BaseTestCase
         $this->assertEquals('https://engine.surfconext.nl/authentication/idp/metadata', $ed->getEntityID());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlXmlException
-     * @expectedExceptionMessage Expected 'EntityDescriptor' xml node and 'urn:oasis:names:tc:SAML:2.0:metadata' namespace but got node 'EntitiesDescriptor' and namespace 'urn:oasis:names:tc:SAML:2.0:metadata'
-     */
     public function test_throws_on_entities_descriptor_document()
     {
+        $this->expectException(\LightSaml\Error\LightSamlXmlException::class);
+        $this->expectExceptionMessage('Expected \'EntityDescriptor\' xml node and \'urn:oasis:names:tc:SAML:2.0:metadata\' namespace but got node \'EntitiesDescriptor\' and namespace \'urn:oasis:names:tc:SAML:2.0:metadata\'');
+
         EntityDescriptor::load(__DIR__.'/../../../../../../resources/sample/EntitiesDescriptor/testshib-providers.xml');
     }
 

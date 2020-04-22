@@ -21,10 +21,6 @@ class LoggableAction extends WrappedAction
      */
     private $logger;
 
-    /**
-     * @param ActionInterface $action
-     * @param LoggerInterface $logger
-     */
     public function __construct(ActionInterface $action, LoggerInterface $logger)
     {
         parent::__construct($action);
@@ -32,20 +28,14 @@ class LoggableAction extends WrappedAction
         $this->logger = $logger;
     }
 
-    /**
-     * @param ContextInterface $context
-     */
     protected function beforeAction(ContextInterface $context)
     {
-        $this->logger->debug(sprintf('Executing action "%s"', get_class($this->action)), array(
+        $this->logger->debug(sprintf('Executing action "%s"', get_class($this->action)), [
             'context' => $context,
             'action' => $this->action,
-        ));
+        ]);
     }
 
-    /**
-     * @param ContextInterface $context
-     */
     protected function afterAction(ContextInterface $context)
     {
     }

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Assertion;
 
 use LightSaml\Action\Assertion\AbstractAssertionAction;
@@ -28,20 +37,17 @@ class AbstractAssertionActionTest extends BaseTestCase
         $action->execute($context);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Expected AssertionContext
-     */
     public function test_throws_context_exception_for_non_assertion_context()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Expected AssertionContext');
+
         $action = $this->getAbstractAssertionActionMock([$this->getLoggerMock()]);
         $action->execute($this->getMockBuilder(ContextInterface::class)->getMock());
     }
 
     /**
-     * @param array $arguments
-     *
-     * @return \PHPUnit_Framework_MockObject_MockObject|AbstractAssertionAction
+     * @return \PHPUnit\Framework\MockObject\MockObject|AbstractAssertionAction
      */
     private function getAbstractAssertionActionMock(array $arguments)
     {

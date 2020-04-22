@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Inbound\Message;
 
 use LightSaml\Action\Profile\Inbound\Message\EntityIdFromMessageIssuerAction;
@@ -25,12 +34,11 @@ class EntityIdFromMessageIssuerActionTest extends BaseTestCase
         $this->assertEquals($expectedEntityId, $context->getPartyEntityContext()->getEntityId());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Inbound messages does not have Issuer
-     */
     public function test_throws_when_inbound_message_has_no_issuer()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Inbound messages does not have Issuer');
+
         $action = new EntityIdFromMessageIssuerAction($this->getLoggerMock());
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);

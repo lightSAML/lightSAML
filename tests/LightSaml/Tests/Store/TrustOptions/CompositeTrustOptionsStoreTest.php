@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Store\TrustOptions;
 
 use LightSaml\Meta\TrustOptions\TrustOptions;
@@ -20,7 +29,7 @@ class CompositeTrustOptionsStoreTest extends BaseTestCase
         new CompositeTrustOptionsStore([$this->getTrustOptionsStoreMock(), $this->getTrustOptionsStoreMock()]);
         $this->assertTrue(true);
     }
-    
+
     public function test_can_add_stores()
     {
         $composite = new CompositeTrustOptionsStore();
@@ -105,7 +114,7 @@ class CompositeTrustOptionsStoreTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|TrustOptionsStoreInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|TrustOptionsStoreInterface
      */
     private function getTrustOptionsStoreMock()
     {

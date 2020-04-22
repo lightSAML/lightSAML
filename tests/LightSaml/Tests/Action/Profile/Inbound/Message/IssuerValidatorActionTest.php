@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Inbound\Message;
 
 use LightSaml\Action\Profile\Inbound\Message\IssuerValidatorAction;
@@ -20,12 +29,11 @@ class IssuerValidatorActionTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Inbound message must have Issuer element
-     */
     public function test_throws_if_inbound_message_has_no_issuer()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Inbound message must have Issuer element');
+
         $action = new IssuerValidatorAction($this->getLoggerMock(), $this->getNameIdValidatorMock(), '');
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
@@ -34,12 +42,11 @@ class IssuerValidatorActionTest extends BaseTestCase
         $action->execute($context);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Response Issuer Format if set must have value 'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress' but it was 'non-allowed'
-     */
     public function test_throws_if_inbound_message_issuer_format_different_then_allowed()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Response Issuer Format if set must have value \'urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress\' but it was \'non-allowed\'');
+
         $action = new IssuerValidatorAction($this->getLoggerMock(), $this->getNameIdValidatorMock(), SamlConstants::NAME_ID_FORMAT_EMAIL);
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
@@ -71,12 +78,11 @@ class IssuerValidatorActionTest extends BaseTestCase
         $action->execute($context);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Error from name id validator
-     */
     public function test_wrapps_validation_exception_in_context_exception()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Error from name id validator');
+
         $nameIdValidatorMock = $this->getNameIdValidatorMock();
         $action = new IssuerValidatorAction($this->getLoggerMock(), $nameIdValidatorMock, $allowedFormat = SamlConstants::NAME_ID_FORMAT_EMAIL);
 
@@ -97,7 +103,7 @@ class IssuerValidatorActionTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Validator\Model\NameId\NameIdValidatorInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Validator\Model\NameId\NameIdValidatorInterface
      */
     public function getNameIdValidatorMock()
     {

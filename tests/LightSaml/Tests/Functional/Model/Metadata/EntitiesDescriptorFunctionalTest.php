@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Functional\Model\Metadata;
 
 use LightSaml\Model\Context\DeserializationContext;
@@ -43,10 +52,10 @@ class EntitiesDescriptorFunctionalTest extends BaseTestCase
         $this->assertCount(1, $idp->getAllKeyDescriptors());
         KeyDescriptorChecker::checkCertificateCN($this, null, 'idp.testshib.org', $idp->getFirstKeyDescriptor());
 
-        NameIdFormatChecker::check($this, $idp, array(
+        NameIdFormatChecker::check($this, $idp, [
             SamlConstants::NAME_ID_FORMAT_TRANSIENT,
             SamlConstants::NAME_ID_FORMAT_SHIB_NAME_ID,
-        ));
+        ]);
 
         $this->assertCount(4, $idp->getAllSingleSignOnServices());
         EndpointChecker::check(
@@ -102,7 +111,6 @@ class EntitiesDescriptorFunctionalTest extends BaseTestCase
         unset($idp);
         //endregion
 
-
         //region SP
         $ed = $entitiesDescriptor->getByEntityId('https://sp.testshib.org/shibboleth-sp');
         $this->assertNotNull($ed);
@@ -145,10 +153,10 @@ class EntitiesDescriptorFunctionalTest extends BaseTestCase
             $sp->getFirstSingleLogoutService(SamlConstants::BINDING_SAML2_HTTP_ARTIFACT)
         );
 
-        NameIdFormatChecker::check($this, $sp, array(
+        NameIdFormatChecker::check($this, $sp, [
             SamlConstants::NAME_ID_FORMAT_TRANSIENT,
             SamlConstants::NAME_ID_FORMAT_SHIB_NAME_ID,
-        ));
+        ]);
 
         $this->assertCount(8, $sp->getAllAssertionConsumerServices());
         IndexedEndpointChecker::check(
@@ -220,12 +228,11 @@ class EntitiesDescriptorFunctionalTest extends BaseTestCase
         $this->assertCount(2935, $entitiesDescriptor->getAllEntityDescriptors());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlXmlException
-     * @expectedExceptionMessage Expected 'EntitiesDescriptor' xml node and 'urn:oasis:names:tc:SAML:2.0:metadata' namespace but got node 'EntityDescriptor' and namespace 'urn:oasis:names:tc:SAML:2.0:metadata'
-     */
     public function test_throws_on_entity_descriptor()
     {
+        $this->expectException(\LightSaml\Error\LightSamlXmlException::class);
+        $this->expectExceptionMessage('Expected \'EntitiesDescriptor\' xml node and \'urn:oasis:names:tc:SAML:2.0:metadata\' namespace but got node \'EntityDescriptor\' and namespace \'urn:oasis:names:tc:SAML:2.0:metadata\'');
+
         EntitiesDescriptor::load(__DIR__.'/../../../../../../resources/sample/EntityDescriptor/idp-ed.xml');
     }
 }

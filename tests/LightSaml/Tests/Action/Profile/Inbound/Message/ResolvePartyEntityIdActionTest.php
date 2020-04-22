@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Inbound\Message;
 
 use LightSaml\Action\Profile\Inbound\Message\ResolvePartyEntityIdAction;
@@ -46,12 +55,11 @@ class ResolvePartyEntityIdActionTest extends BaseTestCase
         $action->execute($context);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage EntityID is not set in the party context
-     */
     public function test_throws_if_entity_id_is_not_set_in_context()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('EntityID is not set in the party context');
+
         $action = new ResolvePartyEntityIdAction(
             $logger = $this->getLoggerMock(),
             $spEntityStore = $this->getEntityDescriptorStoreMock(),
@@ -193,7 +201,7 @@ class ResolvePartyEntityIdActionTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Store\TrustOptions\TrustOptionsStoreInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Store\TrustOptions\TrustOptionsStoreInterface
      */
     private function getTrustOptionsStore()
     {

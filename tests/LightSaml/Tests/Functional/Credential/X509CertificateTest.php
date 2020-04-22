@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Functional\Credential;
 
 use LightSaml\Credential\X509Certificate;
@@ -51,12 +60,12 @@ class X509CertificateTest extends BaseTestCase
         $certificate = new X509Certificate();
         $certificate->loadFromFile(__DIR__.'/../../../../../resources/sample/Certificate/saml.crt');
         $this->assertEquals(
-            array(
+            [
                 'C' => 'RS',
                 'ST' => 'Serbia',
                 'O' => 'BOS',
                 'CN' => 'mt.evo.team',
-            ),
+            ],
             $certificate->getSubject()
         );
     }
@@ -66,12 +75,12 @@ class X509CertificateTest extends BaseTestCase
         $certificate = new X509Certificate();
         $certificate->loadFromFile(__DIR__.'/../../../../../resources/sample/Certificate/saml.crt');
         $this->assertEquals(
-            array(
+            [
                 'C' => 'RS',
                 'ST' => 'Serbia',
                 'O' => 'BOS',
                 'CN' => 'mt.evo.team',
-            ),
+            ],
             $certificate->getIssuer()
         );
     }

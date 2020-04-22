@@ -21,7 +21,7 @@ class CompositeTrustOptionsStore implements TrustOptionsStoreInterface
     /**
      * @param TrustOptionsStoreInterface[] $stores
      */
-    public function __construct(array $stores = array())
+    public function __construct(array $stores = [])
     {
         foreach ($stores as $store) {
             $this->add($store);
@@ -29,8 +29,6 @@ class CompositeTrustOptionsStore implements TrustOptionsStoreInterface
     }
 
     /**
-     * @param TrustOptionsStoreInterface $store
-     *
      * @return CompositeTrustOptionsStore This instance
      */
     public function add(TrustOptionsStoreInterface $store)

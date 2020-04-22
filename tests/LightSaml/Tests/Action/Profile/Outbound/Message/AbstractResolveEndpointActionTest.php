@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Outbound\Message;
 
 use LightSaml\Action\Profile\Outbound\Message\ResolveEndpointBaseAction;
@@ -20,19 +29,16 @@ use Psr\Log\LoggerInterface;
 
 abstract class AbstractResolveEndpointActionTest extends BaseTestCase
 {
-    /** @var ResolveEndpointBaseAction|\PHPUnit_Framework_MockObject_MockObject */
+    /** @var ResolveEndpointBaseAction|\PHPUnit\Framework\MockObject\MockObject */
     protected $action;
 
-    /** @var \Psr\Log\LoggerInterface|\PHPUnit_Framework_MockObject_MockObject */
+    /** @var \Psr\Log\LoggerInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected $logger;
 
-    /** @var  EndpointResolverInterface|\PHPUnit_Framework_MockObject_MockObject */
+    /** @var EndpointResolverInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected $endpointResolver;
 
-    /**
-     *
-     */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->logger = $this->getLoggerMock();
         $this->endpointResolver = $this->getMockBuilder(EndpointResolverInterface::class)->getMock();
@@ -40,9 +46,6 @@ abstract class AbstractResolveEndpointActionTest extends BaseTestCase
     }
 
     /**
-     * @param LoggerInterface           $logger
-     * @param EndpointResolverInterface $endpointResolver
-     *
      * @return ResolveEndpointBaseAction
      */
     abstract protected function createAction(LoggerInterface $logger, EndpointResolverInterface $endpointResolver);
@@ -97,10 +100,6 @@ abstract class AbstractResolveEndpointActionTest extends BaseTestCase
         return $context;
     }
 
-    /**
-     * @param CriteriaSet $criteriaSet
-     * @param array       $bindings
-     */
     protected function criteriaSetShouldHaveBindingCriteria(CriteriaSet $criteriaSet, array $bindings)
     {
         if (empty($bindings)) {
@@ -114,8 +113,7 @@ abstract class AbstractResolveEndpointActionTest extends BaseTestCase
     }
 
     /**
-     * @param CriteriaSet $criteriaSet
-     * @param string      $value
+     * @param string $value
      */
     protected function criteriaSetShouldHaveDescriptorTypeCriteria(CriteriaSet $criteriaSet, $value)
     {
@@ -130,8 +128,7 @@ abstract class AbstractResolveEndpointActionTest extends BaseTestCase
     }
 
     /**
-     * @param CriteriaSet $criteriaSet
-     * @param string      $value
+     * @param string $value
      */
     protected function criteriaSetShouldHaveServiceTypeCriteria(CriteriaSet $criteriaSet, $value)
     {
@@ -146,8 +143,7 @@ abstract class AbstractResolveEndpointActionTest extends BaseTestCase
     }
 
     /**
-     * @param CriteriaSet $criteriaSet
-     * @param string      $value
+     * @param string $value
      */
     protected function criteriaSetShouldHaveIndexCriteria(CriteriaSet $criteriaSet, $value)
     {
@@ -162,8 +158,7 @@ abstract class AbstractResolveEndpointActionTest extends BaseTestCase
     }
 
     /**
-     * @param CriteriaSet $criteriaSet
-     * @param string      $value
+     * @param string $value
      */
     protected function criteriaSetShouldHaveLocationCriteria(CriteriaSet $criteriaSet, $value)
     {

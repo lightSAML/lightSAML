@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Inbound\Message;
 
 use LightSaml\Action\Profile\Inbound\Message\ReceiveMessageAction;
@@ -17,12 +26,11 @@ class ReceiveMessageActionTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlBindingException
-     * @expectedExceptionMessage Unable to resolve binding type, invalid or unsupported http request
-     */
     public function test_throws_on_invalid_binding()
     {
+        $this->expectException(\LightSaml\Error\LightSamlBindingException::class);
+        $this->expectExceptionMessage('Unable to resolve binding type, invalid or unsupported http request');
+
         $action = new ReceiveMessageAction($logger = $this->getLoggerMock(), $bindingFactory = $this->getBindingFactoryMock());
 
         $context = new ProfileContext(Profiles::SSO_SP_SEND_AUTHN_REQUEST, ProfileContext::ROLE_SP);

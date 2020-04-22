@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Builder\Action;
 
 use LightSaml\Action\ActionInterface;
@@ -11,22 +20,20 @@ use LightSaml\Tests\Mock\Action\FooAction;
 
 class CompositeActionBuilderTest extends BaseTestCase
 {
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test__throws_on_priority_true()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $compositeBuilder = new CompositeActionBuilder();
         $compositeBuilder->add(new FooAction(), true);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test__throws_on_priority_string()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $compositeBuilder = new CompositeActionBuilder();
-        $compositeBuilder->add(new FooAction(), "asc");
+        $compositeBuilder->add(new FooAction(), 'asc');
     }
 
     public function test__ranked_as_added_with_out_priority_parameter()
@@ -71,7 +78,7 @@ class CompositeActionBuilderTest extends BaseTestCase
      * @param int $expectedOrder
      * @param int $order
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|ActionInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|ActionInterface
      */
     private function getActionMock($expectedOrder, &$order)
     {
@@ -80,7 +87,7 @@ class CompositeActionBuilderTest extends BaseTestCase
             ->method('execute')
             ->willReturnCallback(function () use ($expectedOrder, &$order) {
                 $this->assertEquals($expectedOrder, $order);
-                $order++;
+                ++$order;
             })
         ;
 

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Inbound\Message;
 
 use LightSaml\Action\Profile\Inbound\Message\DestinationValidatorResponseAction;
@@ -10,7 +19,6 @@ use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Profile\Profiles;
 use LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria;
-use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
 use LightSaml\Tests\BaseTestCase;
 
 class DestinationValidatorResponseActionTest extends BaseTestCase

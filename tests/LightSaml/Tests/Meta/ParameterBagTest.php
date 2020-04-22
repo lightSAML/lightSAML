@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Meta;
 
 use LightSaml\Meta\ParameterBag;
@@ -15,44 +24,44 @@ class ParameterBagTest extends BaseTestCase
 
     public function test_all()
     {
-        $bag = new ParameterBag(array('foo' => 'bar'));
-        $this->assertEquals(array('foo' => 'bar'), $bag->all(), '->all() gets all the input');
+        $bag = new ParameterBag(['foo' => 'bar']);
+        $this->assertEquals(['foo' => 'bar'], $bag->all(), '->all() gets all the input');
     }
 
     public function test_keys()
     {
-        $bag = new ParameterBag(array('foo' => 'bar'));
-        $this->assertEquals(array('foo'), $bag->keys());
+        $bag = new ParameterBag(['foo' => 'bar']);
+        $this->assertEquals(['foo'], $bag->keys());
     }
 
     public function test_add()
     {
-        $bag = new ParameterBag(array('foo' => 'bar'));
-        $bag->add(array('bar' => 'bas'));
-        $this->assertEquals(array('foo' => 'bar', 'bar' => 'bas'), $bag->all());
+        $bag = new ParameterBag(['foo' => 'bar']);
+        $bag->add(['bar' => 'bas']);
+        $this->assertEquals(['foo' => 'bar', 'bar' => 'bas'], $bag->all());
     }
 
     public function test_remove()
     {
-        $bag = new ParameterBag(array('foo' => 'bar'));
-        $bag->add(array('bar' => 'bas'));
-        $this->assertEquals(array('foo' => 'bar', 'bar' => 'bas'), $bag->all());
+        $bag = new ParameterBag(['foo' => 'bar']);
+        $bag->add(['bar' => 'bas']);
+        $this->assertEquals(['foo' => 'bar', 'bar' => 'bas'], $bag->all());
         $bag->remove('bar');
-        $this->assertEquals(array('foo' => 'bar'), $bag->all());
+        $this->assertEquals(['foo' => 'bar'], $bag->all());
     }
 
     public function test_replace()
     {
-        $bag = new ParameterBag(array('foo' => 'bar'));
+        $bag = new ParameterBag(['foo' => 'bar']);
 
-        $bag->replace(array('FOO' => 'BAR'));
-        $this->assertEquals(array('FOO' => 'BAR'), $bag->all(), '->replace() replaces the input with the argument');
+        $bag->replace(['FOO' => 'BAR']);
+        $this->assertEquals(['FOO' => 'BAR'], $bag->all(), '->replace() replaces the input with the argument');
         $this->assertFalse($bag->has('foo'), '->replace() overrides previously set the input');
     }
 
     public function test_get()
     {
-        $bag = new ParameterBag(array('foo' => 'bar', 'null' => null));
+        $bag = new ParameterBag(['foo' => 'bar', 'null' => null]);
 
         $this->assertEquals('bar', $bag->get('foo'), '->get() gets the value of a parameter');
         $this->assertEquals('default', $bag->get('unknown', 'default'), '->get() returns second argument as default if a parameter is not defined');
@@ -61,14 +70,14 @@ class ParameterBagTest extends BaseTestCase
 
     public function test_get_does_not_use_deep_by_default()
     {
-        $bag = new ParameterBag(array('foo' => array('bar' => 'moo')));
+        $bag = new ParameterBag(['foo' => ['bar' => 'moo']]);
 
         $this->assertNull($bag->get('foo[bar]'));
     }
 
     public function test_set()
     {
-        $bag = new ParameterBag(array());
+        $bag = new ParameterBag([]);
 
         $bag->set('foo', 'bar');
         $this->assertEquals('bar', $bag->get('foo'), '->set() sets the value of parameter');
@@ -79,7 +88,7 @@ class ParameterBagTest extends BaseTestCase
 
     public function test_has()
     {
-        $bag = new ParameterBag(array('foo' => 'bar'));
+        $bag = new ParameterBag(['foo' => 'bar']);
 
         $this->assertTrue($bag->has('foo'), '->has() returns true if a parameter is defined');
         $this->assertFalse($bag->has('unknown'), '->has() return false if a parameter is not defined');
@@ -87,7 +96,7 @@ class ParameterBagTest extends BaseTestCase
 
     public function test_get_iterator()
     {
-        $parameters = array('foo' => 'bar', 'hello' => 'world');
+        $parameters = ['foo' => 'bar', 'hello' => 'world'];
         $bag = new ParameterBag($parameters);
 
         $i = 0;
@@ -101,7 +110,7 @@ class ParameterBagTest extends BaseTestCase
 
     public function test_count()
     {
-        $parameters = array('foo' => 'bar', 'hello' => 'world');
+        $parameters = ['foo' => 'bar', 'hello' => 'world'];
         $bag = new ParameterBag($parameters);
 
         $this->assertEquals(count($parameters), count($bag));

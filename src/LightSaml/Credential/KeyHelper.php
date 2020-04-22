@@ -26,7 +26,7 @@ class KeyHelper
      */
     public static function createPrivateKey($key, $passphrase, $isFile = false, $type = XMLSecurityKey::RSA_SHA1)
     {
-        $result = new XMLSecurityKey($type, array('type' => 'private'));
+        $result = new XMLSecurityKey($type, ['type' => 'private']);
         $result->passphrase = $passphrase;
         $result->loadKey($key, $isFile, false);
 
@@ -34,8 +34,6 @@ class KeyHelper
     }
 
     /**
-     * @param X509Certificate $certificate
-     *
      * @return XMLSecurityKey
      */
     public static function createPublicKey(X509Certificate $certificate)
@@ -43,15 +41,14 @@ class KeyHelper
         if (null == $certificate->getSignatureAlgorithm()) {
             throw new LightSamlSecurityException('Unrecognized certificate signature algorithm');
         }
-        $key = new XMLSecurityKey($certificate->getSignatureAlgorithm(), array('type' => 'public'));
+        $key = new XMLSecurityKey($certificate->getSignatureAlgorithm(), ['type' => 'public']);
         $key->loadKey($certificate->toPem(), false, true);
 
         return $key;
     }
 
     /**
-     * @param XMLSecurityKey $key
-     * @param string         $algorithm
+     * @param string $algorithm
      *
      * @throws \LightSaml\Error\LightSamlSecurityException
      * @throws \InvalidArgumentException
@@ -77,7 +74,7 @@ class KeyHelper
             throw new LightSamlSecurityException('Missing key in public key details.');
         }
 
-        $newKey = new XMLSecurityKey($algorithm, array('type' => 'public'));
+        $newKey = new XMLSecurityKey($algorithm, ['type' => 'public']);
         $newKey->loadKey($keyInfo['key']);
 
         return $newKey;

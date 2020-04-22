@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Outbound\Message;
 
 use LightSaml\Action\Profile\Outbound\Message\ResolveEndpointBaseAction;
@@ -18,9 +27,6 @@ use Psr\Log\LoggerInterface;
 class ResolveEndpointSloActionTest extends AbstractResolveEndpointActionTest
 {
     /**
-     * @param LoggerInterface           $logger
-     * @param EndpointResolverInterface $endpointResolver
-     *
      * @return ResolveEndpointBaseAction
      */
     protected function createAction(LoggerInterface $logger, EndpointResolverInterface $endpointResolver)
@@ -79,12 +85,11 @@ class ResolveEndpointSloActionTest extends AbstractResolveEndpointActionTest
         $this->action->execute($context);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Unable to resolve logout target descriptor type
-     */
     public function test_throws_context_exception_own_entity_id_does_not_match_sso_idp_nor_sp()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Unable to resolve logout target descriptor type');
+
         $message = new AuthnRequest();
 
         $context = $this->createContext(ProfileContext::ROLE_IDP, $message);

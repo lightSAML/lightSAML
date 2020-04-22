@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Outbound\Message;
 
 use LightSaml\Action\Profile\Outbound\Message\SignMessageAction;
@@ -52,11 +61,12 @@ class SignMessageActionTest extends BaseTestCase
 
     /**
      * @dataProvider does_not_support_message_provider
-     * @expectedException \LogicException
-     * @expectedExceptionMessage Unexpected message type
      */
     public function test_does_not_support_message(SamlMessage $message)
     {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('Unexpected message type');
+
         $action = new SignMessageAction($this->getLoggerMock(), $this->getSignatureResolverMock());
 
         $context = $this->getProfileContext();
@@ -122,7 +132,7 @@ class SignMessageActionTest extends BaseTestCase
         $signature = new SignatureWriter($certificateMock = $this->getX509CertificateMock());
         $certificateMock->expects($this->any())
             ->method('getInfo')
-            ->willReturn($expectedInfo = ['a'=>1]);
+            ->willReturn($expectedInfo = ['a' => 1]);
         $certificateMock->expects($this->any())
             ->method('getFingerprint')
             ->willReturn($expectedFingerprint = '123123123');

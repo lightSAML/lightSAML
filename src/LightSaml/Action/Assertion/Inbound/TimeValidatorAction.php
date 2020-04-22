@@ -29,10 +29,7 @@ class TimeValidatorAction extends AbstractAssertionAction
     protected $allowedSecondsSkew;
 
     /**
-     * @param LoggerInterface                 $logger
-     * @param AssertionTimeValidatorInterface $assertionTimeValidator
-     * @param TimeProviderInterface           $timeProvider
-     * @param int                             $allowedSecondsSkew
+     * @param int $allowedSecondsSkew
      */
     public function __construct(
         LoggerInterface $logger,
@@ -48,8 +45,6 @@ class TimeValidatorAction extends AbstractAssertionAction
     }
 
     /**
-     * @param AssertionContext $context
-     *
      * @return void
      */
     protected function doExecute(AssertionContext $context)

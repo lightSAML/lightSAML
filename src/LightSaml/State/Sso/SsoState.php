@@ -22,7 +22,7 @@ class SsoState implements \Serializable
     private $parameters;
 
     /** @var SsoSessionState[] */
-    private $ssoSessions = array();
+    private $ssoSessions = [];
 
     public function __construct()
     {
@@ -123,7 +123,7 @@ class SsoState implements \Serializable
      */
     public function setSsoSessions(array $ssoSessions)
     {
-        $this->ssoSessions = array();
+        $this->ssoSessions = [];
         foreach ($ssoSessions as $ssoSession) {
             $this->addSsoSession($ssoSession);
         }
@@ -132,8 +132,6 @@ class SsoState implements \Serializable
     }
 
     /**
-     * @param SsoSessionState $ssoSessionState
-     *
      * @return SsoState
      */
     public function addSsoSession(SsoSessionState $ssoSessionState)
@@ -154,7 +152,7 @@ class SsoState implements \Serializable
      */
     public function filter($idpEntityId, $spEntityId, $nameId, $nameIdFormat, $sessionIndex)
     {
-        $result = array();
+        $result = [];
 
         foreach ($this->ssoSessions as $ssoSession) {
             if ((!$idpEntityId || $ssoSession->getIdpEntityId() === $idpEntityId) &&
@@ -187,12 +185,12 @@ class SsoState implements \Serializable
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             $this->localSessionId,
             $this->ssoSessions,
             [],
             $this->parameters,
-        ));
+        ]);
     }
 
     /**

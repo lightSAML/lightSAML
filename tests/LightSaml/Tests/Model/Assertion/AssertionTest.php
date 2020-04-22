@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Model\Assertion;
 
 use LightSaml\Model\Assertion\Assertion;
@@ -39,7 +48,7 @@ class AssertionTest extends BaseTestCase
             ['1111', false, (new Assertion())->addItem((new AuthnStatement())->setSessionIndex('222'))],
             ['1111', true, (new Assertion())
                 ->addItem((new AuthnStatement())->setSessionIndex('222'))
-                ->addItem((new AuthnStatement())->setSessionIndex('1111'))
+                ->addItem((new AuthnStatement())->setSessionIndex('1111')),
             ],
         ];
     }
@@ -60,7 +69,7 @@ class AssertionTest extends BaseTestCase
             [true, (new Assertion())->addItem((new AuthnStatement())->setSessionIndex('123'))],
             [true, (new Assertion())
                 ->addItem((new AuthnStatement())->setSessionIndex('111'))
-                ->addItem((new AuthnStatement())->setSessionIndex('222'))
+                ->addItem((new AuthnStatement())->setSessionIndex('222')),
             ],
         ];
     }

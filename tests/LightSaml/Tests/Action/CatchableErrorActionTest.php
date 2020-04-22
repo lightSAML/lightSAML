@@ -1,13 +1,20 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action;
 
 use LightSaml\Action\ActionInterface;
 use LightSaml\Action\CatchableErrorAction;
 use LightSaml\Context\AbstractContext;
-use LightSaml\Context\ContextInterface;
 use LightSaml\Context\Profile\ExceptionContext;
-use LightSaml\Context\Profile\ProfileContext;
 use LightSaml\Context\Profile\ProfileContexts;
 use LightSaml\Tests\BaseTestCase;
 
@@ -21,7 +28,7 @@ class CatchableErrorActionTest extends BaseTestCase
 
     public function test_execute_calls_first_action()
     {
-        $mainAction =  new CatchableErrorAction(
+        $mainAction = new CatchableErrorAction(
             $firstAction = $this->getActionMock(),
             $secondAction = $this->getActionMock()
         );
@@ -37,7 +44,7 @@ class CatchableErrorActionTest extends BaseTestCase
 
     public function test_execute_calls_second_action_if_first_throws_exception_and_add_exception_to_context()
     {
-        $mainAction =  new CatchableErrorAction(
+        $mainAction = new CatchableErrorAction(
             $firstAction = $this->getActionMock(),
             $secondAction = $this->getActionMock()
         );
@@ -61,7 +68,7 @@ class CatchableErrorActionTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Action\ActionInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Action\ActionInterface
      */
     private function getActionMock()
     {
@@ -69,7 +76,7 @@ class CatchableErrorActionTest extends BaseTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Context\ContextInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|\LightSaml\Context\ContextInterface
      */
     private function getContextMock()
     {

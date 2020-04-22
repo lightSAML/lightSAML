@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Action\Profile\Inbound\Message;
 
 use LightSaml\Action\Profile\Inbound\Message\AbstractDestinationValidatorAction;
@@ -12,7 +21,6 @@ use LightSaml\Model\Protocol\AuthnRequest;
 use LightSaml\Profile\Profiles;
 use LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria;
 use LightSaml\Resolver\Endpoint\Criteria\LocationCriteria;
-use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
 use LightSaml\Tests\BaseTestCase;
 
 class AbstractDestinationValidatorActionTest extends BaseTestCase
@@ -107,12 +115,11 @@ class AbstractDestinationValidatorActionTest extends BaseTestCase
         $action->execute($context);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Invalid inbound message destination "http://localhost/foo"
-     */
     public function test_throws_exception_when_destination_does_not_match()
     {
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
+        $this->expectExceptionMessage('Invalid inbound message destination "http://localhost/foo"');
+
         $loggerMock = $this->getLoggerMock();
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */
@@ -145,5 +152,4 @@ class AbstractDestinationValidatorActionTest extends BaseTestCase
 
         return $context;
     }
-
 }

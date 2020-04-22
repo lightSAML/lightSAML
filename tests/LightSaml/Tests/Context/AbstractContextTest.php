@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Context;
 
 use LightSaml\Context\AbstractContext;
@@ -71,12 +80,11 @@ class AbstractContextTest extends BaseTestCase
         $this->assertNull($context->getSubContext('other'));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Expected object or ContextInterface
-     */
     public function test_add_sub_context_throws_if_not_a_context_value()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Expected object or ContextInterface');
+
         $context = $this->getContextMock();
         $context->addSubContext($name = 'some', '123');
         $context->getSubContext($name);
@@ -222,7 +230,7 @@ class AbstractContextTest extends BaseTestCase
         $profileContext->addSubContext('assertion_01', $assertionSubContext01 = new AssertionContext());
         $assertionSubContext01->addSubContext('rs', new RequestStateContext());
 
-        $actual = (string)$profileContext;
+        $actual = (string) $profileContext;
 
         $expected = <<<EOT
 {
@@ -242,7 +250,7 @@ EOT;
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|AbstractContext
+     * @return \PHPUnit\Framework\MockObject\MockObject|AbstractContext
      */
     private function getContextMock()
     {

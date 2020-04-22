@@ -1,8 +1,16 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Store\Request;
 
-use LightSaml\Meta\ParameterBag;
 use LightSaml\State\Request\RequestState;
 use LightSaml\Store\Request\RequestStateSessionStore;
 use LightSaml\Tests\BaseTestCase;

@@ -13,7 +13,7 @@ namespace LightSaml\Store\Request;
 
 class RequestStateArrayStore extends AbstractRequestStateArrayStore
 {
-    private $arrayStore = array();
+    private $arrayStore = [];
 
     /**
      * @return array
@@ -24,8 +24,6 @@ class RequestStateArrayStore extends AbstractRequestStateArrayStore
     }
 
     /**
-     * @param array $arr
-     *
      * @return AbstractRequestStateArrayStore
      */
     protected function setArray(array $arr)

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Functional\Store\Credential\Factory;
 
 use LightSaml\Credential\KeyHelper;
@@ -46,7 +55,7 @@ class CredentialFactoryTest extends BaseTestCase
         $credentials = $store->getByEntityId('https://sts.windows.net/554fadfe-f04f-4975-90cb-ddc8b147aaa2/');
         $this->assertCount(1, $credentials);
         $this->assertEquals('https://sts.windows.net/554fadfe-f04f-4975-90cb-ddc8b147aaa2/', $credentials[0]->getEntityId());
-        $this->assertEquals(['CN'=>'accounts.accesscontrol.windows.net'], $credentials[0]->getCertificate()->getSubject());
+        $this->assertEquals(['CN' => 'accounts.accesscontrol.windows.net'], $credentials[0]->getCertificate()->getSubject());
         $this->assertEquals(UsageType::SIGNING, $credentials[0]->getUsageType());
 
         $credentials = $store->getByEntityId('https://mt.evo.team/simplesaml/module.php/saml/sp/metadata.php/default-sp');

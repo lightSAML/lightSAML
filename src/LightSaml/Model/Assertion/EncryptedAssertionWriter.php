@@ -17,9 +17,6 @@ use LightSaml\SamlConstants;
 class EncryptedAssertionWriter extends EncryptedElementWriter
 {
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return \DOMElement
      */
     protected function createRootElement(\DOMNode $parent, SerializationContext $context)

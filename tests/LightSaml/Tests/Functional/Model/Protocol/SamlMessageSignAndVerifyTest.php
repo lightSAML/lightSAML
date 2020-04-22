@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Functional\Model\Protocol;
 
 use LightSaml\Credential\KeyHelper;
@@ -72,9 +81,6 @@ class SamlMessageSignAndVerifyTest extends BaseTestCase
         $this->verify($logoutResponse);
     }
 
-    /**
-     * @param SamlMessage $message
-     */
     private function verify(SamlMessage $message)
     {
         $message
@@ -87,8 +93,6 @@ class SamlMessageSignAndVerifyTest extends BaseTestCase
     }
 
     /**
-     * @param SamlMessage $message
-     *
      * @return string
      */
     private function signAndSerialize(SamlMessage $message)

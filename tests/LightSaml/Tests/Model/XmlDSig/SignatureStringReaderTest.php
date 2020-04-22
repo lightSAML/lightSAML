@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Model\XmlDSig;
 
 use LightSaml\Credential\KeyHelper;
@@ -32,7 +41,7 @@ class SignatureStringReaderTest extends BaseTestCase
 
     public function test_validate_returns_false_when_no_signature_set()
     {
-        $publicKey = KeyHelper::createPublicKey(X509Certificate::fromFile(__DIR__ . '/../../../../../resources/sample/Certificate/saml.crt'));
+        $publicKey = KeyHelper::createPublicKey(X509Certificate::fromFile(__DIR__.'/../../../../../resources/sample/Certificate/saml.crt'));
         $reader = new SignatureStringReader();
         $result = $reader->validate($publicKey);
         $this->assertFalse($result);
@@ -40,8 +49,8 @@ class SignatureStringReaderTest extends BaseTestCase
 
     public function test_validate_correct_signature()
     {
-        $publicKey = KeyHelper::createPublicKey(X509Certificate::fromFile(__DIR__ . '/../../../../../resources/sample/Certificate/saml.crt'));
-        $privateKey = KeyHelper::createPrivateKey(__DIR__ . '/../../../../../resources/sample/Certificate/saml.pem', '', true);
+        $publicKey = KeyHelper::createPublicKey(X509Certificate::fromFile(__DIR__.'/../../../../../resources/sample/Certificate/saml.crt'));
+        $privateKey = KeyHelper::createPrivateKey(__DIR__.'/../../../../../resources/sample/Certificate/saml.pem', '', true);
         $data = 'Some message data';
         $signature = base64_encode($privateKey->signData($data));
 
@@ -50,23 +59,21 @@ class SignatureStringReaderTest extends BaseTestCase
         $this->assertTrue($result);
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage SignatureStringReader can not be serialized
-     */
     public function test_serialize_throws_exception()
     {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('SignatureStringReader can not be serialized');
+
         $context = new SerializationContext();
         $reader = new SignatureStringReader();
         $reader->serialize($context->getDocument(), $context);
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage SignatureStringReader can not be deserialized
-     */
     public function test_deserialize_throws_exception()
     {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('SignatureStringReader can not be deserialized');
+
         $context = new DeserializationContext();
         $reader = new SignatureStringReader();
         $reader->deserialize($context->getDocument(), $context);

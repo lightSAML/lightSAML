@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the LightSAML-Core package.
+ *
+ * (c) Milos Tomic <tmilos@lightsaml.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace LightSaml\Tests\Model\Metadata;
 
 use LightSaml\Model\XmlDSig\SignatureWriter;
@@ -15,11 +24,10 @@ class RoleDescriptorTest extends BaseTestCase
         $this->assertEquals($expectedValue, $rd->getCacheDuration());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test__set_invalid_cache_duration()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $rd = new RoleDescriptorMock();
         $rd->setCacheDuration('123');
     }
