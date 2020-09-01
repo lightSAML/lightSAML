@@ -14,7 +14,6 @@ namespace LightSaml\Action;
 use LightSaml\Context\ContextInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
 
 class DispatchEventAction implements ActionInterface
 {
@@ -30,7 +29,7 @@ class DispatchEventAction implements ActionInterface
      */
     public function __construct(EventDispatcherInterface $eventDispatcher, $event)
     {
-        $this->eventDispatcher = LegacyEventDispatcherProxy::decorate($eventDispatcher);
+        $this->eventDispatcher = $eventDispatcher;
         $this->event = $event;
     }
 
