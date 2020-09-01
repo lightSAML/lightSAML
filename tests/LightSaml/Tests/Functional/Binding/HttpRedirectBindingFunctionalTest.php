@@ -32,12 +32,13 @@ class HttpRedirectBindingFunctionalTest extends BaseTestCase
         $eventDispatcherMock = $this->getEventDispatcherMock();
         $eventDispatcherMock->expects($this->once())
             ->method('dispatch')
-            ->willReturnCallback(function ($name, GenericEvent $event) {
+            ->willReturnCallback(function (GenericEvent $event, $name) {
                 $this->assertEquals(Events::BINDING_MESSAGE_SENT, $name);
                 $this->assertNotEmpty($event->getSubject());
                 $doc = new \DOMDocument();
                 $doc->loadXML($event->getSubject());
                 $this->assertEquals('AuthnRequest', $doc->firstChild->localName);
+                return $event;
             });
 
         $biding->setEventDispatcher($eventDispatcherMock);
@@ -122,12 +123,13 @@ class HttpRedirectBindingFunctionalTest extends BaseTestCase
         $eventDispatcherMock = $this->getEventDispatcherMock();
         $eventDispatcherMock->expects($this->once())
             ->method('dispatch')
-            ->willReturnCallback(function ($name, GenericEvent $event) {
+            ->willReturnCallback(function (GenericEvent $event, $name) {
                 $this->assertEquals(Events::BINDING_MESSAGE_RECEIVED, $name);
                 $this->assertNotEmpty($event->getSubject());
                 $doc = new \DOMDocument();
                 $doc->loadXML($event->getSubject());
                 $this->assertEquals('AuthnRequest', $doc->firstChild->localName);
+                return $event;
             });
 
         $binding->setEventDispatcher($eventDispatcherMock);
