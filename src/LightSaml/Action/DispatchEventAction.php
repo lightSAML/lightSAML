@@ -40,6 +40,6 @@ class DispatchEventAction implements ActionInterface
      */
     public function execute(ContextInterface $context)
     {
-        $this->eventDispatcher->dispatch($this->event, new GenericEvent($context));
+        $this->eventDispatcher->dispatch(new GenericEvent($context), $this->event);
     }
 }

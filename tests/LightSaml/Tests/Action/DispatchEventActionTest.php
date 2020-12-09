@@ -33,8 +33,8 @@ class DispatchEventActionTest extends BaseTestCase
         $eventDispatcherMock->expects($this->once())
             ->method('dispatch')
             ->with(
-                $this->equalTo($expectedEventName),
-                $this->isInstanceOf(GenericEvent::class)
+                $this->isInstanceOf(GenericEvent::class),
+                $this->equalTo($expectedEventName)
             );
 
         $action->execute($context);
