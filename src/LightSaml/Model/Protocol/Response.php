@@ -118,6 +118,8 @@ class Response extends StatusResponse
             throw new \InvalidArgumentException('Response does not have assertion specified to be removed');
         }
 
+        $this->assertions = $arr;
+
         return $this;
     }
 
