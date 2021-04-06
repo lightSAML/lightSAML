@@ -32,12 +32,10 @@ class HasAuthnStatementValidatorActionTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Response must have at least one Assertion containing AuthnStatement element
-     */
     public function test_throws_context_exception_if_no_authn_statement()
     {
+        $this->expectExceptionMessage("Response must have at least one Assertion containing AuthnStatement element");
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
         $action = new HasAuthnStatementValidatorAction($this->getLoggerMock());
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);

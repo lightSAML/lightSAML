@@ -25,12 +25,10 @@ class EntityIdFromMessageIssuerActionTest extends BaseTestCase
         $this->assertEquals($expectedEntityId, $context->getPartyEntityContext()->getEntityId());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Inbound messages does not have Issuer
-     */
     public function test_throws_when_inbound_message_has_no_issuer()
     {
+        $this->expectExceptionMessage("Inbound messages does not have Issuer");
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
         $action = new EntityIdFromMessageIssuerAction($this->getLoggerMock());
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);

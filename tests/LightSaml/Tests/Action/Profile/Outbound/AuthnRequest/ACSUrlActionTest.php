@@ -61,12 +61,10 @@ class ACSUrlActionTest extends BaseTestCase
         $this->assertEquals($endpoint->getLocation(), $authnRequest->getAssertionConsumerServiceURL());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Missing ACS Service with HTTP POST binding in own SP SSO Descriptor
-     */
     public function test_throws_context_exception_if_no_own_acs_service()
     {
+        $this->expectExceptionMessage("Missing ACS Service with HTTP POST binding in own SP SSO Descriptor");
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
         $action = new ACSUrlAction(
             $loggerMock = $this->getLoggerMock(),
             $endpointResolverMock = $this->getEndpointResolverMock()

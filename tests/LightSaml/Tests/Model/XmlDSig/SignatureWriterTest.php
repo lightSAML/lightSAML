@@ -42,12 +42,10 @@ class SignatureWriterTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \LogicException
-     * @expectedExceptionMessage SignatureWriter can not be deserialized
-     */
     public function test_throws_logic_exception_on_deserialize()
     {
+        $this->expectExceptionMessage("SignatureWriter can not be deserialized");
+        $this->expectException(\LogicException::class);
         $deserializationContext = new DeserializationContext();
         $deserializationContext->getDocument()->loadXML('<a></a>');
         $writer = new SignatureWriter();

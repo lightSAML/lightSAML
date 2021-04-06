@@ -79,12 +79,10 @@ class ResolveEndpointSloActionTest extends AbstractResolveEndpointActionTest
         $this->action->execute($context);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Unable to resolve logout target descriptor type
-     */
     public function test_throws_context_exception_own_entity_id_does_not_match_sso_idp_nor_sp()
     {
+        $this->expectExceptionMessage("Unable to resolve logout target descriptor type");
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
         $message = new AuthnRequest();
 
         $context = $this->createContext(ProfileContext::ROLE_IDP, $message);

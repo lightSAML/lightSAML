@@ -107,12 +107,10 @@ class AbstractDestinationValidatorActionTest extends BaseTestCase
         $action->execute($context);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Invalid inbound message destination "http://localhost/foo"
-     */
     public function test_throws_exception_when_destination_does_not_match()
     {
+        $this->expectExceptionMessage("Invalid inbound message destination \"http://localhost/foo\"");
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
         $loggerMock = $this->getLoggerMock();
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */

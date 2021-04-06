@@ -220,12 +220,10 @@ class EntitiesDescriptorFunctionalTest extends BaseTestCase
         $this->assertCount(2935, $entitiesDescriptor->getAllEntityDescriptors());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlXmlException
-     * @expectedExceptionMessage Expected 'EntitiesDescriptor' xml node and 'urn:oasis:names:tc:SAML:2.0:metadata' namespace but got node 'EntityDescriptor' and namespace 'urn:oasis:names:tc:SAML:2.0:metadata'
-     */
     public function test_throws_on_entity_descriptor()
     {
+        $this->expectExceptionMessage("Expected 'EntitiesDescriptor' xml node and 'urn:oasis:names:tc:SAML:2.0:metadata' namespace but got node 'EntityDescriptor' and namespace 'urn:oasis:names:tc:SAML:2.0:metadata'");
+        $this->expectException(\LightSaml\Error\LightSamlXmlException::class);
         EntitiesDescriptor::load(__DIR__.'/../../../../../../resources/sample/EntityDescriptor/idp-ed.xml');
     }
 }
