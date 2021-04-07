@@ -12,9 +12,9 @@
 namespace LightSaml\Build\Container;
 
 use LightSaml\Binding\BindingFactoryInterface;
+use LightSaml\Logout\Resolver\Logout\LogoutSessionResolverInterface;
 use LightSaml\Resolver\Credential\CredentialResolverInterface;
 use LightSaml\Resolver\Endpoint\EndpointResolverInterface;
-use LightSaml\Logout\Resolver\Logout\LogoutSessionResolverInterface;
 use LightSaml\Resolver\Session\SessionProcessorInterface;
 use LightSaml\Resolver\Signature\SignatureResolverInterface;
 use LightSaml\Validator\Model\Assertion\AssertionTimeValidator;

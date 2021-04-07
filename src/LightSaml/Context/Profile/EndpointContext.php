@@ -27,8 +27,6 @@ class EndpointContext extends AbstractProfileContext
     }
 
     /**
-     * @param Endpoint $endpoint
-     *
      * @return EndpointContext
      */
     public function setEndpoint(Endpoint $endpoint)

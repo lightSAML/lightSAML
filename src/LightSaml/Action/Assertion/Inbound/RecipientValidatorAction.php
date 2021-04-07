@@ -30,10 +30,6 @@ class RecipientValidatorAction extends AbstractAssertionAction
     /** @var EndpointResolverInterface */
     private $endpointResolver;
 
-    /**
-     * @param LoggerInterface           $logger
-     * @param EndpointResolverInterface $endpointResolver
-     */
     public function __construct(LoggerInterface $logger, EndpointResolverInterface $endpointResolver)
     {
         parent::__construct($logger);
@@ -42,8 +38,6 @@ class RecipientValidatorAction extends AbstractAssertionAction
     }
 
     /**
-     * @param AssertionContext $context
-     *
      * @return void
      */
     protected function doExecute(AssertionContext $context)
@@ -53,9 +47,6 @@ class RecipientValidatorAction extends AbstractAssertionAction
         }
     }
 
-    /**
-     * @param AssertionContext $context
-     */
     protected function validateBearerAssertion(AssertionContext $context)
     {
         foreach ($context->getAssertion()->getSubject()->getBearerConfirmations() as $subjectConfirmation) {
@@ -63,10 +54,6 @@ class RecipientValidatorAction extends AbstractAssertionAction
         }
     }
 
-    /**
-     * @param AssertionContext    $context
-     * @param SubjectConfirmation $subjectConfirmation
-     */
     protected function validateSubjectConfirmation(AssertionContext $context, SubjectConfirmation $subjectConfirmation)
     {
         $recipient = $subjectConfirmation->getSubjectConfirmationData()->getRecipient();

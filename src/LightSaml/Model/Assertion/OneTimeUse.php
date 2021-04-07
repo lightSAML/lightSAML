@@ -18,9 +18,6 @@ use LightSaml\SamlConstants;
 class OneTimeUse extends AbstractCondition
 {
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
@@ -28,10 +25,6 @@ class OneTimeUse extends AbstractCondition
         $this->createElement('OneTimeUse', SamlConstants::NS_ASSERTION, $parent, $context);
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'OneTimeUse', SamlConstants::NS_ASSERTION);

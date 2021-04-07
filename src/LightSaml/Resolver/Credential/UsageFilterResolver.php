@@ -12,24 +12,23 @@
 namespace LightSaml\Resolver\Credential;
 
 use LightSaml\Credential\CredentialInterface;
-use LightSaml\Criteria\CriteriaSet;
 use LightSaml\Credential\Criteria\UsageCriteria;
+use LightSaml\Criteria\CriteriaSet;
 
 class UsageFilterResolver extends AbstractQueryableResolver
 {
     /**
-     * @param CriteriaSet           $criteriaSet
      * @param CredentialInterface[] $arrCredentials
      *
      * @return CredentialInterface[]
      */
-    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = array())
+    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = [])
     {
         if (false == $criteriaSet->has(UsageCriteria::class)) {
             return $arrCredentials;
         }
 
-        $result = array();
+        $result = [];
         foreach ($criteriaSet->get(UsageCriteria::class) as $criteria) {
             /* @var UsageCriteria $criteria */
             foreach ($arrCredentials as $credential) {

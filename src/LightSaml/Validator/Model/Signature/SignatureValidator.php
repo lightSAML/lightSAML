@@ -12,33 +12,29 @@
 namespace LightSaml\Validator\Model\Signature;
 
 use LightSaml\Credential\CredentialInterface;
+use LightSaml\Credential\Criteria\EntityIdCriteria;
+use LightSaml\Credential\Criteria\MetadataCriteria;
 use LightSaml\Credential\Criteria\PublicKeyThumbprintCriteria;
+use LightSaml\Credential\Criteria\UsageCriteria;
+use LightSaml\Credential\UsageType;
 use LightSaml\Error\LightSamlSecurityException;
 use LightSaml\Model\XmlDSig\AbstractSignatureReader;
 use LightSaml\Resolver\Credential\CredentialResolverInterface;
 use LightSaml\SamlConstants;
-use LightSaml\Credential\UsageType;
-use LightSaml\Credential\Criteria\EntityIdCriteria;
-use LightSaml\Credential\Criteria\MetadataCriteria;
-use LightSaml\Credential\Criteria\UsageCriteria;
 
 class SignatureValidator implements SignatureValidatorInterface
 {
     /** @var CredentialResolverInterface */
     protected $credentialResolver;
 
-    /**
-     * @param CredentialResolverInterface $credentialResolver
-     */
     public function __construct(CredentialResolverInterface $credentialResolver)
     {
         $this->credentialResolver = $credentialResolver;
     }
 
     /**
-     * @param AbstractSignatureReader $signature
-     * @param string                  $issuer
-     * @param string                  $metadataType
+     * @param string $issuer
+     * @param string $metadataType
      *
      * @return CredentialInterface|null
      */

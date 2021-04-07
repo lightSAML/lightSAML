@@ -17,12 +17,11 @@ use LightSaml\Criteria\CriteriaSet;
 class CompositeFilterResolver extends AbstractCompositeResolver
 {
     /**
-     * @param CriteriaSet           $criteriaSet
      * @param CredentialInterface[] $arrCredentials
      *
      * @return CredentialInterface[]
      */
-    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = array())
+    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = [])
     {
         $result = $arrCredentials;
         foreach ($this->resolvers as $resolver) {

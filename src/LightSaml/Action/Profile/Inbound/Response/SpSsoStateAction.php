@@ -29,9 +29,6 @@ class SpSsoStateAction extends AbstractProfileAction
         $this->sessionProcessor = $sessionProcessor;
     }
 
-    /**
-     * @param ProfileContext $context
-     */
     protected function doExecute(ProfileContext $context)
     {
         $response = MessageContextHelper::asResponse($context->getInboundContext());

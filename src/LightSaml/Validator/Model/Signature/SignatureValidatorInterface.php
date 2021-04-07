@@ -17,9 +17,8 @@ use LightSaml\Model\XmlDSig\AbstractSignatureReader;
 interface SignatureValidatorInterface
 {
     /**
-     * @param AbstractSignatureReader $signature
-     * @param string                  $issuer
-     * @param string                  $metadataType
+     * @param string $issuer
+     * @param string $metadataType
      *
      * @return CredentialInterface|null
      */

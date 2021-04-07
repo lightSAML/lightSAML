@@ -11,9 +11,9 @@
 
 namespace LightSaml\Model\Assertion;
 
+use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\AbstractSamlModel;
 use LightSaml\SamlConstants;
 
 class SubjectLocality extends AbstractSamlModel
@@ -69,26 +69,19 @@ class SubjectLocality extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
         $result = $this->createElement('SubjectLocality', SamlConstants::NS_ASSERTION, $parent, $context);
 
-        $this->attributesToXml(array('Address', 'DNSName'), $result);
+        $this->attributesToXml(['Address', 'DNSName'], $result);
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'SubjectLocality', SamlConstants::NS_ASSERTION);
 
-        $this->attributesFromXml($node, array('Address', 'DNSName'));
+        $this->attributesFromXml($node, ['Address', 'DNSName']);
     }
 }

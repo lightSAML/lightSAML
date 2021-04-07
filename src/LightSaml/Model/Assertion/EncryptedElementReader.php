@@ -12,12 +12,12 @@
 namespace LightSaml\Model\Assertion;
 
 use LightSaml\Credential\CredentialInterface;
-use LightSaml\Model\Context\DeserializationContext;
-use LightSaml\Model\Context\SerializationContext;
 use LightSaml\Error\LightSamlSecurityException;
 use LightSaml\Error\LightSamlXmlException;
-use RobRichards\XMLSecLibs\XMLSecurityKey;
+use LightSaml\Model\Context\DeserializationContext;
+use LightSaml\Model\Context\SerializationContext;
 use RobRichards\XMLSecLibs\XMLSecEnc;
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class EncryptedElementReader extends EncryptedElement
 {
@@ -47,9 +47,6 @@ class EncryptedElementReader extends EncryptedElement
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @throws \LogicException
      *
      * @return void
@@ -59,10 +56,6 @@ class EncryptedElementReader extends EncryptedElement
         throw new \LogicException('EncryptedElementReader can not be used for serialization');
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $list = $context->getXpath()->query('xenc:EncryptedData', $node);
@@ -121,8 +114,6 @@ class EncryptedElementReader extends EncryptedElement
     }
 
     /**
-     * @param XMLSecurityKey $inputKey
-     *
      * @throws \LogicException
      * @throws \LightSaml\Error\LightSamlXmlException
      * @throws \LightSaml\Error\LightSamlSecurityException
@@ -195,8 +186,6 @@ class EncryptedElementReader extends EncryptedElement
     }
 
     /**
-     * @param XMLSecurityKey $inputKey
-     *
      * @throws \Exception
      */
     protected function decryptSymmetricKey(XMLSecurityKey $inputKey)
@@ -209,10 +198,7 @@ class EncryptedElementReader extends EncryptedElement
         if (null === $keySize) {
             // To protect against "key oracle" attacks, we need to be able to create a
             // symmetric key, and for that we need to know the key size.
-            throw new LightSamlSecurityException(sprintf(
-                "Unknown key size for encryption algorithm: '%s'",
-                $this->symmetricKey->type
-            ));
+            throw new LightSamlSecurityException(sprintf("Unknown key size for encryption algorithm: '%s'", $this->symmetricKey->type));
         }
 
         /** @var string $key */
@@ -221,12 +207,7 @@ class EncryptedElementReader extends EncryptedElement
             throw new \LogicException('Expected string');
         }
         if (strlen($key) != $keySize) {
-            throw new LightSamlSecurityException(sprintf(
-                "Unexpected key size of '%s' bits for encryption algorithm '%s', expected '%s' bits size",
-                strlen($key) * 8,
-                $this->symmetricKey->type,
-                $keySize
-            ));
+            throw new LightSamlSecurityException(sprintf("Unexpected key size of '%s' bits for encryption algorithm '%s', expected '%s' bits size", strlen($key) * 8, $this->symmetricKey->type, $keySize));
         }
 
         $this->symmetricKey->loadkey($key);
@@ -248,8 +229,6 @@ class EncryptedElementReader extends EncryptedElement
     }
 
     /**
-     * @param XMLSecurityKey $symmetricKey
-     *
      * @throws \LightSaml\Error\LightSamlXmlException
      *
      * @return XMLSecurityKey

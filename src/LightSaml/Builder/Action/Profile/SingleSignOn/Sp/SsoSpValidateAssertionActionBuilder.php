@@ -11,9 +11,9 @@
 
 namespace LightSaml\Builder\Action\Profile\SingleSignOn\Sp;
 
+use LightSaml\Action\Assertion\Inbound\AssertionIssuerFormatValidatorAction;
 use LightSaml\Action\Assertion\Inbound\AssertionSignatureValidatorAction;
 use LightSaml\Action\Assertion\Inbound\AssertionValidatorAction;
-use LightSaml\Action\Assertion\Inbound\AssertionIssuerFormatValidatorAction;
 use LightSaml\Action\Assertion\Inbound\InResponseToValidatorAction;
 use LightSaml\Action\Assertion\Inbound\KnownAssertionIssuerAction;
 use LightSaml\Action\Assertion\Inbound\RecipientValidatorAction;

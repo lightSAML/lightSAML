@@ -27,10 +27,6 @@ class ReceiveMessageAction extends AbstractProfileAction
     /** @var BindingFactoryInterface */
     protected $bindingFactory;
 
-    /**
-     * @param LoggerInterface         $logger
-     * @param BindingFactoryInterface $bindingFactory
-     */
     public function __construct(LoggerInterface $logger, BindingFactoryInterface $bindingFactory)
     {
         parent::__construct($logger);
@@ -39,8 +35,6 @@ class ReceiveMessageAction extends AbstractProfileAction
     }
 
     /**
-     * @param ProfileContext $context
-     *
      * @return void
      */
     protected function doExecute(ProfileContext $context)
@@ -60,9 +54,9 @@ class ReceiveMessageAction extends AbstractProfileAction
 
         $this->logger->info(
             'Received message',
-            LogHelper::getActionContext($context, $this, array(
+            LogHelper::getActionContext($context, $this, [
                 'message' => $context->getInboundContext()->getDeserializationContext()->getDocument()->saveXML(),
-            ))
+            ])
         );
     }
 }

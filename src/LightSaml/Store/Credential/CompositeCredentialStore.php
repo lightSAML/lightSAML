@@ -16,7 +16,7 @@ use LightSaml\Credential\CredentialInterface;
 class CompositeCredentialStore implements CredentialStoreInterface
 {
     /** @var CredentialStoreInterface[] */
-    protected $stores = array();
+    protected $stores = [];
 
     /**
      * @param string $entityId
@@ -25,7 +25,7 @@ class CompositeCredentialStore implements CredentialStoreInterface
      */
     public function getByEntityId($entityId)
     {
-        $result = array();
+        $result = [];
         foreach ($this->stores as $store) {
             $result = array_merge($result, $store->getByEntityId($entityId));
         }
@@ -34,8 +34,6 @@ class CompositeCredentialStore implements CredentialStoreInterface
     }
 
     /**
-     * @param CredentialStoreInterface $store
-     *
      * @return CompositeCredentialStore
      */
     public function add(CredentialStoreInterface $store)

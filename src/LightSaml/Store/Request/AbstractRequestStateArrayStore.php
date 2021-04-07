@@ -16,8 +16,6 @@ use LightSaml\State\Request\RequestState;
 abstract class AbstractRequestStateArrayStore implements RequestStateStoreInterface
 {
     /**
-     * @param RequestState $state
-     *
      * @return AbstractRequestStateArrayStore
      */
     public function set(RequestState $state)
@@ -39,7 +37,7 @@ abstract class AbstractRequestStateArrayStore implements RequestStateStoreInterf
         $result = null;
         $arr = $this->getArray();
         if (false == is_array($arr)) {
-            $arr = array();
+            $arr = [];
             $this->setArray($arr);
         }
         if (isset($arr[$id])) {
@@ -72,7 +70,7 @@ abstract class AbstractRequestStateArrayStore implements RequestStateStoreInterf
      */
     public function clear()
     {
-        $this->setArray(array());
+        $this->setArray([]);
     }
 
     /**
@@ -81,8 +79,6 @@ abstract class AbstractRequestStateArrayStore implements RequestStateStoreInterf
     abstract protected function getArray();
 
     /**
-     * @param array $arr
-     *
      * @return AbstractRequestStateArrayStore
      */
     abstract protected function setArray(array $arr);

@@ -12,9 +12,9 @@
 namespace LightSaml\Model\Metadata;
 
 use LightSaml\Helper;
+use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\XmlDSig\Signature;
 use LightSaml\SamlConstants;
 
@@ -48,7 +48,7 @@ abstract class RoleDescriptor extends AbstractSamlModel
     protected $contactPersons;
 
     /**
-     * @param null|string $cacheDuration
+     * @param string|null $cacheDuration
      *
      * @throws \InvalidArgumentException
      *
@@ -64,7 +64,7 @@ abstract class RoleDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getCacheDuration()
     {
@@ -72,14 +72,12 @@ abstract class RoleDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @param ContactPerson $contactPerson
-     *
      * @return RoleDescriptor
      */
     public function addContactPerson(ContactPerson $contactPerson)
     {
         if (false == is_array($this->contactPersons)) {
-            $this->contactPersons = array();
+            $this->contactPersons = [];
         }
         $this->contactPersons[] = $contactPerson;
 
@@ -95,7 +93,7 @@ abstract class RoleDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @param null|string $errorURL
+     * @param string|null $errorURL
      *
      * @return RoleDescriptor
      */
@@ -107,7 +105,7 @@ abstract class RoleDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getErrorURL()
     {
@@ -115,7 +113,7 @@ abstract class RoleDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @param null|string $id
+     * @param string|null $id
      *
      * @return RoleDescriptor
      */
@@ -127,7 +125,7 @@ abstract class RoleDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getID()
     {
@@ -135,14 +133,12 @@ abstract class RoleDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @param KeyDescriptor $keyDescriptor
-     *
      * @return RoleDescriptor
      */
     public function addKeyDescriptor(KeyDescriptor $keyDescriptor)
     {
         if (false == is_array($this->keyDescriptors)) {
-            $this->keyDescriptors = array();
+            $this->keyDescriptors = [];
         }
         $this->keyDescriptors[] = $keyDescriptor;
 
@@ -164,7 +160,7 @@ abstract class RoleDescriptor extends AbstractSamlModel
      */
     public function getAllKeyDescriptorsByUse($use)
     {
-        $result = array();
+        $result = [];
         foreach ($this->getAllKeyDescriptors() as $kd) {
             if ($kd->getUse() == $use) {
                 $result[] = $kd;
@@ -193,14 +189,12 @@ abstract class RoleDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @param Organization $organization
-     *
      * @return RoleDescriptor
      */
     public function addOrganization(Organization $organization)
     {
         if (false == is_array($this->organizations)) {
-            $this->organizations = array();
+            $this->organizations = [];
         }
         $this->organizations[] = $organization;
 
@@ -236,14 +230,12 @@ abstract class RoleDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @param \LightSaml\Model\XmlDSig\Signature $signature
-     *
      * @return RoleDescriptor
      */
     public function addSignature(Signature $signature)
     {
         if (false == is_array($this->signatures)) {
-            $this->signatures = array();
+            $this->signatures = [];
         }
         $this->signatures[] = $signature;
 
@@ -303,15 +295,12 @@ abstract class RoleDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
         $this->attributesToXml(
-            array('protocolSupportEnumeration', 'ID', 'validUntil', 'cacheDuration', 'errorURL'),
+            ['protocolSupportEnumeration', 'ID', 'validUntil', 'cacheDuration', 'errorURL'],
             $parent
         );
 
@@ -321,15 +310,11 @@ abstract class RoleDescriptor extends AbstractSamlModel
         $this->manyElementsToXml($this->getAllContactPersons(), $parent, $context, null);
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->attributesFromXml(
             $node,
-            array('protocolSupportEnumeration', 'ID', 'validUntil', 'cacheDuration', 'errorURL')
+            ['protocolSupportEnumeration', 'ID', 'validUntil', 'cacheDuration', 'errorURL']
         );
 
         $this->manyElementsFromXml(

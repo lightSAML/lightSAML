@@ -22,17 +22,12 @@ abstract class AbstractProfileAction implements ActionInterface
     /** @var LoggerInterface */
     protected $logger;
 
-    /**
-     * @param LoggerInterface $logger
-     */
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
     /**
-     * @param ContextInterface $context
-     *
      * @return void
      */
     public function execute(ContextInterface $context)
@@ -41,7 +36,7 @@ abstract class AbstractProfileAction implements ActionInterface
             $this->doExecute($context);
         } else {
             $message = sprintf('Expected ProfileContext but got %s', get_class($context));
-            $this->logger->emergency($message, array('context' => $context));
+            $this->logger->emergency($message, ['context' => $context]);
             throw new LightSamlContextException($context, $message);
         }
     }

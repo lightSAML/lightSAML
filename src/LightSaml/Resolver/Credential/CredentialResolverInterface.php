@@ -17,12 +17,11 @@ use LightSaml\Criteria\CriteriaSet;
 interface CredentialResolverInterface
 {
     /**
-     * @param CriteriaSet                 $criteriaSet
      * @param array|CredentialInterface[] $arrCredentials
      *
      * @return array|CredentialInterface[]
      */
-    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = array());
+    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = []);
 
     /**
      * @return CredentialResolverQuery

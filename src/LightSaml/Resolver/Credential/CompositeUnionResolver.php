@@ -17,14 +17,13 @@ use LightSaml\Criteria\CriteriaSet;
 class CompositeUnionResolver extends AbstractCompositeResolver
 {
     /**
-     * @param CriteriaSet           $criteriaSet
      * @param CredentialInterface[] $arrCredentials
      *
      * @return CredentialInterface[]
      */
-    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = array())
+    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = [])
     {
-        $result = array();
+        $result = [];
         foreach ($this->resolvers as $resolver) {
             $result = array_merge($result, $resolver->resolve($criteriaSet, $arrCredentials));
         }

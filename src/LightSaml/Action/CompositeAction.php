@@ -16,12 +16,12 @@ use LightSaml\Context\ContextInterface;
 class CompositeAction implements ActionInterface, DebugPrintTreeActionInterface, CompositeActionInterface
 {
     /** @var ActionInterface[] */
-    protected $children = array();
+    protected $children = [];
 
     /**
      * @param ActionInterface[] $children
      */
-    public function __construct(array $children = array())
+    public function __construct(array $children = [])
     {
         foreach ($children as $action) {
             $this->add($action);
@@ -37,8 +37,6 @@ class CompositeAction implements ActionInterface, DebugPrintTreeActionInterface,
     }
 
     /**
-     * @param ActionInterface $action
-     *
      * @return CompositeAction
      */
     public function add(ActionInterface $action)
@@ -64,8 +62,6 @@ class CompositeAction implements ActionInterface, DebugPrintTreeActionInterface,
     }
 
     /**
-     * @param ContextInterface $context
-     *
      * @return void
      */
     public function execute(ContextInterface $context)
@@ -80,18 +76,18 @@ class CompositeAction implements ActionInterface, DebugPrintTreeActionInterface,
      */
     public function debugPrintTree()
     {
-        $arr = array();
+        $arr = [];
         foreach ($this->children as $childAction) {
             if ($childAction instanceof DebugPrintTreeActionInterface) {
                 $arr = array_merge($arr, $childAction->debugPrintTree());
             } else {
-                $arr = array_merge($arr, array(get_class($childAction) => array()));
+                $arr = array_merge($arr, [get_class($childAction) => []]);
             }
         }
 
-        $result = array(
+        $result = [
             static::class => $arr,
-        );
+        ];
 
         return $result;
     }

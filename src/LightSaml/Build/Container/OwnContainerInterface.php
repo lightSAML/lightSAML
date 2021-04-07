@@ -11,8 +11,8 @@
 
 namespace LightSaml\Build\Container;
 
-use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
 use LightSaml\Credential\CredentialInterface;
+use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
 
 interface OwnContainerInterface
 {

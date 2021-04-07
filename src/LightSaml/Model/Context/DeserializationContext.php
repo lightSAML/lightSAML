@@ -39,8 +39,6 @@ class DeserializationContext
     }
 
     /**
-     * @param \DOMDocument $document
-     *
      * @return DeserializationContext
      */
     public function setDocument(\DOMDocument $document)

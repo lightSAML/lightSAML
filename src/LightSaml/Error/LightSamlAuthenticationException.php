@@ -19,10 +19,9 @@ class LightSamlAuthenticationException extends LightSamlValidationException
     protected $response;
 
     /**
-     * @param StatusResponse $response
-     * @param string         $message
-     * @param int            $code
-     * @param \Exception     $previous
+     * @param string     $message
+     * @param int        $code
+     * @param \Exception $previous
      */
     public function __construct(StatusResponse $response, $message = '', $code = 0, \Exception $previous = null)
     {

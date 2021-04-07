@@ -21,8 +21,6 @@ interface SsoStateStoreInterface
     public function get();
 
     /**
-     * @param SsoState $ssoState
-     *
      * @return void
      */
     public function set(SsoState $ssoState);

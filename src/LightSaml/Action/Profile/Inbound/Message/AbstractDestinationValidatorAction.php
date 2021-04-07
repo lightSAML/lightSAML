@@ -29,10 +29,6 @@ abstract class AbstractDestinationValidatorAction extends AbstractProfileAction
     /** @var EndpointResolverInterface */
     protected $endpointResolver;
 
-    /**
-     * @param LoggerInterface           $logger
-     * @param EndpointResolverInterface $endpointResolver
-     */
     public function __construct(LoggerInterface $logger, EndpointResolverInterface $endpointResolver)
     {
         parent::__construct($logger);
@@ -41,8 +37,6 @@ abstract class AbstractDestinationValidatorAction extends AbstractProfileAction
     }
 
     /**
-     * @param ProfileContext $context
-     *
      * @return void
      */
     protected function doExecute(ProfileContext $context)
@@ -67,8 +61,7 @@ abstract class AbstractDestinationValidatorAction extends AbstractProfileAction
     }
 
     /**
-     * @param ProfileContext $context
-     * @param string         $location
+     * @param string $location
      *
      * @return CriteriaSet
      */
