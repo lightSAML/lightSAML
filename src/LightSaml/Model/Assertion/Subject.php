@@ -11,9 +11,9 @@
 
 namespace LightSaml\Model\Assertion;
 
+use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\AbstractSamlModel;
 use LightSaml\SamlConstants;
 
 class Subject extends AbstractSamlModel
@@ -22,7 +22,7 @@ class Subject extends AbstractSamlModel
     protected $nameId;
 
     /** @var SubjectConfirmation[] */
-    protected $subjectConfirmation = array();
+    protected $subjectConfirmation = [];
 
     /**
      * @param NameID $nameId
@@ -45,8 +45,6 @@ class Subject extends AbstractSamlModel
     }
 
     /**
-     * @param SubjectConfirmation $subjectConfirmation
-     *
      * @return Subject
      */
     public function addSubjectConfirmation(SubjectConfirmation $subjectConfirmation)
@@ -83,7 +81,7 @@ class Subject extends AbstractSamlModel
      */
     public function getBearerConfirmations()
     {
-        $result = array();
+        $result = [];
         if ($this->getAllSubjectConfirmations()) {
             foreach ($this->getAllSubjectConfirmations() as $confirmation) {
                 if (SamlConstants::CONFIRMATION_METHOD_BEARER == $confirmation->getMethod()) {
@@ -97,30 +95,23 @@ class Subject extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
         $result = $this->createElement('Subject', SamlConstants::NS_ASSERTION, $parent, $context);
 
-        $this->singleElementsToXml(array('NameID'), $result, $context);
+        $this->singleElementsToXml(['NameID'], $result, $context);
         $this->manyElementsToXml($this->getAllSubjectConfirmations(), $result, $context, null);
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'Subject', SamlConstants::NS_ASSERTION);
 
-        $this->singleElementsFromXml($node, $context, array(
-            'NameID' => array('saml', 'LightSaml\Model\Assertion\NameID'),
-        ));
+        $this->singleElementsFromXml($node, $context, [
+            'NameID' => ['saml', 'LightSaml\Model\Assertion\NameID'],
+        ]);
 
         $this->manyElementsFromXml(
             $node,

@@ -12,9 +12,9 @@
 namespace LightSaml\Model\Protocol;
 
 use LightSaml\Helper;
+use LightSaml\Model\Assertion\NameID;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\Assertion\NameID;
 use LightSaml\SamlConstants;
 
 class LogoutRequest extends AbstractRequest
@@ -32,8 +32,6 @@ class LogoutRequest extends AbstractRequest
     protected $sessionIndex;
 
     /**
-     * @param NameID $nameID
-     *
      * @return LogoutRequest
      */
     public function setNameID(NameID $nameID)
@@ -96,7 +94,7 @@ class LogoutRequest extends AbstractRequest
     }
 
     /**
-     * @param null|string $reason
+     * @param string|null $reason
      *
      * @return LogoutRequest
      */
@@ -108,7 +106,7 @@ class LogoutRequest extends AbstractRequest
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getReason()
     {
@@ -116,7 +114,7 @@ class LogoutRequest extends AbstractRequest
     }
 
     /**
-     * @param null|string $sessionIndex
+     * @param string|null $sessionIndex
      *
      * @return LogoutRequest
      */
@@ -128,46 +126,38 @@ class LogoutRequest extends AbstractRequest
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getSessionIndex()
     {
         return $this->sessionIndex;
     }
 
-    /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
         $result = $this->createElement('LogoutRequest', SamlConstants::NS_PROTOCOL, $parent, $context);
 
         parent::serialize($result, $context);
 
-        $this->attributesToXml(array('Reason', 'NotOnOrAfter'), $result);
+        $this->attributesToXml(['Reason', 'NotOnOrAfter'], $result);
 
-        $this->singleElementsToXml(array('NameID', 'SessionIndex'), $result, $context, SamlConstants::NS_PROTOCOL);
+        $this->singleElementsToXml(['NameID', 'SessionIndex'], $result, $context, SamlConstants::NS_PROTOCOL);
 
         // must be last in order signature to include them all
-        $this->singleElementsToXml(array('Signature'), $result, $context);
+        $this->singleElementsToXml(['Signature'], $result, $context);
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'LogoutRequest', SamlConstants::NS_PROTOCOL);
 
         parent::deserialize($node, $context);
 
-        $this->attributesFromXml($node, array('Reason', 'NotOnOrAfter'));
+        $this->attributesFromXml($node, ['Reason', 'NotOnOrAfter']);
 
-        $this->singleElementsFromXml($node, $context, array(
-            'NameID' => array('saml', 'LightSaml\Model\Assertion\NameID'),
-            'SessionIndex' => array('samlp', null),
-        ));
+        $this->singleElementsFromXml($node, $context, [
+            'NameID' => ['saml', 'LightSaml\Model\Assertion\NameID'],
+            'SessionIndex' => ['samlp', null],
+        ]);
     }
 }

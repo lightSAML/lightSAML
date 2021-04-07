@@ -21,7 +21,7 @@ class CompositeActionBuilder implements ActionBuilderInterface
      *
      * @var array
      */
-    private $actions = array();
+    private $actions = [];
 
     /** @var int */
     protected $increaseStep = 5;
@@ -30,8 +30,7 @@ class CompositeActionBuilder implements ActionBuilderInterface
     private $biggestPriority = 0;
 
     /**
-     * @param ActionInterface $action
-     * @param int|bool        $priority
+     * @param int|bool $priority
      *
      * @return CompositeActionBuilder
      */
@@ -47,7 +46,7 @@ class CompositeActionBuilder implements ActionBuilderInterface
         }
 
         if (false === isset($this->actions[$priority])) {
-            $this->actions[$priority] = array();
+            $this->actions[$priority] = [];
         }
         $this->actions[$priority][] = $action;
 

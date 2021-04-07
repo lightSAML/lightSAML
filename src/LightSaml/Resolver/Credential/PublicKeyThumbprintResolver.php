@@ -18,18 +18,17 @@ use LightSaml\Criteria\CriteriaSet;
 class PublicKeyThumbprintResolver extends AbstractQueryableResolver
 {
     /**
-     * @param CriteriaSet           $criteriaSet
      * @param CredentialInterface[] $arrCredentials
      *
      * @return CredentialInterface[]
      */
-    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = array())
+    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = [])
     {
         if (false == $criteriaSet->has(PublicKeyThumbprintCriteria::class)) {
             return $arrCredentials;
         }
 
-        $result = array();
+        $result = [];
         /** @var PublicKeyThumbprintCriteria $criteria */
         foreach ($criteriaSet->get(PublicKeyThumbprintCriteria::class) as $criteria) {
             foreach ($arrCredentials as $credential) {

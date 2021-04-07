@@ -19,8 +19,7 @@ use LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria;
 class DestinationValidatorResponseAction extends AbstractDestinationValidatorAction
 {
     /**
-     * @param ProfileContext $context
-     * @param string         $location
+     * @param string $location
      *
      * @return CriteriaSet
      */

@@ -12,24 +12,23 @@
 namespace LightSaml\Resolver\Credential;
 
 use LightSaml\Credential\CredentialInterface;
-use LightSaml\Criteria\CriteriaSet;
 use LightSaml\Credential\Criteria\PrivateKeyCriteria;
+use LightSaml\Criteria\CriteriaSet;
 
 class PrivateKeyResolver extends AbstractQueryableResolver
 {
     /**
-     * @param CriteriaSet           $criteriaSet
      * @param CredentialInterface[] $arrCredentials
      *
      * @return CredentialInterface[]
      */
-    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = array())
+    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = [])
     {
         if (false == $criteriaSet->has(PrivateKeyCriteria::class)) {
             return $arrCredentials;
         }
 
-        $result = array();
+        $result = [];
         foreach ($arrCredentials as $credential) {
             if ($credential->getPrivateKey()) {
                 $result[] = $credential;

@@ -98,7 +98,7 @@ class RequestState implements \Serializable
     {
         $nonce = $this->getNonce();
 
-        return serialize(array($this->id, $nonce, $this->parameters->serialize()));
+        return serialize([$this->id, $nonce, $this->parameters->serialize()]);
     }
 
     /**

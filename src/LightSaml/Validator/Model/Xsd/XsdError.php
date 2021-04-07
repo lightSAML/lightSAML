@@ -39,8 +39,6 @@ class XsdError
     private $column;
 
     /**
-     * @param \LibXMLError $error
-     *
      * @return XsdError
      */
     public static function fromLibXMLError(\LibXMLError $error)

@@ -11,9 +11,9 @@
 
 namespace LightSaml\Model\Assertion;
 
+use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\AbstractSamlModel;
 use LightSaml\SamlConstants;
 
 class AuthnContext extends AbstractSamlModel
@@ -59,7 +59,7 @@ class AuthnContext extends AbstractSamlModel
     }
 
     /**
-     * @param null|string $authnContextClassRef
+     * @param string|null $authnContextClassRef
      *
      * @return AuthnContext
      */
@@ -71,7 +71,7 @@ class AuthnContext extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getAuthnContextClassRef()
     {
@@ -79,7 +79,7 @@ class AuthnContext extends AbstractSamlModel
     }
 
     /**
-     * @param null|string $authnContextDecl
+     * @param string|null $authnContextDecl
      *
      * @return AuthnContext
      */
@@ -91,7 +91,7 @@ class AuthnContext extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getAuthnContextDecl()
     {
@@ -99,7 +99,7 @@ class AuthnContext extends AbstractSamlModel
     }
 
     /**
-     * @param null|string $authnContextDeclRef
+     * @param string|null $authnContextDeclRef
      *
      * @return AuthnContext
      */
@@ -111,7 +111,7 @@ class AuthnContext extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getAuthnContextDeclRef()
     {
@@ -119,9 +119,6 @@ class AuthnContext extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
@@ -129,26 +126,22 @@ class AuthnContext extends AbstractSamlModel
         $result = $this->createElement('AuthnContext', SamlConstants::NS_ASSERTION, $parent, $context);
 
         $this->singleElementsToXml(
-            array('AuthnContextClassRef', 'AuthnContextDecl', 'AuthnContextDeclRef', 'AuthenticatingAuthority'),
+            ['AuthnContextClassRef', 'AuthnContextDecl', 'AuthnContextDeclRef', 'AuthenticatingAuthority'],
             $result,
             $context,
             SamlConstants::NS_ASSERTION
         );
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'AuthnContext', SamlConstants::NS_ASSERTION);
 
-        $this->singleElementsFromXml($node, $context, array(
-            'AuthnContextClassRef' => array('saml', null),
-            'AuthnContextDecl' => array('saml', null),
-            'AuthnContextDeclRef' => array('saml', null),
-            'AuthenticatingAuthority' => array('saml', null),
-        ));
+        $this->singleElementsFromXml($node, $context, [
+            'AuthnContextClassRef' => ['saml', null],
+            'AuthnContextDecl' => ['saml', null],
+            'AuthnContextDeclRef' => ['saml', null],
+            'AuthenticatingAuthority' => ['saml', null],
+        ]);
     }
 }

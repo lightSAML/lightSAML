@@ -30,7 +30,7 @@ class MessageIdAction extends AbstractProfileAction
 
         $this->logger->info(
             sprintf('Message ID set to "%s"', $id),
-            LogHelper::getActionContext($context, $this, array('message_id' => $id))
+            LogHelper::getActionContext($context, $this, ['message_id' => $id])
         );
     }
 }

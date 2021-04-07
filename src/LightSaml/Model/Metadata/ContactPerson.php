@@ -11,9 +11,9 @@
 
 namespace LightSaml\Model\Metadata;
 
+use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\AbstractSamlModel;
 use LightSaml\SamlConstants;
 
 class ContactPerson extends AbstractSamlModel
@@ -63,7 +63,7 @@ class ContactPerson extends AbstractSamlModel
     }
 
     /**
-     * @param null|string $company
+     * @param string|null $company
      *
      * @return ContactPerson
      */
@@ -75,7 +75,7 @@ class ContactPerson extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getCompany()
     {
@@ -83,7 +83,7 @@ class ContactPerson extends AbstractSamlModel
     }
 
     /**
-     * @param null|string $emailAddress
+     * @param string|null $emailAddress
      *
      * @return ContactPerson
      */
@@ -95,7 +95,7 @@ class ContactPerson extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getEmailAddress()
     {
@@ -103,7 +103,7 @@ class ContactPerson extends AbstractSamlModel
     }
 
     /**
-     * @param null|string $givenName
+     * @param string|null $givenName
      *
      * @return ContactPerson
      */
@@ -115,7 +115,7 @@ class ContactPerson extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getGivenName()
     {
@@ -123,7 +123,7 @@ class ContactPerson extends AbstractSamlModel
     }
 
     /**
-     * @param null|string $surName
+     * @param string|null $surName
      *
      * @return ContactPerson
      */
@@ -135,7 +135,7 @@ class ContactPerson extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getSurName()
     {
@@ -143,7 +143,7 @@ class ContactPerson extends AbstractSamlModel
     }
 
     /**
-     * @param null|string $telephoneNumber
+     * @param string|null $telephoneNumber
      *
      * @return ContactPerson
      */
@@ -155,7 +155,7 @@ class ContactPerson extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getTelephoneNumber()
     {
@@ -163,41 +163,34 @@ class ContactPerson extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
         $result = $this->createElement('ContactPerson', SamlConstants::NS_METADATA, $parent, $context);
 
-        $this->attributesToXml(array('contactType'), $result);
+        $this->attributesToXml(['contactType'], $result);
 
         $this->singleElementsToXml(
-            array('Company', 'GivenName', 'SurName', 'EmailAddress', 'TelephoneNumber'),
+            ['Company', 'GivenName', 'SurName', 'EmailAddress', 'TelephoneNumber'],
             $result,
             $context,
             SamlConstants::NS_METADATA
         );
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'ContactPerson', SamlConstants::NS_METADATA);
 
-        $this->attributesFromXml($node, array('contactType'));
+        $this->attributesFromXml($node, ['contactType']);
 
-        $this->singleElementsFromXml($node, $context, array(
-            'Company' => array('md', null),
-            'GivenName' => array('md', null),
-            'SurName' => array('md', null),
-            'EmailAddress' => array('md', null),
-            'TelephoneNumber' => array('md', null),
-        ));
+        $this->singleElementsFromXml($node, $context, [
+            'Company' => ['md', null],
+            'GivenName' => ['md', null],
+            'SurName' => ['md', null],
+            'EmailAddress' => ['md', null],
+            'TelephoneNumber' => ['md', null],
+        ]);
     }
 }

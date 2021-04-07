@@ -17,8 +17,6 @@ use LightSaml\Model\Assertion\NameID;
 interface NameIdProviderInterface
 {
     /**
-     * @param AbstractProfileContext $context
-     *
      * @return NameID|null
      */
     public function getNameID(AbstractProfileContext $context);

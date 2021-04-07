@@ -27,7 +27,7 @@ class BindingCriteria implements CriteriaInterface
      */
     public function __construct(array $bindings)
     {
-        $this->bindings = array();
+        $this->bindings = [];
 
         foreach ($bindings as $binding) {
             $this->add($binding);

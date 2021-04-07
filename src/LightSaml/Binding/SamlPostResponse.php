@@ -23,11 +23,10 @@ class SamlPostResponse extends Response
 
     /**
      * @param string $destination
-     * @param array  $data
      * @param int    $status
      * @param array  $headers
      */
-    public function __construct($destination, array $data, $status = 200, $headers = array())
+    public function __construct($destination, array $data, $status = 200, $headers = [])
     {
         parent::__construct('', $status, $headers);
 

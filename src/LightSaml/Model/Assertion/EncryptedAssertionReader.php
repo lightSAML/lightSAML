@@ -17,8 +17,7 @@ use RobRichards\XMLSecLibs\XMLSecurityKey;
 class EncryptedAssertionReader extends EncryptedElementReader
 {
     /**
-     * @param XMLSecurityKey[]       $inputKeys
-     * @param DeserializationContext $deserializationContext
+     * @param XMLSecurityKey[] $inputKeys
      *
      * @return Assertion
      */
@@ -30,8 +29,7 @@ class EncryptedAssertionReader extends EncryptedElementReader
     }
 
     /**
-     * @param XMLSecurityKey         $credential
-     * @param DeserializationContext $deserializationContext
+     * @param XMLSecurityKey $credential
      *
      * @return Assertion
      */
@@ -43,9 +41,6 @@ class EncryptedAssertionReader extends EncryptedElementReader
     }
 
     /**
-     * @param \DOMElement            $dom
-     * @param DeserializationContext $deserializationContext
-     *
      * @return Assertion
      */
     protected function getAssertionFromDom(\DOMElement $dom, DeserializationContext $deserializationContext)

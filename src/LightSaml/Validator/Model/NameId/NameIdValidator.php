@@ -18,7 +18,7 @@ use LightSaml\SamlConstants;
 
 class NameIdValidator implements NameIdValidatorInterface
 {
-    private static $formatValidators = array(
+    private static $formatValidators = [
         SamlConstants::NAME_ID_FORMAT_EMAIL => 'validateEmailFormat',
         SamlConstants::NAME_ID_FORMAT_X509_SUBJECT_NAME => 'validateX509SubjectNameFormat',
         SamlConstants::NAME_ID_FORMAT_WINDOWS => 'validateWindowsFormat',
@@ -26,11 +26,9 @@ class NameIdValidator implements NameIdValidatorInterface
         SamlConstants::NAME_ID_FORMAT_ENTITY => 'validateEntityFormat',
         SamlConstants::NAME_ID_FORMAT_PERSISTENT => 'validatePersistentFormat',
         SamlConstants::NAME_ID_FORMAT_TRANSIENT => 'validateTransientFormat',
-    );
+    ];
 
     /**
-     * @param AbstractNameID $nameId
-     *
      * @throws \LightSaml\Error\LightSamlValidationException
      *
      * @return void
@@ -50,24 +48,13 @@ class NameIdValidator implements NameIdValidatorInterface
         }
     }
 
-    /**
-     * @param AbstractNameID $nameId
-     */
     protected function validateFormat(AbstractNameID $nameId)
     {
         if (false == Helper::validateWellFormedUriString($nameId->getFormat())) {
-            throw new LightSamlValidationException(
-                sprintf(
-                    "NameID element has Format attribute '%s' which is not a wellformed absolute uri",
-                    $nameId->getFormat()
-                )
-            );
+            throw new LightSamlValidationException(sprintf("NameID element has Format attribute '%s' which is not a wellformed absolute uri", $nameId->getFormat()));
         }
     }
 
-    /**
-     * @param AbstractNameID $nameId
-     */
     protected function validateEmailFormat(AbstractNameID $nameId)
     {
         if (false == Helper::validateRequiredString($nameId->getValue())) {
@@ -79,9 +66,6 @@ class NameIdValidator implements NameIdValidatorInterface
         }
     }
 
-    /**
-     * @param AbstractNameID $nameId
-     */
     protected function validateX509SubjectNameFormat(AbstractNameID $nameId)
     {
         if (false == Helper::validateRequiredString($nameId->getValue())) {
@@ -92,9 +76,6 @@ class NameIdValidator implements NameIdValidatorInterface
         // XML Signature Recommendation (http://www.w3.org/TR/xmldsig-core/) section 4.4.4
     }
 
-    /**
-     * @param AbstractNameID $nameId
-     */
     protected function validateWindowsFormat(AbstractNameID $nameId)
     {
         // Required format is 'DomainName\UserName' but the domain name and the '\' are optional
@@ -103,9 +84,6 @@ class NameIdValidator implements NameIdValidatorInterface
         }
     }
 
-    /**
-     * @param AbstractNameID $nameId
-     */
     protected function validateKerberosFormat(AbstractNameID $nameId)
     {
         // Required format is 'name[/instance]@REALM'
@@ -121,9 +99,6 @@ class NameIdValidator implements NameIdValidatorInterface
         // TODO: Consider implementing the rules for 'name', 'instance' and 'REALM' found in IETF RFC 1510 (http://www.ietf.org/rfc/rfc1510.txt) here
     }
 
-    /**
-     * @param AbstractNameID $nameId
-     */
     protected function validateEntityFormat(AbstractNameID $nameId)
     {
         if (false == Helper::validateRequiredString($nameId->getValue())) {
@@ -143,9 +118,6 @@ class NameIdValidator implements NameIdValidatorInterface
         }
     }
 
-    /**
-     * @param AbstractNameID $nameId
-     */
     protected function validatePersistentFormat(AbstractNameID $nameId)
     {
         if (false == Helper::validateRequiredString($nameId->getValue())) {
@@ -156,9 +128,6 @@ class NameIdValidator implements NameIdValidatorInterface
         }
     }
 
-    /**
-     * @param AbstractNameID $nameId
-     */
     protected function validateTransientFormat(AbstractNameID $nameId)
     {
         if (false == Helper::validateRequiredString($nameId->getValue())) {
@@ -168,12 +137,7 @@ class NameIdValidator implements NameIdValidatorInterface
             throw new LightSamlValidationException('NameID with Transient Format attribute MUST have a Value that contains no more than 256 characters');
         }
         if (false == Helper::validateIdString($nameId->getValue())) {
-            throw new LightSamlValidationException(
-                sprintf(
-                    "NameID '%s' with Transient Format attribute MUST have a Value with at least 16 characters (the equivalent of 128 bits)",
-                    $nameId->getValue()
-                )
-            );
+            throw new LightSamlValidationException(sprintf("NameID '%s' with Transient Format attribute MUST have a Value with at least 16 characters (the equivalent of 128 bits)", $nameId->getValue()));
         }
     }
 }

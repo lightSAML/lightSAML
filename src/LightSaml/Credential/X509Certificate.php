@@ -28,7 +28,7 @@ class X509Certificate
     /** @var string */
     protected $data;
 
-    /** @var null|array */
+    /** @var array|null */
     protected $info;
 
     /** @var string */

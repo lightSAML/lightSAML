@@ -12,9 +12,9 @@
 namespace LightSaml\Model\Assertion;
 
 use LightSaml\Helper;
+use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\AbstractSamlModel;
 use LightSaml\SamlConstants;
 
 class SubjectConfirmationData extends AbstractSamlModel
@@ -35,7 +35,7 @@ class SubjectConfirmationData extends AbstractSamlModel
     protected $recipient;
 
     /**
-     * @param null|string $address
+     * @param string|null $address
      *
      * @return SubjectConfirmationData
      */
@@ -47,7 +47,7 @@ class SubjectConfirmationData extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getAddress()
     {
@@ -55,7 +55,7 @@ class SubjectConfirmationData extends AbstractSamlModel
     }
 
     /**
-     * @param null|string $inResponseTo
+     * @param string|null $inResponseTo
      *
      * @return SubjectConfirmationData
      */
@@ -67,7 +67,7 @@ class SubjectConfirmationData extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getInResponseTo()
     {
@@ -163,7 +163,7 @@ class SubjectConfirmationData extends AbstractSamlModel
     }
 
     /**
-     * @param null|string $recipient
+     * @param string|null $recipient
      *
      * @return SubjectConfirmationData
      */
@@ -175,7 +175,7 @@ class SubjectConfirmationData extends AbstractSamlModel
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getRecipient()
     {
@@ -183,9 +183,6 @@ class SubjectConfirmationData extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
@@ -193,21 +190,17 @@ class SubjectConfirmationData extends AbstractSamlModel
         $result = $this->createElement('SubjectConfirmationData', SamlConstants::NS_ASSERTION, $parent, $context);
 
         $this->attributesToXml(
-            array('InResponseTo', 'NotBefore', 'NotOnOrAfter', 'Address', 'Recipient'),
+            ['InResponseTo', 'NotBefore', 'NotOnOrAfter', 'Address', 'Recipient'],
             $result
         );
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'SubjectConfirmationData', SamlConstants::NS_ASSERTION);
 
-        $this->attributesFromXml($node, array(
+        $this->attributesFromXml($node, [
             'InResponseTo', 'NotBefore', 'NotOnOrAfter', 'Address', 'Recipient',
-        ));
+        ]);
     }
 }

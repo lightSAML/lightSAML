@@ -70,23 +70,20 @@ class EntityDescriptor extends Metadata
 
     /**
      * @param string|null $entityId
-     * @param array       $items
      */
-    public function __construct($entityId = null, array $items = array())
+    public function __construct($entityId = null, array $items = [])
     {
         $this->entityID = $entityId;
         $this->items = $items;
     }
 
     /**
-     * @param ContactPerson $contactPerson
-     *
      * @return EntityDescriptor
      */
     public function addContactPerson(ContactPerson $contactPerson)
     {
         if (false == is_array($this->contactPersons)) {
-            $this->contactPersons = array();
+            $this->contactPersons = [];
         }
         $this->contactPersons[] = $contactPerson;
 
@@ -121,7 +118,7 @@ class EntityDescriptor extends Metadata
     public function addOrganization(Organization $organization)
     {
         if (false == is_array($this->organizations)) {
-            $this->organizations = array();
+            $this->organizations = [];
         }
         $this->organizations[] = $organization;
 
@@ -228,7 +225,7 @@ class EntityDescriptor extends Metadata
         }
 
         if (false == is_array($this->items)) {
-            $this->items = array();
+            $this->items = [];
         }
 
         $this->items[] = $item;
@@ -249,7 +246,7 @@ class EntityDescriptor extends Metadata
      */
     public function getAllIdpSsoDescriptors()
     {
-        $result = array();
+        $result = [];
         foreach ($this->getAllItems() as $item) {
             if ($item instanceof IdpSsoDescriptor) {
                 $result[] = $item;
@@ -264,7 +261,7 @@ class EntityDescriptor extends Metadata
      */
     public function getAllSpSsoDescriptors()
     {
-        $result = array();
+        $result = [];
         foreach ($this->getAllItems() as $item) {
             if ($item instanceof SpSsoDescriptor) {
                 $result[] = $item;
@@ -371,7 +368,7 @@ class EntityDescriptor extends Metadata
      */
     public function getAllIdpKeyDescriptors()
     {
-        $result = array();
+        $result = [];
         foreach ($this->getAllIdpSsoDescriptors() as $idp) {
             foreach ($idp->getAllKeyDescriptors() as $key) {
                 $result[] = $key;
@@ -386,7 +383,7 @@ class EntityDescriptor extends Metadata
      */
     public function getAllSpKeyDescriptors()
     {
-        $result = array();
+        $result = [];
         foreach ($this->getAllSpSsoDescriptors() as $sp) {
             foreach ($sp->getAllKeyDescriptors() as $key) {
                 $result[] = $key;
@@ -401,7 +398,7 @@ class EntityDescriptor extends Metadata
      */
     public function getAllEndpoints()
     {
-        $result = array();
+        $result = [];
         foreach ($this->getAllIdpSsoDescriptors() as $idpSsoDescriptor) {
             foreach ($idpSsoDescriptor->getAllSingleSignOnServices() as $sso) {
                 $result[] = new EndpointReference($this, $idpSsoDescriptor, $sso);
@@ -423,16 +420,13 @@ class EntityDescriptor extends Metadata
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
         $result = $this->createElement('EntityDescriptor', SamlConstants::NS_METADATA, $parent, $context);
 
-        $this->attributesToXml(array('entityID', 'validUntil', 'cacheDuration', 'ID'), $result);
+        $this->attributesToXml(['entityID', 'validUntil', 'cacheDuration', 'ID'], $result);
 
         $this->manyElementsToXml($this->getAllItems(), $result, $context, null);
         if ($this->organizations) {
@@ -442,20 +436,16 @@ class EntityDescriptor extends Metadata
             $this->manyElementsToXml($this->contactPersons, $result, $context, null);
         }
 
-        $this->singleElementsToXml(array('Signature'), $result, $context);
+        $this->singleElementsToXml(['Signature'], $result, $context);
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'EntityDescriptor', SamlConstants::NS_METADATA);
 
-        $this->attributesFromXml($node, array('entityID', 'validUntil', 'cacheDuration', 'ID'));
+        $this->attributesFromXml($node, ['entityID', 'validUntil', 'cacheDuration', 'ID']);
 
-        $this->items = array();
+        $this->items = [];
 
         $this->manyElementsFromXml(
             $node,
@@ -493,8 +483,8 @@ class EntityDescriptor extends Metadata
             'addContactPerson'
         );
 
-        $this->singleElementsFromXml($node, $context, array(
-            'Signature' => array('ds', 'LightSaml\Model\XmlDSig\SignatureXmlReader'),
-        ));
+        $this->singleElementsFromXml($node, $context, [
+            'Signature' => ['ds', 'LightSaml\Model\XmlDSig\SignatureXmlReader'],
+        ]);
     }
 }

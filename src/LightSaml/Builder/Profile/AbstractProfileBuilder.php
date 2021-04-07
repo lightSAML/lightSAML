@@ -19,9 +19,6 @@ abstract class AbstractProfileBuilder implements ProfileBuilderInterface
     /** @var BuildContainerInterface */
     protected $container;
 
-    /**
-     * @param BuildContainerInterface $buildContainer
-     */
     public function __construct(BuildContainerInterface $buildContainer)
     {
         $this->container = $buildContainer;

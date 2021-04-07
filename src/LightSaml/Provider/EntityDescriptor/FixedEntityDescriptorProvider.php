@@ -18,9 +18,6 @@ class FixedEntityDescriptorProvider implements EntityDescriptorProviderInterface
     /** @var EntityDescriptor */
     protected $entityDescriptor;
 
-    /**
-     * @param EntityDescriptor $entityDescriptor
-     */
     public function __construct(EntityDescriptor $entityDescriptor)
     {
         $this->entityDescriptor = $entityDescriptor;

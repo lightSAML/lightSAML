@@ -11,12 +11,12 @@
 
 namespace LightSaml\Model\Metadata;
 
+use LightSaml\Credential\X509Certificate;
 use LightSaml\Error\LightSamlXmlException;
+use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\AbstractSamlModel;
 use LightSaml\SamlConstants;
-use LightSaml\Credential\X509Certificate;
 
 class KeyDescriptor extends AbstractSamlModel
 {
@@ -30,8 +30,7 @@ class KeyDescriptor extends AbstractSamlModel
     private $certificate;
 
     /**
-     * @param string|null          $use
-     * @param X509Certificate|null $certificate
+     * @param string|null $use
      */
     public function __construct($use = null, X509Certificate $certificate = null)
     {
@@ -66,8 +65,6 @@ class KeyDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @param X509Certificate $certificate
-     *
      * @return KeyDescriptor
      */
     public function setCertificate(X509Certificate $certificate)
@@ -86,16 +83,13 @@ class KeyDescriptor extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
         $result = $this->createElement('KeyDescriptor', SamlConstants::NS_METADATA, $parent, $context);
 
-        $this->attributesToXml(array('use'), $result);
+        $this->attributesToXml(['use'], $result);
 
         $keyInfo = $this->createElement('ds:KeyInfo', SamlConstants::NS_XMLDSIG, $result, $context);
         $xData = $this->createElement('ds:X509Data', SamlConstants::NS_XMLDSIG, $keyInfo, $context);
@@ -104,15 +98,11 @@ class KeyDescriptor extends AbstractSamlModel
         $xCert->nodeValue = $this->getCertificate()->getData();
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'KeyDescriptor', SamlConstants::NS_METADATA);
 
-        $this->attributesFromXml($node, array('use'));
+        $this->attributesFromXml($node, ['use']);
 
         $list = $context->getXpath()->query('./ds:KeyInfo/ds:X509Data/ds:X509Certificate', $node);
         if (1 != $list->length) {

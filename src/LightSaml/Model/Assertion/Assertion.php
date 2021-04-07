@@ -12,9 +12,9 @@
 namespace LightSaml\Model\Assertion;
 
 use LightSaml\Helper;
+use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\XmlDSig\Signature;
 use LightSaml\SamlConstants;
 
@@ -64,7 +64,7 @@ class Assertion extends AbstractSamlModel
     /**
      * @var array|AbstractStatement[]|AuthnStatement[]|AttributeStatement[]
      */
-    protected $items = array();
+    protected $items = [];
 
     //endregion
 
@@ -135,8 +135,6 @@ class Assertion extends AbstractSamlModel
     //region Getters & Setters
 
     /**
-     * @param Conditions|null $conditions
-     *
      * @return Assertion
      */
     public function setConditions(Conditions $conditions = null)
@@ -261,8 +259,6 @@ class Assertion extends AbstractSamlModel
     }
 
     /**
-     * @param Subject $subject
-     *
      * @return Assertion
      */
     public function setSubject(Subject $subject)
@@ -301,8 +297,6 @@ class Assertion extends AbstractSamlModel
     }
 
     /**
-     * @param AbstractStatement $statement
-     *
      * @return Assertion
      */
     public function addItem(AbstractStatement $statement)
@@ -325,7 +319,7 @@ class Assertion extends AbstractSamlModel
      */
     public function getAllAuthnStatements()
     {
-        $result = array();
+        $result = [];
         foreach ($this->items as $item) {
             if ($item instanceof AuthnStatement) {
                 $result[] = $item;
@@ -340,7 +334,7 @@ class Assertion extends AbstractSamlModel
      */
     public function getAllAttributeStatements()
     {
-        $result = array();
+        $result = [];
         foreach ($this->items as $item) {
             if ($item instanceof AttributeStatement) {
                 $result[] = $item;
@@ -405,9 +399,6 @@ class Assertion extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
@@ -416,10 +407,10 @@ class Assertion extends AbstractSamlModel
 
         $result = $this->createElement('Assertion', SamlConstants::NS_ASSERTION, $parent, $context);
 
-        $this->attributesToXml(array('ID', 'Version', 'IssueInstant'), $result);
+        $this->attributesToXml(['ID', 'Version', 'IssueInstant'], $result);
 
         $this->singleElementsToXml(
-            array('Issuer', 'Subject', 'Conditions'),
+            ['Issuer', 'Subject', 'Conditions'],
             $result,
             $context
         );
@@ -429,24 +420,20 @@ class Assertion extends AbstractSamlModel
         }
 
         // must be added at the end
-        $this->singleElementsToXml(array('Signature'), $result, $context);
+        $this->singleElementsToXml(['Signature'], $result, $context);
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'Assertion', SamlConstants::NS_ASSERTION);
 
-        $this->attributesFromXml($node, array('ID', 'Version', 'IssueInstant'));
+        $this->attributesFromXml($node, ['ID', 'Version', 'IssueInstant']);
 
-        $this->singleElementsFromXml($node, $context, array(
-            'Issuer' => array('saml', 'LightSaml\Model\Assertion\Issuer'),
-            'Subject' => array('saml', 'LightSaml\Model\Assertion\Subject'),
-            'Conditions' => array('saml', 'LightSaml\Model\Assertion\Conditions'),
-        ));
+        $this->singleElementsFromXml($node, $context, [
+            'Issuer' => ['saml', 'LightSaml\Model\Assertion\Issuer'],
+            'Subject' => ['saml', 'LightSaml\Model\Assertion\Subject'],
+            'Conditions' => ['saml', 'LightSaml\Model\Assertion\Conditions'],
+        ]);
 
         $this->manyElementsFromXml(
             $node,
@@ -466,8 +453,8 @@ class Assertion extends AbstractSamlModel
             'addItem'
         );
 
-        $this->singleElementsFromXml($node, $context, array(
-            'Signature' => array('ds', 'LightSaml\Model\XmlDSig\SignatureXmlReader'),
-        ));
+        $this->singleElementsFromXml($node, $context, [
+            'Signature' => ['ds', 'LightSaml\Model\XmlDSig\SignatureXmlReader'],
+        ]);
     }
 }

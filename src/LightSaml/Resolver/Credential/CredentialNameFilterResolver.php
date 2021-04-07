@@ -18,18 +18,17 @@ use LightSaml\Criteria\CriteriaSet;
 class CredentialNameFilterResolver extends AbstractQueryableResolver
 {
     /**
-     * @param CriteriaSet           $criteriaSet
      * @param CredentialInterface[] $arrCredentials
      *
      * @return CredentialInterface[]
      */
-    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = array())
+    public function resolve(CriteriaSet $criteriaSet, array $arrCredentials = [])
     {
         if (false == $criteriaSet->has(CredentialNameCriteria::class)) {
             return $arrCredentials;
         }
 
-        $result = array();
+        $result = [];
         foreach ($criteriaSet->get(CredentialNameCriteria::class) as $criteria) {
             /* @var CredentialNameCriteria $criteria */
             foreach ($arrCredentials as $credential) {

@@ -26,8 +26,7 @@ class EntitiesDescriptorEntityProvider implements EntityDescriptorProviderInterf
     private $entityDescriptor;
 
     /**
-     * @param EntitiesDescriptorProviderInterface $entitiesDescriptorProvider
-     * @param string                              $entityId
+     * @param string $entityId
      */
     public function __construct(EntitiesDescriptorProviderInterface $entitiesDescriptorProvider, $entityId)
     {

@@ -12,9 +12,9 @@
 namespace LightSaml\Model\Metadata;
 
 use LightSaml\Error\LightSamlXmlException;
+use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\AbstractSamlModel;
 use LightSaml\SamlConstants;
 
 class Organization extends AbstractSamlModel
@@ -111,9 +111,6 @@ class Organization extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
@@ -124,7 +121,7 @@ class Organization extends AbstractSamlModel
 
         $result = $this->createElement('Organization', SamlConstants::NS_METADATA, $parent, $context);
 
-        $elements = array('OrganizationName', 'OrganizationDisplayName', 'OrganizationURL');
+        $elements = ['OrganizationName', 'OrganizationDisplayName', 'OrganizationURL'];
         $this->singleElementsToXml(
             $elements,
             $result,
@@ -142,18 +139,14 @@ class Organization extends AbstractSamlModel
         }
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'Organization', SamlConstants::NS_METADATA);
 
-        $this->singleElementsFromXml($node, $context, array(
-            'OrganizationName' => array('md', null),
-            'OrganizationDisplayName' => array('md', null),
-            'OrganizationURL' => array('md', null),
-        ));
+        $this->singleElementsFromXml($node, $context, [
+            'OrganizationName' => ['md', null],
+            'OrganizationDisplayName' => ['md', null],
+            'OrganizationURL' => ['md', null],
+        ]);
     }
 }

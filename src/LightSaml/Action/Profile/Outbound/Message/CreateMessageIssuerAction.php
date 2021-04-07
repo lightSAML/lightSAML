@@ -24,8 +24,6 @@ use LightSaml\SamlConstants;
 class CreateMessageIssuerAction extends AbstractProfileAction
 {
     /**
-     * @param ProfileContext $context
-     *
      * @return void
      */
     protected function doExecute(ProfileContext $context)

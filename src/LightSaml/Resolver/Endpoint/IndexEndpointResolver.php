@@ -11,15 +11,14 @@
 
 namespace LightSaml\Resolver\Endpoint;
 
+use LightSaml\Criteria\CriteriaSet;
 use LightSaml\Model\Metadata\EndpointReference;
 use LightSaml\Model\Metadata\IndexedEndpoint;
 use LightSaml\Resolver\Endpoint\Criteria\IndexCriteria;
-use LightSaml\Criteria\CriteriaSet;
 
 class IndexEndpointResolver implements EndpointResolverInterface
 {
     /**
-     * @param CriteriaSet         $criteriaSet
      * @param EndpointReference[] $candidates
      *
      * @return EndpointReference[]
@@ -30,7 +29,7 @@ class IndexEndpointResolver implements EndpointResolverInterface
             return $candidates;
         }
 
-        $result = array();
+        $result = [];
         /** @var IndexCriteria $indexCriteria */
         foreach ($criteriaSet->get(IndexCriteria::class) as $indexCriteria) {
             foreach ($candidates as $endpointReference) {
