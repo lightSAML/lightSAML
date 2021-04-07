@@ -11,8 +11,8 @@
 
 namespace LightSaml\Resolver\Credential;
 
-use LightSaml\Criteria\CriteriaSet;
 use LightSaml\Credential\CredentialInterface;
+use LightSaml\Criteria\CriteriaSet;
 
 class CredentialResolverQuery extends CriteriaSet
 {
@@ -22,9 +22,6 @@ class CredentialResolverQuery extends CriteriaSet
     /** @var CredentialInterface[] */
     private $arrCredentials;
 
-    /**
-     * @param CredentialResolverInterface $resolver
-     */
     public function __construct(CredentialResolverInterface $resolver)
     {
         $this->resolver = $resolver;
@@ -61,7 +58,7 @@ class CredentialResolverQuery extends CriteriaSet
      */
     public function getPublicKeys()
     {
-        $result = array();
+        $result = [];
         foreach ($this->arrCredentials as $credential) {
             if ($credential instanceof CredentialInterface) {
                 $publicKey = $credential->getPublicKey();
@@ -81,7 +78,7 @@ class CredentialResolverQuery extends CriteriaSet
      */
     public function getPrivateKeys()
     {
-        $result = array();
+        $result = [];
         foreach ($this->arrCredentials as $credential) {
             if ($credential instanceof CredentialInterface) {
                 $privateKey = $credential->getPrivateKey();

@@ -24,10 +24,6 @@ class AssertionAction extends AbstractProfileAction implements DebugPrintTreeAct
     /** @var ActionInterface */
     private $assertionAction;
 
-    /**
-     * @param LoggerInterface $logger
-     * @param ActionInterface $assertionAction
-     */
     public function __construct(LoggerInterface $logger, ActionInterface $assertionAction)
     {
         parent::__construct($logger);
@@ -35,9 +31,6 @@ class AssertionAction extends AbstractProfileAction implements DebugPrintTreeAct
         $this->assertionAction = $assertionAction;
     }
 
-    /**
-     * @param ProfileContext $context
-     */
     protected function doExecute(ProfileContext $context)
     {
         $response = MessageContextHelper::asResponse($context->getInboundContext());
@@ -62,16 +55,16 @@ class AssertionAction extends AbstractProfileAction implements DebugPrintTreeAct
      */
     public function debugPrintTree($depth = 0)
     {
-        $arr = array();
+        $arr = [];
         if ($this->assertionAction instanceof DebugPrintTreeActionInterface) {
             $arr = array_merge($arr, $this->assertionAction->debugPrintTree());
         } else {
-            $arr[get_class($this->assertionAction)] = array();
+            $arr[get_class($this->assertionAction)] = [];
         }
 
-        $result = array(
+        $result = [
             static::class => $arr,
-        );
+        ];
 
         return $result;
     }

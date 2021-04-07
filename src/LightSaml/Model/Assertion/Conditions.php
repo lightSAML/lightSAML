@@ -12,9 +12,9 @@
 namespace LightSaml\Model\Assertion;
 
 use LightSaml\Helper;
+use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\AbstractSamlModel;
 use LightSaml\SamlConstants;
 
 class Conditions extends AbstractSamlModel
@@ -32,11 +32,9 @@ class Conditions extends AbstractSamlModel
     /**
      * @var array|AbstractCondition[]|AudienceRestriction[]|OneTimeUse[]|ProxyRestriction[]
      */
-    protected $items = array();
+    protected $items = [];
 
     /**
-     * @param AbstractCondition $item
-     *
      * @return Conditions
      */
     public function addItem(AbstractCondition $item)
@@ -59,7 +57,7 @@ class Conditions extends AbstractSamlModel
      */
     public function getAllAudienceRestrictions()
     {
-        $result = array();
+        $result = [];
         foreach ($this->items as $item) {
             if ($item instanceof AudienceRestriction) {
                 $result[] = $item;
@@ -88,7 +86,7 @@ class Conditions extends AbstractSamlModel
      */
     public function getAllOneTimeUses()
     {
-        $result = array();
+        $result = [];
         foreach ($this->items as $item) {
             if ($item instanceof OneTimeUse) {
                 $result[] = $item;
@@ -117,7 +115,7 @@ class Conditions extends AbstractSamlModel
      */
     public function getAllProxyRestrictions()
     {
-        $result = array();
+        $result = [];
         foreach ($this->items as $item) {
             if ($item instanceof ProxyRestriction) {
                 $result[] = $item;
@@ -230,9 +228,6 @@ class Conditions extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
@@ -240,7 +235,7 @@ class Conditions extends AbstractSamlModel
         $result = $this->createElement('Conditions', SamlConstants::NS_ASSERTION, $parent, $context);
 
         $this->attributesToXml(
-            array('NotBefore', 'NotOnOrAfter'),
+            ['NotBefore', 'NotOnOrAfter'],
             $result
         );
 
@@ -249,15 +244,11 @@ class Conditions extends AbstractSamlModel
         }
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'Conditions', SamlConstants::NS_ASSERTION);
 
-        $this->attributesFromXml($node, array('NotBefore', 'NotOnOrAfter'));
+        $this->attributesFromXml($node, ['NotBefore', 'NotOnOrAfter']);
 
         $this->manyElementsFromXml(
             $node,

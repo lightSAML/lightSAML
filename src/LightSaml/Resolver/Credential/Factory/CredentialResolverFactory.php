@@ -28,9 +28,6 @@ class CredentialResolverFactory
     /** @var CredentialStoreInterface */
     protected $credentialStore;
 
-    /**
-     * @param CredentialStoreInterface $credentialStore
-     */
     public function __construct(CredentialStoreInterface $credentialStore)
     {
         $this->credentialStore = $credentialStore;

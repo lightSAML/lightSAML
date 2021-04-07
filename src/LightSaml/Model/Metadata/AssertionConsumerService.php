@@ -23,10 +23,6 @@ class AssertionConsumerService extends IndexedEndpoint
         parent::serialize($result, $context);
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'AssertionConsumerService', SamlConstants::NS_METADATA);

@@ -11,14 +11,13 @@
 
 namespace LightSaml\Resolver\Endpoint;
 
+use LightSaml\Criteria\CriteriaSet;
 use LightSaml\Model\Metadata\EndpointReference;
 use LightSaml\Resolver\Endpoint\Criteria\LocationCriteria;
-use LightSaml\Criteria\CriteriaSet;
 
 class LocationEndpointResolver implements EndpointResolverInterface
 {
     /**
-     * @param CriteriaSet         $criteriaSet
      * @param EndpointReference[] $candidates
      *
      * @return EndpointReference[]
@@ -29,7 +28,7 @@ class LocationEndpointResolver implements EndpointResolverInterface
             return $candidates;
         }
 
-        $result = array();
+        $result = [];
         /** @var LocationCriteria $locationCriteria */
         foreach ($criteriaSet->get(LocationCriteria::class) as $locationCriteria) {
             foreach ($candidates as $endpointReference) {

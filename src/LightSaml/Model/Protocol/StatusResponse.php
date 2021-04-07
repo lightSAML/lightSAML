@@ -43,8 +43,6 @@ abstract class StatusResponse extends SamlMessage
     }
 
     /**
-     * @param Status $status
-     *
      * @return StatusResponse
      */
     public function setStatus(Status $status)
@@ -63,31 +61,24 @@ abstract class StatusResponse extends SamlMessage
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
         parent::serialize($parent, $context);
 
-        $this->attributesToXml(array('InResponseTo'), $parent);
+        $this->attributesToXml(['InResponseTo'], $parent);
 
-        $this->singleElementsToXml(array('Status'), $parent, $context);
+        $this->singleElementsToXml(['Status'], $parent, $context);
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
-        $this->attributesFromXml($node, array('InResponseTo'));
+        $this->attributesFromXml($node, ['InResponseTo']);
 
-        $this->singleElementsFromXml($node, $context, array(
-            'Status' => array('samlp', 'LightSaml\Model\Protocol\Status'),
-        ));
+        $this->singleElementsFromXml($node, $context, [
+            'Status' => ['samlp', 'LightSaml\Model\Protocol\Status'],
+        ]);
 
         parent::deserialize($node, $context);
     }

@@ -16,8 +16,6 @@ use LightSaml\Model\Assertion\Assertion;
 interface AssertionValidatorInterface
 {
     /**
-     * @param Assertion $assertion
-     *
      * @throws \LightSaml\Error\LightSamlValidationException
      *
      * @return void

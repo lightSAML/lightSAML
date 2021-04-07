@@ -24,9 +24,6 @@ class SerializationContext
         $this->document = $document ? $document : new \DOMDocument();
     }
 
-    /**
-     * @param \DOMDocument $document
-     */
     public function setDocument(\DOMDocument $document)
     {
         $this->document = $document;

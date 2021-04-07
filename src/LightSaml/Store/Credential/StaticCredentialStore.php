@@ -20,7 +20,7 @@ class StaticCredentialStore implements CredentialStoreInterface
      *
      * @var array
      */
-    protected $credentials = array();
+    protected $credentials = [];
 
     /**
      * @param string $entityId
@@ -45,8 +45,6 @@ class StaticCredentialStore implements CredentialStoreInterface
     }
 
     /**
-     * @param CredentialInterface $credential
-     *
      * @return StaticCredentialStore
      */
     public function add(CredentialInterface $credential)
@@ -64,7 +62,7 @@ class StaticCredentialStore implements CredentialStoreInterface
     private function checkEntityIdExistence($entityId)
     {
         if (false == $this->has($entityId)) {
-            $this->credentials[$entityId] = array();
+            $this->credentials[$entityId] = [];
         }
     }
 }

@@ -19,17 +19,12 @@ class FixedNameIdProvider implements NameIdProviderInterface
     /** @var NameID|null */
     protected $nameId;
 
-    /**
-     * @param NameID|null $nameId
-     */
     public function __construct(NameID $nameId = null)
     {
         $this->nameId = $nameId;
     }
 
     /**
-     * @param NameID|null $nameId
-     *
      * @return FixedNameIdProvider
      */
     public function setNameId(NameID $nameId = null)
@@ -40,8 +35,6 @@ class FixedNameIdProvider implements NameIdProviderInterface
     }
 
     /**
-     * @param AbstractProfileContext $context
-     *
      * @return NameID|null
      */
     public function getNameID(AbstractProfileContext $context)

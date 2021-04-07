@@ -14,9 +14,8 @@ namespace LightSaml\Store\Id;
 class NullIdStore implements IdStoreInterface
 {
     /**
-     * @param string    $entityId
-     * @param string    $id
-     * @param \DateTime $expiryTime
+     * @param string $entityId
+     * @param string $id
      *
      * @return void
      */

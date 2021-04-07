@@ -22,8 +22,6 @@ abstract class AbstractSignatureReader extends Signature
     protected $key;
 
     /**
-     * @param XMLSecurityKey $key
-     *
      * @return bool True if validated, False if validation was not performed
      *
      * @throws \LightSaml\Error\LightSamlSecurityException If validation fails
@@ -84,8 +82,6 @@ abstract class AbstractSignatureReader extends Signature
     abstract public function getAlgorithm();
 
     /**
-     * @param XMLSecurityKey $key
-     *
      * @return XMLSecurityKey
      */
     protected function castKeyIfNecessary(XMLSecurityKey $key)

@@ -22,8 +22,6 @@ use LightSaml\Model\Assertion\AuthnStatement;
 class StatementValidator implements StatementValidatorInterface
 {
     /**
-     * @param AbstractStatement $statement
-     *
      * @throws \LightSaml\Error\LightSamlValidationException
      *
      * @return void
@@ -101,8 +99,6 @@ class StatementValidator implements StatementValidatorInterface
     }
 
     /**
-     * @param Attribute $attribute
-     *
      * @throws LightSamlValidationException
      *
      * @return void

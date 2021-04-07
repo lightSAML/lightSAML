@@ -33,8 +33,7 @@ abstract class Metadata extends AbstractSamlModel
     }
 
     /**
-     * @param string                 $xml
-     * @param DeserializationContext $context
+     * @param string $xml
      *
      * @return EntityDescriptor|EntitiesDescriptor
      *
@@ -57,17 +56,13 @@ abstract class Metadata extends AbstractSamlModel
         }
 
         if (SamlConstants::NS_METADATA !== $node->namespaceURI) {
-            throw new LightSamlXmlException(sprintf(
-                "Invalid namespace '%s' of the root XML element, expected '%s'",
-                $node->namespaceURI,
-                SamlConstants::NS_METADATA
-            ));
+            throw new LightSamlXmlException(sprintf("Invalid namespace '%s' of the root XML element, expected '%s'", $node->namespaceURI, SamlConstants::NS_METADATA));
         }
 
-        $map = array(
+        $map = [
             'EntityDescriptor' => '\LightSaml\Model\Metadata\EntityDescriptor',
             'EntitiesDescriptor' => '\LightSaml\Model\Metadata\EntitiesDescriptor',
-        );
+        ];
 
         $rootElementName = $node->localName;
 

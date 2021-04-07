@@ -31,9 +31,7 @@ class AssertionSignatureValidatorAction extends AbstractAssertionAction
     protected $requireSignature;
 
     /**
-     * @param LoggerInterface             $logger
-     * @param SignatureValidatorInterface $signatureValidator
-     * @param bool                        $requireSignature
+     * @param bool $requireSignature
      */
     public function __construct(LoggerInterface $logger, SignatureValidatorInterface $signatureValidator, $requireSignature = true)
     {
@@ -44,8 +42,6 @@ class AssertionSignatureValidatorAction extends AbstractAssertionAction
     }
 
     /**
-     * @param AssertionContext $context
-     *
      * @return void
      */
     protected function doExecute(AssertionContext $context)
@@ -70,9 +66,9 @@ class AssertionSignatureValidatorAction extends AbstractAssertionAction
                 $keyNames = $credential->getKeyNames();
                 $this->logger->debug(
                     sprintf('Assertion signature validated with key "%s"', implode(', ', $keyNames)),
-                    LogHelper::getActionContext($context, $this, array(
+                    LogHelper::getActionContext($context, $this, [
                         'credential' => $credential,
-                    ))
+                    ])
                 );
             } else {
                 $this->logger->warning(

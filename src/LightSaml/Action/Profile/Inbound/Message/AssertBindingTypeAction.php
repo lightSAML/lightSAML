@@ -23,8 +23,7 @@ class AssertBindingTypeAction extends AbstractProfileAction
     protected $expectedBindingTypes;
 
     /**
-     * @param LoggerInterface $logger
-     * @param string[]        $expectedBindingTypes
+     * @param string[] $expectedBindingTypes
      */
     public function __construct(LoggerInterface $logger, array $expectedBindingTypes)
     {
@@ -33,9 +32,6 @@ class AssertBindingTypeAction extends AbstractProfileAction
         $this->expectedBindingTypes = $expectedBindingTypes;
     }
 
-    /**
-     * @param ProfileContext $context
-     */
     protected function doExecute(ProfileContext $context)
     {
         if (false === in_array($context->getInboundContext()->getBindingType(), $this->expectedBindingTypes)) {
@@ -44,10 +40,10 @@ class AssertBindingTypeAction extends AbstractProfileAction
                 $context->getInboundContext()->getBindingType(),
                 implode(' ', $this->expectedBindingTypes)
             );
-            $this->logger->critical($message, LogHelper::getActionErrorContext($context, $this, array(
+            $this->logger->critical($message, LogHelper::getActionErrorContext($context, $this, [
                 'actualBindingType' => $context->getInboundContext()->getBindingType(),
                 'expectedBindingTypes' => $this->expectedBindingTypes,
-            )));
+            ]));
 
             throw new LightSamlContextException($context, $message);
         }

@@ -23,7 +23,7 @@ class ParameterBag implements \IteratorAggregate, \Countable, \Serializable
     /**
      * @param array $parameters An array of parameters
      */
-    public function __construct(array $parameters = array())
+    public function __construct(array $parameters = [])
     {
         $this->parameters = $parameters;
     }
@@ -53,17 +53,15 @@ class ParameterBag implements \IteratorAggregate, \Countable, \Serializable
      *
      * @param array $parameters An array of parameters
      */
-    public function replace(array $parameters = array())
+    public function replace(array $parameters = [])
     {
         $this->parameters = $parameters;
     }
 
     /**
      * Adds parameters.
-     *
-     * @param array $parameters
      */
-    public function add(array $parameters = array())
+    public function add(array $parameters = [])
     {
         $this->parameters = array_replace($this->parameters, $parameters);
     }

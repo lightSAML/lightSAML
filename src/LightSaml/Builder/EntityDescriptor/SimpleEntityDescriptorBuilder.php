@@ -11,6 +11,7 @@
 
 namespace LightSaml\Builder\EntityDescriptor;
 
+use LightSaml\Credential\X509Certificate;
 use LightSaml\Model\Metadata\AssertionConsumerService;
 use LightSaml\Model\Metadata\EntityDescriptor;
 use LightSaml\Model\Metadata\IdpSsoDescriptor;
@@ -20,7 +21,6 @@ use LightSaml\Model\Metadata\SingleSignOnService;
 use LightSaml\Model\Metadata\SpSsoDescriptor;
 use LightSaml\Provider\EntityDescriptor\EntityDescriptorProviderInterface;
 use LightSaml\SamlConstants;
-use LightSaml\Credential\X509Certificate;
 
 class SimpleEntityDescriptorBuilder implements EntityDescriptorProviderInterface
 {
@@ -49,22 +49,21 @@ class SimpleEntityDescriptorBuilder implements EntityDescriptorProviderInterface
     private $entityDescriptor;
 
     /**
-     * @param string          $entityId
-     * @param string          $acsUrl
-     * @param string          $ssoUrl
-     * @param X509Certificate $ownCertificate
-     * @param string[]        $acsBindings
-     * @param string[]        $ssoBindings
-     * @param string[]|null   $use
+     * @param string        $entityId
+     * @param string        $acsUrl
+     * @param string        $ssoUrl
+     * @param string[]      $acsBindings
+     * @param string[]      $ssoBindings
+     * @param string[]|null $use
      */
     public function __construct(
         $entityId,
         $acsUrl,
         $ssoUrl,
         X509Certificate $ownCertificate,
-        array $acsBindings = array(SamlConstants::BINDING_SAML2_HTTP_POST),
-        array $ssoBindings = array(SamlConstants::BINDING_SAML2_HTTP_POST, SamlConstants::BINDING_SAML2_HTTP_REDIRECT),
-        $use = array(KeyDescriptor::USE_ENCRYPTION, KeyDescriptor::USE_SIGNING)
+        array $acsBindings = [SamlConstants::BINDING_SAML2_HTTP_POST],
+        array $ssoBindings = [SamlConstants::BINDING_SAML2_HTTP_POST, SamlConstants::BINDING_SAML2_HTTP_REDIRECT],
+        $use = [KeyDescriptor::USE_ENCRYPTION, KeyDescriptor::USE_SIGNING]
     ) {
         $this->entityId = $entityId;
         $this->acsUrl = $acsUrl;
@@ -157,9 +156,6 @@ class SimpleEntityDescriptorBuilder implements EntityDescriptorProviderInterface
         return $idpSso;
     }
 
-    /**
-     * @param RoleDescriptor $descriptor
-     */
     protected function addKeyDescriptors(RoleDescriptor $descriptor)
     {
         if ($this->use) {

@@ -25,10 +25,6 @@ class SessionProcessor implements SessionProcessorInterface
     /** @var TimeProviderInterface */
     protected $timeProvider;
 
-    /**
-     * @param SsoStateStoreInterface $ssoStateStore
-     * @param TimeProviderInterface  $timeProvider
-     */
     public function __construct(SsoStateStoreInterface $ssoStateStore, TimeProviderInterface $timeProvider)
     {
         $this->ssoStateStore = $ssoStateStore;
@@ -59,8 +55,6 @@ class SessionProcessor implements SessionProcessorInterface
     }
 
     /**
-     * @param Assertion $assertion
-     *
      * @return bool
      */
     protected function supportsSession(Assertion $assertion)
@@ -73,11 +67,8 @@ class SessionProcessor implements SessionProcessorInterface
     }
 
     /**
-     * @param string    $ownEntityId
-     * @param string    $partyEntityId
-     * @param SsoState  $ssoState
-     * @param Assertion $assertion
-     * @param \DateTime $now
+     * @param string $ownEntityId
+     * @param string $partyEntityId
      */
     protected function checkSession($ownEntityId, $partyEntityId, SsoState $ssoState, Assertion $assertion, \DateTime $now)
     {
@@ -91,11 +82,8 @@ class SessionProcessor implements SessionProcessorInterface
     }
 
     /**
-     * @param SsoState  $ssoState
-     * @param Assertion $assertion
-     * @param \DateTime $now
-     * @param string    $ownEntityId
-     * @param string    $partyEntityId
+     * @param string $ownEntityId
+     * @param string $partyEntityId
      *
      * @return SsoSessionState
      */
@@ -118,7 +106,6 @@ class SessionProcessor implements SessionProcessorInterface
 
     /**
      * @param SsoSessionState[] $sessions
-     * @param \DateTime         $now
      */
     protected function updateLastAuthn(array $sessions, \DateTime $now)
     {
@@ -128,10 +115,8 @@ class SessionProcessor implements SessionProcessorInterface
     }
 
     /**
-     * @param SsoState  $ssoState
-     * @param Assertion $assertion
-     * @param string    $ownEntityId
-     * @param string    $partyEntityId
+     * @param string $ownEntityId
+     * @param string $partyEntityId
      *
      * @return \LightSaml\State\Sso\SsoSessionState[]
      */

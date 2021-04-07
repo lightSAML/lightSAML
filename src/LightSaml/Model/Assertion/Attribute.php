@@ -11,9 +11,9 @@
 
 namespace LightSaml\Model\Assertion;
 
+use LightSaml\Model\AbstractSamlModel;
 use LightSaml\Model\Context\DeserializationContext;
 use LightSaml\Model\Context\SerializationContext;
-use LightSaml\Model\AbstractSamlModel;
 use LightSaml\SamlConstants;
 
 class Attribute extends AbstractSamlModel
@@ -38,7 +38,7 @@ class Attribute extends AbstractSamlModel
     {
         $this->name = $name;
         if ($value) {
-            $this->attributeValue = is_array($value) ? $value : array($value);
+            $this->attributeValue = is_array($value) ? $value : [$value];
         }
     }
 
@@ -50,7 +50,7 @@ class Attribute extends AbstractSamlModel
     public function addAttributeValue($attributeValue)
     {
         if (false == is_array($this->attributeValue)) {
-            $this->attributeValue = array();
+            $this->attributeValue = [];
         }
         $this->attributeValue[] = $attributeValue;
 
@@ -65,7 +65,7 @@ class Attribute extends AbstractSamlModel
     public function setAttributeValue($attributeValue)
     {
         if (false == is_array($attributeValue)) {
-            $attributeValue = array($attributeValue);
+            $attributeValue = [$attributeValue];
         }
         $this->attributeValue = $attributeValue;
 
@@ -151,31 +151,24 @@ class Attribute extends AbstractSamlModel
     }
 
     /**
-     * @param \DOMNode             $parent
-     * @param SerializationContext $context
-     *
      * @return void
      */
     public function serialize(\DOMNode $parent, SerializationContext $context)
     {
         $result = $this->createElement('Attribute', SamlConstants::NS_ASSERTION, $parent, $context);
 
-        $this->attributesToXml(array('Name', 'NameFormat', 'FriendlyName'), $result);
+        $this->attributesToXml(['Name', 'NameFormat', 'FriendlyName'], $result);
 
         $this->manyElementsToXml($this->getAllAttributeValues(), $result, $context, 'AttributeValue', SamlConstants::NS_ASSERTION);
     }
 
-    /**
-     * @param \DOMNode               $node
-     * @param DeserializationContext $context
-     */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
         $this->checkXmlNodeName($node, 'Attribute', SamlConstants::NS_ASSERTION);
 
-        $this->attributesFromXml($node, array('Name', 'NameFormat', 'FriendlyName'));
+        $this->attributesFromXml($node, ['Name', 'NameFormat', 'FriendlyName']);
 
-        $this->attributeValue = array();
+        $this->attributeValue = [];
         $this->manyElementsFromXml($node, $context, 'AttributeValue', 'saml', null, 'addAttributeValue');
     }
 }

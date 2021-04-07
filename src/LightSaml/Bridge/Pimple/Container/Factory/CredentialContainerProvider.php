@@ -29,12 +29,8 @@ class CredentialContainerProvider implements ServiceProviderInterface
     private $ownContainer;
 
     /** @var CredentialInterface[] */
-    private $extraCredentials = array();
+    private $extraCredentials = [];
 
-    /**
-     * @param PartyContainerInterface $partyContainer
-     * @param OwnContainerInterface   $ownContainer
-     */
     public function __construct(PartyContainerInterface $partyContainer, OwnContainerInterface $ownContainer)
     {
         $this->ownContainer = $ownContainer;
@@ -42,8 +38,6 @@ class CredentialContainerProvider implements ServiceProviderInterface
     }
 
     /**
-     * @param CredentialInterface $credential
-     *
      * @return CredentialContainerProvider
      */
     public function addExtraCredential(CredentialInterface $credential)
