@@ -30,12 +30,10 @@ class HasAssertionsValidatorActionTest extends BaseTestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Response must contain at least one assertion
-     */
     public function test_throws_context_exception_if_no_assertions()
     {
+        $this->expectExceptionMessage("Response must contain at least one assertion");
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
         $action = new HasAssertionsValidatorAction($this->getLoggerMock());
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);

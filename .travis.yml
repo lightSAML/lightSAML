@@ -6,6 +6,7 @@ php:
     - 7.2
     - 7.3
     - 7.4
+    - 8.0
 
 before_install:
     - composer self-update
@@ -19,8 +20,8 @@ install:
 
 script:
     - if [ "$TRAVIS_PHP_VERSION" == "7.2" ]; then php php-cs-fixer.phar fix --dry-run -v; fi
-    - if [ "$TRAVIS_PHP_VERSION" == "7.2" ]; then bin/phpunit --coverage-clover build/logs/clover.xml; fi
-    - if [ "$TRAVIS_PHP_VERSION" != "7.2" ]; then bin/phpunit; fi
+    - if [ "$TRAVIS_PHP_VERSION" == "7.2" ]; then vendor/bin/phpunit --coverage-clover build/logs/clover.xml; fi
+    - if [ "$TRAVIS_PHP_VERSION" != "7.2" ]; then vendor/bin/phpunit; fi
 
 after_script:
     - if [ "$TRAVIS_PHP_VERSION" == "7.2" ]; then php php-coveralls.phar -v; fi

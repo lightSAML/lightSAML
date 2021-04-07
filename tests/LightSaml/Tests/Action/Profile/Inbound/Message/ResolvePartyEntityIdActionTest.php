@@ -46,12 +46,10 @@ class ResolvePartyEntityIdActionTest extends BaseTestCase
         $action->execute($context);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage EntityID is not set in the party context
-     */
     public function test_throws_if_entity_id_is_not_set_in_context()
     {
+        $this->expectExceptionMessage("EntityID is not set in the party context");
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
         $action = new ResolvePartyEntityIdAction(
             $logger = $this->getLoggerMock(),
             $spEntityStore = $this->getEntityDescriptorStoreMock(),

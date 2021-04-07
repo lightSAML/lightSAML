@@ -15,11 +15,9 @@ class RoleDescriptorTest extends BaseTestCase
         $this->assertEquals($expectedValue, $rd->getCacheDuration());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function test__set_invalid_cache_duration()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $rd = new RoleDescriptorMock();
         $rd->setCacheDuration('123');
     }

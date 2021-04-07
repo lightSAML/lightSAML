@@ -40,12 +40,10 @@ class MessageSignatureValidatorActionTest extends BaseTestCase
         $action->execute($context);
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlModelException
-     * @expectedExceptionMessage Expected AbstractSignatureReader
-     */
     public function test_throws_if_not_signature_reader()
     {
+        $this->expectExceptionMessage("Expected AbstractSignatureReader");
+        $this->expectException(\LightSaml\Error\LightSamlModelException::class);
         $action = new MessageSignatureValidatorAction(
             $logger = $this->getLoggerMock(),
             $signatureValidator = $this->getSignatureValidatorMock()

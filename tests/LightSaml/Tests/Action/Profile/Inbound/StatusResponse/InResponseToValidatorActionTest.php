@@ -58,12 +58,10 @@ class InResponseToValidatorActionTest extends BaseTestCase
         $this->assertSame($requestState, $requestStateContext->getRequestState());
     }
 
-    /**
-     * @expectedException \LightSaml\Error\LightSamlContextException
-     * @expectedExceptionMessage Unknown InResponseTo '1234567890'
-     */
     public function test_throws_context_exception_if_no_request_state_for_in_response_to_from_message()
     {
+        $this->expectExceptionMessage("Unknown InResponseTo '1234567890'");
+        $this->expectException(\LightSaml\Error\LightSamlContextException::class);
         $action = new InResponseToValidatorAction(
             $loggerMock = $this->getLoggerMock(),
             $requestStateStoreMock = $this->getRequestStateStoreMock()
