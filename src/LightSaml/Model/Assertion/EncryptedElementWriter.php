@@ -47,6 +47,7 @@ abstract class EncryptedElementWriter extends EncryptedElement
         $oldKey = $key;
         $key = new XMLSecurityKey($this->keyTransportEncryption, ['type' => 'public']);
         $key->loadKey($oldKey->key);
+        $key->name = $oldKey->name;
 
         $serializationContext = new SerializationContext();
         $object->serialize($serializationContext->getDocument(), $serializationContext);
