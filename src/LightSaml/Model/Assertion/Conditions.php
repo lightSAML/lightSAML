@@ -140,7 +140,7 @@ class Conditions extends AbstractSamlModel
     }
 
     /**
-     * @param int|string|\DateTime|null $notBefore
+     * @param int|string|\DateTime $notBefore
      *
      * @return Conditions
      */
@@ -160,7 +160,7 @@ class Conditions extends AbstractSamlModel
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
     public function getNotBeforeString()
     {
@@ -184,7 +184,7 @@ class Conditions extends AbstractSamlModel
     }
 
     /**
-     * @param int|null $notOnOrAfter
+     * @param int|string|\DateTime $notOnOrAfter
      *
      * @return Conditions
      */
