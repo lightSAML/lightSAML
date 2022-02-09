@@ -16,7 +16,7 @@ use LightSaml\Store\Credential\CredentialStoreInterface;
 
 class CredentialContainer extends AbstractPimpleContainer implements CredentialContainerInterface
 {
-    const CREDENTIAL_STORE = 'lightsaml.container.credential_store';
+    public const CREDENTIAL_STORE = 'lightsaml.container.credential_store';
 
     /**
      * @return CredentialStoreInterface

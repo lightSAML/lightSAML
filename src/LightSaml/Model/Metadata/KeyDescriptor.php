@@ -20,8 +20,8 @@ use LightSaml\SamlConstants;
 
 class KeyDescriptor extends AbstractSamlModel
 {
-    const USE_SIGNING = 'signing';
-    const USE_ENCRYPTION = 'encryption';
+    public const USE_SIGNING = 'signing';
+    public const USE_ENCRYPTION = 'encryption';
 
     /** @var string */
     protected $use;

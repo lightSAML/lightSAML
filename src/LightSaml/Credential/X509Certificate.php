@@ -110,7 +110,7 @@ class X509Certificate
      */
     public function toPem()
     {
-        $result = "-----BEGIN CERTIFICATE-----\n".chunk_split($this->getData(), 64, "\n")."-----END CERTIFICATE-----\n";
+        $result = "-----BEGIN CERTIFICATE-----\n" . chunk_split($this->getData(), 64, "\n") . "-----END CERTIFICATE-----\n";
 
         return $result;
     }

@@ -15,9 +15,9 @@ use LightSaml\Error\LightSamlContextException;
 
 class ProfileContext extends AbstractProfileContext
 {
-    const ROLE_SP = 'sp';
-    const ROLE_IDP = 'idp';
-    const ROLE_NONE = 'none';
+    public const ROLE_SP = 'sp';
+    public const ROLE_IDP = 'idp';
+    public const ROLE_NONE = 'none';
 
     /** @var string */
     private $profileId;

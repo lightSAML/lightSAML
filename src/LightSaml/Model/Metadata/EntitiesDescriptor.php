@@ -188,7 +188,7 @@ class EntitiesDescriptor extends Metadata
     public function getValidUntilDateTime()
     {
         if ($this->validUntil) {
-            return new \DateTime('@'.$this->validUntil);
+            return new \DateTime('@' . $this->validUntil);
         }
 
         return null;

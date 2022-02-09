@@ -99,7 +99,7 @@ class AuthnStatement extends AbstractStatement
     public function getAuthnInstantDateTime()
     {
         if ($this->authnInstant) {
-            return new \DateTime('@'.$this->authnInstant);
+            return new \DateTime('@' . $this->authnInstant);
         }
 
         return null;
@@ -163,7 +163,7 @@ class AuthnStatement extends AbstractStatement
     public function getSessionNotOnOrAfterDateTime()
     {
         if ($this->sessionNotOnOrAfter) {
-            return new \DateTime('@'.$this->sessionNotOnOrAfter);
+            return new \DateTime('@' . $this->sessionNotOnOrAfter);
         }
 
         return null;

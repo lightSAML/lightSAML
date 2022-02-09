@@ -13,9 +13,9 @@ namespace LightSaml\Validator\Model\Xsd;
 
 class XsdError
 {
-    const WARNING = 'Warning';
-    const ERROR = 'Error';
-    const FATAL = 'Fatal';
+    public const WARNING = 'Warning';
+    public const ERROR = 'Error';
+    public const FATAL = 'Fatal';
 
     private static $levelMap = [
         LIBXML_ERR_WARNING => self::WARNING,

@@ -25,16 +25,16 @@ use LightSaml\Validator\Model\Signature\SignatureValidatorInterface;
 
 class ServiceContainer extends AbstractPimpleContainer implements ServiceContainerInterface
 {
-    const ASSERTION_VALIDATOR = 'lightsaml.container.assertion_validator';
-    const ASSERTION_TIME_VALIDATOR = 'lightsaml.container.assertion_time_validator';
-    const SIGNATURE_RESOLVER = 'lightsaml.container.signature_resolver';
-    const ENDPOINT_RESOLVER = 'lightsaml.container.endpoint_resolver';
-    const NAME_ID_VALIDATOR = 'lightsaml.container.name_id_validator';
-    const BINDING_FACTORY = 'lightsaml.container.binding_factory';
-    const SIGNATURE_VALIDATOR = 'lightsaml.container.signature_validator';
-    const CREDENTIAL_RESOLVER = 'lightsaml.container.credential_resolver';
-    const LOGOUT_SESSION_RESOLVER = 'lightsaml.container.logout_session_resolver';
-    const SESSION_PROCESSOR = 'lightsaml.container.session_processor';
+    public const ASSERTION_VALIDATOR = 'lightsaml.container.assertion_validator';
+    public const ASSERTION_TIME_VALIDATOR = 'lightsaml.container.assertion_time_validator';
+    public const SIGNATURE_RESOLVER = 'lightsaml.container.signature_resolver';
+    public const ENDPOINT_RESOLVER = 'lightsaml.container.endpoint_resolver';
+    public const NAME_ID_VALIDATOR = 'lightsaml.container.name_id_validator';
+    public const BINDING_FACTORY = 'lightsaml.container.binding_factory';
+    public const SIGNATURE_VALIDATOR = 'lightsaml.container.signature_validator';
+    public const CREDENTIAL_RESOLVER = 'lightsaml.container.credential_resolver';
+    public const LOGOUT_SESSION_RESOLVER = 'lightsaml.container.logout_session_resolver';
+    public const SESSION_PROCESSOR = 'lightsaml.container.session_processor';
 
     /**
      * @return AssertionValidatorInterface
