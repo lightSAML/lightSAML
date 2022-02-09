@@ -41,7 +41,8 @@ class AssertionIssuerFormatValidatorAction extends AbstractAssertionAction
             throw new LightSamlContextException($context, $message);
         }
 
-        if ($context->getAssertion()->getIssuer()->getFormat() &&
+        if (
+            $context->getAssertion()->getIssuer()->getFormat() &&
             $context->getAssertion()->getIssuer()->getFormat() != $this->expectedIssuerFormat
         ) {
             $message = sprintf(

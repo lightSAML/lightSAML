@@ -16,8 +16,8 @@ use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class SigningOptions
 {
-    const CERTIFICATE_SUBJECT_NAME = 'subjectName';
-    const CERTIFICATE_ISSUER_SERIAL = 'issuerSerial';
+    public const CERTIFICATE_SUBJECT_NAME = 'subjectName';
+    public const CERTIFICATE_ISSUER_SERIAL = 'issuerSerial';
 
     /** @var bool */
     private $enabled = true;

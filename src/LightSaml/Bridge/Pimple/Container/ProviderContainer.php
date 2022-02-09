@@ -19,9 +19,9 @@ use LightSaml\Provider\Session\SessionInfoProviderInterface;
 
 class ProviderContainer extends AbstractPimpleContainer implements ProviderContainerInterface
 {
-    const ATTRIBUTE_VALUE_PROVIDER = 'lightsaml.container.attribute_value_provider';
-    const SESSION_INFO_PROVIDER = 'lightsaml.container.session_info_provider';
-    const NAME_ID_PROVIDER = 'lightsaml.container.name_id_provider';
+    public const ATTRIBUTE_VALUE_PROVIDER = 'lightsaml.container.attribute_value_provider';
+    public const SESSION_INFO_PROVIDER = 'lightsaml.container.session_info_provider';
+    public const NAME_ID_PROVIDER = 'lightsaml.container.name_id_provider';
 
     /**
      * @return AttributeValueProviderInterface

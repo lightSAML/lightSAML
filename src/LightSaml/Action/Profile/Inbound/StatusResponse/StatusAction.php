@@ -38,12 +38,12 @@ class StatusAction extends AbstractProfileAction
         }
 
         $status = $statusResponse->getStatus()->getStatusCode()->getValue();
-        $status .= "\n".$statusResponse->getStatus()->getStatusMessage();
+        $status .= "\n" . $statusResponse->getStatus()->getStatusMessage();
         if ($statusResponse->getStatus()->getStatusCode()->getStatusCode()) {
-            $status .= "\n".$statusResponse->getStatus()->getStatusCode()->getStatusCode()->getValue();
+            $status .= "\n" . $statusResponse->getStatus()->getStatusCode()->getStatusCode()->getValue();
         }
 
-        $message = 'Unsuccessful SAML response: '.$status;
+        $message = 'Unsuccessful SAML response: ' . $status;
         $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, ['status' => $status]));
         throw new LightSamlAuthenticationException($statusResponse, $message);
     }

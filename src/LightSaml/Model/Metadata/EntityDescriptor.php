@@ -218,7 +218,8 @@ class EntityDescriptor extends Metadata
      */
     public function addItem($item)
     {
-        if (false == $item instanceof IdpSsoDescriptor &&
+        if (
+            false == $item instanceof IdpSsoDescriptor &&
             false == $item instanceof SpSsoDescriptor
         ) {
             throw new \InvalidArgumentException('EntityDescriptor item must be IdpSsoDescriptor or SpSsoDescriptor');
@@ -357,7 +358,7 @@ class EntityDescriptor extends Metadata
     public function getValidUntilDateTime()
     {
         if ($this->validUntil) {
-            return new \DateTime('@'.$this->validUntil);
+            return new \DateTime('@' . $this->validUntil);
         }
 
         return null;

@@ -170,7 +170,7 @@ abstract class AbstractNameID extends AbstractSamlModel
         if (SamlConstants::NS_ASSERTION == $parent->namespaceURI) {
             $result = $this->createElement($this->getElementName(), SamlConstants::NS_ASSERTION, $parent, $context);
         } else {
-            $result = $this->createElement('saml:'.$this->getElementName(), SamlConstants::NS_ASSERTION, $parent, $context);
+            $result = $this->createElement('saml:' . $this->getElementName(), SamlConstants::NS_ASSERTION, $parent, $context);
         }
 
         /* @var \DOMElement $parent */

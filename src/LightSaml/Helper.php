@@ -13,7 +13,7 @@ namespace LightSaml;
 
 final class Helper
 {
-    const TIME_FORMAT = 'Y-m-d\TH:i:s\Z';
+    public const TIME_FORMAT = 'Y-m-d\TH:i:s\Z';
 
     /**
      * @param string $duration
@@ -69,12 +69,14 @@ final class Helper
     public static function parseSAMLTime($time)
     {
         $matches = [];
-        if (0 == preg_match(
+        if (
+            0 == preg_match(
                 '/^(\\d\\d\\d\\d)-(\\d\\d)-(\\d\\d)T(\\d\\d):(\\d\\d):(\\d\\d)(?:\\.\\d+)?(Z|[+-]\\d\\d:\\d\\d)$/D',
                 $time,
                 $matches
-            )) {
-            throw new \InvalidArgumentException('Invalid SAML2 timestamp: '.$time);
+            )
+        ) {
+            throw new \InvalidArgumentException('Invalid SAML2 timestamp: ' . $time);
         }
 
         return strtotime($time);
@@ -127,7 +129,7 @@ final class Helper
      */
     public static function generateID()
     {
-        return '_'.self::stringToHex(self::generateRandomBytes(21));
+        return '_' . self::stringToHex(self::generateRandomBytes(21));
     }
 
     /**
