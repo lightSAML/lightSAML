@@ -38,7 +38,7 @@
         "symfony/dom-crawler": "~5.0",
         "symfony/css-selector": "~5.0",
         "pimple/pimple": "~3.0",
-        "phpunit/phpunit": "~9.5",
+        "phpunit/phpunit": "~8.4|~9.5",
         "monolog/monolog": "^2.0.0"
     },
     "suggest": {
