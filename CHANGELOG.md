@@ -2,6 +2,9 @@
 
 All notable changes will be documented in this file.
 
+## [2.3.0] - 2022-02-09
++ Update to symfony packages 6.0
+
 ## [2.2.0] - 2022-02-09
 + Run tests by GitHub's actions.
 
