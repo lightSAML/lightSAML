@@ -39,7 +39,8 @@ class InResponseToValidatorAction extends AbstractAssertionAction
         }
 
         foreach ($context->getAssertion()->getSubject()->getAllSubjectConfirmations() as $subjectConfirmation) {
-            if ($subjectConfirmation->getSubjectConfirmationData() &&
+            if (
+                $subjectConfirmation->getSubjectConfirmationData() &&
                 $subjectConfirmation->getSubjectConfirmationData()->getInResponseTo()
             ) {
                 $requestState = $this->validateInResponseTo(

@@ -177,7 +177,7 @@ class Conditions extends AbstractSamlModel
     public function getNotBeforeDateTime()
     {
         if ($this->notBefore) {
-            return new \DateTime('@'.$this->notBefore);
+            return new \DateTime('@' . $this->notBefore);
         }
 
         return null;
@@ -221,7 +221,7 @@ class Conditions extends AbstractSamlModel
     public function getNotOnOrAfterDateTime()
     {
         if ($this->notOnOrAfter) {
-            return new \DateTime('@'.$this->notOnOrAfter);
+            return new \DateTime('@' . $this->notOnOrAfter);
         }
 
         return null;

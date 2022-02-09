@@ -61,14 +61,16 @@ class StatementValidator implements StatementValidatorInterface
 
     private function validateAuthnContext(AuthnContext $authnContext)
     {
-        if (false == $authnContext->getAuthnContextClassRef() &&
+        if (
+            false == $authnContext->getAuthnContextClassRef() &&
             false == $authnContext->getAuthnContextDecl() &&
             false == $authnContext->getAuthnContextDeclRef()
         ) {
             throw new LightSamlValidationException('AuthnContext element MUST contain at least one AuthnContextClassRef, AuthnContextDecl or AuthnContextDeclRef element');
         }
 
-        if ($authnContext->getAuthnContextClassRef() &&
+        if (
+            $authnContext->getAuthnContextClassRef() &&
             $authnContext->getAuthnContextDecl() &&
             $authnContext->getAuthnContextDeclRef()
         ) {

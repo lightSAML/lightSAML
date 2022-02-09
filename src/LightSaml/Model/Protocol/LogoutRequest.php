@@ -87,7 +87,7 @@ class LogoutRequest extends AbstractRequest
     public function getNotOnOrAfterDateTime()
     {
         if ($this->notOnOrAfter) {
-            return new \DateTime('@'.$this->notOnOrAfter);
+            return new \DateTime('@' . $this->notOnOrAfter);
         }
 
         return null;

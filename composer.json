@@ -39,7 +39,8 @@
         "symfony/css-selector": "~5.0",
         "pimple/pimple": "~3.0",
         "phpunit/phpunit": "~8.4|~9.5",
-        "monolog/monolog": "^2.0.0"
+        "monolog/monolog": "^2.0.0",
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "suggest": {
         "lightsaml/symfony-bridge": "Symfony 2 build container bridge",

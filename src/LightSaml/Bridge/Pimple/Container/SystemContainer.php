@@ -20,11 +20,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SystemContainer extends AbstractPimpleContainer implements SystemContainerInterface
 {
-    const REQUEST = 'lightsaml.container.request';
-    const SESSION = 'lightsaml.container.session';
-    const TIME_PROVIDER = 'lightsaml.container.time_provider';
-    const EVENT_DISPATCHER = 'lightsaml.container.event_dispatcher';
-    const LOGGER = 'lightsaml.container.logger';
+    public const REQUEST = 'lightsaml.container.request';
+    public const SESSION = 'lightsaml.container.session';
+    public const TIME_PROVIDER = 'lightsaml.container.time_provider';
+    public const EVENT_DISPATCHER = 'lightsaml.container.event_dispatcher';
+    public const LOGGER = 'lightsaml.container.logger';
 
     /**
      * @return Request

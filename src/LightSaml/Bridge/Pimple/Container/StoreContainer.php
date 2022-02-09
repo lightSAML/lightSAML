@@ -18,9 +18,9 @@ use LightSaml\Store\Sso\SsoStateStoreInterface;
 
 class StoreContainer extends AbstractPimpleContainer implements StoreContainerInterface
 {
-    const REQUEST_STATE_STORE = 'lightsaml.container.request_state_store';
-    const ID_STATE_STORE = 'lightsaml.container.id_state_store';
-    const SSO_STATE_STORE = 'lightsaml.container.sso_state_store';
+    public const REQUEST_STATE_STORE = 'lightsaml.container.request_state_store';
+    public const ID_STATE_STORE = 'lightsaml.container.id_state_store';
+    public const SSO_STATE_STORE = 'lightsaml.container.sso_state_store';
 
     /**
      * @return RequestStateStoreInterface

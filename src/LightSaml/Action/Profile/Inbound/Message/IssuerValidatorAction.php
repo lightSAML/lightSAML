@@ -52,7 +52,8 @@ class IssuerValidatorAction extends AbstractProfileAction
             throw new LightSamlContextException($context, $message);
         }
 
-        if ($this->allowedFormat &&
+        if (
+            $this->allowedFormat &&
             $message->getIssuer()->getValue() &&
             $message->getIssuer()->getFormat() &&
             $message->getIssuer()->getFormat() != $this->allowedFormat

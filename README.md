@@ -3,7 +3,7 @@ SAML 2.0 PHP Library
 
 [![GitHub release](https://img.shields.io/github/release/lightsaml/lightsaml.svg)](https://github.com/lightSAML/lightSAML)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Build Status](https://travis-ci.org/lightSAML/lightSAML.svg?branch=master)](https://travis-ci.org/lightSAML/lightSAML)
+[![Run tests](https://github.com/lightSAML/lightSAML/actions/workflows/run_tests.yml/badge.svg)](https://github.com/lightSAML/lightSAML/actions/workflows/run_tests.yml)
 [![Coverage Status](https://coveralls.io/repos/github/lightSAML/lightSAML/badge.svg?branch=master)](https://coveralls.io/github/lightSAML/lightSAML?branch=master)
 [![Scrutinizer](https://scrutinizer-ci.com/g/lightSAML/lightSAML/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/lightSAML/lightSAML/?branch=master)
 [![Packagist Version](https://img.shields.io/packagist/v/lightsaml/lightsaml.svg?style=flat-square)](https://packagist.org/packages/lightsaml/lightsaml)

@@ -50,7 +50,8 @@ class FlushRequestStatesAction extends AbstractProfileAction
      */
     protected function flush($requestStateContext = null)
     {
-        if ($requestStateContext instanceof RequestStateContext &&
+        if (
+            $requestStateContext instanceof RequestStateContext &&
             $requestStateContext->getRequestState() &&
             $requestStateContext->getRequestState()->getId()
         ) {

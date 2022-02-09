@@ -179,7 +179,7 @@ abstract class AbstractContext implements ContextInterface
                     $arr = array_merge($arr, [$name => get_class($subContext)]);
                 }
             }
-            $result[$ownName.'__children'] = $arr;
+            $result[$ownName . '__children'] = $arr;
         }
 
         return $result;

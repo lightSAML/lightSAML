@@ -133,7 +133,8 @@ class AssertionValidator implements AssertionValidatorInterface
 
     protected function validateConditionsInterval(Conditions $conditions)
     {
-        if ($conditions->getNotBeforeTimestamp() &&
+        if (
+            $conditions->getNotBeforeTimestamp() &&
             $conditions->getNotOnOrAfterTimestamp() &&
             $conditions->getNotBeforeTimestamp() > $conditions->getNotOnOrAfterTimestamp()
         ) {
