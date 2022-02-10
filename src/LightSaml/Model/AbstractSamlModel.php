@@ -200,7 +200,7 @@ abstract class AbstractSamlModel implements SamlElementInterface
     {
         $value = $node->getAttribute($attributeName);
         if ('' !== $value) {
-            $setter = 'set'.$attributeName;
+            $setter = 'set' . $attributeName;
             if (method_exists($this, $setter)) {
                 $this->{$setter}($value);
             }
@@ -225,7 +225,7 @@ abstract class AbstractSamlModel implements SamlElementInterface
         $value = $arr->length > 0 ? $arr->item(0) : null;
 
         if ($value) {
-            $setter = 'set'.$elementName;
+            $setter = 'set' . $elementName;
             if (false == method_exists($this, $setter)) {
                 throw new \LogicException(sprintf("Unable to find setter for element '%s' in class '%s'", $elementName, get_class($this)));
             }
@@ -275,9 +275,9 @@ abstract class AbstractSamlModel implements SamlElementInterface
         if (false !== ($pos = strpos($name, ':'))) {
             $name = substr($name, $pos + 1);
         }
-        $getter = 'get'.$name.'String';
+        $getter = 'get' . $name . 'String';
         if (false == method_exists($this, $getter)) {
-            $getter = 'get'.$name;
+            $getter = 'get' . $name;
         }
         if (false == method_exists($this, $getter)) {
             throw new \LogicException(sprintf("Unable to find getter method for '%s' on '%s'", $name, get_class($this)));

@@ -196,7 +196,7 @@ class HttpRedirectBinding extends AbstractBinding
     protected function addRelayStateToUrl(&$msg, SamlMessage $message)
     {
         if (null !== $message->getRelayState()) {
-            $msg .= '&RelayState='.urlencode($message->getRelayState());
+            $msg .= '&RelayState=' . urlencode($message->getRelayState());
         }
     }
 
@@ -209,9 +209,9 @@ class HttpRedirectBinding extends AbstractBinding
         $key = $signature ? $signature->getXmlSecurityKey() : null;
 
         if (null != $key) {
-            $msg .= '&SigAlg='.urlencode($key->type);
+            $msg .= '&SigAlg=' . urlencode($key->type);
             $signature = $key->signData($msg);
-            $msg .= '&Signature='.urlencode(base64_encode($signature));
+            $msg .= '&Signature=' . urlencode(base64_encode($signature));
         }
     }
 
@@ -225,9 +225,9 @@ class HttpRedirectBinding extends AbstractBinding
     {
         $destination = $message->getDestination() ? $message->getDestination() : $destination;
         if (false === strpos($destination, '?')) {
-            $destination .= '?'.$msg;
+            $destination .= '?' . $msg;
         } else {
-            $destination .= '&'.$msg;
+            $destination .= '&' . $msg;
         }
 
         return $destination;
@@ -251,17 +251,17 @@ class HttpRedirectBinding extends AbstractBinding
             switch ($name) {
                 case 'SAMLRequest':
                 case 'SAMLResponse':
-                    $sigQuery = $name.'='.$value;
+                    $sigQuery = $name . '=' . $value;
                     break;
                 case 'RelayState':
-                    $relayState = '&RelayState='.$value;
+                    $relayState = '&RelayState=' . $value;
                     break;
                 case 'SigAlg':
-                    $sigAlg = '&SigAlg='.$value;
+                    $sigAlg = '&SigAlg=' . $value;
                     break;
             }
         }
-        $result['SignedQuery'] = $sigQuery.$relayState.$sigAlg;
+        $result['SignedQuery'] = $sigQuery . $relayState . $sigAlg;
 
         return $result;
     }

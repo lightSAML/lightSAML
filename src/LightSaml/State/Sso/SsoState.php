@@ -155,7 +155,8 @@ class SsoState implements \Serializable
         $result = [];
 
         foreach ($this->ssoSessions as $ssoSession) {
-            if ((!$idpEntityId || $ssoSession->getIdpEntityId() === $idpEntityId) &&
+            if (
+                (!$idpEntityId || $ssoSession->getIdpEntityId() === $idpEntityId) &&
                 (!$spEntityId || $ssoSession->getSpEntityId() === $spEntityId) &&
                 (!$nameId || $ssoSession->getNameId() === $nameId) &&
                 (!$nameIdFormat || $ssoSession->getNameIdFormat() === $nameIdFormat) &&

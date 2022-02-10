@@ -160,7 +160,7 @@ abstract class SamlMessage extends AbstractSamlModel
     public function getIssueInstantDateTime()
     {
         if ($this->issueInstant) {
-            return new \DateTime('@'.$this->issueInstant);
+            return new \DateTime('@' . $this->issueInstant);
         }
 
         return null;

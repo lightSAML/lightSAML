@@ -18,11 +18,11 @@ use LightSaml\SamlConstants;
 
 class ContactPerson extends AbstractSamlModel
 {
-    const TYPE_TECHNICAL = 'technical';
-    const TYPE_SUPPORT = 'support';
-    const TYPE_ADMINISTRATIVE = 'administrative';
-    const TYPE_BILLING = 'billing';
-    const TYPE_OTHER = 'other';
+    public const TYPE_TECHNICAL = 'technical';
+    public const TYPE_SUPPORT = 'support';
+    public const TYPE_ADMINISTRATIVE = 'administrative';
+    public const TYPE_BILLING = 'billing';
+    public const TYPE_OTHER = 'other';
 
     /** @var string */
     protected $contactType;

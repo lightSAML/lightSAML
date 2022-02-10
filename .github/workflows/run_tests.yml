@@ -1,0 +1,34 @@
+name: Run tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php: [7.2, 7.4, 8.0, 8.1]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set PHP version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Install composer dependencies
+        run: composer install --quiet --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
+      - name: Run tests
+        run: vendor/bin/phpunit
+
+      - name: Run phpcs
+        run: vendor/bin/phpcs --standard=PSR12 --exclude=Generic.Files.LineLength ./src
