@@ -60,14 +60,14 @@ class SamlPostResponse extends Response
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>POST data</title>
 </head>
-<body onload="document.getElementsByTagName('input')[0].click();">
+<body onload="document.getElementById('a-very-unique-input-id#lightSAML').click();">
 
     <noscript>
         <p><strong>Note:</strong> Since your browser does not support JavaScript, you must press the button below once to proceed.</p>
     </noscript>
 
     <form method="post" action="%s">
-        <input type="submit" style="display:none;" />
+        <input id="a-very-unique-input-id#lightSAML" type="submit" style="display:none;"/>
 
         %s
 
