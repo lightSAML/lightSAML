@@ -2,6 +2,9 @@
 
 All notable changes will be documented in this file.
 
+## [2.3.1] - 2022-03-01
++ Fix input id in SamlPostResponse (#153)
+
 ## [2.3.0] - 2022-02-09
 + Update to symfony packages 6.0
 
