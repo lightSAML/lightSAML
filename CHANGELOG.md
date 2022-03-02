@@ -2,6 +2,9 @@
 
 All notable changes will be documented in this file.
 
+## [2.3.2] - 2022-03-02
++ Fix param types in LightSaml\Model\Assertion\Conditions class (#155)
+
 ## [2.3.1] - 2022-03-01
 + Fix input id in SamlPostResponse (#153)
 
