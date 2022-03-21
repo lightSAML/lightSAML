@@ -115,7 +115,7 @@ class ParameterBag implements \IteratorAggregate, \Countable, \Serializable
     /**
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->parameters);
     }
@@ -123,7 +123,7 @@ class ParameterBag implements \IteratorAggregate, \Countable, \Serializable
     /**
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->parameters);
     }
