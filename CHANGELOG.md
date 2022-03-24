@@ -2,6 +2,9 @@
 
 All notable changes will be documented in this file.
 
+## [2.3.3] - 2022-03-24
++ Fix return types in LightSaml\Context\AbstractContext & LightSaml\Meta\ParameterBag (#156)
+
 ## [2.3.2] - 2022-03-02
 + Fix param types in LightSaml\Model\Assertion\Conditions class (#155)
 
