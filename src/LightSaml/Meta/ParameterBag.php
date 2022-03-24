@@ -112,18 +112,12 @@ class ParameterBag implements \IteratorAggregate, \Countable, \Serializable
         unset($this->parameters[$key]);
     }
 
-    /**
-     * @return \ArrayIterator
-     */
-    public function getIterator()
+    public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->parameters);
     }
 
-    /**
-     * @return int
-     */
-    public function count()
+    public function count(): int
     {
         return count($this->parameters);
     }
