@@ -69,7 +69,11 @@ class SignatureXmlReader extends AbstractSignatureReader
             return false;
         }
 
-        $this->signature->validateReference();
+        try {
+            $this->signature->validateReference();
+        } catch (Exception $e) {
+            throw new LightSamlSecurityException('Digest validation failed', $e->getCode(), $e);
+        }
 
         $key = $this->castKeyIfNecessary($key);
 
