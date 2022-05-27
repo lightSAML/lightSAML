@@ -2,6 +2,9 @@
 
 All notable changes will be documented in this file.
 
+## [2.3.4] - 2022-05-27
++ Fix LightSaml\Model\XmlDSig\SignatureXmlReader::validate() exception catching (#158)
+
 ## [2.3.3] - 2022-03-24
 + Fix return types in LightSaml\Context\AbstractContext & LightSaml\Meta\ParameterBag (#156)
 
