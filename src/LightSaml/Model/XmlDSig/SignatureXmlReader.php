@@ -11,6 +11,7 @@
 
 namespace LightSaml\Model\XmlDSig;
 
+use Exception;
 use LightSaml\Error\LightSamlSecurityException;
 use LightSaml\Error\LightSamlXmlException;
 use LightSaml\Model\Context\DeserializationContext;
@@ -60,7 +61,7 @@ class SignatureXmlReader extends AbstractSignatureReader
     /**
      * @return bool
      *
-     * @throws LightSamlSecurityException
+     * @throws LightSamlSecurityException|Exception
      */
     public function validate(XMLSecurityKey $key)
     {
@@ -68,8 +69,10 @@ class SignatureXmlReader extends AbstractSignatureReader
             return false;
         }
 
-        if (false == $this->signature->validateReference()) {
-            throw new LightSamlSecurityException('Digest validation failed');
+        try {
+            $this->signature->validateReference();
+        } catch (Exception $e) {
+            throw new LightSamlSecurityException('Digest validation failed', $e->getCode(), $e);
         }
 
         $key = $this->castKeyIfNecessary($key);
@@ -118,7 +121,7 @@ class SignatureXmlReader extends AbstractSignatureReader
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function deserialize(\DOMNode $node, DeserializationContext $context)
     {
