@@ -1,3 +1,18 @@
+⚠️ **This library is no longer in active development.** ⚠️
+
+We recommend you to use our new repository [litesaml/lightsaml](https://github.com/litesaml/lightsaml).
+
+The code base don't change, you juste have to update your `composer.json` like this :
+
+```diff
+     "require": {
+-        "lightsaml/lightsaml": "~2.3.4",
++        "litesaml/lightsaml": "~3.0.0",
+     },
+```
+
+---
+
 SAML 2.0 PHP Library
 ====================
 

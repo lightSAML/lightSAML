@@ -4,8 +4,12 @@
     "type": "library",
     "description": "Light SAML 2.0 PHP library",
     "keywords": ["SAML 2.0", "PHP", "library", "lightSAML", "Single SignOn", "Single Logout"],
-    "homepage": "https://www.lightsaml.com/",
+    "homepage": "https://litesaml.github.io",
     "authors": [
+        {
+            "name": "William",
+            "email": "work@suppo.fr"
+        },
         {
             "name": "Milos Tomic",
             "email": "tmilos@gmail.com",
@@ -14,9 +18,9 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/lightsaml/lightsaml/issues",
-        "source": "https://github.com/lightSAML/lightSAML",
-        "docs": "http://www.lightsaml.com/LightSAML-Core/"
+        "issues": "https://github.com/litesaml/lightsaml/issues",
+        "source": "https://github.com/litesaml/lightSAML",
+        "docs": "https://litesaml.github.io"
     },
     "autoload": {
         "psr-0": {
@@ -30,9 +34,9 @@
     },
     "require": {
         "php": ">=7.2.5",
-        "robrichards/xmlseclibs": "~2.0|~3.0|~4.0",
+        "pouet/xmlseclibs": "~3.0.0",
         "symfony/http-foundation": "~5.0|~6.0",
-        "symfony/event-dispatcher": "~5.0|~6.0"
+        "pou/event-dispatcher": "~5.0|~6.0"
     },
     "require-dev": {
         "symfony/dom-crawler": "~5.0",
@@ -42,10 +46,7 @@
         "monolog/monolog": "^2.0.0",
         "squizlabs/php_codesniffer": "^3.6"
     },
-    "suggest": {
-        "lightsaml/symfony-bridge": "Symfony 2 build container bridge",
-        "lightsaml/sp-bundle": "Symfony 2 SP security bundle"
-    },
     "prefer-stable": true,
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "abandoned": "litesaml/lightsaml"
 }

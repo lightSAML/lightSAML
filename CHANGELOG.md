@@ -2,6 +2,9 @@
 
 All notable changes will be documented in this file.
 
+## [2.3.5] - 2022-05-29
++ Ask to switch to [litesaml/lightsaml](https://github.com/litesaml/lightsaml) new repository.
+
 ## [2.3.4] - 2022-05-27
 + Fix LightSaml\Model\XmlDSig\SignatureXmlReader::validate() exception catching (#158)
 
