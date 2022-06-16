@@ -53,7 +53,7 @@ class ProxyRestriction extends AbstractCondition
     }
 
     /**
-     * @return \string[]|null
+     * @return string[]|null
      */
     public function getAllAudience()
     {

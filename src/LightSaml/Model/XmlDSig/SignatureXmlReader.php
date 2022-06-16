@@ -38,7 +38,7 @@ class SignatureXmlReader extends AbstractSignatureReader
     }
 
     /**
-     * @return \string[]
+     * @return string[]
      */
     public function getAllCertificates()
     {

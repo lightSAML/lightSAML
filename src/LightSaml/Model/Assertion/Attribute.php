@@ -73,7 +73,7 @@ class Attribute extends AbstractSamlModel
     }
 
     /**
-     * @return \string[]
+     * @return string[]
      */
     public function getAllAttributeValues()
     {

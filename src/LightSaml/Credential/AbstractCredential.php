@@ -123,7 +123,7 @@ abstract class AbstractCredential implements CredentialInterface
     }
 
     /**
-     * @param \string[] $keyNames
+     * @param string[] $keyNames
      *
      * @return AbstractCredential
      */
