@@ -1,8 +1,8 @@
-⚠️ **This library is no longer in active development.** ⚠️
+### ⚠️ This library is no longer actively developed. ⚠️
 
-We recommend you to use our new repository [litesaml/lightsaml](https://github.com/litesaml/lightsaml).
+We recommend our new repository [litesaml/lightsaml](https://github.com/litesaml/lightsaml).
 
-The code base don't change, you juste have to update your `composer.json` like this :
+No need to change your code just update `composer.json`.
 
 ```diff
      "require": {
