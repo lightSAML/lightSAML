@@ -83,7 +83,7 @@ class SsoSpSendAuthnRequestProfileBuilder extends AbstractProfileBuilder
     {
         $trustOptions = $this->container->getPartyContainer()->getTrustOptionsStore()->get($this->idpEntityId) ?: new TrustOptions();
 
-        $wantAuthnRequestsSigned = $idpEd->getFirstIdpSsoDescriptor()->getWantAuthnRequestsSigned();
+        $wantAuthnRequestsSigned = $idpEd->getFirstIdpSsoDescriptor() ? $idpEd->getFirstIdpSsoDescriptor()->getWantAuthnRequestsSigned() : null;
 
         if (null !== $wantAuthnRequestsSigned) {
             $trustOptions->setSignAuthnRequest($wantAuthnRequestsSigned);
